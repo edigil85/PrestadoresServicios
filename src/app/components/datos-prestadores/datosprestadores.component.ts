@@ -45,6 +45,8 @@ export class DatosPrestadoresComponent {
     this.matIconRegistry.addSvgIcon("delete",this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/Iconos/iconos-prestadores/delete.svg"));
     this.matIconRegistry.addSvgIcon("module",this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/Iconos/iconos-prestadores/module.svg"));
     this.matIconRegistry.addSvgIcon("list",this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/Iconos/iconos-prestadores/list.svg"));
+    this.matIconRegistry.addSvgIcon("filter_alt",this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/Iconos/iconos-prestadores/filter_alt.svg"));
+    this.matIconRegistry.addSvgIcon("close",this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/Iconos/iconos-prestadores/close.svg"));
     this.navLinks = [
         {
             label: 'Sedes',

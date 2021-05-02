@@ -16,12 +16,17 @@ export class SedesComponent implements OnInit {
   dialogRef: MatDialogRef<DeleteconfirmmodalComponent>;
   ShowCards = true;
   ShowTable = false;
+  ShowFilter= false;
   IconoMostrar="list";
+  IconoFilter ="filter_alt";
   sede: Isedes;
   page_size: number = 10;
   page_number: number = 1;
   pageSizeOption = [10, 15, 20, 25];
   sedes: Isedes[]=[];
+  seleccionarTodos = false;
+  UseFilter = false;
+  textoFiltro= '';
 
   constructor(
     private dialog: MatDialog,
@@ -109,5 +114,18 @@ export class SedesComponent implements OnInit {
   handlePage(e: PageEvent){
     this.page_size= e.pageSize;
     this.page_number= e.pageIndex + 1;
+  }
+
+  UsarFiltro(){
+    if(this.ShowFilter == false){
+      this.ShowFilter = true;
+      this.UseFilter = true;
+      this.IconoFilter="close";
+     }
+     else{
+      this.ShowFilter = false;
+      this.UseFilter = false;
+      this.IconoFilter = "filter_alt";
+     }
   }
 }
