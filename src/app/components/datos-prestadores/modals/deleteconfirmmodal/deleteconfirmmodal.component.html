@@ -1,0 +1,8 @@
+<h1 md-dialog-title><span class="material-icons">
+  warning_amber
+  </span></h1>
+<div md-dialog-content><h3>{{confirmMessage}}</h3></div>
+<div md-dialog-actions>
+  <button mat-raised-button (click)="dialogRef.close(false)">Cancelar</button>
+  <button mat-raised-button color="primary" (click)="dialogRef.close(true)">Eliminar</button>
+</div>

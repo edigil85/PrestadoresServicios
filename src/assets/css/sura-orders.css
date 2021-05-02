@@ -1,0 +1,416 @@
+@font-face {
+    font-family: 'Barlow-medium';
+    src: url('fonts/Barlow-Medium.eot');
+    src: url('fonts/Barlow-Medium.eot?#iefix') format('embedded-opentype'), url('fonts/Barlow-Medium.woff2') format('woff2'), url('fonts/Barlow-Medium.woff') format('woff'), url('fonts/Barlow-Medium.ttf') format('truetype'), url('fonts/Barlow-Medium.svg#Barlow-Medium') format('svg');
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Barlow-light';
+    src: url('fonts/Barlow-Light.eot');
+    src: url('fonts/Barlow-Light.eot?#iefix') format('embedded-opentype'), url('fonts/Barlow-Light.woff2') format('woff2'), url('fonts/Barlow-Light.woff') format('woff'), url('fonts/Barlow-Light.ttf') format('truetype'), url('fonts/Barlow-Light.svg#Barlow-Light') format('svg');
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Barlow-bold';
+    src: url('fonts/Barlow-Bold.eot');
+    src: url('fonts/Barlow-Bold.eot?#iefix') format('embedded-opentype'), url('fonts/Barlow-Bold.woff2') format('woff2'), url('fonts/Barlow-Bold.woff') format('woff'), url('fonts/Barlow-Bold.ttf') format('truetype'), url('fonts/Barlow-Bold.svg#Barlow-Bold') format('svg');
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Barlow-regular';
+    src: url('fonts/Barlow-Regular.eot');
+    src: url('fonts/Barlow-Regular.eot?#iefix') format('embedded-opentype'), url('fonts/Barlow-Regular.woff2') format('woff2'), url('fonts/Barlow-Regular.woff') format('woff'), url('fonts/Barlow-Regular.ttf') format('truetype'), url('fonts/Barlow-Regular.svg#Barlow-Regular') format('svg');
+    font-style: normal;
+}
+
+body {
+    font-family: 'Barlow-regular', sans-serif;
+    position: relative;
+    /** height: 100vh; **/
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Barlow-bold', sans-serif;
+    font-weight: 700;
+}
+
+.service-section {
+    background: #ffffff;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+}
+
+.service-section .form-row .form-group {
+    position: relative;
+}
+
+.service-section .form-row .form-group .ic-modal {
+    position: absolute;
+    right: 10px;
+    bottom: 4px;
+    cursor: pointer;
+}
+
+.service-section .form-row .form-group .ic-modal i {
+    font-size: 23px;
+    color: #0033a0;
+    cursor: pointer;
+}
+
+.service-section .service-title h2 {
+    color: #00AEC7;
+}
+
+.service-section .service-data small {
+    font-family: 'Barlow-bold';
+}
+
+.service-section .service-form button.btn-primary {
+    background: #00A3E0;
+    font-family: 'Barlow-medium';
+    color: #FFFFFF;
+    border: 2px solid #00A3E0;
+}
+
+.service-section .service-form button.btn-primary:hover {
+    background: #0033A0;
+    color: #FFFFFF;
+    border: 2px solid #0033A0;
+}
+
+.service-section .service-form button.btn-outline-primary {
+    font-family: 'Barlow-medium';
+    color: #00A3E0;
+    border: 2px solid #00A3E0;
+}
+
+.service-section .service-form button.btn-outline-primary:hover {
+    background: #00A3E0;
+    color: #FFFFFF;
+    border: 2px solid #00A3E0;
+}
+
+.service-section .card {
+    width: 100%;
+    cursor: pointer;
+}
+
+.service-section .card:hover,
+.document-section .card:hover {
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15);
+}
+
+.service-section .card .card-body {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+.service-section .col-md-4:last-child .card {
+    background: none;
+    border: 3px dashed #dfdfdf;
+}
+
+.service-section .card .card-body i {
+    font-size: 40px;
+}
+
+.service-section .card .card-img i {
+    display: block;
+    width: 45px;
+    font-size: 40px;
+    text-align: center;
+    color: #0033A0;
+    margin: 36px auto 0;
+}
+
+.service-section .card h6.card-subtitle {
+    color: #8189A9;
+}
+
+.service-section .custom-file-input~.custom-file-label::after {
+    content: "Examinar";
+}
+
+.service-section .custom-file {
+    width: 82%;
+    float: right;
+}
+
+.service-section .custom-file input[type="file"] {
+    cursor: pointer;
+}
+
+.service-section .custom-file-label::after,
+.service-section .form-submit button {
+    background: #0033a0;
+    color: #ffffff;
+}
+
+.service-section #file-check i,
+.service-section #file-check2 i {
+    font-size: 2rem;
+    color: #0ba20b;
+    margin: 2px 15px;
+}
+
+.service-section .service-title h4,
+.modal .modal-body .modal-subtitle h5 {
+    color: #0033a0;
+}
+
+.service-section #rem-button {
+    background: none;
+    height: 37px;
+    padding: 0 10px;
+    font-family: 'Barlow-regular';
+    line-height: 0;
+    border: 1px solid transparent;
+}
+
+.service-section #rem-button:hover {
+    color: #d62e2e;
+    text-decoration: underline;
+}
+
+.service-section #rem-button:focus {
+    outline: none;
+}
+
+.service-section #add-code span.select2 .selection .select2-selection {
+    display: block;
+    width: 100% !important;
+    height: calc(1.5em + .75rem + 2px) !important;
+    padding: .375rem .75rem !important;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da !important;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.service-section #add-code span.select2-selection__rendered {
+    line-height: 21px !important;
+}
+
+.service-section #add-code span.select2-selection__arrow {
+    right: 6px !important;
+    top: 6px !important;
+}
+
+.service-section .form-submit button {
+    font-family: 'Barlow-bold';
+    border: 2px solid #0033a0;
+}
+
+.service-section .form-submit button:hover {
+    background: #ffffff;
+    color: #0033a0;
+}
+
+.service-section .input-ic {
+    margin-right: 10px;
+    font-size: 39px;
+    color: #aaaaaa;
+}
+
+.modal .modal-header {
+    background: #0033a0;
+}
+
+.modal .modal-header button.close {
+    color: #ffffff;
+}
+
+.modal .modal-header button.close:focus {
+    outline: none;
+}
+
+.modal .modal-header h5 {
+    color: #ffffff;
+}
+
+@media (max-width: 768px) {
+    .service-section {
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .service-container {
+        width: 100% !important;
+    }
+}
+
+@media (max-width: 426px) {
+    .service-container {
+        width: 100% !important;
+    }
+}
+
+@media (max-width: 320px) {
+    .service-section .custom-file {
+        width: 78%;
+    }
+}
+
+
+/* TABLA */
+
+.service-section .service-table table.control_citas {
+    border: 0;
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.service-section .service-table table.control_citas caption {
+    font-size: 1.5em;
+    margin: .5em 0 .75em;
+}
+
+.service-section .service-table table.control_citas thead tr {
+    background-color: #004898 !important;
+    border: 0;
+    padding: .35em;
+}
+
+.service-section .service-table table.control_citas tbody tr {
+    background-color: #ECF0F1;
+    border: 0;
+    padding: .35em;
+}
+
+.service-section .service-table table.control_citas th,
+.service-section .service-table table.control_citas td {
+    padding: .625em;
+    font-size: 15px;
+    text-align: center;
+    border: 0;
+    border-right: 1px solid #e8e7e7;
+}
+
+.service-section .service-table table.control_citas td:last-child {
+    border: 0;
+}
+
+.service-section .service-table table.control_citas tr:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+.service-section .service-table table.control_citas th {
+    font-family: 'Barlow-bold';
+    font-size: 1em;
+    padding: 15px .625em;
+    color: #ffffff;
+    border: 0;
+    border-left: 1px solid #002752;
+    border-right: 1px solid #002752;
+}
+
+.service-section .service-table table.control_citas th:first-child {
+    border-radius: 30px 0 0 30px;
+    border: 0 !important;
+}
+
+.service-section .service-table table.control_citas th:last-child {
+    border-radius: 0 30px 30px 0;
+    border: 0 !important;
+}
+
+@media (max-width: 575.98px) {
+    .service-container {
+        width: 100% !important;
+    }
+    .service-section .service-table {
+        border: 1px solid #dddddd;
+        padding: 5px;
+    }
+    .service-section .service-table table.control_citas {
+        border: 0;
+    }
+    .service-section .service-table table.control_citas caption {
+        font-size: 1.3em;
+    }
+    .service-section .service-table table.control_citas thead {
+        border: none;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+    }
+    .service-section .service-table table.control_citas tr {
+        border-bottom: 3px solid #ddd !important;
+        display: block;
+        margin-bottom: .625em;
+    }
+    .service-section .service-table table.control_citas tr:last-child {
+        margin-bottom: 0;
+    }
+    .service-section .service-table table.control_citas td {
+        border-bottom: 1px solid #ddd !important;
+        border: none;
+        display: block;
+        font-size: .8em;
+        text-align: right;
+    }
+    .service-section .service-table table.control_citas td::before {
+        content: attr(data-label);
+        float: left;
+        font-family: 'Barlow-bold';
+        font-size: 14px;
+        text-transform: uppercase;
+    }
+    .service-section .service-table table.control_citas td:last-child {
+        border-bottom: 0 !important;
+    }
+}
+
+
+/**/
+
+.service-section .file-delete {
+    cursor: pointer;
+}
+
+.service-section .file-delete:hover {
+    text-decoration: underline;
+}
+
+.service-section .file-delete strong {
+    position: relative;
+    top: -2px;
+}
+
+.service-section .file-delete i {
+    display: inline-table;
+    font-size: 25px;
+    margin-top: 4px;
+    color: #c7c7c7;
+    border-left: 1px solid #dbdede;
+}
+
+.service-section .file-delete i:hover {
+    color: #dc0c0c;
+}

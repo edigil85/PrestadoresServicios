@@ -1,0 +1,77 @@
+<section class="center" *ngIf="sedes.length==0">
+  <h3>Aún no tienes configuradas las sedes</h3>
+  <h5>Debes de hacer uso de la acción adicionar registro para configurarlas</h5>
+  <img src='assets\Imagenes\img-prestadores.svg'>
+</section>
+
+<div *ngIf="ShowCards">
+  <div>
+    <button mat-icon-button (click)="mostrar()"><mat-icon svgIcon={{IconoMostrar}}></mat-icon></button>
+  </div>
+<div  class="container.fluid">
+  <div class="row">
+  <mat-card class="card" *ngFor="let sede of sedes | paginate: page_size: page_number">
+    <mat-card-header>
+    <div mat-card-avatar><mat-icon svgIcon="sedes"></mat-icon></div>
+    <mat-card-title>{{sede.direccion}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content align="center">
+  
+        {{sede.departamento}}-{{sede.ciudad}}
+  
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button mat-icon-button (click)="editSede(sede)"><mat-icon svgIcon="edit"></mat-icon></button>
+      <button mat-icon-button (click)="deleteSede(sede)"><mat-icon svgIcon="delete"></mat-icon></button>
+    </mat-card-actions>
+  </mat-card>
+  </div>
+  </div>
+<mat-paginator [length]="sedes.length"
+               [pageSize]="page_size"
+               [pageSizeOptions]="pageSizeOption"
+               (page)="handlePage($event)"
+               showFirstLastButtons>
+</mat-paginator>
+</div>
+
+
+<div *ngIf="ShowTable">
+  <div class="Derecha">
+    <button mat-icon-button (click)="mostrar()"><mat-icon svgIcon={{IconoMostrar}}></mat-icon></button>
+  </div>
+  <div  class="container.fluid">
+    <mat-card class="card" *ngFor="let sede of sedes | paginate: page_size: page_number">
+      <mat-card-content>
+        <div class="continer">
+          <div class="row">
+            <div class="col"><mat-icon svgIcon="sedes"></mat-icon></div>
+            <div class="col-3">Direccion<br>{{sede.direccion}}</div>
+            <div class="col">Departamento<br>{{sede.departamento}}</div>
+            <div class="col">Ciudad<br>{{sede.ciudad}}</div>
+            <div class="col">
+              <button mat-icon-button ><mat-icon svgIcon="edit"></mat-icon></button>
+              <button mat-icon-button><mat-icon svgIcon="delete"></mat-icon></button>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <mat-paginator [length]="sedes.length"
+    [pageSize]="page_size"
+    [pageSizeOptions]="pageSizeOption"
+    (page)="handlePage($event)">
+  </mat-paginator>
+</div>
+
+
+<div class="flotante">
+  <div class="redes">
+    <button mat-fab color="primary" (click)="onCreate()"><span class="material-icons">add</span></button>
+  </div>
+</div>
+
+
+
+

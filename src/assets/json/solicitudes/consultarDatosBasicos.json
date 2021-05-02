@@ -1,0 +1,23 @@
+
+{
+  "tipoDocumento" :  "CC",
+  "numeroDocumento" :  "1829938630",
+  "primerNombre" :  "Talia",
+  "segundoNombre" :  null,
+  "primerApellido" :  "Henriquez",
+  "segundoApellido" :  "Rosas",
+  "sexo" :  "F",
+  "correoElectronico" :  "huribe@sura.com.co",
+  "celular" :  "3008429887",
+  "tieneDerechosPbs" :  true,
+  "tieneDerechosPac" : true,
+  "ipsMedica" :  "91",
+  "nombreIpsMedica" :  "CIS COMFAMA SABANETA",
+  "tipoAfiliadoPbs" :  "B",
+  "clasificacionIngresoPbs" :  "2",
+  "codigoProductoPac" :  null,
+  "codigoTipoPlanPac" :  null,
+  "tipoPlanPac" :  null,
+  "telefonoFijo" :  "2301540",
+  "NombreCompleto" :  "Talia Flavia Henriquez Rosas"
+}

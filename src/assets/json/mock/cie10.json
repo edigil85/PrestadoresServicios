@@ -1,0 +1,29 @@
+[{
+        "codigoDiagnostico": "F844",
+        "descripcionDiagnostico": "TRASTORNO HIPERACTIVO ASOCIADO CON RETRASO MENTAL Y MOVIMIENTOS ESTEREOTIPADOS"
+    },
+    {
+        "codigoDiagnostico": "F901",
+        "descripcionDiagnostico": "TRASTORNO HIPERCINÉTICO DE LA CONDUCTA"
+    },
+    {
+        "codigoDiagnostico": "F908",
+        "descripcionDiagnostico": "OTROS TRASTORNOS HIPERCINÉTICOS"
+    },
+    {
+        "codigoDiagnostico": "F909",
+        "descripcionDiagnostico": "TRASTORNO HIPERCINÉTICO, NO ESPECIFICADO"
+    },
+    {
+        "codigoDiagnostico": "I110",
+        "descripcionDiagnostico": "ENFERMEDAD CARDÍACA HIPERTENSIVA CON INSUFICIENCIA CARDÍACA (CONGESTIVA)"
+    },
+    {
+        "codigoDiagnostico": "I119",
+        "descripcionDiagnostico": "ENFERMEDAD CARDÍACA HIPERTENSIVA SIN INSUFICIENCIA CARDÍACA (CONGESTIVA)"
+    },
+    {
+        "codigoDiagnostico": "I120",
+        "descripcionDiagnostico": "ENFERMEDAD RENAL HIPERTENSIVA CON INSUFICIENCIA RENAL"
+    }
+]

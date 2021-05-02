@@ -1,0 +1,109 @@
+<section class="service-section">
+    <div class="container">
+        <div class="service-title">
+            <h2 class="font-weight-bold">Carga masiva de agendamiento de afiliados SURA vacunación</h2>
+        </div>
+        <div class="service-container mt-3">
+            <div class="service-description">
+                <p> A través de esta opción, las IPS autorizadas para vacunación que no estén conectadas
+                    con SURA, podrán realizar cargas del agendamiento o cancelación de citas de afiliados de EPS SURA de forma
+                    masiva. </p>
+            </div>
+
+
+
+            <div class="service-title m-10  mt-10 " style="margin-top: 20px; margin-bottom: 20px;">
+                <h6 class="mt-4">Seleccione la opción de carga a realizar
+                    </h6>
+            </div>
+         
+              <form [formGroup]="reactiveForm">
+                
+                <div class="form-check">
+                    <input type="radio" class="form-check-input" id="materialChecked2" [value]="true"
+                           formControlName="reactiveRadio" name="reactiveRadio">
+                    <label class="form-check-label" for="materialChecked2">Agendamiento de vacunación</label>
+                  </div>
+
+                <div class="form-check">
+                  <input type="radio" class="form-check-input" id="materialUnchecked2" [value]="false"
+                         formControlName="reactiveRadio" name="reactiveRadio">
+                  <label class="form-check-label" for="materialUnchecked2">Anulación de agendamiento de vacunación</label>
+                </div>
+              
+              </form>
+
+
+            <div class="service-title m-10  mt-15" style="margin-top: 20px; margin-bottom: 20px;" *ngIf="radioButton">
+                <h6 class="mt-4">Carga de archivo de agendamiento</h6>
+            </div>
+            <div class="service-title m-10  mt-15 " style="margin-top: 20px; margin-bottom: 20px;" *ngIf="!radioButton">
+                <h6 class="mt-4">Carga de archivo de anulación</h6>
+            </div>
+
+            <div class="col no-gutters mt-15 labelMayor">
+                <div class="col-12 numberCol ">
+                    <div class="col-2 numberCircle">1</div>
+                    <div class="col-5 stepDescription">Hemos dispuesto una guía completa para tu proceso.</div>
+                    <div class="col-4">
+                        <button type="button" class="btn btn-primary buttonLinks" (click)="downloadGuia()">Descargar
+                        </button>
+
+                    </div>
+                </div>
+                
+                <div class="col-12 numberCol mt-3" *ngIf="radioButton">
+                    <div class="col-2 numberCircle">2</div>
+                    <div class="col-5 stepDescription">Descarga el archivo modelo e ingresa la información  de
+                        los <br> afiliados a  EPS SURA que serán vacunados en tu IPS.</div>
+                        
+                        <div class="col-2">
+                            <a href="https://comunicaciones.segurossura.com.co/MercadeoComunicacionesExternas/plantilla-ips-no-conectadas.xlsx" download="plantilla-ips-no-conectadas"><button type="button" class="btn btn-primary buttonLinks ">Descargar
+                            </button></a>
+                        </div>
+                </div>
+
+                <div class="col-12 numberCol mt-3" *ngIf="!radioButton">
+                    <div class="col-2 numberCircle">2</div>
+                    <div class="col-5 stepDescription">Descarga el archivo modelo e ingresa la información de los afiliados 
+                        a EPS SURA a los que se les anulará el agendamiento de vacunación.</div>
+                        
+                        <div class="col-2">
+                            <a href="https://comunicaciones.segurossura.com.co/MercadeoComunicacionesExternas/plantilla-anulacion-ips.xlsx" download="plantilla-anulacion-ips"><button type="button" class="btn btn-primary buttonLinks ">Descargar
+                            </button></a>
+                        </div>
+                </div>
+                
+                <div class="col-10 numberCol2 mt-3" *ngIf="radioButton">
+                    <div class="col-2 numberCircle" >3</div>
+                    <div class="col-10 stepDescription">Realiza la carga del archivo de agendamiento de
+                        afiliados a EPS SURA que serán vacunados en tu IPS.</div>
+                </div>
+
+                <div class="col-10 numberCol2 mt-3" *ngIf="!radioButton">
+                    <div class="col-2 numberCircle" >3</div>
+                    <div class="col-10 stepDescription">Realiza la carga del archivo de anulación del agendamiento de vacunación de los afiliados a EPS SURA.</div>
+                </div>
+
+                <div class="input-group col-12 ">
+                    <div>
+                        <app-uploadCsv-file [progress]="existFileUpload" (saveFile)='uploadFile($event)'  (delete)='deleteFile()'>
+                        </app-uploadCsv-file>
+                    </div>
+
+                </div>
+                <button type="button " class="btn btn-primary buttonUp " (click)="sendFile()"
+                    [disabled]="existFileUpload==false">Continuar</button>
+
+            </div>
+
+
+        </div>
+    </div>
+</section>
+
+
+<!-- Spinner -->
+<ngx-spinner bdColor="rgba(165,162,165,0.8)" size="large" color="#fff" type="ball-pulse">
+    <p style="font-size: 20px; color: white">Procesando...</p>
+</ngx-spinner>

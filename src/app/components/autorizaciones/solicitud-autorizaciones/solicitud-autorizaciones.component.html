@@ -1,0 +1,321 @@
+<!-- BEGIN SERVICES SECTION -->
+<header id="header"></header>
+<section class="service-section">
+    <div class="container">
+        <div class="service-title">
+            <h2 class="font-weight-bold">Solicitud de autorizaciones</h2>
+        </div>
+        <div class="service-container mt-3">
+            <div class="service-description">
+                <p>A través de esta opción puedes radicar las solicitudes de autorizaciones para nuestros afiliados. Diligencia los datos y anexa los documentos solicitados y en máximo cuatro días hábiles, el usuario recibirá información por medio del correo
+                    electrónico ingresado.</p>
+            </div>
+            <form [formGroup]="myForm" novalidate (ngSubmit)="_consult()">
+                <div class=" service-title ">
+                    <h4 class="font-weight-bold mb-4 mt-5 ">Diligenciamiento datos básicos</h4>
+                </div>
+
+                <div class="form-row ">
+                    <div class="form-group col-md-4 ">
+                        <label for="identificationType "><strong>Tipo de documento</strong></label>
+                        <select id="identificationType " formControlName="identificationType" class="form-control " [class.is-invalid]="identificationTypeValid" required>
+                            <option *ngFor="let type of typeIndetification " [value]="type.value ">{{type.text}}</option>
+                        </select>
+                        <div *ngIf="myForm.get( 'identificationType').errors && myForm.get( 'identificationType').dirty ">
+                            <p class="text-danger" *ngIf="myForm.get( 'identificationType').hasError( 'required') "><i class="fas fa-exclamation-circle" aria-hidden="true"> Campo requerido</i></p>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-3 ">
+                        <label for="documentNumber "><strong>Número de documento</strong></label>
+                        <input type="text " class="form-control" formControlName="documentNumber" id="documentNumber " [class.is-invalid]="customValidate" required>
+                        <div *ngIf="customValidate">
+                            <p class="text-danger" *ngIf="customValidate ">Verifique los valores ingresados</p>
+                        </div>
+                    </div>
+                    <div class="form-group form-submit col-md-3 ">
+                        <label for="inputSearch-smt "></label>
+                        <button type="submit" class="btn btn-primary form-control rounded-pill px-4 mt-2 ">Consultar</button>
+                    </div>
+                    <div class="form-group col-md-3 ">
+                    </div>
+                </div>
+            </form>
+            <form [formGroup]="myFormData" (ngSubmit)="_send()">
+                <!--<section *ngIf="tieneAcceso">-->
+
+                <div class="form-row " *ngIf="tieneAcceso">
+                    <div class="form-group col-md-3 ">
+                        <label for="nombreCompleto "><strong>Nombre completo</strong></label>
+                        <input type="text " class="form-control " formControlName="nombreCompleto" id="nombreCompleto" [(ngModel)]="affiliate.NombreCompleto" [class.is-invalid]="nameValidate" disabled>
+                        <small *ngIf="nameValidate" class="text-danger">
+                                Verifique el campo Nombre Completo
+                            </small>
+                    </div>
+                    <div class="form-group col-md-3 ">
+                        <label for="telefonoFijo "><strong>Número de teléfono fijo</strong></label>
+                        <input type="text " class="form-control only-number" placeholder="Ejemplo: 1234567 " id="telefonoFijo " formControlName="telefonoFijo" [(ngModel)]="affiliate.telefonoFijo" [class.is-invalid]="telephoneValidate">
+                        <p class="text-danger" *ngIf="telephoneValidate">Verifique los valores ingresados</p>
+                        <div class="ic-modal " data-toggle="modal" (click)="openDialog('Mensaje Informativo','Datos básicos','Recuerde que el teléfono fijo debe corresponder con el del usuario, si no tiene, se deberá ingresar el de un familiar')">
+                            <i class="fas fa-info-square shadow-sm "></i>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-3 ">
+                        <label for="celular "><strong>Número de celular</strong></label>
+                        <input type="text " class="form-control only-number" placeholder="Ejemplo: 3001234567 " id="celular " formControlName="celular" [(ngModel)]="affiliate.celular" [class.is-invalid]="phoneValidate">
+                        <div class="ic-modal " data-toggle="modal" (click)="openDialog('Mensaje Informativo','Datos básicos','Recuerde que el celular debe corresponder con el del usuario, si no tiene, se deberá ingresar el de un familiar')">
+                            <i class="fas fa-info-square shadow-sm "></i>
+                        </div>
+                        <small *ngIf="phoneValidate" class="text-danger">
+                                Verifique el campo Celular
+                            </small>
+                    </div>
+                    <div class="form-group col-md-3 ">
+                        <label for="correoElectronico "><strong>Correo electrónico</strong></label>
+                        <input type="email" class="form-control " placeholder="Ejemplo: micorreo@micorreo.com.co " id="correoElectronico" formControlName="correoElectronico" data-toggle="popover " data-placement="bottom " title="Importante " data-content="No digites tu correo o el de tu empresa aquí, podrás
+                            agregarlo más adelante. " [(ngModel)]="affiliate.correoElectronico" [class.is-invalid]="emailValidate">
+                        <div class="ic-modal " data-toggle="modal" (click)="openDialog('Mensaje Informativo','Datos básicos','Recuerde que el correo electrónico debe corresponder con el del usuario, si no tiene, se deberá ingresar el de un familiar')">
+                            <i class="fas fa-info-square shadow-sm "></i>
+                        </div>
+                        <small *ngIf="emailValidate" class="text-danger">
+                                veirifique el Correo electrónico.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-row " *ngIf="tieneAcceso == true && affiliate.tieneDerechosPac == true">
+                    <div class="form-group col-md-3 ">
+                        <label for="tipoPlanPAC "><strong>Tipo de plan</strong></label>
+                        <input type="text " class="form-control " id="tipoPlanPAC" formControlName="tipoPlanPAC" placeholder="60 MÁS " [(ngModel)]="affiliate.tipoPlanPac" disabled>
+                    </div>
+                </div>
+
+
+
+                <div class="service-title " *ngIf="tieneAcceso">
+                    <h4 class="font-weight-bold my-4 ">Datos para la solicitud</h4>
+                </div>
+                <div class="form-row " *ngIf="tieneAcceso">
+                    <div class="form-group col-md-6 ">
+                        <label for="requestType"><strong>Tipo de solicitud</strong></label>
+                        <select id="requestType" class="form-control " (change)="_onTypeChange()" formControlName="requestType" [class.is-invalid]="requestTypeValidate" required>
+                                <option *ngFor="let list of listRequest " [value]="list.value ">{{list.text}}
+                            </select>
+                    </div>
+                </div>
+                <!--</section>-->
+                <section *ngIf="datosSolicitud">
+                    <div class="form-row ">
+                        <div class="form-group col-md-3 ">
+                            <label for="cie10 "><strong>Código CIE 10</strong></label>
+                            <input type="text" class="form-control " id="cie10" placeholder="Buscar CIE10" (blur) = '_getCIE10InputCod()' formControlName="cie10" [matAutocomplete]="auto" [class.is-invalid]="codeCIE10Validate" required>
+                            <small *ngIf="codeCIE10Validate" class="text-danger">
+                                Código CIE 10 es obligatorio.
+                            </small>
+                            <mat-autocomplete #auto="matAutocomplete" (optionSelected)='_getCIE10($event.option.value)'>
+                                <mat-option *ngFor="let c of filteredCie10 | async" [value]="c">
+                                    {{c}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </div>
+                        <div class="form-group col-md-9 ">
+                            <label for="inputRequest2 "><strong>Descripción código CIE 10</strong></label>
+                            <textarea class="form-control " formControlName="descripcionCIE10" rows="2"  (blur) = '_getCIE10InputDesc()' [matAutocomplete]="description" [class.is-invalid]="descriptionCIE10Validate" required></textarea>
+                            <small *ngIf="descriptionCIE10Validate" class="text-danger">
+                                Descripción código CIE 10 es obligatorio.
+                            </small>
+                            <mat-autocomplete #description="matAutocomplete" (optionSelected)='_getCIE10Code($event.option.value)'>
+                                <mat-option *ngFor="let c of filteredCie10Description | async" [value]="c">
+                                    {{c}}
+                                </mat-option>
+                            </mat-autocomplete>
+                            <div class="ic-modal" *ngIf="codeCIE10 != '' " data-toggle="modal " (click)="openDialog('Mensaje Informativo','Descripción Código CIE 10', codeCIE10)">
+                                <i class="fas fa-info-square shadow-sm "></i>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div id="add-code " *ngIf="showCUPs==true">
+                        <div class="form-row " formGroupName="cups">
+
+                            <div class="form-group col-md-1">
+                                <label for="cantidad"><strong>Cantidad</strong></label>
+                               
+                                <input type="number" id="cantidad" class="form-control" max="10" min="1" maxlength="10" formControlName="cantidad" pattern="\d*" value="1" (input)="validateNumberQuantity()">
+                                <small *ngIf="cantidad" class="text-danger">
+                                    Verifique el campo cantidad.
+                                </small>
+                            </div>
+
+                            <div class="form-group col-md-3 ">
+
+                                <label for="cups "><strong>Código de prestación (CUPS)</strong></label>
+                                <input type="text" class="form-control " id="cups" placeholder="Buscar Código de prestación (CUPS)" formControlName="codigo" [matAutocomplete]="cupsCodigo">
+                                <mat-autocomplete #cupsCodigo="matAutocomplete" (optionSelected)='_getCupsDescription($event.option.value)'>
+                                    <mat-option *ngFor="let c of filteredCupsCode | async" [value]="c">
+                                        {{c}}
+                                    </mat-option>
+                                </mat-autocomplete>
+                            </div>
+                            <div class="form-group col-md-6 ">
+                                <label for="inputRequest2 "><strong>Descripción código de prestación (CUPS)</strong></label>
+                                <textarea class="form-control " formControlName="descripcion" rows="2" [matAutocomplete]="descriptionCups"></textarea>
+                                <div class="ic-modal " data-toggle="modal" *ngIf="cupsDescripcion != ''" (click)="openDialog('Mensaje Informativo','Descripción Código de prestación (CUPS)', cupsDescripcion)">
+                                    <i class="fas fa-info-square shadow-sm "></i>
+                                </div>
+                                <mat-autocomplete #descriptionCups="matAutocomplete" (optionSelected)='_getCupsCode($event.option.value)'>
+                                    <mat-option *ngFor="let c of filteredCupsDescription | async" [value]="c">
+                                        {{c}}
+                                    </mat-option>
+                                </mat-autocomplete>
+                            </div>
+                            <div class="form-group form-submit col-md-3 ">
+                                <label for="inputSearch-smt "></label>
+                                <button type="button" (click)="addCups()" id="add-button" class="btn btn-primary form-control rounded-pill px-4 mt-2 ">Agregar CUPS</button>
+                            </div>
+                        </div>
+
+                        <section class="service-section" *ngIf="cupsArrayForm != null && cupsArrayForm.length  >=1">
+                            <div class="service-content">
+                                <div class="service-table">
+                                    <table class="control_citas">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col" class="h6 th-codigo">Código de prestación (CUPS)</th>
+                                                <th scope="col" class="h6">Descripción Código de prestación (CUPS)</th>
+                                                <th scope="col" class="h6 th-cantidad">Cantidad</th>
+                                                <th scope="col" class="h6 th-accioon">Acción</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody formArrayName="cupsArrayForm">
+                                            <tr *ngFor="let m of cupsArrayForm.controls; let i = index;">
+                                                <td data-label="Código de prestación">{{ m.value.codigoCups }}</td>
+                                                <td data-label="Descripción Código de prestación">{{ m.value.nombreProcedimiento }}</td>
+                                                <td data-label="Cantidad">{{ m.value.cantidad }}</td>
+                                                <td data-label="Borrar prestación">
+                                                    <button type="button" (click)="removeCups(i)" id="rem-button"><i class="fas fa-trash-alt mr-2"></i> Eliminar</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+
+
+                    <div id="add-med " *ngIf="showCUMS==true">
+                        <div class="form-row ">
+                            <div class="form-group col-md-6 ">
+                                <label for="inputRequest2 "><strong>Descripción del Medicamento</strong></label>
+                                <textarea class="form-control " formControlName="medicamento" [matAutocomplete]="medicamento" rows="2"></textarea>
+                                <div class="ic-modal" *ngIf="medicine != ''" data-toggle="modal" (click)="openDialog('Mensaje Informativo','Descripción del Medicamento',medicine)">
+                                    <i class="fas fa-info-square shadow-sm "></i>
+                                </div>
+                                <mat-autocomplete #medicamento="matAutocomplete">
+                                    <mat-option *ngFor="let m of filteredMedicine | async" [value]="m">
+                                        {{m}}
+                                    </mat-option>
+                                </mat-autocomplete>
+                            </div>
+                            <div class="form-group form-submit col-md-3 ">
+                                <label for="inputSearch-smt "></label>
+                                <button type="button" (click)="addMedicine()" class="btn btn-primary form-control rounded-pill px-4 mt-2 ">Agregar Medicamento</button>
+                            </div>
+                        </div>
+
+                        <section class="service-section" *ngIf="medicamentos.length">
+                            <div class="service-content">
+                                <div class="service-table">
+                                    <table class="control_citas">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col" class="h6">Descripción Medicamento</th>
+                                                <th scope="col" class="h6">Acción</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody formArrayName="medicamentos">
+                                            <tr *ngFor="let m of medicamentos.controls; let i = index;">
+                                                <td data-label="Medicamento">{{m.value.nombreGenerico + " " + m.value.descripcionMedicamento }}</td>
+                                                <td data-label="Borrar Medicamento">
+                                                    <button type="button" (click)="removeMedicine(i)" id="rem-button"><i class="fas fa-trash-alt mr-2"></i> Eliminar</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </section>
+
+                    </div>
+
+                    <div class="form-row ">
+                        <div class="form-group col-md-12 mt-3 ">
+                             <label for="observaciones"><strong>Observaciones sobre la solicitud:</strong> Ten en cuenta no incluir caracteres especiales como: & % >, antes de completar tu información.</label>
+                             <textarea maxlength="{{observacionmax}}" class="form-control" [class.is-invalid]="observationValidate" id="observaciones" formControlName="observaciones" rows="3"  (paste)='validarObservacionesPaste($event)' (keypress)="validarObservaciones($event)" required></textarea>
+                             <small>
+                                Verifique el campo observaciones  es obligatorio.
+                            </small>
+                            <small *ngIf="this.myFormData.get('observaciones').hasError('maxlength')" class="text-danger">
+                                El campo observacion no puede superar los 300 caracteres
+                            </small>
+                            <span class="form-help" style="float:right">{{observacionmax - myFormData.get("observaciones").value.length}}/{{observacionmax}}</span>
+                        </div>
+                    </div>
+
+
+                    <div class="service-response">
+
+                        <div class="select-div">
+
+                            <div class="service-title ">
+                                <h6 class="mt-4">Documentos</h6>
+                                <p class="mb-4 mt-2 ">Debes adjuntar los documentos en archivos independientes. Los tipos de archivos permitidos son PDF, JPG, TIF. Tamaño permitido de cada archivo 4MB.</p>
+                            </div>
+
+
+                            <div class="service-title ">
+                                <h5 class="font-weight-bold my-4 ">Adjuntar Historia Clínica</h5>
+                            </div>
+                            <app-upload-file [progress]="existFileClinicHistory" (data)='uploadFileClinicHistory($event)' [class]="classClinicHistory" (delete)="deleteFileClinicHistory()"  [fileNoRequired]="deleteClinic"></app-upload-file>
+                            
+                            <div class="service-title ">
+                                <h5 class="font-weight-bold my-4 ">Adjuntar Remisión o fórmula médica</h5>
+                                 <small *ngIf="isValidUpload" class="text-danger smallIm">
+                              Campo obligatorio
+                            </small>
+                            </div>
+                            <app-upload-file [progress]="existFileFormOrRem" (data)='uploadFileFormOrRem($event)' [class]="classRem" (delete)="deleteFileFormOrRem()" [fileDelete]="deleteFormOrRem" ></app-upload-file>
+                             
+                            <div class="service-title " *ngIf="affiliate.tieneDerechosPac">
+                                <h5 class="font-weight-bold my-4 ">Adjuntar Otro documento</h5>
+                            </div>
+                            <div *ngIf="affiliate.tieneDerechosPac">
+                                <app-upload-file [progress]="existFileOther" (data)='uploadFileOther($event)' [class]="classOther" (delete)="deleteFileOther()"  [fileNoRequired]="deletFileOther"></app-upload-file>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="alert alert-warning text-center mt-4 " role="alert ">
+                        Al usar esta opción, se enviará la información de autorizaciones al número celular y/o correo electrónico registrado, de acuerdo con la política de privacidad de Suramericana SA y la autorización de tratamiento dada a la misma.
+                    </div>
+
+                    <div class="form-submit d-flex justify-content-center mt-5 ">
+                        <button type="submit " class="btn btn-primary rounded-pill px-4 ">Enviar solicitud</button>
+                    </div>
+                </section>
+
+            </form>
+        </div>
+    </div>
+</section>
+<!-- Spinner -->
+<ngx-spinner bdColor="rgba(165,162,165,0.8)" size="large" color="#fff" type="ball-pulse">
+    <p style="font-size: 20px; color: white">Procesando...</p>
+</ngx-spinner>
+
+<!-- END SERVICES SECTION -->

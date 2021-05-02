@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>SURA - PRESTADORES</title>
+    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap core CSS -->
+    <link href="./assets/vendor/bootstrap/css/bootstrap-grid.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="./assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+    <link href="./assets/vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- Custom styles for this template -->
+    <link href="./assets/css/sura-orders.css" rel="stylesheet">
+    <link href="https://pro.fontawesome.com/releases/v5.2.0/css/all.css" rel="stylesheet">
+
+
+    <!-- <script src="vendor/jquery/jquery.min.js"></script> -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" crossorigin="anonymous"></script>
+    <script src="./assets/vendor/jquery/main.js"></script>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body class="mat-typography">
+
+    <app-root></app-root>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="./assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <script type="text/javascript">
+        $(function() {
+            $('[data-toggle="popover"]').popover();
+
+            var scntDiv = $('#add-code');
+            var i = $('div.form-row').size() + 1;
+
+            $('#add-button').on('click', function() {
+                $('<div class="form-row"><div class="form-group col-md-3"><input type="text" class="form-control" id="inputCie10-2" value="######"></div><div class="form-group col-md-6"><textarea class="form-control" id="exampleFormControlTextarea3" rows="2"></textarea><div class="ic-modal" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-info-square shadow-sm"></i></div></div><button type="button" id="rem-button"><i class="fas fa-trash-alt mr-2"></i> Eliminar</button></div>').appendTo(scntDiv);
+                i++;
+
+                var matched = $("#add-code div.form-row");
+                if (matched.length == 10) {
+                    $('#add-button').addClass('d-none');
+                } else {
+                    $('#add-button').removeClass('d-none');
+                }
+                return false;
+            });
+
+            $('.select2').select2();
+
+        });
+
+        var select1 = document.getElementById('exampleInputFile1');
+
+        if (select1) {
+            document.getElementById('exampleInputFile1').addEventListener('change', function() {
+                if (this.files.length == 1) {
+                    document.getElementById('file-check').innerHTML = "<i class='fas fa-check-circle'></i>";
+                    $('.file-delete').removeClass('d-none');
+                } else {
+                    $('.file-delete').removeClass('d-none');
+                }
+            });
+        }
+
+        var select2 = document.getElementById('exampleInputFile2');
+
+        if (select1) {
+            document.getElementById('exampleInputFile2').addEventListener('change', function() {
+                if (this.files.length == 1) {
+                    document.getElementById('file-check2').innerHTML = "<i class='fas fa-check-circle'></i>";
+                }
+            });
+        }
+
+        jQuery(document).ready(function() {
+            jQuery(".only-number").on('input', function(evt) {
+                jQuery(this).val(jQuery(this).val().replace(/[^0-9]/g, ''));
+            });
+        });
+
+    </script>
+</body>
+
+</html>

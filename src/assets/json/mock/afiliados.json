@@ -1,0 +1,42 @@
+[
+
+    {
+        "tieneAcceso": true,
+        "tipoDocumento": "CC",
+        "numeroDocumento": "1020433617",
+        "tienePAC": false,
+        "tipoPlanPAC": "60 MAS",
+        "nombreCompleto": "Sandra Johana Gonzalez Torres",
+        "telefonoFijo": "2382569",
+        "celular": "3104482478",
+        "correoElectronico": "sjgonzalez@sura.com.co",
+        "mensajeRespuesta": ""
+    },
+
+    {
+        "tieneAcceso": true,
+        "tipoDocumento": "CC",
+        "numeroDocumento": "1020433618",
+        "tienePAC": true,
+        "tipoPlanPAC": "60 MAS",
+        "nombreCompleto": "Sandra Johana Gonzalez Torres",
+        "telefonoFijo": "2382569",
+        "celular": "3104482478",
+        "correoElectronico": "sjgonzalez@sura.com.co",
+        "mensajeRespuesta": ""
+    },
+
+    {
+        "tieneAcceso": false,
+        "tipoDocumento": "CC",
+        "numeroDocumento": "1020433619",
+        "tienePAC": true,
+        "tipoPlanPAC": "60 MAS",
+        "nombreCompleto": "Sandra Johana Gonzalez Torres",
+        "telefonoFijo": "2382569",
+        "celular": "3104482478",
+        "correoElectronico": "sjgonzalez@sura.com.co",
+        "mensajeRespuesta": "Mensaje de Afiliado sin Acceso"
+    }
+
+]

@@ -1,0 +1,40 @@
+<div class="form-row alingCenterCol">
+    <div class="form-group">
+        <i class="fas fa-cloud-upload input-ic"></i>
+        <div class="custom-file" id="customFile1">
+            <input #myInput type="file" class="custom-file-input" (change)="selectFiles($event)" id="exampleInputFile1"
+                aria-describedby="fileHelp" [class.is-invalid]="validInput" title="{{nameArchive}}">
+            <label class="custom-file-label box" for="exampleInputFile">
+                {{nameArchive}}
+                
+            </label>
+        </div>
+    </div>
+    <div class="alert alert-light" role="alert"> {{message}}</div>
+</div>
+<div class="form-row" style="margin-bottom: 10px;">
+    <div class="form-group margin" *ngIf="progress">
+        <div class="input-group">
+            <span id="file-check">
+                <i class="fas fa-check-circle"></i>
+            </span>
+            <p><b>El archivo {{nameArchive}} se ha cargado correctamente</b></p>
+        </div>
+        <div class="input-group margin">
+            <div class="file-delete" data-placement="top" title="Eliminar archivo">
+                <i class="fas fa-trash-alt px-3" (click)="deleteFile()"></i>
+            </div>
+            <p>Eliminar archivo para cargar uno nuevo (utilice esta opcion si cargo el archivo erroneo o icompleto)</p>
+
+        </div>
+    </div>
+
+
+
+</div>
+
+<style>
+    .custom-file-input:lang(en)~.custom-file-label::after {
+        content: "Examinar";
+    }
+</style>

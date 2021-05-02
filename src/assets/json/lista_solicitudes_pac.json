@@ -1,0 +1,5 @@
+[
+    { "value": "0", "text": "SELECCIONE TIPO DE SOLICITUD" },
+    { "value": "1", "text": "Procedimiento" },
+    { "value": "2", "text": "Medicamento" }
+]

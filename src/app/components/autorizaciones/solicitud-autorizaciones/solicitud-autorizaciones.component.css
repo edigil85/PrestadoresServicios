@@ -1,0 +1,21 @@
+.mt-2,
+.my-2 {
+    margin-top: 1.8rem!important;
+}
+
+input.form-control {
+    color: #53565A !important;
+}
+
+::placeholder {
+    color: #8189a9;
+    opacity: 1;
+}
+
+.spanAlign {
+    float: 'right'
+}
+
+.smallIm{
+  margin-left: 70px
+}

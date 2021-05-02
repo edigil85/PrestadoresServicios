@@ -1,0 +1,6 @@
+[
+    { "value": "0", "text": "SELECCIONE TIPO DE SOLICITUD" },
+    { "value": "6", "text": "Citas con especialistas, laboratorios, radiografías y ecografías" },
+    { "value": "1", "text": "Cirugías, resonancias" },
+    { "value": "2", "text": "Medicamentos" }
+]

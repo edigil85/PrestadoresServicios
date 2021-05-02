@@ -1,0 +1,19 @@
+[{
+        "codigoMedicamento": "001",
+        "nombreGenerico": "ACETAMINOFEN",
+        "nombreComercial": "ACETAMINOFEN",
+        "descripcionMedicamento": "ACETAMINOFEN"
+    },
+    {
+        "codigoMedicamento": "002",
+        "nombreGenerico": "CETAPHIL",
+        "nombreComercial": "CETAPHIL",
+        "descripcionMedicamento": "CETAPHIL"
+    },
+    {
+        "codigoMedicamento": "003",
+        "nombreGenerico": "DERMACORTINE",
+        "nombreComercial": "DERMACORTINE",
+        "descripcionMedicamento": "DERMACORTINE"
+    }
+]

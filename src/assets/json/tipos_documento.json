@@ -1,0 +1,14 @@
+[
+    { "value": "CC", "text": "CÉDULA DE CIUDADANÍA", "minimo": 3, "maximo": 11, "patron": "[^0-9]" },
+    { "value": "CE", "text": "CÉDULA DE EXTRANJERÍA", "minimo": 3, "maximo": 7, "patron": "[^A-Za-z0-9]" },
+    { "value": "CD", "text": "CARNÉ DIPLOMÁTICO", "minimo": 3, "maximo": 11, "patron": "[^A-Za-z0-9]" },
+    { "value": "CN", "text": "CERTIFICADO DE NACIDO VIVO", "minimo": 9, "maximo": 9, "patron": "[^0-9]" },
+    { "value": "NU", "text": "N.U.I.P", "minimo": 9, "maximo": 11 },
+    { "value": "PA", "text": "PASAPORTE", "minimo": 6, "maximo": 11, "patron": "[^A-Za-z0-9]" },
+    { "value": "PE", "text": "PERMISO ESPECIAL", "minimo": 3, "maximo": 16, "patron": "[^0-9]" },
+    { "value": "PF", "text": "PERMISO ESPECIAL FORMALIZACIÓN", "minimo": 15, "maximo": 15, "patron": "[^0-9]" },
+    { "value": "RC", "text": "REGISTRO CIVIL", "minimo": 10, "patron": "[^0-9]" },
+    { "value": "SC", "text": "SALVOCONDUCTO DE PERMANENCIA", "minimo": 9, "maximo": 9, "patron": "[^0-9]" },
+    { "value": "TI", "text": "TARJETA DE IDENTIDAD", "minimo": 8, "maximo": 11, "patron": "[^0-9]" },
+    { "value": "NI", "text": "NIT" }
+]

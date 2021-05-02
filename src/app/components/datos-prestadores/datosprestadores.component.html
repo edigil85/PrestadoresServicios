@@ -1,0 +1,42 @@
+<header id="header"></header>
+    <div class="container-fluid">
+        <h3>Configuracion del prestador</h3>
+        <div class="row">
+            <div class="col-md-3"  style="background-color:rgb(255, 255, 255)">
+                <h3>Identificación / {{datosPrestador.tipoDocumentoPrestador}}</h3> 
+                <p>{{datosPrestador.numeroDocumentoPrestador}}</p>
+            </div>
+            <div class="col-md-3"  style="background-color:rgb(255, 255, 255)">
+                <h3>Razón social</h3> 
+                <p>{{datosPrestador.razonSocial}}</p>
+            </div>
+            <div class="col-lg-5"  style="background-color:#CCCCFF">
+            <h3>Representante legal</h3> 
+            <mat-icon svgIcon="user"></mat-icon>
+            <mat-form-field>
+                <mat-label>Representante legal</mat-label>
+                <input matInput disabled placeholder="Representante legal" value={{infoPrestador.representanteLegal}}>
+            </mat-form-field>
+            <mat-icon svgIcon="email"></mat-icon>
+            <mat-form-field>
+                <mat-label></mat-label>
+                <mat-label>Correo representante legal</mat-label>
+                <input matInput disabled placeholder="Corre@ejemplo.com" value={{infoPrestador.emailReperesentantelegal}}>
+            </mat-form-field>
+            <button mat-icon-button (click)="onCreate()" ><mat-icon svgIcon="edit"></mat-icon></button>
+            </div>
+        </div>
+  </div>
+  <span class="toolbar-flex">
+    <nav mat-tab-nav-bar>
+      <a mat-tab-link
+      *ngFor="let link of navLinks"
+      [routerLink]="link.link"
+      routerLinkActive #rla="routerLinkActive"
+      [active]="rla.isActive">
+      <mat-icon svgIcon={{link.icon}}></mat-icon><br>
+      {{link.label}}
+    </a>
+    </nav>
+    </span>
+    <router-outlet></router-outlet>

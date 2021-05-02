@@ -1,0 +1,8 @@
+{
+    "/solicitudes/*": {
+        "target": "http://epsappslab.suranet.com/Prestadores/api/v1",
+        "secure": false,
+        "changeOrigin": true
+    }
+
+}

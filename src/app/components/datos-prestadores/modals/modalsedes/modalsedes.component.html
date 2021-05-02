@@ -1,0 +1,44 @@
+<mat-toolbar>
+    <span><h3>Información de la sede</h3></span>
+  </mat-toolbar>
+  <form [formGroup]="form" class="normal-form" (ngSubmit)="onSubmit()">
+    <mat-grid-list cols="1" rowHeight="75px">
+      <mat-grid-tile>
+        <div>
+        <mat-form-field>
+          <mat-label>Departamento</mat-label>
+          <mat-select (selectionChange)= "onSelectDepartamento()" 
+          formControlName="departamentoseleccionado" required>
+            <mat-option *ngFor="let dep of listdepartamento" [value]="dep">
+              {{dep.nombreDepartamento}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile *ngIf="showCiudad">
+        <div>
+          <mat-form-field>
+            <mat-label>Ciudad</mat-label>
+            <mat-select  formControlName="ciudad" required >
+              <mat-option *ngFor="let ciu of listciudades" [value]="ciu.nombreCiudad">
+                {{ciu.nombreCiudad}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <div>
+          <mat-form-field>
+            <mat-label>Dirección*</mat-label>
+            <input matInput formControlName="direccion">
+          </mat-form-field>
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>
+    <div class="button-row">
+      <button mat-raised-button color="warn" (click)="onClose()">Cerrar</button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Guardar</button>
+    </div>
+  </form>

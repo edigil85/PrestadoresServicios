@@ -1,0 +1,5 @@
+{
+    "tipoDocumentoPrestador": "NI",
+    "numeroDocumentoPrestador": "890901826",
+    "uriCargaArchivo": "https://stinfoclientes001.blob.core.windows.net/agenda-vacunacion-externos/NI890903777_agendamientovacunacion_24022021_11_56_20.csv?sv=2018-03-28&sr=c&sig=LkT0c8P28FNPyUX%2B3tskGvXfbk6wyE0IsPvsZhJbyKI%3D&st=2021-02-24T16%3A56%3A20Z&se=2021-02-24T17%3A06%3A20Z&sp=w"
+}

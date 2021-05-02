@@ -1,0 +1,25 @@
+<div class="form-row">
+    <div class="form-group col-md-4">
+        <i class="fas fa-cloud-upload input-ic"></i>
+        <div class="custom-file" id="customFile1">
+            <input #myInput type="file" class="custom-file-input" (change)="selectFiles($event)" id="exampleInputFile1" aria-describedby="fileHelp" [class.is-invalid]="validInput" title="{{nameArchive}}">
+            <label class="custom-file-label box" for="exampleInputFile">
+                {{nameArchive}}
+            </label>
+        </div>
+    </div>
+    <span id="file-check">
+    <i class="fas fa-check-circle" [ngClass]="class === 'clinic-history'?'d-none':class == 'rem'?'d-none': class === 'other'?'d-none':''"></i></span>
+    <div class="file-delete" [ngClass]="class === 'clinic-history'?'d-none':class == 'rem'?'d-none': class === 'other'?'d-none':''" data-toggle="tooltip" data-placement="top" title="Eliminar archivo">
+        <i class="fas fa-trash-alt px-3" (click)="deleteFile()"></i>
+    </div>
+
+   <div class="alert alert-light" role="alert"> {{message}}</div>
+</div>
+
+<style>
+    
+.custom-file-input:lang(en) ~ .custom-file-label::after {
+  content: "Examinar";
+}
+</style>

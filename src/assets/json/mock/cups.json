@@ -1,0 +1,95 @@
+[{
+        "codigoCups": "08010",
+        "codigoSuracups": "12345",
+        "nombreProcedimiento": "CONSULTA ORTOPEDIA"
+    },
+    {
+        "codigoCups": "F901",
+        "codigoSuracups": "F901",
+        "nombreProcedimiento": "TRASTORNO HIPERCINÉTICO DE LA CONDUCTA"
+    },
+    {
+        "codigoCups": "F908",
+        "codigoSuracups": "F908",
+        "nombreProcedimiento": "OTROS TRASTORNOS HIPERCINÉTICOS"
+    },
+    {
+        "codigoCups": "F909",
+        "codigoSuracups": "F909",
+        "nombreProcedimiento": "TRASTORNO HIPERCINÉTICO, NO ESPECIFICADO"
+    },
+    {
+        "codigoCups": "I110",
+        "codigoSuracups": "I110",
+        "nombreProcedimiento": "ENFERMEDAD CARDÍACA HIPERTENSIVA CON INSUFICIENCIA CARDÍACA (CONGESTIVA)"
+    },
+    {
+        "codigoCups": "I119",
+        "codigoSuracups": "I119",
+        "nombreProcedimiento": "ENFERMEDAD CARDÍACA HIPERTENSIVA SIN INSUFICIENCIA CARDÍACA (CONGESTIVA)"
+    },
+    {
+        "codigoCups": "I120",
+        "codigoSuracups": "I120",
+        "nombreProcedimiento": "ENFERMEDAD RENAL HIPERTENSIVA CON INSUFICIENCIA RENAL"
+    }
+
+    ,
+    {
+        "codigoCups": "0000",
+        "codigoSuracups": "0000",
+        "nombreProcedimiento": "TRASTORNO HIPERCINÉTICO, NO ESPECIFICADO"
+    },
+    {
+        "codigoCups": "1111",
+        "codigoSuracups": "1111",
+        "nombreProcedimiento": "ENFERMEDAD CARDÍACA HIPERTENSIVA CON INSUFICIENCIA CARDÍACA (CONGESTIVA)"
+    },
+    {
+        "codigoCups": "2222",
+        "codigoSuracups": "2222",
+        "nombreProcedimiento": "ENFERMEDAD CARDÍACA HIPERTENSIVA SIN INSUFICIENCIA CARDÍACA (CONGESTIVA)"
+    },
+    {
+        "codigoCups": "3333",
+        "codigoSuracups": "3333",
+        "nombreProcedimiento": "ENFERMEDAD RENAL HIPERTENSIVA CON INSUFICIENCIA RENAL"
+    }
+    ,
+    {
+        "codigoCups": "4444",
+        "codigoSuracups": "4444",
+        "nombreProcedimiento": "TRASTORNO HIPERCINÉTICO, NO ESPECIFICADO"
+    },
+    {
+        "codigoCups": "5555",
+        "codigoSuracups": "5555",
+        "nombreProcedimiento": "ENFERMEDAD CARDÍACA HIPERTENSIVA CON INSUFICIENCIA CARDÍACA (CONGESTIVA)"
+    },
+    {
+        "codigoCups": "6666",
+        "codigoSuracups": "6666",
+        "nombreProcedimiento": "ENFERMEDAD CARDÍACA HIPERTENSIVA SIN INSUFICIENCIA CARDÍACA (CONGESTIVA)"
+    },
+    {
+        "codigoCups": "7777",
+        "codigoSuracups": "7777",
+        "nombreProcedimiento": "ENFERMEDAD RENAL HIPERTENSIVA CON INSUFICIENCIA RENAL"
+    }
+    ,
+    {
+        "codigoCups": "8888",
+        "codigoSuracups": "8888",
+        "nombreProcedimiento": "TRASTORNO HIPERCINÉTICO, NO ESPECIFICADO"
+    },
+    {
+        "codigoCups": "9999",
+        "codigoSuracups": "9999",
+        "nombreProcedimiento": "ENFERMEDAD CARDÍACA HIPERTENSIVA CON INSUFICIENCIA CARDÍACA (CONGESTIVA)"
+    },
+    {
+        "codigoCups": "909090",
+        "codigoSuracups": "2222",
+        "nombreProcedimiento": "ENFERMEDAD CARDÍACA HIPERTENSIVA SIN INSUFICIENCIA CARDÍACA (CONGESTIVA)"
+    }
+]
