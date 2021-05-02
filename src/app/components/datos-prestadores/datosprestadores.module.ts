@@ -18,6 +18,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatPaginatorIntl, MatPaginatorModule} from '@angular/material/paginator';
 
 
+
 //componentes del modulo
 import { DatosPrestadoresRoutingModule } from './datosprestadores-routing.module';
 import { DatosPrestadoresComponent } from './datosprestadores.component';
