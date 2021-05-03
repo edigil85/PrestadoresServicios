@@ -72,8 +72,8 @@
             <div class="col">Departamento<br>{{sede.departamento}}</div>
             <div class="col">Ciudad<br>{{sede.ciudad}}</div>
             <div class="col">
-              <button mat-icon-button ><mat-icon svgIcon="edit"></mat-icon></button>
-              <button mat-icon-button><mat-icon svgIcon="delete"></mat-icon></button>
+              <button mat-icon-button (click)="editSede(sede)"><mat-icon svgIcon="edit"></mat-icon></button>
+              <button mat-icon-button (click)="deleteSede(sede)"><mat-icon svgIcon="delete"></mat-icon></button>
             </div>
           </div>
         </div>

@@ -35,6 +35,7 @@ import { DeleteconfirmmodalComponent } from './modals/deleteconfirmmodal/deletec
 import { PaginatePipe } from './pipes/paginate.pipe'
 import { CustomMatPaginatorIntl } from './pipes/paginate.es';
 import { sedesFilter } from './pipes/sedesfilter.pipe';
+import { codigoHabFilter } from './pipes/CodigosHabFilter.pipe';
 
 
 
@@ -52,7 +53,8 @@ import { sedesFilter } from './pipes/sedesfilter.pipe';
    ModalprefijofacturacionComponent,
    DeleteconfirmmodalComponent,
    PaginatePipe,
-   sedesFilter
+   sedesFilter,
+   codigoHabFilter
   ],
   imports: [ 
     HttpClientModule,
