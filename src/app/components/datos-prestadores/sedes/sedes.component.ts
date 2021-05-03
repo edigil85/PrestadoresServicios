@@ -111,6 +111,10 @@ export class SedesComponent implements OnInit {
     });
   }
 
+  deleteSedes(){
+    
+  }
+
   handlePage(e: PageEvent){
     this.page_size= e.pageSize;
     this.page_number= e.pageIndex + 1;

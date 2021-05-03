@@ -34,6 +34,7 @@ import { SedesComponent } from './sedes/sedes.component';
 import { DeleteconfirmmodalComponent } from './modals/deleteconfirmmodal/deleteconfirmmodal.component';
 import { PaginatePipe } from './pipes/paginate.pipe'
 import { CustomMatPaginatorIntl } from './pipes/paginate.es';
+import { sedesFilter } from './pipes/sedesfilter.pipe';
 
 
 
@@ -50,7 +51,8 @@ import { CustomMatPaginatorIntl } from './pipes/paginate.es';
    ModalinfoprestadorComponent,
    ModalprefijofacturacionComponent,
    DeleteconfirmmodalComponent,
-   PaginatePipe
+   PaginatePipe,
+   sedesFilter
   ],
   imports: [ 
     HttpClientModule,
