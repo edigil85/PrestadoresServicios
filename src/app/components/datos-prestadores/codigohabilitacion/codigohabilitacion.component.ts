@@ -45,7 +45,12 @@ export class CodigohabilitacionComponent implements OnInit {
     dialogConfig.autoFocus = true;
     dialogConfig.width = "40%";
     localStorage.setItem('codigoHabilitacion', JSON.stringify(codigo));
-    this.dialog.open(ModalcodigohabilitacionComponent, dialogConfig);
+    const dialogRef = this.dialog.open(ModalcodigohabilitacionComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(
+      () => 
+      this.ConsultarCodigosHabilitacion()
+  ); 
   } 
 
   deleteCodigo(codigo: IcodigoHabilitacion){

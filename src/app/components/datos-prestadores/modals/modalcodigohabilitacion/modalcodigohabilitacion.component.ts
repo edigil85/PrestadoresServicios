@@ -42,6 +42,7 @@ export class ModalcodigohabilitacionComponent implements OnInit {
       && this.form.get('descripcion'). value == this.codigoHabilitacion.descripcionServicio
       )
      {
+      console.log('no cambio ningun parametro') 
       this.dialogRef.close();
     }
      else{
@@ -56,6 +57,7 @@ export class ModalcodigohabilitacionComponent implements OnInit {
        
       }
       else{
+        console.log('se debe de ralizar la actualizacion del codigo') 
         this.codigoHabilitacion.descripcionServicio = this.form.get('descripcion'). value;
         this.service.ActualizarCodigoHabilitacion(this.codigoHabilitacion).subscribe(
           () => {
