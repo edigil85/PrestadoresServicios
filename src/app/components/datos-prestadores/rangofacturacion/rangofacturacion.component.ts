@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DateAdapter } from '@angular/material/core';
 import { MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material/dialog'
 import { PageEvent } from '@angular/material/paginator';
 import { DeleteconfirmmodalComponent } from '../modals/deleteconfirmmodal/deleteconfirmmodal.component';
@@ -30,7 +31,10 @@ export class RangofacturacionComponent implements OnInit {
   constructor(
     private dialog: MatDialog,
     private service: prefijoFacturacionService,
-  ) { }
+    private dateAdapter: DateAdapter<Date>
+  ) {
+    this.dateAdapter.setLocale('es');
+   }
 
   ngOnInit(): void {
     this.ConsultarPrefijoFacturacion();
