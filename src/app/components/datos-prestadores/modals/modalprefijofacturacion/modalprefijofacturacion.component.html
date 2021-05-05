@@ -2,8 +2,8 @@
     <span><h3>Rango de facturación</h3></span>
 </mat-toolbar>
   <form [formGroup]="form" class="normal-form" (ngSubmit)="onSubmit()">
-    <mat-grid-list cols="1" rowHeight="75px">
-      <mat-grid-tile *ngIf="modificarCodigo">
+    <mat-grid-list *ngIf="modificarCodigo" cols="1" rowHeight="75px">
+      <mat-grid-tile>
         <div>
           <mat-form-field>
             <mat-label>Prefijo *</mat-label>
@@ -28,6 +28,38 @@
           </mat-form-field>
     </mat-grid-tile>
     </mat-grid-list>
+    
+
+    <mat-grid-list *ngIf="!modificarCodigo" cols="1" rowHeight="75px">
+      <mat-grid-tile>
+        <div>
+          <mat-form-field>
+            <mat-label>Prefijo *</mat-label>
+            <input matInput readonly formControlName="prefijoFacturacion">
+          </mat-form-field>
+        </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <mat-form-field>
+            <mat-label>Fecha inicial</mat-label>
+            <input matInput formControlName="fechaInicial" [matDatepicker]="pickerInicial" disabled (dateChange)="cambioDia()">
+            <mat-datepicker-toggle matSuffix [for]="pickerInicial"></mat-datepicker-toggle>
+            <mat-datepicker touchUi #pickerInicial></mat-datepicker>
+        </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <mat-form-field>
+            <mat-label>Fecha final</mat-label>
+            <input matInput formControlName="fechaFinal" [min]="fechaminima" [matDatepicker]="pickerFinal">
+            <mat-datepicker-toggle matSuffix [for]="pickerFinal"></mat-datepicker-toggle>
+            <mat-datepicker touchUi #pickerFinal></mat-datepicker>
+          </mat-form-field>
+    </mat-grid-tile>
+    </mat-grid-list>
+
+
+
+
     <div class="button-row">
       <button mat-raised-button color="warn" (click)="onClose()">Cerrar</button>
       <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Guardar</button>

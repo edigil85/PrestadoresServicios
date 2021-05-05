@@ -20,6 +20,7 @@ export class ModalprefijofacturacionComponent implements OnInit {
   prefijoFacturacion: IprefijoFacturacion;
   modificarCodigo: boolean= false;
   fechaminima: Date;
+  fechaPaso: Date;
 
   constructor(
     public service: prefijoFacturacionService,
@@ -36,46 +37,55 @@ export class ModalprefijofacturacionComponent implements OnInit {
       this.modificarCodigo= false;
     }
     this.DatosFormGroup(this.prefijoFacturacion.prefijoFacturacion, 
-      this.prefijoFacturacion.fechaInicial,
-      this.prefijoFacturacion.fechaFinal);
+      this.RemplazarMes_Es_En(this.prefijoFacturacion.fechaInicial.toString()),
+      this.RemplazarMes_Es_En(this.prefijoFacturacion.fechaFinal.toString())
+      );
+    this.fechaminima = this.form.get("fechaInicial").value;
   }
 
   onSubmit() {
-    // if (this.form.get('codigo'). value == this.codigoHabilitacion.codigoHabilitacion
-    //   && this.form.get('descripcion'). value == this.codigoHabilitacion.descripcionServicio
-    //   )
-    //  {
-    //   this.dialogRef.close();
-    // }
-    //  else{
-    //   if(this.codigoHabilitacion.codigoHabilitacion == '' && this.codigoHabilitacion.descripcionServicio == '' ){
-    //     this.codigoHabilitacion.codigoHabilitacion = this.form.get('codigo'). value;
-    //     this.codigoHabilitacion.descripcionServicio = this.form.get('descripcion'). value;
-    //     this.service.InsertarCodigoHabilitacion(this.codigoHabilitacion).subscribe(
-    //       () => {
-    //        this.dialogRef.close();
-    //      }
-    //    );
+    if (this.form.get('fechaFinal').value == this.RemplazarMes_Es_En(this.prefijoFacturacion.fechaFinal)
+      
+      )
+     {
+      this.dialogRef.close();
+    }
+     else{
+      if(this.prefijoFacturacion.prefijoFacturacion == ''){
+        this.prefijoFacturacion.prefijoFacturacion = this.form.get('prefijoFacturacion'). value;
+        this.fechaPaso = this.form.get('fechaInicial'). value;
+        this.prefijoFacturacion.fechaInicial= this.RemplazarMes_En_Es(this.fechaPaso.toLocaleDateString('en-US', 
+        {  month: 'short', year: 'numeric', day: 'numeric' }));
+        this.fechaPaso = this.form.get('fechaFinal'). value;
+        this.prefijoFacturacion.fechaFinal= this.RemplazarMes_En_Es(this.fechaPaso.toLocaleDateString('en-US', 
+        {  month: 'short', year: 'numeric', day: 'numeric' }));
+        this.service.InsertarPrefijoFacturacion(this.prefijoFacturacion).subscribe(
+          () => {
+           this.dialogRef.close();
+         }
+       );
        
-    //   }
-    //   else{
-    //     this.codigoHabilitacion.descripcionServicio = this.form.get('descripcion'). value;
-    //     this.service.ActualizarCodigoHabilitacion(this.codigoHabilitacion).subscribe(
-    //       () => {
-    //        this.dialogRef.close();
-    //      }
-    //    );
+      }
+      else{
+        this.fechaPaso = this.form.get('fechaFinal'). value;
+        this.prefijoFacturacion.fechaFinal= this.RemplazarMes_En_Es(this.fechaPaso.toLocaleDateString('en-US', 
+        {  month: 'short', year: 'numeric', day: 'numeric' }));
+        this.service.ActualizarPrefijoFacturacion(this.prefijoFacturacion).subscribe(
+          () => {
+           this.dialogRef.close();
+         }
+       );
        
-    //   }
-    //  }
+      }
+     }
 
   }
 
   DatosFormGroup(prefijoFacturacion: String, fechaInicial: String, fechaFinal: String){
     this.form.patchValue({
       prefijoFacturacion: prefijoFacturacion,
-      fechaInicial: fechaInicial,
-      fechaFinal: fechaFinal
+      fechaInicial: new Date(fechaInicial.toString()),
+      fechaFinal: new Date(fechaFinal.toString())
     });
   }
 
@@ -95,8 +105,49 @@ export class ModalprefijofacturacionComponent implements OnInit {
 
   cambioDia(){
     this.fechaminima = this.form.get("fechaInicial").value;
-    this.prefijoFacturacion.fechaInicial= this.fechaminima.toLocaleDateString('en-US', 
-    { year: 'numeric', month: 'short', day: 'numeric' });
-    console.log(this.prefijoFacturacion);
+  }
+
+   RemplazarMes_En_Es(fecha:String):String {
+    var result: String
+    var mes: String = fecha.substr(0,3);
+    switch (mes){
+      case 'Jan':
+      result = fecha.replace('Jan','Ene');
+      break;
+      case 'Apr':
+      result = fecha.replace('Apr','Abr');
+      break;
+      case 'Aug':
+      result = fecha.replace('Aug','Ago');
+      break;
+      case 'Dec':
+      result = fecha.replace('Dec','Dic');
+      break;
+      default:
+        result= fecha;
+    }
+    return result;
+  }
+
+  RemplazarMes_Es_En(fecha:String):String {
+    var result: String
+    var mes: String = fecha.substr(0,3);
+    switch (mes){
+      case 'ene':
+      result = fecha.replace('ene','Jan');
+      break;
+      case 'abr':
+      result = fecha.replace('abr','Apr');
+      break;
+      case 'ago':
+      result = fecha.replace('ago','Aug');
+      break;
+      case 'dic':
+      result = fecha.replace('dic','Dec');
+      break;
+      default:
+        result= fecha;
+    }
+    return result;
   }
 }
