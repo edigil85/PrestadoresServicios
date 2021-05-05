@@ -1,8 +1,112 @@
-<section class="center">
+<section class="center" *ngIf="contactos.length==0">
     <h3>Aún no tienes configurados los contactos</h3>
     <h5>Debes de hacer uso de la acción adicionar registro para configurarlas</h5>
     <img src='assets\Imagenes\img-prestadores.svg'>
   </section>
+
+  <div *ngIf="ShowCards">
+    <div>
+      <mat-checkbox class="example-margin" [(ngModel)]="seleccionarTodos">Seleccionar todos</mat-checkbox>
+      <span *ngIf="seleccionarTodos"><button mat-icon-button (click)="deleteContactos()"><mat-icon svgIcon="delete"></mat-icon></button></span>
+      <span *ngIf="UseFilter">
+        <mat-form-field class="example-form-field">
+          <mat-label>Ingresar nombre, correo o teléfono</mat-label>
+          <input matInput type="text" [(ngModel)]="textoFiltro">
+          <button mat-button *ngIf="textoFiltro" matSuffix mat-icon-button aria-label="Clear" (click)="textoFiltro=''">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+      </span>
+      <button mat-icon-button (click)="UsarFiltro()"><mat-icon svgIcon={{IconoFilter}}></mat-icon></button>
+      <button mat-icon-button (click)="mostrar()"><mat-icon svgIcon={{IconoMostrar}}></mat-icon></button>
+    </div>
+  <div  class="container.fluid">
+    <div class="row">
+    <mat-card class="card" *ngFor="let contacto of contactos |contactoPreFilter : textoFiltro | paginate: page_size: page_number">
+      <mat-card-header>
+      <mat-card-title>
+        {{contacto.nombre}}
+      </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <span><mat-icon svgIcon="email"></mat-icon>{{contacto.emailNotificacion}}</span>
+        <span><mat-icon svgIcon="phone"></mat-icon>{{contacto.telefono}}</span>
+        <table>
+          <tr>
+            <th colspan="3"><mat-icon svgIcon="notificacion"></mat-icon>Notificaciones</th>
+          </tr>
+          <tr>
+            <td>Glosas: {{contacto.notificacionGlosa}} </td>
+            <td>Devoluciones: {{contacto.notificacionDevoluciones}} </td>
+            <td>Cartera: {{contacto.notificacionCartera}}</td>
+          </tr>
+        </table>
+    
+      </mat-card-content>
+      <mat-card-actions align="end">
+        <button mat-icon-button (click)="editContacto(contacto)"><mat-icon svgIcon="edit"></mat-icon></button>
+        <button mat-icon-button (click)="deleteContacto(contacto)"><mat-icon svgIcon="delete"></mat-icon></button>
+      </mat-card-actions>
+    </mat-card>
+    </div>
+    </div>
+  <mat-paginator [length]="contactos.length"
+                 [pageSize]="page_size"
+                 [pageSizeOptions]="pageSizeOption"
+                 (page)="handlePage($event)"
+                 showFirstLastButtons>
+  </mat-paginator>
+  </div>
+
+  <div *ngIf="ShowTable">
+    <div>
+      <mat-checkbox class="example-margin" [(ngModel)]="seleccionarTodos">Seleccionar todos</mat-checkbox>
+      <span *ngIf="seleccionarTodos"><button mat-icon-button (click)="deleteContactos()"><mat-icon svgIcon="delete"></mat-icon></button></span>
+      <span *ngIf="UseFilter">
+        <mat-form-field class="example-form-field">
+          <mat-label>Ingresar nombre, correo o teléfono</mat-label>
+          <input matInput type="text" [(ngModel)]="textoFiltro">
+          <button mat-button *ngIf="textoFiltro" matSuffix mat-icon-button aria-label="Clear" (click)="textoFiltro=''">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+      </span>
+      <button mat-icon-button (click)="UsarFiltro()"><mat-icon svgIcon={{IconoFilter}}></mat-icon></button>
+      <button mat-icon-button (click)="mostrar()"><mat-icon svgIcon={{IconoMostrar}}></mat-icon></button>
+ </div>
+  <div  class="container.fluid">
+    <mat-card class="card" *ngFor="let contacto of contactos |contactoPreFilter:textoFiltro | paginate: page_size: page_number">
+      <mat-card-content>
+        <div class="continer">
+          <div class="row">
+            <div class="col-3">{{contacto.nombre}}<br>
+            {{contacto.emailNotificacion}}  <span>{{contacto.telefono}}</span> </div>
+            <div class="col">
+              <table>
+                <tr>
+                  <td><mat-icon svgIcon="notificacion"></mat-icon>Notificaciones</td>
+                  <td>Glosas: {{contacto.notificacionGlosa}} </td>
+                  <td>Devoluciones: {{contacto.notificacionDevoluciones}}</td>
+                  <td>Cartera: {{contacto.notificacionCartera}}</td>
+                  
+                </tr>
+              </table>
+            </div>
+            <div class="col">
+              <button mat-icon-button (click)="editContacto(contacto)"><mat-icon svgIcon="edit"></mat-icon></button>
+              <button mat-icon-button (click)="deleteContacto(contacto)"><mat-icon svgIcon="delete"></mat-icon></button>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <mat-paginator [length]="contactos.length"
+    [pageSize]="page_size"
+    [pageSizeOptions]="pageSizeOption"
+    (page)="handlePage($event)">
+  </mat-paginator>
+</div>
   
   <div class="flotante">
     <div class="redes">

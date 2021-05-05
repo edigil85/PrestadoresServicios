@@ -10,7 +10,7 @@
       <span *ngIf="seleccionarTodos"><button mat-icon-button (click)="deleteCodigos()"><mat-icon svgIcon="delete"></mat-icon></button></span>
       <span *ngIf="UseFilter">
         <mat-form-field class="example-form-field">
-          <mat-label>Direccion, departamento o municipio</mat-label>
+          <mat-label>Código ó nombre del servicio</mat-label>
           <input matInput type="text" [(ngModel)]="textoFiltro">
           <button mat-button *ngIf="textoFiltro" matSuffix mat-icon-button aria-label="Clear" (click)="textoFiltro=''">
             <mat-icon>close</mat-icon>
@@ -54,7 +54,7 @@
       <span *ngIf="seleccionarTodos"><button mat-icon-button (click)="deleteCodigos()"><mat-icon svgIcon="delete"></mat-icon></button></span>
       <span *ngIf="UseFilter">
         <mat-form-field class="example-form-field">
-          <mat-label>Direccion, departamento o municipio</mat-label>
+          <mat-label>Código ó nombre del servicio</mat-label>
           <input matInput type="text" [(ngModel)]="textoFiltro">
           <button mat-button *ngIf="textoFiltro" matSuffix mat-icon-button aria-label="Clear" (click)="textoFiltro=''">
             <mat-icon>close</mat-icon>

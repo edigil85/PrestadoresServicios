@@ -40,6 +40,7 @@ import { CustomMatPaginatorIntl } from './pipes/paginate.es';
 import { sedesFilter } from './pipes/sedesfilter.pipe';
 import { codigoHabFilter } from './pipes/CodigosHabFilter.pipe';
 import { prefijoFacFilter } from './pipes/PrefijoFacFilter.pipe';
+import { contactoPreFilter } from './pipes/ContactoPreFilter.pipe';
 
 
 
@@ -59,7 +60,8 @@ import { prefijoFacFilter } from './pipes/PrefijoFacFilter.pipe';
    PaginatePipe,
    sedesFilter,
    codigoHabFilter,
-   prefijoFacFilter
+   prefijoFacFilter,
+   contactoPreFilter
   ],
   imports: [ 
     HttpClientModule,
