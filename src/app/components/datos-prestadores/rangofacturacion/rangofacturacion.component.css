@@ -57,3 +57,8 @@
     margin-right: auto;
     width: 30%;
   }
+
+  .mat-paginator {
+    display: flex;
+    justify-content: center;
+  } 

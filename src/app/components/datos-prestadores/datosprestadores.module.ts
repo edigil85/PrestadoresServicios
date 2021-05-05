@@ -16,6 +16,9 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatInputModule} from '@angular/material/input';
 import {MatPaginatorIntl, MatPaginatorModule} from '@angular/material/paginator';
+import {MatDatepickerModule, } from '@angular/material/datepicker';
+import { MatNativeDateModule } from "@angular/material/core";
+
 
 
 
@@ -36,6 +39,7 @@ import { PaginatePipe } from './pipes/paginate.pipe'
 import { CustomMatPaginatorIntl } from './pipes/paginate.es';
 import { sedesFilter } from './pipes/sedesfilter.pipe';
 import { codigoHabFilter } from './pipes/CodigosHabFilter.pipe';
+import { prefijoFacFilter } from './pipes/PrefijoFacFilter.pipe';
 
 
 
@@ -54,7 +58,8 @@ import { codigoHabFilter } from './pipes/CodigosHabFilter.pipe';
    DeleteconfirmmodalComponent,
    PaginatePipe,
    sedesFilter,
-   codigoHabFilter
+   codigoHabFilter,
+   prefijoFacFilter
   ],
   imports: [ 
     HttpClientModule,
@@ -73,7 +78,9 @@ import { codigoHabFilter } from './pipes/CodigosHabFilter.pipe';
     MatSelectModule,
     MatCheckboxModule,
     MatInputModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatDatepickerModule,
+    MatNativeDateModule
     ],
     providers: [
      {provide: MatPaginatorIntl, useClass: CustomMatPaginatorIntl}

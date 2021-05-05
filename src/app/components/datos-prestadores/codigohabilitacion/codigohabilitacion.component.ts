@@ -82,7 +82,6 @@ export class CodigohabilitacionComponent implements OnInit {
     .subscribe(
        (result) => {
         this.codigos= result;
-        console.log('Consulta de codigos de habilitacion');
       }
     )
   }

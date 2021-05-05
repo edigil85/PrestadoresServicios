@@ -36,6 +36,8 @@ import { UploadFileService } from './components/autorizaciones/service/upload-fi
 import { ValidadoresService } from './components/autorizaciones/service/validadores.service';
 import {MatSelectModule} from '@angular/material/select';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatDatepickerModule, } from '@angular/material/datepicker';
+import { MatNativeDateModule } from "@angular/material/core";
 
 
 @NgModule({
@@ -57,7 +59,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
    CommonModule,
     //Material
     MatToolbarModule, MatIconModule, MatButtonModule, MatCardModule,
-    MatProgressBarModule, MatTabsModule, MatSelectModule, MatCheckboxModule,
+    MatProgressBarModule, MatTabsModule, MatSelectModule, MatCheckboxModule, MatDatepickerModule, 
+    MatNativeDateModule,
 
     //vacunacion
      FormsModule, ReactiveFormsModule, NgxSpinnerModule,

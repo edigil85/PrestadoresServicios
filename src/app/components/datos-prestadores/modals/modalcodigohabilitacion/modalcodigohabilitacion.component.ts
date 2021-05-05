@@ -26,9 +26,7 @@ export class ModalcodigohabilitacionComponent implements OnInit {
   ngOnInit(): void {
     this.codigoHabilitacion= JSON.parse(localStorage.getItem('codigoHabilitacion'));
     localStorage.removeItem('codigoHabilitacion');
-    console.log(this.codigoHabilitacion)
     if(this.codigoHabilitacion.codigoHabilitacion==''){
-      console.log('codigo diferente de vacio')
       this.modificarCodigo= true;
     }
     else{
@@ -42,7 +40,6 @@ export class ModalcodigohabilitacionComponent implements OnInit {
       && this.form.get('descripcion'). value == this.codigoHabilitacion.descripcionServicio
       )
      {
-      console.log('no cambio ningun parametro') 
       this.dialogRef.close();
     }
      else{
@@ -57,7 +54,6 @@ export class ModalcodigohabilitacionComponent implements OnInit {
        
       }
       else{
-        console.log('se debe de ralizar la actualizacion del codigo') 
         this.codigoHabilitacion.descripcionServicio = this.form.get('descripcion'). value;
         this.service.ActualizarCodigoHabilitacion(this.codigoHabilitacion).subscribe(
           () => {

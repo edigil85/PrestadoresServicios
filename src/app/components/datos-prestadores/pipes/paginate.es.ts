@@ -6,8 +6,8 @@ export class CustomMatPaginatorIntl extends MatPaginatorIntl {
     itemsPerPageLabel = 'Número de pagina'; 
     nextPageLabel     = 'Siguiente';
     previousPageLabel = 'Anterior';
-    firstPageLabel    = 'Última página';
-    lastPageLabel     = 'Primera página';
+    firstPageLabel    = 'Primera página';
+    lastPageLabel     = 'Última página';
   
     getRangeLabel = function (page, pageSize, length) {
       if (length === 0 || pageSize === 0) {

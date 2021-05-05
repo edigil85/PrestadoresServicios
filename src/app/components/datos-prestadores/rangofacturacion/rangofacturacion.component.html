@@ -1,11 +1,103 @@
-<section class="center">
-    <h3>Aún no tienes configurados los rangos de facturación</h3>
-    <h5>Debes de hacer uso de la acción adicionar registro para configurarlas</h5>
-    <img src='assets\Imagenes\img-prestadores.svg'>
-  </section>
-  
-  <div class="flotante">
-    <div class="redes">
-      <button mat-fab color="primary" (click)="onCreate()"><span class="material-icons">add</span></button>
-    </div>
+<section class="center" *ngIf="rangosFacturacion.length==0">
+  <h3>Aún no tienes configurados rangos de facturación</h3>
+  <h5>Debes de hacer uso de la acción adicionar registro para configurarlas</h5>
+  <img src='assets\Imagenes\img-prestadores.svg'>
+</section>
+
+<div *ngIf="ShowCards">
+  <div>
+    <mat-checkbox class="example-margin" [(ngModel)]="seleccionarTodos">Seleccionar todos</mat-checkbox>
+    <span *ngIf="seleccionarTodos"><button mat-icon-button (click)="deletePrefijosFacturacion()"><mat-icon svgIcon="delete"></mat-icon></button></span>
+    <span *ngIf="UseFilter">
+      <mat-form-field class="example-form-field">
+        <mat-label>Direccion, departamento o municipio</mat-label>
+        <input matInput type="text" [(ngModel)]="textoFiltro">
+        <button mat-button *ngIf="textoFiltro" matSuffix mat-icon-button aria-label="Clear" (click)="textoFiltro=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+    </span>
+    <button mat-icon-button (click)="UsarFiltro()"><mat-icon svgIcon={{IconoFilter}}></mat-icon></button>
+    <button mat-icon-button (click)="mostrar()"><mat-icon svgIcon={{IconoMostrar}}></mat-icon></button>
   </div>
+<div  class="container.fluid">
+  <div class="row">
+  <mat-card class="card" *ngFor="let rango of rangosFacturacion |prefijoFacFilter : textoFiltro | paginate: page_size: page_number">
+    <mat-card-header>
+    <mat-card-title><span>Prefijo</span><span>{{rango.prefijoFacturacion}}</span>
+    </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <table>
+        <tr>
+          <th rowspan="2">Vigencia</th>
+          <td>Desde:{{rango.fechaInicial}}</td>
+        </tr>
+        <tr>
+          <td>Hasta:{{rango.fechaFinal}}</td>
+        </tr>
+      </table>
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button mat-icon-button (click)="editPrefijo(rango)"><mat-icon svgIcon="edit"></mat-icon></button>
+      <button mat-icon-button (click)="deletePrefijo(rango)"><mat-icon svgIcon="delete"></mat-icon></button>
+    </mat-card-actions>
+  </mat-card>
+  </div>
+  </div>
+<mat-paginator [length]="rangosFacturacion.length"
+               [pageSize]="page_size"
+               [pageSizeOptions]="pageSizeOption"
+               (page)="handlePage($event)"
+               showFirstLastButtons>
+</mat-paginator>
+</div>
+
+<div *ngIf="ShowTable">
+  <div>
+    <mat-checkbox class="example-margin" [(ngModel)]="seleccionarTodos">Seleccionar todos</mat-checkbox>
+    <span *ngIf="seleccionarTodos"><button mat-icon-button (click)="deletePrefijosFacturacion()"><mat-icon svgIcon="delete"></mat-icon></button></span>
+    <span *ngIf="UseFilter">
+      <mat-form-field class="example-form-field">
+        <mat-label>Direccion, departamento o municipio</mat-label>
+        <input matInput type="text" [(ngModel)]="textoFiltro">
+        <button mat-button *ngIf="textoFiltro" matSuffix mat-icon-button aria-label="Clear" (click)="textoFiltro=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+    </span>
+    <button mat-icon-button (click)="UsarFiltro()"><mat-icon svgIcon={{IconoFilter}}></mat-icon></button>
+    <button mat-icon-button (click)="mostrar()"><mat-icon svgIcon={{IconoMostrar}}></mat-icon></button>
+</div>
+<div  class="container.fluid">
+  <mat-card class="card" *ngFor="let rango of rangosFacturacion | prefijoFacFilter:textoFiltro | paginate: page_size: page_number">
+    <mat-card-content>
+      <div class="continer">
+        <div class="row">
+          <div class="col-3"><span>Prefijo</span><span>{{rango.prefijoFacturacion}}</span></div>
+          <div class="col">Vigencias<br>
+            <span>Desde: {{rango.fechaInicial}}</span>
+            <span>Hasta: {{rango.fechaFinal}}</span>
+          </div>
+          <div class="col">
+            <button mat-icon-button (click)="editPrefijo(rango)"><mat-icon svgIcon="edit"></mat-icon></button>
+            <button mat-icon-button (click)="deletePrefijo(rango)"><mat-icon svgIcon="delete"></mat-icon></button>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+<mat-paginator [length]="rangosFacturacion.length"
+  [pageSize]="page_size"
+  [pageSizeOptions]="pageSizeOption"
+  (page)="handlePage($event)">
+</mat-paginator>
+</div>
+
+
+<div class="flotante">
+  <div class="redes">
+    <button mat-fab color="primary" (click)="onCreate()"><span class="material-icons">add</span></button>
+  </div>
+</div>
