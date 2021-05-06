@@ -79,8 +79,10 @@
       <mat-card-content>
         <div class="continer">
           <div class="row">
-            <div class="col-3">{{contacto.nombre}}<br>
-            {{contacto.emailNotificacion}}  <span>{{contacto.telefono}}</span> </div>
+            <div class="col-3"><span>{{contacto.nombre}}</span><br>
+              <span><mat-icon svgIcon="email"></mat-icon>{{contacto.emailNotificacion}}</span>
+              <span><mat-icon svgIcon="phone"></mat-icon>{{contacto.telefono}}</span>
+            </div>
             <div class="col">
               <table>
                 <tr>

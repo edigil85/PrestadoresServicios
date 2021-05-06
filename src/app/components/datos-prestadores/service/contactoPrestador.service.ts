@@ -22,17 +22,17 @@ export class contactoPrestadorService {
   }
 
   InsertarContactoPrestador(params:IcontactoPrestador): Observable<any> {
-    return this.httpClient.post<IcontactoPrestador>(`${this.baseUrl}`+Constants.URI_SERVICE_CONTACTOPRESTADOR_CONSULTA,
+    return this.httpClient.post<IcontactoPrestador>(`${this.baseUrl}`+Constants.URI_SERVICE_CONTACTOPRESTADOR_CREAR,
     JSON.stringify(params), {headers:environment.headers})
   }
 
   ActualizarContactoPrestador(params:IcontactoPrestador): Observable<any> {
-    return this.httpClient.post<IcontactoPrestador>(`${this.baseUrl}`+Constants.URI_SERVICE_CONTACTOPRESTADOR_CONSULTA,
+    return this.httpClient.post<IcontactoPrestador>(`${this.baseUrl}`+Constants.URI_SERVICE_CONTACTOPRESTADOR_ACTUALIZAR,
     JSON.stringify(params), {headers:environment.headers})
   }
 
   EliminarContactoPrestador(params:IcontactoPrestador): Observable<any> {
-    return this.httpClient.post<IcontactoPrestador>(`${this.baseUrl}`+Constants.URI_SERVICE_CONTACTOPRESTADOR_CONSULTA,
+    return this.httpClient.post<IcontactoPrestador>(`${this.baseUrl}`+Constants.URI_SERVICE_CONTACTOPRESTADOR_ELIMINAR,
     JSON.stringify(params), {headers:environment.headers})
   }
 

@@ -40,7 +40,7 @@ export class DatoscontactoComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.width = "40%";
+    dialogConfig.width = "80%";
     localStorage.setItem('contactoPrestador', JSON.stringify(contacto));
     const dialogRef = this.dialog.open(ModalcontactoprestadorComponent, dialogConfig);
 
@@ -104,7 +104,7 @@ export class DatoscontactoComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.width = "40%";
+    dialogConfig.width = "80%";
     const dialogRef = this.dialog.open(ModalcontactoprestadorComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(

@@ -49,6 +49,7 @@ export class DatosPrestadoresComponent {
     this.matIconRegistry.addSvgIcon("close",this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/Iconos/iconos-prestadores/close.svg"));
     this.matIconRegistry.addSvgIcon("phone",this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/Iconos/iconos-prestadores/phone.svg"));
     this.matIconRegistry.addSvgIcon("notificacion",this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/Iconos/iconos-prestadores/notificacion.svg"));
+    this.matIconRegistry.addSvgIcon("lightbulb",this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/Iconos/iconos-prestadores/lightbulb.svg"));
     this.navLinks = [
         {
             label: 'Sedes',
