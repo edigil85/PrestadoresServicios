@@ -1,4 +1,18 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { ErrorStateMatcher } from '@angular/material/core';
+import { MatDialogRef } from '@angular/material/dialog';
+import { IcontactoPrestador } from '../../model/contactoPrestador';
+import { contactoPrestadorService } from '../../service/contactoPrestador.service';
+
+
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const invalidCtrl = !!(control && control.invalid && control.parent.dirty);
+    const invalidParent = !!(control && control.parent && control.parent.invalid && control.parent.dirty);
+    return (invalidCtrl || invalidParent);
+  }
+}
 
 @Component({
   selector: 'app-modalcontactoprestador',
@@ -7,9 +21,160 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ModalcontactoprestadorComponent implements OnInit {
 
-  constructor() { }
+  notificacionGlosa: boolean= false;
+  notificacionDevoluciones: boolean = false;
+  notificacionCartera: boolean = false;
+  form : FormGroup;
+  IniContactoPrestador: IcontactoPrestador;
+  FinalContactoPrestador: IcontactoPrestador;
+  matcher = new MyErrorStateMatcher();
 
-  ngOnInit(): void {
+  constructor(
+    public service: contactoPrestadorService,
+    public dialogRef: MatDialogRef<ModalcontactoprestadorComponent>,
+    private formBuilder: FormBuilder
+  ) 
+  { 
+    this.form = this.formBuilder.group({
+      nombre: ['', [Validators.required]],
+      telefono: ['', [Validators.required]],
+      emailNotificacion: ['', [Validators.required, Validators.email]],
+      correConfirmacion: [''] 
+    }, { validator: this.checkEmail });
   }
 
+  ngOnInit(): void {
+    this.IniContactoPrestador= JSON.parse(localStorage.getItem('contactoPrestador'));
+    this.FinalContactoPrestador= JSON.parse(localStorage.getItem('contactoPrestador'));
+    localStorage.removeItem('contactoPrestador');
+    this.DatosFormGroup(this.IniContactoPrestador.emailNotificacion,
+      this.IniContactoPrestador.nombre,
+      this.IniContactoPrestador.telefono);
+    if (this.IniContactoPrestador.notificacionGlosa=='S'){
+      this.notificacionGlosa= true;
+    }
+    if (this.IniContactoPrestador.notificacionDevoluciones=='S'){
+      this.notificacionDevoluciones= true;
+    }
+    if (this.IniContactoPrestador.notificacionCartera=='S'){
+      this.notificacionCartera= true;
+    }
+  }
+
+  checkEmail(group: FormGroup) { 
+    let pass = group.controls.emailNotificacion.value;
+    let confirmPass = group.controls.correConfirmacion.value;
+    return pass === confirmPass ? null : { NoMacth: true }
+  }
+
+  onSubmit() {
+    //Capturar los valores en FinalContactoPrestador
+    this.CapturarFormulario();
+
+
+    if (this.CompararContactos()
+      )
+     {
+      this.dialogRef.close();
+    }
+     else{
+      if(this.IniContactoPrestador.nombre=='' && this.IniContactoPrestador.emailNotificacion =='' && this.IniContactoPrestador.telefono == ''){
+        console.log(this.FinalContactoPrestador);
+        this.service.InsertarContactoPrestador(this.FinalContactoPrestador).subscribe(
+          () => {
+           this.dialogRef.close();
+         }
+       );
+       
+      }
+      else{
+        console.log(this.FinalContactoPrestador);
+        this.service.ActualizarContactoPrestador(this.FinalContactoPrestador).subscribe(
+          () => {
+           this.dialogRef.close();
+         }
+       );
+       
+      }
+     }
+
+  }
+
+  DatosFormGroup(emailNotificacion: String, nombre: String, telefono: String ){
+    this.form.patchValue({
+      emailNotificacion: emailNotificacion,
+      correConfirmacion: emailNotificacion,
+      nombre: nombre,
+      telefono: telefono
+    });
+  }
+
+  onClose() {
+    this.dialogRef.close();
+  }
+
+  initializeFormGroup() {
+    this.form.patchValue({
+      emailNotificacion: '',
+      correConfirmacion: '',
+      nombre: '',
+      telefono: ''
+    });
+  }
+
+  CapturarFormulario(){
+    this.FinalContactoPrestador.nombre= this.form.get('nombre').value;
+    this.FinalContactoPrestador.emailNotificacion= this.form.get('emailNotificacion').value;
+    this.FinalContactoPrestador.telefono= this.form.get('telefono').value;
+  }
+
+  CompararContactos(): boolean{
+    if (
+      this.IniContactoPrestador.nombre == this.FinalContactoPrestador.nombre 
+      && this.IniContactoPrestador.telefono == this.FinalContactoPrestador.telefono 
+      && this.IniContactoPrestador.emailNotificacion == this.FinalContactoPrestador.emailNotificacion 
+      && this.IniContactoPrestador.notificacionCartera == this.FinalContactoPrestador.notificacionCartera 
+      && this.IniContactoPrestador.notificacionDevoluciones == this.FinalContactoPrestador.notificacionDevoluciones 
+      && this.IniContactoPrestador.notificacionGlosa == this.FinalContactoPrestador.notificacionGlosa 
+    )
+    {
+      return true;
+    }
+    return false;
+  }
+
+  notiGlosa(e: any){
+    if(e.checked){
+      this.FinalContactoPrestador.notificacionGlosa='S'
+    }
+    else{
+      this.FinalContactoPrestador.notificacionGlosa='N'
+    }
+  }
+
+  notiDevoluciones(e: any){
+    if(e.checked){
+      this.FinalContactoPrestador.notificacionDevoluciones='S'
+
+      console.log(this.FinalContactoPrestador);
+    }
+    else{
+      this.FinalContactoPrestador.notificacionDevoluciones='N'
+      console.log(this.FinalContactoPrestador);
+    }
+  }
+
+  notiCartera(e: any){
+    if(e.checked){
+      this.FinalContactoPrestador.notificacionCartera='S'
+    }
+    else{
+      this.FinalContactoPrestador.notificacionCartera='N'
+    }
+  }
+
+  get nombre() { return this.form.get('nombre');}
+  get telefono() { return this.form.get('telefono');}
+  get emailNotificacion() { return this.form.get('emailNotificacion');}
+  get correConfirmacion() { return this.form.get('correConfirmacion');}
 }
