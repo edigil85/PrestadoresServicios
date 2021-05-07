@@ -24,6 +24,7 @@ export class ModalcontactoprestadorComponent implements OnInit {
   notificacionGlosa: boolean= false;
   notificacionDevoluciones: boolean = false;
   notificacionCartera: boolean = false;
+  Checked: boolean = false;
   form : FormGroup;
   IniContactoPrestador: IcontactoPrestador;
   FinalContactoPrestador: IcontactoPrestador;
@@ -36,8 +37,8 @@ export class ModalcontactoprestadorComponent implements OnInit {
   ) 
   { 
     this.form = this.formBuilder.group({
-      nombre: ['', [Validators.required]],
-      telefono: ['', [Validators.required]],
+      nombre: ['', [Validators.required, Validators.maxLength(80)]],
+      telefono: ['', [Validators.required, Validators.pattern('^[0-9]*$'), Validators.minLength(7), Validators.maxLength(10)]],
       emailNotificacion: ['', [Validators.required, Validators.maxLength(80), Validators.pattern(this.emailpattern)]],
       correConfirmacion: [''] 
     }, { validator: this.checkEmail });
@@ -52,13 +53,17 @@ export class ModalcontactoprestadorComponent implements OnInit {
       this.IniContactoPrestador.telefono);
     if (this.IniContactoPrestador.notificacionGlosa=='S'){
       this.notificacionGlosa= true;
+      this.Checked= true;
     }
     if (this.IniContactoPrestador.notificacionDevoluciones=='S'){
       this.notificacionDevoluciones= true;
+      this.Checked= true;
     }
     if (this.IniContactoPrestador.notificacionCartera=='S'){
       this.notificacionCartera= true;
+      this.Checked= true;
     }
+    this.validarChecks();
   }
 
   checkEmail(group: FormGroup) { 
@@ -79,7 +84,6 @@ export class ModalcontactoprestadorComponent implements OnInit {
     }
      else{
       if(this.IniContactoPrestador.nombre=='' && this.IniContactoPrestador.emailNotificacion =='' && this.IniContactoPrestador.telefono == ''){
-        console.log(this.FinalContactoPrestador);
         this.service.InsertarContactoPrestador(this.FinalContactoPrestador).subscribe(
           () => {
            this.dialogRef.close();
@@ -88,7 +92,6 @@ export class ModalcontactoprestadorComponent implements OnInit {
        
       }
       else{
-        console.log(this.FinalContactoPrestador);
         this.service.ActualizarContactoPrestador(this.FinalContactoPrestador).subscribe(
           () => {
            this.dialogRef.close();
@@ -150,18 +153,17 @@ export class ModalcontactoprestadorComponent implements OnInit {
     else{
       this.FinalContactoPrestador.notificacionGlosa='N'
     }
+    this.validarChecks();
   }
 
   notiDevoluciones(e: any){
     if(e.checked){
       this.FinalContactoPrestador.notificacionDevoluciones='S'
-
-      console.log(this.FinalContactoPrestador);
     }
     else{
       this.FinalContactoPrestador.notificacionDevoluciones='N'
-      console.log(this.FinalContactoPrestador);
     }
+    this.validarChecks();
   }
 
   notiCartera(e: any){
@@ -170,6 +172,18 @@ export class ModalcontactoprestadorComponent implements OnInit {
     }
     else{
       this.FinalContactoPrestador.notificacionCartera='N'
+    }
+    this.validarChecks();
+  }
+
+  validarChecks(){
+    if(this.FinalContactoPrestador.notificacionGlosa=='S' 
+    || this.FinalContactoPrestador.notificacionDevoluciones=='S'
+    || this.FinalContactoPrestador.notificacionCartera=='S'){
+      this.Checked=true;
+    }
+    else{
+      this.Checked=false;
     }
   }
 
