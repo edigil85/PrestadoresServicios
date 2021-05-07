@@ -5,6 +5,7 @@ import { Isedes} from '../model/sedes';
 import { sedesservice} from '../service/sedes.service'
 import { DeleteconfirmmodalComponent } from '../modals/deleteconfirmmodal/deleteconfirmmodal.component'
 import { PageEvent } from '@angular/material/paginator';
+import { Constants } from 'src/app/shared/utils/Constants';
 
 
 @Component({
@@ -13,6 +14,7 @@ import { PageEvent } from '@angular/material/paginator';
   styleUrls: ['./sedes.component.css']
 })
 export class SedesComponent implements OnInit {
+  Max_Registros: Number
   dialogRef: MatDialogRef<DeleteconfirmmodalComponent>;
   ShowCards = true;
   ShowTable = false;
@@ -36,6 +38,7 @@ export class SedesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.Max_Registros= Constants.SEDES_PRESTADORES_MAX;
     this.ConsultarSedesPrestador();
   }
 

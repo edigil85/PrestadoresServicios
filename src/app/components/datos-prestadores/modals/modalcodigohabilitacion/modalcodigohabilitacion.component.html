@@ -10,7 +10,17 @@
         <div>
           <mat-form-field>
             <mat-label>Código del servicio *</mat-label>
-            <input matInput formControlName="codigo">
+            <input matInput  maxlength="20" formControlName="codigo" onkeyup="javascript:this.value=this.value.toUpperCase();">
+            <mat-hint align="end">{{codigo.value.length}} / 20</mat-hint>
+            <mat-error *ngIf="codigo.hasError('pattern') && !codigo.hasError('required')">
+              Ingrese solo números
+            </mat-error>
+            <mat-error *ngIf="codigo.hasError('maxlength') && !codigo.hasError('required')">
+              Excede el número de caracteres
+            </mat-error>
+            <mat-error *ngIf="codigo.hasError('required')">
+              Campo requerido
+            </mat-error>
           </mat-form-field>
         </div>
       </mat-grid-tile>
@@ -26,7 +36,14 @@
         <div>
           <mat-form-field>
             <mat-label>Descrición del servicio *</mat-label>
-            <input matInput formControlName="descripcion">
+            <input matInput formControlName="descripcion" onkeyup="javascript:this.value=this.value.toUpperCase();">
+            <mat-hint align="end">{{descripcion.value.length}} / 50</mat-hint>
+            <mat-error *ngIf="descripcion.hasError('maxlength')">
+              Excede el número de caracteres (50)
+            </mat-error>
+            <mat-error *ngIf="descripcion.hasError('required')">
+              Campo requerido
+            </mat-error>
           </mat-form-field>
         </div>
       </mat-grid-tile>

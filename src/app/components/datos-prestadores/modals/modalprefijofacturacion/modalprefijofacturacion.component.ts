@@ -12,7 +12,7 @@ import { prefijoFacturacionService } from '../../service/prefijoFacturacion.serv
 export class ModalprefijofacturacionComponent implements OnInit {
 
   form: FormGroup = new FormGroup({
-    prefijoFacturacion: new FormControl('', Validators.required),
+    prefijoFacturacion: new FormControl('', [Validators.required, Validators.maxLength(10)]),
     fechaInicial: new FormControl('', Validators.required),
     fechaFinal: new FormControl('', Validators.required),
   });
@@ -105,6 +105,7 @@ export class ModalprefijofacturacionComponent implements OnInit {
 
   cambioDia(){
     this.fechaminima = this.form.get("fechaInicial").value;
+    this.fechaminima.setDate(this.fechaminima.getDate()+1);
   }
 
    RemplazarMes_En_Es(fecha:String):String {

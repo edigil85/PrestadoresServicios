@@ -32,7 +32,7 @@
         <div>
           <mat-form-field>
             <mat-label>Dirección*</mat-label>
-            <input matInput formControlName="direccion">
+            <input matInput formControlName="direccion" onkeyup="javascript:this.value=this.value.toUpperCase();">
           </mat-form-field>
         </div>
       </mat-grid-tile>

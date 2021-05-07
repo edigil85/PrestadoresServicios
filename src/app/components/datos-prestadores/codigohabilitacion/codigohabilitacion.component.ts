@@ -5,6 +5,7 @@ import { DeleteconfirmmodalComponent } from '../modals/deleteconfirmmodal/delete
 import { codigoHabilitacionService} from '../service/codigosHabilitacion.service';
 import { PageEvent } from '@angular/material/paginator';
 import { IcodigoHabilitacion } from '../model/codigoHabilitacion';
+import { Constants } from 'src/app/shared/utils/Constants';
 
 
 
@@ -14,6 +15,7 @@ import { IcodigoHabilitacion } from '../model/codigoHabilitacion';
   styleUrls: ['./codigohabilitacion.component.css']
 })
 export class CodigohabilitacionComponent implements OnInit {
+  Max_Registros: Number;
   dialogRef: MatDialogRef<DeleteconfirmmodalComponent>;
   ShowCards = true;
   ShowTable = false;
@@ -36,6 +38,7 @@ export class CodigohabilitacionComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.Max_Registros= Constants.CODIGOSHABILITACION_PRESTADORES_MAX;
     this.ConsultarCodigosHabilitacion();
   }
 

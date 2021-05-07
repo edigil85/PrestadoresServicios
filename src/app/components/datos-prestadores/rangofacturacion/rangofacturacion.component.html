@@ -1,5 +1,5 @@
 <section class="center" *ngIf="rangosFacturacion.length==0">
-  <h3>Aún no tienes configurados rangos de facturación</h3>
+  <h3>Aún no tienes configurados los prefijos de facturación</h3>
   <h5>Debes de hacer uso de la acción adicionar registro para configurarlas</h5>
   <img src='assets\Imagenes\img-prestadores.svg'>
 </section>
@@ -96,7 +96,7 @@
 </div>
 
 
-<div class="flotante">
+<div class="flotante" *ngIf="rangosFacturacion.length < Max_Registros">
   <div class="redes">
     <button mat-fab color="primary" (click)="onCreate()"><span class="material-icons">add</span></button>
   </div>

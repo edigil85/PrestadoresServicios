@@ -7,7 +7,8 @@
         <div>
           <mat-form-field>
             <mat-label>Prefijo *</mat-label>
-            <input matInput formControlName="prefijoFacturacion">
+            <input matInput maxlength="10" #prefijoFacturacion formControlName="prefijoFacturacion" onkeyup="javascript:this.value=this.value.toUpperCase();">
+            <mat-hint align="end">{{prefijoFacturacion.value.length}} / 10</mat-hint>
           </mat-form-field>
         </div>
     </mat-grid-tile>

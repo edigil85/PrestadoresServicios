@@ -1,8 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { ErrorStateMatcher } from '@angular/material/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { IcodigoHabilitacion } from '../../model/codigoHabilitacion';
 import { codigoHabilitacionService } from '../../service/codigosHabilitacion.service';
+
+
+
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const invalidCtrl = !!(control && control.invalid && control.parent.dirty);
+    const invalidParent = !!(control && control.parent && control.parent.invalid && control.parent.dirty);
+    return (invalidCtrl || invalidParent);
+  }
+}
 
 @Component({
   selector: 'app-modalcodigohabilitacion',
@@ -11,9 +22,10 @@ import { codigoHabilitacionService } from '../../service/codigosHabilitacion.ser
 })
 export class ModalcodigohabilitacionComponent implements OnInit {
 
+  matcher = new MyErrorStateMatcher();
   form: FormGroup = new FormGroup({
-    codigo: new FormControl('', Validators.required),
-    descripcion: new FormControl('', Validators.required),
+    codigo: new FormControl('', [Validators.required, Validators.pattern('^[0-9]*$'), Validators.maxLength(20)]),
+    descripcion: new FormControl('', [Validators.required, Validators.maxLength(50)]),
   });
   codigoHabilitacion: IcodigoHabilitacion;
   modificarCodigo: boolean= false;
@@ -85,4 +97,8 @@ export class ModalcodigohabilitacionComponent implements OnInit {
       descripcion: '',
     });
   }
+
+
+  get codigo() { return this.form.get('codigo');}
+  get descripcion() { return this.form.get('descripcion');}
 }

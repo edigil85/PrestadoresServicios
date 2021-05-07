@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DateAdapter } from '@angular/material/core';
 import { MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material/dialog'
 import { PageEvent } from '@angular/material/paginator';
+import { Constants } from 'src/app/shared/utils/Constants';
 import { DeleteconfirmmodalComponent } from '../modals/deleteconfirmmodal/deleteconfirmmodal.component';
 import { ModalprefijofacturacionComponent } from '../modals/modalprefijofacturacion/modalprefijofacturacion.component'
 import { IprefijoFacturacion } from '../model/prefijoFacturacion';
@@ -13,6 +14,7 @@ import { prefijoFacturacionService } from '../service/prefijoFacturacion.service
   styleUrls: ['./rangofacturacion.component.css']
 })
 export class RangofacturacionComponent implements OnInit {
+  Max_Registros: Number;
   dialogRef: MatDialogRef<DeleteconfirmmodalComponent>;
   ShowCards = true;
   ShowTable = false;
@@ -37,6 +39,7 @@ export class RangofacturacionComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    this.Max_Registros= Constants.RANGOSFACTURACION_PRESTADORES_MAX;
     this.ConsultarPrefijoFacturacion();
   }
 

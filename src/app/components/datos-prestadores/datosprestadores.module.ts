@@ -41,6 +41,7 @@ import { sedesFilter } from './pipes/sedesfilter.pipe';
 import { codigoHabFilter } from './pipes/CodigosHabFilter.pipe';
 import { prefijoFacFilter } from './pipes/PrefijoFacFilter.pipe';
 import { contactoPreFilter } from './pipes/ContactoPreFilter.pipe';
+import { BlockCopyPasteDirective } from 'src/app/shared/Directive/block-copy-paste.directive';
 
 
 
@@ -61,7 +62,8 @@ import { contactoPreFilter } from './pipes/ContactoPreFilter.pipe';
    sedesFilter,
    codigoHabFilter,
    prefijoFacFilter,
-   contactoPreFilter
+   contactoPreFilter,
+   BlockCopyPasteDirective
   ],
   imports: [ 
     HttpClientModule,

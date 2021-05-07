@@ -61,4 +61,12 @@ export class Constants {
 
   static URI_SERVICE_SECCION_DATA ='/informacionseccion/consultar';
 
+  //Constanetes para maximos registros
+
+  static SEDES_PRESTADORES_MAX = 80;
+
+  static RANGOSFACTURACION_PRESTADORES_MAX = 300;
+
+  static CODIGOSHABILITACION_PRESTADORES_MAX = 300;
+
 }

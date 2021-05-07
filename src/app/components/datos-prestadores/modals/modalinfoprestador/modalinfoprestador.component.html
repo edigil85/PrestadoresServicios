@@ -7,7 +7,7 @@
         <mat-form-field>
             <mat-label>Nombre *</mat-label>
             <input matInput placeholder="Juan Felipe Rodas Restrepo" formControlName="representanteLegal"
-            [errorStateMatcher]="matcher">
+            [errorStateMatcher]="matcher" onkeyup="javascript:this.value=this.value.toUpperCase();" >
             <mat-error *ngIf="representanteLegal.hasError('required')">
                 Este campo es <strong>requerido</strong>
               </mat-error>
@@ -16,10 +16,13 @@
     <mat-grid-tile>
         <mat-form-field>
             <mat-label>Correo electronico *</mat-label>
-            <input matInput placeholder="juanrestrepo@ips.com.co" formControlName="correoElectronico">
-            <mat-error *ngIf="correoElectronico.hasError('email') && !correoElectronico.hasError('required')">
-                Por favir ingrese un correo valido
-              </mat-error>
+            <input matInput placeholder="juanrestrepo@ips.com.co" formControlName="correoElectronico" appBlockCopyPaste onkeyup="javascript:this.value=this.value.toUpperCase();">
+            <mat-error *ngIf="correoElectronico.hasError('maxlength') && !correoElectronico.hasError('required')">
+                Supera el maximo de caracteres (80)
+            </mat-error>
+            <mat-error *ngIf="correoElectronico.hasError('pattern') && !correoElectronico.hasError('required')">
+              Email no es valido
+            </mat-error>
               <mat-error *ngIf="correoElectronico.hasError('required')">
                 Este campo es <strong>requerido</strong>
               </mat-error>
@@ -28,8 +31,8 @@
     <mat-grid-tile>
         <mat-form-field>
             <mat-label>Confirmar Correo electronico *</mat-label>
-            <input matInput placeholder="juanrestrepo@ips.com.co" formControlName="correConfirmacion"
-            [errorStateMatcher]="matcher">
+            <input matInput placeholder="juanrestrepo@ips.com.co" formControlName="correConfirmacion" onkeyup="javascript:this.value=this.value.toUpperCase();"
+            [errorStateMatcher]="matcher" appBlockCopyPaste> 
               <mat-error *ngIf="form.hasError('NoMacth')">
                 Correos no son iguales
             </mat-error>  

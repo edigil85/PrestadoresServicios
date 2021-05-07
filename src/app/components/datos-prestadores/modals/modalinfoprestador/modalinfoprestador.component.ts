@@ -22,7 +22,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 
 export class ModalinfoprestadorComponent implements OnInit {
-
+   emailpattern ='(^[\\-_a-zA-Z0-9]+(\\.[\\-_a-zA-Z0-9]+)*@[a-zA-z0-9-]+(\\.[a-zA-Z0-9-]+)*(\\.[a-zA-Z]{2,4})$)|(^$)';
   form : FormGroup;
   infoPrestador: IinfoPrestadores;
   matcher = new MyErrorStateMatcher();
@@ -34,7 +34,7 @@ export class ModalinfoprestadorComponent implements OnInit {
     private formBuilder: FormBuilder){
       this.form = this.formBuilder.group({
         representanteLegal: ['', [Validators.required]],
-        correoElectronico: ['', [Validators.required, Validators.email]],
+        correoElectronico: ['', [Validators.required, Validators.maxLength(80), Validators.pattern(this.emailpattern)]],
         correConfirmacion: [''] 
       }, { validator: this.checkEmail }); 
 

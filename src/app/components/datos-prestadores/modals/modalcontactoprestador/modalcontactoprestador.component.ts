@@ -20,7 +20,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./modalcontactoprestador.component.css']
 })
 export class ModalcontactoprestadorComponent implements OnInit {
-
+  emailpattern ='(^[\\-_a-zA-Z0-9]+(\\.[\\-_a-zA-Z0-9]+)*@[a-zA-z0-9-]+(\\.[a-zA-Z0-9-]+)*(\\.[a-zA-Z]{2,4})$)|(^$)';
   notificacionGlosa: boolean= false;
   notificacionDevoluciones: boolean = false;
   notificacionCartera: boolean = false;
@@ -38,7 +38,7 @@ export class ModalcontactoprestadorComponent implements OnInit {
     this.form = this.formBuilder.group({
       nombre: ['', [Validators.required]],
       telefono: ['', [Validators.required]],
-      emailNotificacion: ['', [Validators.required, Validators.email]],
+      emailNotificacion: ['', [Validators.required, Validators.maxLength(80), Validators.pattern(this.emailpattern)]],
       correConfirmacion: [''] 
     }, { validator: this.checkEmail });
   }

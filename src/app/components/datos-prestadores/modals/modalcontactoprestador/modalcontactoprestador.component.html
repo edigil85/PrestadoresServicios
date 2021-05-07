@@ -10,14 +10,18 @@
             <div class="col-lg-4">
             <mat-form-field>
                 <mat-label>Nombres y apellidos *</mat-label>
-                <input matInput formControlName="nombre">
+                <input matInput formControlName="nombre" onkeyup="javascript:this.value=this.value.toUpperCase();">
             </mat-form-field>
             </div>
             <div class="col-lg-4">
             <mat-form-field>
                 <mat-label>Correo electronico *</mat-label>
-                <input matInput placeholder="juanrestrepo@ips.com.co" formControlName="emailNotificacion">
-                <mat-error *ngIf="emailNotificacion.hasError('email') && !emailNotificacion.hasError('required')">
+                <input matInput placeholder="juanrestrepo@ips.com.co" formControlName="emailNotificacion"
+                 onkeyup="javascript:this.value=this.value.toUpperCase();">
+                <mat-error *ngIf="emailNotificacion.hasError('maxlength') && !emailNotificacion.hasError('required')">
+                    Supera el maximo de caracteres (80)
+                </mat-error>
+                <mat-error *ngIf="emailNotificacion.hasError('pattern') && !emailNotificacion.hasError('required')">
                      Por favir ingrese un correo valido
                 </mat-error>
                 <mat-error *ngIf="emailNotificacion.hasError('required')">

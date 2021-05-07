@@ -57,7 +57,7 @@ export class DatosPrestadoresComponent {
             icon: 'sedes',
             index: 0
         }, {
-            label: 'Rangos de facturación',
+            label: 'Prefijos de facturación',
             link: './rangofacturacion',
             icon: 'invoice',
             index: 1

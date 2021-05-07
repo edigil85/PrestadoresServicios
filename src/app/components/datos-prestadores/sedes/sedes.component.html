@@ -86,9 +86,7 @@
     (page)="handlePage($event)">
   </mat-paginator>
 </div>
-
-
-<div class="flotante">
+<div class="flotante" *ngIf="sedes.length < Max_Registros">
   <div class="redes">
     <button mat-fab color="primary" (click)="onCreate()"><span class="material-icons">add</span></button>
   </div>
