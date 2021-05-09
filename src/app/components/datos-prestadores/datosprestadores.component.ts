@@ -9,7 +9,8 @@ import { utilPrestadoresService } from './service/utilPrestadoresService';
 import { IinfoPrestadores } from '../datos-prestadores/model/infoPrestador'
 import { infoPrestadoresService} from '../datos-prestadores/service/infoPrestador.service'
 import { ModalinfoprestadorComponent } from '../datos-prestadores/modals/modalinfoprestador/modalinfoprestador.component'
-import { async } from 'rxjs/internal/scheduler/async';
+import { UtilService } from 'src/app/shared/service/util.service';
+import { ModalDialogComponent } from '../modal-dialog/modal-dialog.component';
 
 
 
@@ -24,7 +25,8 @@ export class DatosPrestadoresComponent {
   activeLinkIndex = -1;
   datosPrestador: IdatosPrestador;
   infoPrestador: IinfoPrestadores;
-  error;
+  util: UtilService;
+  
  
   constructor(
     private router: Router, 
@@ -101,7 +103,8 @@ consultarDatosSeccion(){
        result => {
       this.datosPrestador= result;
       localStorage.setItem("SSE", JSON.stringify(this.datosPrestador));
-    }, error=> this.error= error
+    },(error) => {
+      this._getError(error); }
   );
 }
 
@@ -116,7 +119,8 @@ ConsultarInfoPrestador(){
   .subscribe(
      (result) => {
       this.infoPrestador= result[0];
-    }
+    },(error) => {
+      this._getError(error); }
   )
 }
 
@@ -133,6 +137,40 @@ onCreate() {
       () => 
       this.ConsultarInfoPrestador()
   );    
+}
+
+openDialog(pTittle, pSubtittle, pMessage) {
+  this.dialog.open(ModalDialogComponent, {
+    data: {
+      tittle: pTittle,
+      subtittle: pSubtittle,
+      message: pMessage,
+    },
+  });
+}
+
+
+_getError(error) {
+  if (error.status === 500) {
+    this.openDialog(
+      'Mensaje Error',
+      '',
+      'Ocurrió un error en el servicio, por favor intente más tarde.'
+    );
+  } else if (error.status === 401) {
+    this.openDialog(
+      'Mensaje Error',
+      '401',
+      'Su sesión ha terminado, por favor inicia nuevamente.'
+    );
+
+  } else if (error.error.frontEndErrorCode != undefined) {
+    this.openDialog(
+      'Mensaje Error',
+      '',
+      this.util.showMessageError(error.error.frontEndErrorCode)
+    );
+  }
 }
 
 }

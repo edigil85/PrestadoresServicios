@@ -1,8 +1,28 @@
-<h1 md-dialog-title><span class="material-icons">
-  warning_amber
-  </span></h1>
-<div md-dialog-content><h3>{{confirmMessage}}</h3></div>
-<div md-dialog-actions>
-  <button mat-raised-button (click)="dialogRef.close(false)">Cancelar</button>
-  <button mat-raised-button color="primary" (click)="dialogRef.close(true)">Eliminar</button>
-</div>
+<mat-dialog-content>
+  <div class="modal fade show" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+      style="display: block; padding-right: 17px;" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+              <div class="modal-header matHeader">
+                  <h5 class="modal-title" id="exampleModalLabel" mat-dialog-title>{{confirmMessage}}</h5>
+              </div>
+              <div class="modal-body">
+                  <div class="modal-subtitle">
+                      <h5 class="font-weight-bold mb-3 mt-1" ></h5>
+                  </div>
+                  <p><span class="material-icons">
+                    warning_amber
+                    </span></p>
+
+              </div>
+              <!--<div class="modal-footer">-->
+              <mat-dialog-actions>
+                <button mat-raised-button (click)="dialogRef.close(false)">Cancelar</button>
+                <button mat-raised-button color="primary" (click)="dialogRef.close(true)">Eliminar</button>
+              </mat-dialog-actions>
+
+              <!--</div>-->
+          </div>
+      </div>
+  </div>
+</mat-dialog-content>

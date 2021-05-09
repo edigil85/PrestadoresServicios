@@ -6,6 +6,8 @@ import { sedesservice} from '../service/sedes.service'
 import { DeleteconfirmmodalComponent } from '../modals/deleteconfirmmodal/deleteconfirmmodal.component'
 import { PageEvent } from '@angular/material/paginator';
 import { Constants } from 'src/app/shared/utils/Constants';
+import { ModalDialogComponent } from '../../modal-dialog/modal-dialog.component';
+import { UtilService } from 'src/app/shared/service/util.service';
 
 
 @Component({
@@ -14,6 +16,7 @@ import { Constants } from 'src/app/shared/utils/Constants';
   styleUrls: ['./sedes.component.css']
 })
 export class SedesComponent implements OnInit {
+  utilService: UtilService;
   Max_Registros: Number
   dialogRef: MatDialogRef<DeleteconfirmmodalComponent>;
   ShowCards = true;
@@ -21,7 +24,7 @@ export class SedesComponent implements OnInit {
   ShowFilter= false;
   IconoMostrar="list";
   IconoFilter ="filter_alt";
-  sede: Isedes;
+  sede: Isedes;l
   page_size: number = 10;
   page_number: number = 1;
   pageSizeOption = [10, 15, 20, 25];
@@ -29,6 +32,7 @@ export class SedesComponent implements OnInit {
   seleccionarTodos = false;
   UseFilter = false;
   textoFiltro= '';
+  
 
   constructor(
     private dialog: MatDialog,
@@ -51,8 +55,11 @@ export class SedesComponent implements OnInit {
     .subscribe(
        (result) => {
         this.sedes= result;
-        console.log('consulta de sedes');
+      },
+      (error) => {
+        this._getError(error);
       }
+
     )
   }
 
@@ -105,7 +112,10 @@ export class SedesComponent implements OnInit {
         this.sedesservice.EliminarSedes(sede).subscribe(
           () => {
             this.ConsultarSedesPrestador();
-         }
+         },
+         (error) => {
+          this._getError(error);
+        }
        )
         this.ConsultarSedesPrestador();
         
@@ -134,5 +144,39 @@ export class SedesComponent implements OnInit {
       this.UseFilter = false;
       this.IconoFilter = "filter_alt";
      }
+  }
+
+  openDialog(pTittle, pSubtittle, pMessage) {
+    this.dialog.open(ModalDialogComponent, {
+      data: {
+        tittle: pTittle,
+        subtittle: pSubtittle,
+        message: pMessage,
+      },
+    });
+  }
+
+
+  _getError(error) {
+    if (error.status === 500) {
+      this.openDialog(
+        'Mensaje Error',
+        '',
+        'Ocurrió un error en el servicio, por favor intente más tarde.'
+      );
+    } else if (error.status === 401) {
+      this.openDialog(
+        'Mensaje Error',
+        '401',
+        'Su sesión ha terminado, por favor inicia nuevamente.'
+      );
+
+    } else if (error.error.frontEndErrorCode != undefined) {
+      this.openDialog(
+        'Mensaje Error',
+        '',
+        this.utilService.showMessageError(error.error.frontEndErrorCode)
+      );
+    }
   }
 }

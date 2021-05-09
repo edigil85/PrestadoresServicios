@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog'
 import { PageEvent } from '@angular/material/paginator';
+import { UtilService } from 'src/app/shared/service/util.service';
+import { ModalDialogComponent } from '../../modal-dialog/modal-dialog.component';
 import { DeleteconfirmmodalComponent } from '../modals/deleteconfirmmodal/deleteconfirmmodal.component';
 import { ModalcontactoprestadorComponent } from '../modals/modalcontactoprestador/modalcontactoprestador.component'
 import { IcontactoPrestador } from '../model/contactoPrestador';
@@ -26,6 +28,7 @@ export class DatoscontactoComponent implements OnInit {
   seleccionarTodos = false;
   UseFilter = false;
   textoFiltro= '';
+  utilService: UtilService;
 
   constructor(
     private dialog: MatDialog,
@@ -61,8 +64,10 @@ export class DatoscontactoComponent implements OnInit {
         this.service.EliminarContactoPrestador(contacto).subscribe(
           () => {
             this.ConsultarContactosPrestador();
-         }
-       )
+         },
+         (error) => {
+          this._getError(error);
+         })
         this.ConsultarContactosPrestador();
         
       }
@@ -85,8 +90,10 @@ export class DatoscontactoComponent implements OnInit {
     .subscribe(
        (result) => {
         this.contactos= result;
-      }
-    )
+      },
+      (error) => {
+        this._getError(error);
+      })
   }
 
   onCreate() {
@@ -146,5 +153,39 @@ export class DatoscontactoComponent implements OnInit {
 
   deleteContactos(){
     
+  }
+
+  openDialog(pTittle, pSubtittle, pMessage) {
+    this.dialog.open(ModalDialogComponent, {
+      data: {
+        tittle: pTittle,
+        subtittle: pSubtittle,
+        message: pMessage,
+      },
+    });
+  }
+
+
+  _getError(error) {
+    if (error.status === 500) {
+      this.openDialog(
+        'Mensaje Error',
+        '',
+        'Ocurrió un error en el servicio, por favor intente más tarde.'
+      );
+    } else if (error.status === 401) {
+      this.openDialog(
+        'Mensaje Error',
+        '401',
+        'Su sesión ha terminado, por favor inicia nuevamente.'
+      );
+
+    } else if (error.error.frontEndErrorCode != undefined) {
+      this.openDialog(
+        'Mensaje Error',
+        '',
+        this.utilService.showMessageError(error.error.frontEndErrorCode)
+      );
+    }
   }
 }

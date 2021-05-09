@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material/dialog'
-import {ModalcodigohabilitacionComponent} from '../modals/modalcodigohabilitacion/modalcodigohabilitacion.component';
+import { ModalcodigohabilitacionComponent } from '../modals/modalcodigohabilitacion/modalcodigohabilitacion.component';
 import { DeleteconfirmmodalComponent } from '../modals/deleteconfirmmodal/deleteconfirmmodal.component';
 import { codigoHabilitacionService} from '../service/codigosHabilitacion.service';
 import { PageEvent } from '@angular/material/paginator';
 import { IcodigoHabilitacion } from '../model/codigoHabilitacion';
 import { Constants } from 'src/app/shared/utils/Constants';
-
-
+import { ModalDialogComponent } from '../../modal-dialog/modal-dialog.component';
+import { UtilService } from 'src/app/shared/service/util.service';
 
 @Component({
   selector: 'app-codigohabilitacion',
@@ -30,6 +30,7 @@ export class CodigohabilitacionComponent implements OnInit {
   seleccionarTodos = false;
   UseFilter = false;
   textoFiltro= '';
+  utilService: UtilService;
 
 
   constructor(
@@ -67,10 +68,10 @@ export class CodigohabilitacionComponent implements OnInit {
         this.service.EliminarCodigoHabilitacion(codigo).subscribe(
           () => {
             this.ConsultarCodigosHabilitacion();
-         }
-       )
-        this.ConsultarCodigosHabilitacion();
-        
+         },
+         (error) => {
+          this._getError(error);
+         })
       }
       this.dialogRef = null;
     });
@@ -85,8 +86,10 @@ export class CodigohabilitacionComponent implements OnInit {
     .subscribe(
        (result) => {
         this.codigos= result;
+      },(error) => {
+        this._getError(error);
       }
-    )
+      )
   }
 
   onCreate() {
@@ -140,6 +143,40 @@ export class CodigohabilitacionComponent implements OnInit {
 
   deleteCodigos(){
     
+  }
+
+  openDialog(pTittle, pSubtittle, pMessage) {
+    this.dialog.open(ModalDialogComponent, {
+      data: {
+        tittle: pTittle,
+        subtittle: pSubtittle,
+        message: pMessage,
+      },
+    });
+  }
+
+
+  _getError(error) {
+    if (error.status === 500) {
+      this.openDialog(
+        'Mensaje Error',
+        '',
+        'Ocurrió un error en el servicio, por favor intente más tarde.'
+      );
+    } else if (error.status === 401) {
+      this.openDialog(
+        'Mensaje Error',
+        '401',
+        'Su sesión ha terminado, por favor inicia nuevamente.'
+      );
+
+    } else if (error.error.frontEndErrorCode != undefined) {
+      this.openDialog(
+        'Mensaje Error',
+        '',
+        this.utilService.showMessageError(error.error.frontEndErrorCode)
+      );
+    }
   }
 
 

@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { DateAdapter } from '@angular/material/core';
 import { MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material/dialog'
 import { PageEvent } from '@angular/material/paginator';
+import { UtilService } from 'src/app/shared/service/util.service';
 import { Constants } from 'src/app/shared/utils/Constants';
+import { ModalDialogComponent } from '../../modal-dialog/modal-dialog.component';
 import { DeleteconfirmmodalComponent } from '../modals/deleteconfirmmodal/deleteconfirmmodal.component';
 import { ModalprefijofacturacionComponent } from '../modals/modalprefijofacturacion/modalprefijofacturacion.component'
 import { IprefijoFacturacion } from '../model/prefijoFacturacion';
@@ -29,6 +31,7 @@ export class RangofacturacionComponent implements OnInit {
   seleccionarTodos = false;
   UseFilter = false;
   textoFiltro= '';
+  utilService: UtilService;
 
   constructor(
     private dialog: MatDialog,
@@ -68,7 +71,9 @@ export class RangofacturacionComponent implements OnInit {
         this.service.EliminarPrefijoFacturacion(prefijo).subscribe(
           () => {
             this.ConsultarPrefijoFacturacion();
-         }
+         },
+         (error) => {
+          this._getError(error); }
        )
         this.ConsultarPrefijoFacturacion();
         
@@ -91,7 +96,9 @@ export class RangofacturacionComponent implements OnInit {
     .subscribe(
        (result) => {
         this.rangosFacturacion= result;
-      }
+      },  
+      (error) => {
+        this._getError(error); }
     )
   }
 
@@ -151,5 +158,39 @@ export class RangofacturacionComponent implements OnInit {
 
   deletePrefijosFacturacion(){
     
+  }
+
+  openDialog(pTittle, pSubtittle, pMessage) {
+    this.dialog.open(ModalDialogComponent, {
+      data: {
+        tittle: pTittle,
+        subtittle: pSubtittle,
+        message: pMessage,
+      },
+    });
+  }
+
+
+  _getError(error) {
+    if (error.status === 500) {
+      this.openDialog(
+        'Mensaje Error',
+        '',
+        'Ocurrió un error en el servicio, por favor intente más tarde.'
+      );
+    } else if (error.status === 401) {
+      this.openDialog(
+        'Mensaje Error',
+        '401',
+        'Su sesión ha terminado, por favor inicia nuevamente.'
+      );
+
+    } else if (error.error.frontEndErrorCode != undefined) {
+      this.openDialog(
+        'Mensaje Error',
+        '',
+        this.utilService.showMessageError(error.error.frontEndErrorCode)
+      );
+    }
   }
 }
