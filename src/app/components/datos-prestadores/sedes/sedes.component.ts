@@ -64,7 +64,6 @@ export class SedesComponent implements OnInit {
   }
 
   onCreate() {
-    console.log(this.sede);
     localStorage.setItem("sedeprestador", JSON.stringify(this.sede));
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
@@ -101,7 +100,6 @@ export class SedesComponent implements OnInit {
   } 
 
   deleteSede(sede: Isedes){
-    console.log(sede);
     this.dialogRef = this.dialog.open(DeleteconfirmmodalComponent, {
       disableClose: false
     });

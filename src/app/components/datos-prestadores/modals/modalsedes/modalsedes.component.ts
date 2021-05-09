@@ -138,7 +138,6 @@ export class ModalsedesComponent implements OnInit {
 
   obtenerCiudad(){
     this.utilService.getCiudad(this.selectedDepartamento).subscribe((response:any) => {
-      console.log(response);
       this.listciudades = response.body;
       },
       (error) => console.error(error)
@@ -146,7 +145,6 @@ export class ModalsedesComponent implements OnInit {
   }
 
   onSelectDepartamento():void{
-    console.log(this.form.get('departamentoseleccionado').value);
     this.selectedDepartamento = this.form.get('departamentoseleccionado').value;
     this.obtenerCiudad();
     this.showCiudad = true;
