@@ -1,42 +1,52 @@
 <header id="header"></header>
-    <div class="container-fluid">
-        <h3>Configuracion del prestador</h3>
+    <div class="container">
+        <h4 class="h4-bold">Configuracion del prestador</h4>
         <div class="row">
-            <div class="col-md-3"  style="background-color:rgb(255, 255, 255)">
-                <h3>Identificación / {{datosPrestador.tipoDocumentoPrestador}}</h3> 
-                <p>{{datosPrestador.numeroDocumentoPrestador}}</p>
+            <div class="col-md-3 col-lg-3"  >
+                <p class="subtitulo-bold-16">Identificación / {{datosPrestador.tipoDocumentoPrestador}}</p> 
+                <p class="body-16">{{datosPrestador.numeroDocumentoPrestador}}</p>
             </div>
-            <div class="col-md-3"  style="background-color:rgb(255, 255, 255)">
-                <h3>Razón social</h3> 
-                <p>{{datosPrestador.razonSocial}}</p>
+            <div class="col-md-2 col-lg-2"  >
+                <p class="subtitulo-bold-16">Razón social</p> 
+                <p class="body-16" >{{datosPrestador.razonSocial}}</p>
             </div>
-            <div class="col-lg-5"  style="background-color:#CCCCFF">
-            <h3>Representante legal</h3> 
-            <mat-icon svgIcon="user"></mat-icon>
-            <mat-form-field>
-                <mat-label>Representante legal</mat-label>
+            <div class="col-md-7 col-lg-7 background-legal py-2" >
+            <p class="subtitulo-bold-16">Representante legal</p> 
+            <mat-icon svgIcon="user" class="iconos mr-2" ></mat-icon>
+            <mat-form-field class="p-0" appearance="outline">                
                 <input matInput disabled placeholder="Representante legal" value={{infoPrestador.representanteLegal}}>
             </mat-form-field>
-            <mat-icon svgIcon="email"></mat-icon>
-            <mat-form-field>
-                <mat-label></mat-label>
-                <mat-label>Correo representante legal</mat-label>
+            <i class="fas fa-envelope ml-3 mr-2 iconos"></i>
+            <mat-form-field class="p-0" appearance="outline">
                 <input matInput disabled placeholder="Corre@ejemplo.com" value={{infoPrestador.emailReperesentantelegal}}>
             </mat-form-field>
-            <button mat-icon-button (click)="onCreate()" ><mat-icon svgIcon="edit"></mat-icon></button>
+            <button mat-icon-button (click)="onCreate()" class="ml-2" >
+                <!-- <mat-icon svgIcon="edit" class="iconos" ></mat-icon> -->
+                <i class="fas fa-edit iconos pb-2"></i>
+            </button>
             </div>
         </div>
   </div>
-  <span class="toolbar-flex">
-    <nav mat-tab-nav-bar>
+<div class="container">
+    <nav mat-tab-nav-bar mat-align-tabs="center" class="background-legal mt-3 pt-2" >
       <a mat-tab-link
       *ngFor="let link of navLinks"
       [routerLink]="link.link"
       routerLinkActive #rla="routerLinkActive"
       [active]="rla.isActive">
-      <mat-icon svgIcon={{link.icon}}></mat-icon><br>
-      {{link.label}}
+      <div>
+          <table>
+              <tr>
+                  <td><mat-icon class="iconos-tabs" svgIcon={{link.icon}}></mat-icon></td>    
+              </tr>
+              <tr>
+                <td class="body-14 pb-2">{{link.label}}</td>
+              </tr>
+          </table>
+        
+        
+      </div>
     </a>
     </nav>
-    </span>
+</div>
     <router-outlet></router-outlet>

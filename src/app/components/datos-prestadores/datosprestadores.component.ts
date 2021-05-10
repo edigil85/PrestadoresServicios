@@ -17,7 +17,7 @@ import { ModalDialogComponent } from '../modal-dialog/modal-dialog.component';
 @Component({
   selector: 'app-datos-prestadores',
   templateUrl: './datosprestadores.component.html',
-  styles: [
+  styleUrls: [ './datosprestadores.component.scss'
   ]
 })
 export class DatosPrestadoresComponent {
