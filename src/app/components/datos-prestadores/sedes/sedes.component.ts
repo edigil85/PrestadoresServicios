@@ -13,7 +13,7 @@ import { UtilService } from 'src/app/shared/service/util.service';
 @Component({
   selector: 'app-sedes',
   templateUrl: './sedes.component.html',
-  styleUrls: ['./sedes.component.css']
+  styleUrls: ['./sedes.component.scss']
 })
 export class SedesComponent implements OnInit {
   utilService: UtilService;
