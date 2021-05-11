@@ -73,7 +73,7 @@
       </span>
       <button mat-icon-button (click)="UsarFiltro()">
         <i class="fas fa-filter  iconos-busqueda"></i></button>
-      <button mat-icon-button (click)="mostrar()"><i class="fas fa-list iconos-busqueda"></i></button>
+      <button mat-icon-button (click)="mostrar()"><i class="fas fa-th-list iconos-busqueda"></i></button>
     </div>
   </div>
   <div  class="container.fluid">
@@ -97,7 +97,8 @@
   <mat-paginator [length]="sedes.length"
     [pageSize]="page_size"
     [pageSizeOptions]="pageSizeOption"
-    (page)="handlePage($event)">
+    (page)="handlePage($event)"
+    showFirstLastButtons>
   </mat-paginator>
   </div>
 

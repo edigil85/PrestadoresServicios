@@ -11,7 +11,7 @@ import { contactoPrestadorService } from '../service/contactoPrestador.service';
 @Component({
   selector: 'app-datoscontacto',
   templateUrl: './datoscontacto.component.html',
-  styleUrls: ['./datoscontacto.component.css']
+  styleUrls: ['./datoscontacto.component.scss']
 })
 export class DatoscontactoComponent implements OnInit {
   dialogRef: MatDialogRef<DeleteconfirmmodalComponent>;

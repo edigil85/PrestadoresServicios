@@ -12,7 +12,7 @@ import { UtilService } from 'src/app/shared/service/util.service';
 @Component({
   selector: 'app-codigohabilitacion',
   templateUrl: './codigohabilitacion.component.html',
-  styleUrls: ['./codigohabilitacion.component.css']
+  styleUrls: ['./codigohabilitacion.component.scss']
 })
 export class CodigohabilitacionComponent implements OnInit {
   Max_Registros: Number;

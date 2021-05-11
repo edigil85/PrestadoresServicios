@@ -13,7 +13,7 @@ import { prefijoFacturacionService } from '../service/prefijoFacturacion.service
 @Component({
   selector: 'app-rangofacturacion',
   templateUrl: './rangofacturacion.component.html',
-  styleUrls: ['./rangofacturacion.component.css']
+  styleUrls: ['./rangofacturacion.component.scss']
 })
 export class RangofacturacionComponent implements OnInit {
   Max_Registros: Number;

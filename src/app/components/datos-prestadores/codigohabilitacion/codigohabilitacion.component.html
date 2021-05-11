@@ -1,24 +1,32 @@
+<div class="container">
 <section class="center" *ngIf="codigos.length==0">
     <h3>Aún no tienes configurados los códigos de habilitación</h3>
-    <h5>Debes de hacer uso de la acción adicionar registro para configurarlas</h5>
+    <p class="body-16 pt-1">Debes de hacer uso de la acción adicionar registro para configurarlas</p>
     <img src='assets\Imagenes\img-prestadores.svg'>
   </section>
 
-  <div *ngIf="ShowCards">
-    <div>
-      <mat-checkbox class="example-margin" [(ngModel)]="seleccionarTodos">Seleccionar todos</mat-checkbox>
-      <span *ngIf="seleccionarTodos"><button mat-icon-button (click)="deleteCodigos()"><mat-icon svgIcon="delete"></mat-icon></button></span>
-      <span *ngIf="UseFilter">
-        <mat-form-field class="example-form-field">
-          <mat-label>Código ó nombre del servicio</mat-label>
-          <input matInput type="text" [(ngModel)]="textoFiltro">
-          <button mat-button *ngIf="textoFiltro" matSuffix mat-icon-button aria-label="Clear" (click)="textoFiltro=''">
-            <mat-icon>close</mat-icon>
+  <div *ngIf="ShowCards && codigos.length>0">
+    <div  class="row" >
+      <div class="col-lg-6 pt-3" >
+        <mat-checkbox  [(ngModel)]="seleccionarTodos">Seleccionar todos</mat-checkbox>
+          <button *ngIf="seleccionarTodos" style="position: relative;top: -6px;" mat-icon-button class="m-0" (click)="deleteCodigos()">
+            <i class="far fa-trash-alt iconos-busqueda "></i>
           </button>
-        </mat-form-field>
-      </span>
-      <button mat-icon-button (click)="UsarFiltro()"><mat-icon svgIcon={{IconoFilter}}></mat-icon></button>
-      <button mat-icon-button (click)="mostrar()"><mat-icon svgIcon={{IconoMostrar}}></mat-icon></button>
+      </div>
+      <div class="col-lg-6 text-right ">
+        <span *ngIf="UseFilter">
+          <mat-form-field class="example-form-field" class="input-busqueda" >
+            <mat-label>Código ó nombre del servicio</mat-label>
+            <input matInput type="text" [(ngModel)]="textoFiltro">
+            <button mat-button *ngIf="textoFiltro" matSuffix mat-icon-button aria-label="Clear" (click)="textoFiltro=''">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+        </span>
+        <button mat-icon-button (click)="UsarFiltro()">
+          <i class="fas fa-filter  iconos-busqueda"></i></button>
+        <button mat-icon-button (click)="mostrar()"><i class="fas fa-th-list iconos-busqueda"></i></button>
+      </div>
     </div>
   <div  class="container.fluid">
     <div class="row">
@@ -48,24 +56,31 @@
   </mat-paginator>
   </div>
 
-  <div *ngIf="ShowTable">
-    <div>
-      <mat-checkbox class="example-margin" [(ngModel)]="seleccionarTodos">Seleccionar todos</mat-checkbox>
-      <span *ngIf="seleccionarTodos"><button mat-icon-button (click)="deleteCodigos()"><mat-icon svgIcon="delete"></mat-icon></button></span>
-      <span *ngIf="UseFilter">
-        <mat-form-field class="example-form-field">
-          <mat-label>Código ó nombre del servicio</mat-label>
-          <input matInput type="text" [(ngModel)]="textoFiltro">
-          <button mat-button *ngIf="textoFiltro" matSuffix mat-icon-button aria-label="Clear" (click)="textoFiltro=''">
-            <mat-icon>close</mat-icon>
+  <div *ngIf="ShowTable  && codigos.length>0">
+    <div  class="row" >
+      <div class="col-lg-6 pt-3" >
+        <mat-checkbox  [(ngModel)]="seleccionarTodos">Seleccionar todos</mat-checkbox>
+          <button *ngIf="seleccionarTodos" style="position: relative;top: -6px;" mat-icon-button class="m-0" (click)="deleteCodigos()">
+            <i class="far fa-trash-alt iconos-busqueda "></i>
           </button>
-        </mat-form-field>
-      </span>
-      <button mat-icon-button (click)="UsarFiltro()"><mat-icon svgIcon={{IconoFilter}}></mat-icon></button>
-      <button mat-icon-button (click)="mostrar()"><mat-icon svgIcon={{IconoMostrar}}></mat-icon></button>
- </div>
+      </div>
+      <div class="col-lg-6 text-right ">
+        <span *ngIf="UseFilter">
+          <mat-form-field class="example-form-field" class="input-busqueda" >
+            <mat-label>Código ó nombre del servicio</mat-label>
+            <input matInput type="text" [(ngModel)]="textoFiltro">
+            <button mat-button *ngIf="textoFiltro" matSuffix mat-icon-button aria-label="Clear" (click)="textoFiltro=''">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+        </span>
+        <button mat-icon-button (click)="UsarFiltro()">
+          <i class="fas fa-filter  iconos-busqueda"></i></button>
+        <button mat-icon-button (click)="mostrar()"><i class="fas fa-list iconos-busqueda"></i></button>
+      </div>
+    </div>
   <div  class="container.fluid">
-    <mat-card class="card" *ngFor="let codigo of codigos |codigoHabFilter:textoFiltro | paginate: page_size: page_number">
+    <mat-card class="card-large" *ngFor="let codigo of codigos |codigoHabFilter:textoFiltro | paginate: page_size: page_number">
       <mat-card-content>
         <div class="continer">
           <div class="row">
@@ -83,8 +98,10 @@
   <mat-paginator [length]="codigos.length"
     [pageSize]="page_size"
     [pageSizeOptions]="pageSizeOption"
-    (page)="handlePage($event)">
+    (page)="handlePage($event)"
+    showFirstLastButtons>
   </mat-paginator>
+</div>
 </div>
   
   <div class="flotante" *ngIf="codigos.length < Max_Registros">
