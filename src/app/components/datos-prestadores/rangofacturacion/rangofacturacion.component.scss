@@ -9,6 +9,25 @@
   height: 35px !important;
 }
 
+.Prefijo{
+  background: #f7f7f7 0% 0% no-repeat;
+    padding: 10px;
+    margin-left: 1px;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+    width: 125px;
+    font-size: 24px
+}
+
+.Prefijo-title{
+  background: #f7f7f7 0% 0% no-repeat;
+    padding: 10px;
+    margin-left: 3px;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+    font-size: 24px
+}
+
 .sedes-card {
     max-width: 200px;
   }

@@ -42,7 +42,7 @@ import { codigoHabFilter } from './pipes/CodigosHabFilter.pipe';
 import { prefijoFacFilter } from './pipes/PrefijoFacFilter.pipe';
 import { contactoPreFilter } from './pipes/ContactoPreFilter.pipe';
 import { BlockCopyPasteDirective } from 'src/app/shared/Directive/block-copy-paste.directive';
-
+import { sino } from './pipes/sino.pipe';
 
 
 @NgModule({
@@ -63,6 +63,7 @@ import { BlockCopyPasteDirective } from 'src/app/shared/Directive/block-copy-pas
    codigoHabFilter,
    prefijoFacFilter,
    contactoPreFilter,
+   sino,
    BlockCopyPasteDirective
   ],
   imports: [ 

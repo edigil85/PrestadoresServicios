@@ -13,6 +13,38 @@
     max-width: 200px;
   }
 
+.notificaciones{
+  background: #f7f7f7 0% 0% no-repeat padding-box;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.opcion{
+  background: #f7f7f7 0% 0% no-repeat padding-box;
+  padding: 12px;
+}
+
+.opcion-1{
+  background: #f7f7f7 0% 0% no-repeat padding-box;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  padding-top: 24px;
+}
+
+.opcion-2{
+  background: #f7f7f7 0% 0% no-repeat padding-box;
+  padding: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  padding-top: 24px;
+}
+
+.opcion-3{
+  background: #f7f7f7 0% 0% no-repeat padding-box;
+  padding: 10px;
+  padding-top: 24px;
+}
+
 
   .card {
     /* Add shadows to create the "card" effect */
@@ -21,7 +53,7 @@
     // margin-top: 2 ;
     // margin-left: 2;
     // margin-right: 2;
-    width: 260px;
+    width: 355px;
     margin: 10px;
   }
 

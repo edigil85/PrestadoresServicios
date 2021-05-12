@@ -32,17 +32,21 @@
   <div class="row">
   <mat-card class="card" *ngFor="let rango of rangosFacturacion |prefijoFacFilter : textoFiltro | paginate: page_size: page_number">
     <mat-card-header>
-    <mat-card-title><span>Prefijo</span><span>{{rango.prefijoFacturacion}}</span>
+    <mat-card-title style="font-size: 24px">
+      <div class="row">
+        <div class="Prefijo-title">Prefijo</div>
+        <div class="Prefijo">{{rango.prefijoFacturacion}}</div>
+      </div>
     </mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <table>
+      <table class="mt-2">
         <tr>
-          <th rowspan="2">Vigencia</th>
-          <td>Desde:{{rango.fechaInicial}}</td>
+          <th rowspan="2"><p class="body-16"><strong>Vigencia</strong></p></th>
+          <td><p class="body-16"><strong>Desde: </strong>{{rango.fechaInicial}}</p></td>
         </tr>
         <tr>
-          <td>Hasta:{{rango.fechaFinal}}</td>
+          <td><p class="body-16"><strong>Hasta: </strong>{{rango.fechaFinal}}</p></td>
         </tr>
       </table>
     </mat-card-content>
@@ -89,10 +93,20 @@
     <mat-card-content>
       <div class="continer">
         <div class="row">
-          <div class="col-3"><span>Prefijo</span><span>{{rango.prefijoFacturacion}}</span></div>
-          <div class="col">Vigencias<br>
-            <span>Desde: {{rango.fechaInicial}}</span>
-            <span>Hasta: {{rango.fechaFinal}}</span>
+          <div class="row col-3">
+            <div class="col Prefijo-title">Prefijo</div>
+            <div class="col Prefijo">{{rango.prefijoFacturacion}}</div>
+          </div>
+          <div class="col-7">
+            <table>
+              <tr>
+                <th><p class="body-16"><strong>Vigencias</strong></p></th>
+              </tr>
+              <tr>
+                <td><p class="body-16"><strong>Desde: </strong> {{rango.fechaInicial}}</p></td>
+                <td><p class="body-16 ml-2"><strong>Hasta: </strong>{{rango.fechaFinal}}</p></td>
+              </tr>
+            </table>
           </div>
           <div class="col">
             <button mat-icon-button (click)="editPrefijo(rango)"><i class="fas fa-edit iconos"></i></button>

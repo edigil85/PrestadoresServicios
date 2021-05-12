@@ -33,17 +33,15 @@
     <mat-card class="card" *ngFor="let codigo of codigos |codigoHabFilter : textoFiltro | paginate: page_size: page_number">
       <mat-card-header>
       <mat-card-title>Servicio<br>
-        {{codigo.codigoHabilitacion}}
+        <p class="body-16 pt-1">{{codigo.codigoHabilitacion}}</p>
       </mat-card-title>
       </mat-card-header>
-      <mat-card-content>
-    
-          {{codigo.descripcionServicio}}
-    
+      <mat-card-content class="ml-3">
+        <p class="body-16 pt-3">{{codigo.descripcionServicio}}</p>
       </mat-card-content>
       <mat-card-actions align="end">
-        <button mat-icon-button (click)="editCodigo(codigo)"><mat-icon svgIcon="edit"></mat-icon></button>
-        <button mat-icon-button (click)="deleteCodigo(codigo)"><mat-icon svgIcon="delete"></mat-icon></button>
+        <button mat-icon-button (click)="editCodigo(codigo)"><i class="fas fa-edit iconos"></i></button>
+        <button mat-icon-button (click)="deleteCodigo(codigo)"><i class="far fa-trash-alt iconos"></i></button>
       </mat-card-actions>
     </mat-card>
     </div>
@@ -84,11 +82,11 @@
       <mat-card-content>
         <div class="continer">
           <div class="row">
-            <div class="col-3">Servicio<br>{{codigo.codigoHabilitacion}}</div>
-            <div class="col">Descripción del servicio<br>{{codigo.descripcionServicio}}</div>
+            <div class="col-3"><p class="body-16 pt-3"><strong>Servicio</strong><br>{{codigo.codigoHabilitacion}}</p></div>
+            <div class="col-7"><p class="body-16 pt-3"><strong>Descripción del servicio</strong><br>{{codigo.descripcionServicio}}</p></div>
             <div class="col">
-              <button mat-icon-button (click)="editCodigo(codigo)"><mat-icon svgIcon="edit"></mat-icon></button>
-              <button mat-icon-button (click)="deleteCodigo(codigo)"><mat-icon svgIcon="delete"></mat-icon></button>
+              <button mat-icon-button (click)="editCodigo(codigo)"><i class="fas fa-edit iconos"></i></button>
+        <button mat-icon-button (click)="deleteCodigo(codigo)"><i class="far fa-trash-alt iconos"></i></button>
             </div>
           </div>
         </div>
