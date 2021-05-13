@@ -13,7 +13,7 @@ import { FormGroup, FormControl, Validators } from "@angular/forms";
 @Component({
   selector: 'app-modalsedes',
   templateUrl: './modalsedes.component.html',
-  styleUrls: ['./modalsedes.component.css']
+  styleUrls: ['./modalsedes.component.scss']
 })
 export class ModalsedesComponent implements OnInit {
 

@@ -1,0 +1,107 @@
+@mixin buttonPrimary {
+  width: $button-size-lg !important;
+  height: $button-size-heigth-lg !important;
+  border: none !important;
+  border-radius: $border-radius !important;
+  background: $primario !important;
+  color: $secundario-blanco !important;
+  font-family: $unnamed-font-family-barlow !important;
+  font-size: $unnamed-font-size-16 !important;
+  text-transform: uppercase !important;
+  font-weight: $unnamed-font-weight-bold !important;
+  &:hover{
+    background: $primario !important;
+    box-shadow: $shadow-button !important;
+  }
+}
+
+@mixin buttonSecundary  {
+  font-family: $unnamed-font-family-barlow!important;
+  font-size: $unnamed-font-size-16!important;
+  color: $primario!important;
+  width: $button-size-lg!important;
+  height: $button-size-heigth-lg!important;
+  background: $secundario-blanco!important;
+  border: 2px solid $primario!important;
+  border-radius: $border-radius!important;
+  text-transform: uppercase!important;
+  font-weight: $unnamed-font-weight-bold!important;
+  &:hover{
+    background: $button-sc-hover!important;
+    box-shadow: $shadow-button!important;
+  }
+}
+@mixin buttonThird {
+  font-family: $unnamed-font-family-barlow!important;
+  font-size: $unnamed-font-size-16!important;
+  color: $primario!important;
+// width: $button-size-lg!important;
+  height: $button-size-heigth-lg!important;
+  background: $secundario-blanco!important;
+  border: none!important;
+  border-radius: $border-radius!important;
+  text-transform: uppercase!important;
+  font-weight: $unnamed-font-weight-bold!important;
+  &:hover{
+    text-decoration-line: underline!important;
+  }
+}
+@mixin buttonFour {
+  font-family: $unnamed-font-family-barlow!important;
+  font-size: $unnamed-font-size-16!important;
+  color: $primario!important;
+// width: $button-size-lg!important;
+// height: $button-size-heigth-lg!important;
+  background: $button-sc-hover!important;
+  border: none!important;
+  border-radius: $border-radius!important;
+  text-transform: uppercase!important;
+  font-weight: $unnamed-font-weight-bold!important;
+  &:hover{
+    text-decoration-line: underline!important;
+  }
+}
+@mixin buttonDanger {
+  font-family: $unnamed-font-family-barlow!important;
+  font-size: $unnamed-font-size-16!important;
+  color: $secundario-blanco!important;
+  width: $button-size-lg!important;
+  height: 3rem!important;
+  font-size: 1rem!important;
+  background: $error!important;
+  border: none!important;
+  border-radius: $border-radius!important;
+  font-weight: $unnamed-font-weight-bold!important;
+  &:hover{
+    background: $button-sc-hover!important;
+    box-shadow: $shadow-button!important;
+  }
+}
+@mixin buttonDisabledPrimary {
+  width: $button-size-lg!important;
+  height: $button-size-heigth-lg!important;
+  border: none!important;
+  border-radius: $border-radius!important;
+  background: rgba(129, 137, 169, 0.27) 0%0% no-repeat padding-box!important;
+  color: $variante-gris-claro!important;
+  font-family: $unnamed-font-family-barlow!important;
+  font-size: $unnamed-font-size-16!important;
+  text-transform: uppercase!important;
+  font-weight: $unnamed-font-weight-bold!important;
+  &:hover{
+    background: rgba(129, 137, 169, 0.27) 0%0% no-repeat padding-box!important;
+    box-shadow: none!important;
+  }
+}
+@mixin buttonDisabledThird  {
+  width: $button-size-lg!important;
+  height: $button-size-heigth-lg!important;
+  border: none!important;
+  border-radius: $border-radius!important;
+  background: $secundario-blanco!important;
+  color: $variante-gris-claro!important;
+  font-family: $unnamed-font-family-barlow!important;
+  font-size: $unnamed-font-size-16!important;
+  text-transform: uppercase!important;
+  font-weight: $unnamed-font-weight-bold!important;
+}
