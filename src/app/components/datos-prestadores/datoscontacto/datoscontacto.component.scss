@@ -1,8 +1,12 @@
 @import "../../../../assets/scss/variables";
 
+::ng-deep .mat-card-header-text {
+  margin: 0px !important;
+}
 .iconos{
   font-size: 20px;
   color: $primario;
+  padding-left: 0px !important;
 }
 .iconos-tabs{
   width: 35px !important;
@@ -21,7 +25,7 @@
 
 .opcion{
   background: #f7f7f7 0% 0% no-repeat padding-box;
-  padding: 12px;
+  padding: 10px 10px;
 }
 
 .opcion-1{

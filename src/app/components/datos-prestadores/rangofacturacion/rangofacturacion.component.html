@@ -89,13 +89,13 @@
     </div>
   </div>
 <div  class="container.fluid">
-  <mat-card class="card-large" *ngFor="let rango of rangosFacturacion | prefijoFacFilter:textoFiltro | paginate: page_size: page_number">
+  <mat-card class="card-large pl-4 pb-0 pt-2" *ngFor="let rango of rangosFacturacion | prefijoFacFilter:textoFiltro | paginate: page_size: page_number">
     <mat-card-content>
       <div class="continer">
         <div class="row">
           <div class="row col-3">
-            <div class="col Prefijo-title">Prefijo</div>
-            <div class="col Prefijo">{{rango.prefijoFacturacion}}</div>
+            <div class="col Prefijo-title-show">Prefijo</div>
+            <div class="col Prefijo-show">{{rango.prefijoFacturacion}}</div>
           </div>
           <div class="col-7">
             <table>

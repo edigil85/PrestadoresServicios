@@ -16,7 +16,7 @@
     border-bottom-right-radius: 10px;
     border-top-right-radius: 10px;
     width: 125px;
-    font-size: 24px
+    font-size: 20px
 }
 
 .Prefijo-title{
@@ -25,8 +25,31 @@
     margin-left: 3px;
     border-bottom-left-radius: 10px;
     border-top-left-radius: 10px;
-    font-size: 24px
+    font-size: 20px
 }
+
+.Prefijo-show{
+  background: #f7f7f7 0% 0% no-repeat;
+    padding: 10px;
+    margin-left: 1px;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+    width: 125px;
+    font-size: 20px;
+    height: 47px;
+}
+
+.Prefijo-title-show{
+  background: #f7f7f7 0% 0% no-repeat;
+    padding: 10px;
+    margin-left: 3px;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+    font-size: 20px;
+    height: 47px;
+}
+
+
 
 .sedes-card {
     max-width: 200px;
@@ -134,6 +157,9 @@ td{
 .input-busqueda{
   width: 402px;
   margin-right: 10px;
+}
+.body-16{
+  font-size: 15px;
 }
 
 //icono material
