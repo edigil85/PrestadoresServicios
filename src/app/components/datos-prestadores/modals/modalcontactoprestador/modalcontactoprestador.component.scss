@@ -1,9 +1,23 @@
 @import "../../../../../assets/scss/variables";
 
-.direccion {
+.background-legal{
+  background: #f7f7f7 0% 0% no-repeat padding-box;
+  border-radius: 10px;
+}
+
+.input {
   min-width: 150px;
   max-width: 500px;
   width: 100%;
+}
+
+.iconos{
+  font-size: 20px;
+  color: $primario;
+}
+.iconos-tabs{
+  width: 35px !important;
+  height: 35px !important;
 }
 
 .buttonDisabledPrimary{

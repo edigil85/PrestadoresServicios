@@ -1,5 +1,5 @@
 <mat-toolbar>
-    <span><h3>Datos de contacto</h3></span>
+    <h3>Datos de contacto</h3>
 </mat-toolbar>
 
   <form [formGroup]="form" class="normal-form" (ngSubmit)="onSubmit()">
@@ -8,7 +8,7 @@
         <div class="container-fluid">
         <div class="row">
             <div class="col-lg-4">
-            <mat-form-field>
+            <mat-form-field class="input" appearance="fill">
                 <mat-label>Nombres y apellidos *</mat-label>
                 <input matInput formControlName="nombre" onkeyup="javascript:this.value=this.value.toUpperCase();">
                 <mat-hint align="end">{{nombre.value.length}} / 80</mat-hint>
@@ -21,7 +21,7 @@
             </mat-form-field>
             </div>
             <div class="col-lg-4">
-            <mat-form-field>
+            <mat-form-field class="input" appearance="fill">
                 <mat-label>Correo electronico *</mat-label>
                 <input matInput placeholder="juanrestrepo@ips.com.co" formControlName="emailNotificacion"
                  onkeyup="javascript:this.value=this.value.toUpperCase();">
@@ -38,10 +38,10 @@
             </div>
 
             <div class="col-lg-4">
-            <mat-form-field>
+            <mat-form-field class="input" appearance="fill">
                 <mat-label>Confirmar Correo electronico *</mat-label>
                 <input matInput placeholder="juanrestrepo@ips.com.co" formControlName="correConfirmacion"
-                [errorStateMatcher]="matcher">
+                [errorStateMatcher]="matcher" onkeyup="javascript:this.value=this.value.toUpperCase();">
                 <mat-error *ngIf="form.hasError('NoMacth')">
                     Correos no son iguales
                 </mat-error>  
@@ -54,7 +54,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-4">
-                <mat-form-field>
+                <mat-form-field class="input" appearance="fill">
                     <mat-label>Telefono / Celular *</mat-label>
                     <input matInput formControlName="telefono">
                     <mat-hint align="end">{{telefono.value.length}} / 10</mat-hint>
@@ -78,15 +78,13 @@
             </div>
         </div>
       </mat-grid-tile>
-      <mat-grid-tile>
-          <div>
-            <span><mat-icon svgIcon="lightbulb"></mat-icon>
-              Para este contacto, puedes configurar las notificaciones que deseas reciba esta persona
-               cuando se realice algún proceso de <Strong>Glosas, Devoluciones y/o cartera.</Strong></span>
-          </div>
-      </mat-grid-tile>
     </mat-grid-list>
-    <div class="container">
+    <div class="container-fluid background-legal pt-4">
+        <div>
+            <p><i class="far fa-lightbulb iconos"></i>
+              Para este contacto, puedes configurar las notificaciones que deseas reciba esta persona
+               cuando se realice algún proceso de <Strong>Glosas, Devoluciones y/o cartera.</Strong></p>
+          </div>
         <div class="row">
             <div class="col-lg-4">
                 <mat-checkbox class="example-margin" [checked]="notificacionGlosa" (change)="notiGlosa($event)">Glosas</mat-checkbox>
@@ -97,11 +95,13 @@
             <div class="col-lg-4">
                 <mat-checkbox class="example-margin" [checked]="notificacionCartera" (change)="notiCartera($event)" >Cartera</mat-checkbox>
             </div>
-            <span *ngIf="!Checked">Debes de seleccionar minimo una notificacion</span>
         </div>
     </div>
-    <div class="button-row">
-      <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid || !Checked">Guardar</button>
-      <button mat-raised-button color="warn" (click)="onClose()">Cerrar</button>
+    <mat-error class="text-center" *ngIf="!Checked">
+        Debes de seleccionar minimo una notificacion
+       </mat-error>
+    <div class="button-row text-center pt-3">
+        <button  class="buttonSecundary mr-3" (click)="onClose()">Cerrar</button>
+        <button  [ngClass]="{'buttonDisabledPrimary': form.invalid==true || Checked==false, 'buttonPrimary': form.invalid==false && Checked==true }" type="submit" [disabled]="form.invalid">Guardar</button>
     </div>
   </form>

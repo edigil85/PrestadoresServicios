@@ -18,7 +18,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 @Component({
   selector: 'app-modalcodigohabilitacion',
   templateUrl: './modalcodigohabilitacion.component.html',
-  styleUrls: ['./modalcodigohabilitacion.component.css']
+  styleUrls: ['./modalcodigohabilitacion.component.scss']
 })
 export class ModalcodigohabilitacionComponent implements OnInit {
 

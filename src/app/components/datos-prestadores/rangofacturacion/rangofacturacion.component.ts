@@ -90,8 +90,11 @@ export class RangofacturacionComponent implements OnInit {
       prefijoFacturacion:'',
       activo:'S',
       fechaInicial:'',
-      fechaFinal:''
+      fechaFinal:'',
+      rangoInicial:'',
+      rangoFinal:''
     };
+
     this.service.ConsultarPrefijoFacturacion(this.rangoFacturacion)
     .subscribe(
        (result) => {
@@ -110,7 +113,9 @@ export class RangofacturacionComponent implements OnInit {
       prefijoFacturacion:'',
       activo:'S',
       fechaInicial:'',
-      fechaFinal:''
+      fechaFinal:'',
+      rangoInicial:'',
+      rangoFinal:''
     };
     localStorage.setItem("prefijoFacturacion", JSON.stringify(this.rangoFacturacion));
     const dialogConfig = new MatDialogConfig();

@@ -17,7 +17,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 @Component({
   selector: 'app-modalcontactoprestador',
   templateUrl: './modalcontactoprestador.component.html',
-  styleUrls: ['./modalcontactoprestador.component.css']
+  styleUrls: ['./modalcontactoprestador.component.scss']
 })
 export class ModalcontactoprestadorComponent implements OnInit {
   emailpattern ='(^[\\-_a-zA-Z0-9]+(\\.[\\-_a-zA-Z0-9]+)*@[a-zA-z0-9-]+(\\.[a-zA-Z0-9-]+)*(\\.[a-zA-Z]{2,4})$)|(^$)';

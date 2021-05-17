@@ -3,9 +3,9 @@
   </mat-toolbar>
   <form [formGroup]="form" class="normal-form" (ngSubmit)="onSubmit()">
     
-     
-        <div>
-        <mat-form-field appearance="outline">
+        <div class="row pt-3">
+        <div class="col">
+        <mat-form-field appearance="fill">
           <mat-label>Departamento</mat-label>
           <mat-select (selectionChange)= "onSelectDepartamento()" 
           formControlName="departamentoseleccionado" required>
@@ -16,8 +16,8 @@
         </mat-form-field>
         </div>
     
-      <div *ngIf="showCiudad">
-          <mat-form-field appearance="outline">
+      <div class="pl-2" *ngIf="showCiudad">
+          <mat-form-field appearance="fill">
             <mat-label>Ciudad</mat-label>
             <mat-select  formControlName="ciudad" required >
               <mat-option *ngFor="let ciu of listciudades" [value]="ciu.nombreCiudad">
@@ -26,13 +26,15 @@
             </mat-select>
           </mat-form-field>
         </div> 
-      
-        <div class="col-lg-6">
-          <mat-form-field >
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="direccion" appearance="fill">
             <mat-label>Dirección*</mat-label>
             <input matInput formControlName="direccion" onkeyup="javascript:this.value=this.value.toUpperCase();">
           </mat-form-field>
         </div>
+      </div>
       
     <div class="button-row text-center">
       <button  class="buttonSecundary mr-3" (click)="onClose()">Cerrar</button>

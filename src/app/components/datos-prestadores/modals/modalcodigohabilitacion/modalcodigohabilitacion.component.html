@@ -1,14 +1,21 @@
+<div class="container">
 <mat-toolbar>
     <span><h3>Código de habilitación</h3></span>
 </mat-toolbar>
-<span>Ingrese la información del servicio habilitado como prestador de salud.
-    Tenga en cuanta que esta información es importante para la generación de los RIPS.
-</span>
+<div class="row pt-4">
+  <table>
+    <tr>
+      <td><i class="far fa-lightbulb iconos"></i></td>
+      <td class="pl-2"><p class="body-14">Ingrese la información del servicio habilitado como prestador de salud.
+        Tenga en cuanta que esta información es importante para la generación de los RIPS.
+    </p></td>
+  </tr>
+  </table>
+</div>
   <form [formGroup]="form" class="normal-form" (ngSubmit)="onSubmit()">
-    <mat-grid-list cols="1" rowHeight="75px">
-      <mat-grid-tile *ngIf="modificarCodigo">
-        <div>
-          <mat-form-field>
+    <div class="row pt-3">
+        <div class="col" *ngIf="modificarCodigo">
+          <mat-form-field appearance="fill">
             <mat-label>Código del servicio *</mat-label>
             <input matInput  maxlength="20" formControlName="codigo" onkeyup="javascript:this.value=this.value.toUpperCase();">
             <mat-hint align="end">{{codigo.value.length}} / 20</mat-hint>
@@ -23,20 +30,16 @@
             </mat-error>
           </mat-form-field>
         </div>
-      </mat-grid-tile>
-      <mat-grid-tile *ngIf="!modificarCodigo">
-        <div>
+        <div class="col" *ngIf="!modificarCodigo">
           <mat-form-field>
             <mat-label>Código del servicio *</mat-label>
             <input matInput readonly formControlName="codigo">
           </mat-form-field>
         </div>
-      </mat-grid-tile>
-      <mat-grid-tile>
-        <div>
-          <mat-form-field>
+        <div class="col-8">
+          <mat-form-field class="descripcion" appearance="fill">
             <mat-label>Descrición del servicio *</mat-label>
-            <input matInput formControlName="descripcion" onkeyup="javascript:this.value=this.value.toUpperCase();">
+            <input  matInput formControlName="descripcion" onkeyup="javascript:this.value=this.value.toUpperCase();">
             <mat-hint align="end">{{descripcion.value.length}} / 50</mat-hint>
             <mat-error *ngIf="descripcion.hasError('maxlength')">
               Excede el número de caracteres (50)
@@ -46,10 +49,10 @@
             </mat-error>
           </mat-form-field>
         </div>
-      </mat-grid-tile>
-    </mat-grid-list>
-    <div class="button-row">
-      <button mat-raised-button color="warn" (click)="onClose()">Cerrar</button>
-      <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Guardar</button>
+    </div>
+    <div class="button-row text-center">
+      <button  class="buttonSecundary mr-3" (click)="onClose()">Cerrar</button>
+      <button  [ngClass]="{'buttonDisabledPrimary': form.invalid==true, 'buttonPrimary': form.invalid==false }" type="submit" [disabled]="form.invalid">Guardar</button>
     </div>
   </form>
+</div>

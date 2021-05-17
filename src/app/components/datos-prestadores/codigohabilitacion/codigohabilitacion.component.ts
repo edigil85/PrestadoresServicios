@@ -47,7 +47,7 @@ export class CodigohabilitacionComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.width = "40%";
+    dialogConfig.width = "60%";
     localStorage.setItem('codigoHabilitacion', JSON.stringify(codigo));
     const dialogRef = this.dialog.open(ModalcodigohabilitacionComponent, dialogConfig);
 
@@ -101,7 +101,7 @@ export class CodigohabilitacionComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.width = "40%";
+    dialogConfig.width = "60%";
     const dialogRef = this.dialog.open(ModalcodigohabilitacionComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(

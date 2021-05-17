@@ -1,9 +1,18 @@
 @import "../../../../../assets/scss/variables";
 
-.direccion {
+.descripcion {
   min-width: 150px;
   max-width: 500px;
   width: 100%;
+}
+
+.iconos{
+  font-size: 20px;
+  color: $primario;
+}
+.iconos-tabs{
+  width: 35px !important;
+  height: 35px !important;
 }
 
 .buttonDisabledPrimary{
