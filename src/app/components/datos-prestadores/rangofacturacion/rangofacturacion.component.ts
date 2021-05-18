@@ -50,7 +50,7 @@ export class RangofacturacionComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.width = "40%";
+    dialogConfig.width = "50%";
     localStorage.setItem('prefijoFacturacion', JSON.stringify(prefijo));
     const dialogRef = this.dialog.open(ModalprefijofacturacionComponent, dialogConfig);
 
@@ -121,7 +121,7 @@ export class RangofacturacionComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.width = "40%";
+    dialogConfig.width = "50%";
     const dialogRef = this.dialog.open(ModalprefijofacturacionComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(

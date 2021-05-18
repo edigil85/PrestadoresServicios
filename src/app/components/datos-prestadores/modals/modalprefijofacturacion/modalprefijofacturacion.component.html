@@ -1,38 +1,81 @@
 <mat-toolbar>
     <span><h3>Rango de facturación</h3></span>
 </mat-toolbar>
-  <form [formGroup]="form" class="normal-form" (ngSubmit)="onSubmit()">
-    <mat-grid-list *ngIf="modificarCodigo" cols="1" rowHeight="75px">
-      <mat-grid-tile>
-        <div>
-          <mat-form-field>
+  <form [formGroup]="form" class="normal-form pt-3" (ngSubmit)="onSubmit()">
+    <div class="container" *ngIf="modificarCodigo" >
+        <div class="row">
+          <mat-form-field appearance="fill">
             <mat-label>Prefijo *</mat-label>
             <input matInput maxlength="10" #prefijoFacturacion formControlName="prefijoFacturacion" onkeyup="javascript:this.value=this.value.toUpperCase();">
             <mat-hint align="end">{{prefijoFacturacion.value.length}} / 10</mat-hint>
+            <mat-error *ngIf="prefijo.hasError('required')">
+              Este campo es <strong>requerido</strong>
+          </mat-error>
           </mat-form-field>
+          <i class="fas fa-info-circle iconos" title="Dato alfanumerico asignado por la DIAN"></i>
         </div>
-    </mat-grid-tile>
-    <mat-grid-tile>
-        <mat-form-field>
-            <mat-label>Fecha inicial</mat-label>
-            <input matInput formControlName="fechaInicial" [matDatepicker]="pickerInicial" (dateChange)="cambioDia()">
-            <mat-datepicker-toggle matSuffix [for]="pickerInicial"></mat-datepicker-toggle>
-            <mat-datepicker touchUi #pickerInicial></mat-datepicker>
-        </mat-form-field>
-    </mat-grid-tile>
-    <mat-grid-tile>
-        <mat-form-field>
-            <mat-label>Fecha final</mat-label>
-            <input matInput formControlName="fechaFinal" [min]="fechaminima" [matDatepicker]="pickerFinal">
-            <mat-datepicker-toggle matSuffix [for]="pickerFinal"></mat-datepicker-toggle>
-            <mat-datepicker touchUi #pickerFinal></mat-datepicker>
+
+      <div class="row">
+        <div class="col background-legal">
+          <p class="subtitulo-bold-16 pt-2">Rangos</p>
+          <div class="row">
+            <mat-form-field class="ml-2" appearance="fill">
+              <mat-label>Rango Inicial *</mat-label>
+              <input matInput type="number" formControlName="rangoInicial" >
+              <mat-error *ngIf="rangoInicial.hasError('required')">
+                  Este campo es <strong>requerido</strong>
+              </mat-error>
           </mat-form-field>
-    </mat-grid-tile>
-    </mat-grid-list>
+              <mat-form-field class="ml-2" appearance="fill">
+                <mat-label>Rango Final *</mat-label>
+              <input matInput type="number" formControlName="rangoFinal" 
+              [errorStateMatcher]="matcher">
+                <mat-error *ngIf="form.hasError('NoMacth')">
+                    Rango final debe ser mayor a rango inicial
+                </mat-error>  
+              <mat-error *ngIf="rangoFinal.hasError('required')">
+                  Este campo es <strong>requerido</strong>
+              </mat-error>
+              </mat-form-field>
+           
+          </div>
+        </div>
+
+
+
+
+    <div class="col background-legal ml-2">
+      <p class="subtitulo-bold-16 pt-2">Vigencias</p>
+      <div class="row">
+        
+          <mat-form-field class="ml-2" appearance="fill">
+              <mat-label>Fecha inicial</mat-label>
+              <input matInput formControlName="fechaInicial" [matDatepicker]="pickerInicial" (dateChange)="cambioDia()">
+              <mat-datepicker-toggle matSuffix [for]="pickerInicial"></mat-datepicker-toggle>
+              <mat-datepicker touchUi #pickerInicial></mat-datepicker>
+              <mat-error *ngIf="fechaInicial.hasError('required')">
+                Este campo es <strong>requerido</strong>
+            </mat-error>
+          </mat-form-field>
+        
+          <mat-form-field class="ml-2" appearance="fill">
+              <mat-label>Fecha final</mat-label>
+              <input matInput formControlName="fechaFinal" [min]="fechaminima" [matDatepicker]="pickerFinal">
+              <mat-datepicker-toggle matSuffix [for]="pickerFinal"></mat-datepicker-toggle>
+              <mat-datepicker touchUi #pickerFinal></mat-datepicker>
+              <mat-error *ngIf="fechaFinal.hasError('required')">
+                Este campo es <strong>requerido</strong>
+            </mat-error>
+          </mat-form-field>
+        
+      </div>
+    </div>
+  </div>
+  </div>
     
 
-    <mat-grid-list *ngIf="!modificarCodigo" cols="1" rowHeight="75px">
-      <mat-grid-tile>
+  <div class="container" *ngIf="!modificarCodigo">
+    <mat-grid-tile>
         <div>
           <mat-form-field>
             <mat-label>Prefijo *</mat-label>
@@ -56,13 +99,13 @@
             <mat-datepicker touchUi #pickerFinal></mat-datepicker>
           </mat-form-field>
     </mat-grid-tile>
-    </mat-grid-list>
+  </div>
 
 
 
 
-    <div class="button-row">
-      <button mat-raised-button color="warn" (click)="onClose()">Cerrar</button>
-      <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Guardar</button>
+    <div class="button-row text-center pt-3">
+      <button  class="buttonSecundary mr-3" (click)="onClose()">Cerrar</button>
+      <button  [ngClass]="{'buttonDisabledPrimary': form.invalid==true, 'buttonPrimary': form.invalid==false }" type="submit" [disabled]="form.invalid">Guardar</button>
     </div>
   </form>
