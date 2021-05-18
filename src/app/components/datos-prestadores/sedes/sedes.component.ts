@@ -123,7 +123,27 @@ export class SedesComponent implements OnInit {
   }
 
   deleteSedes(){
-    
+    this.sede = this.sedes[0];
+    this.dialogRef = this.dialog.open(DeleteconfirmmodalComponent, {
+      disableClose: false
+    });
+    this.dialogRef.componentInstance.confirmMessage = "¿Estás seguro de eliminar todas las sedes registradas?"
+
+    this.dialogRef.afterClosed().subscribe(result => {
+      if(result) {
+        this.sedesservice.EliminarTodasSedes(this.sede).subscribe(
+          () => {
+            this.ConsultarSedesPrestador();
+         },
+         (error) => {
+          this._getError(error);
+        }
+       )
+        this.ConsultarSedesPrestador();
+        
+      }
+      this.dialogRef = null;
+    });
   }
 
   handlePage(e: PageEvent){

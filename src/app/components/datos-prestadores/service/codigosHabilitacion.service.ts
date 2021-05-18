@@ -35,5 +35,10 @@ export class codigoHabilitacionService{
     return this.httpClient.post<IcodigoHabilitacion>(`${this.baseUrl}`+Constants.URI_SERVICE_CODIGOHABILITACION_ELIMINAR,
     JSON.stringify(params), {headers:environment.headers})
   }
+
+  EliminarTodosCodigosHabilitacion(params:IcodigoHabilitacion): Observable<any> {
+    return this.httpClient.post<IcodigoHabilitacion>(`${this.baseUrl}`+Constants.URI_SERVICE_CODIGOHABILITACION_ELIMINARTODOS,
+    JSON.stringify(params), {headers:environment.headers})
+  }
   
 }

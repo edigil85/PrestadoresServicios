@@ -75,6 +75,31 @@ export class DatoscontactoComponent implements OnInit {
     });
   }
 
+  
+  deleteContactos(){
+    this.contacto = this. contactos[0];
+
+    this.dialogRef = this.dialog.open(DeleteconfirmmodalComponent, {
+      disableClose: false
+    });
+    this.dialogRef.componentInstance.confirmMessage = "¿Estás seguro de eliminar todos los contactos registrados?"
+
+    this.dialogRef.afterClosed().subscribe(result => {
+      if(result) {
+        this.service.EliminarTodosContactosPrestador(this.contacto).subscribe(
+          () => {
+            this.ConsultarContactosPrestador();
+         },
+         (error) => {
+          this._getError(error);
+         })
+        this.ConsultarContactosPrestador();
+        
+      }
+      this.dialogRef = null;
+    });
+  }
+
   ConsultarContactosPrestador(){
     var datos = JSON.parse( localStorage.getItem( "SSE" ) );
     this.contacto= {idRegistro:'1',
@@ -151,9 +176,6 @@ export class DatoscontactoComponent implements OnInit {
     }
   }
 
-  deleteContactos(){
-    
-  }
 
   openDialog(pTittle, pSubtittle, pMessage) {
     this.dialog.open(ModalDialogComponent, {

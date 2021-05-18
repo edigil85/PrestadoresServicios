@@ -3,25 +3,16 @@
       style="display: block; padding-right: 17px;" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
-              <div class="modal-header matHeader">
-                  <h5 class="modal-title" id="exampleModalLabel" mat-dialog-title>{{confirmMessage}}</h5>
+              <div class="modal-body pt-3">
+                <i class="fas fa-exclamation-triangle iconos"></i>
+                <div class="modal-subtitle">
+                    <h4 class="h4-bold">{{confirmMessage}}</h4>
+                </div>
               </div>
-              <div class="modal-body">
-                  <div class="modal-subtitle">
-                      <h5 class="font-weight-bold mb-3 mt-1" ></h5>
-                  </div>
-                  <p><span class="material-icons">
-                    warning_amber
-                    </span></p>
-
+              <div class="m-2 text-center">
+                    <button  class="buttonSecundary mr-3" (click)="dialogRef.close(false)">Cerrar</button>
+                    <button  class="buttonPrimary" (click)="dialogRef.close(true)">Eliminar</button>
               </div>
-              <!--<div class="modal-footer">-->
-              <mat-dialog-actions>
-                <button mat-raised-button (click)="dialogRef.close(false)">Cancelar</button>
-                <button mat-raised-button color="primary" (click)="dialogRef.close(true)">Eliminar</button>
-              </mat-dialog-actions>
-
-              <!--</div>-->
           </div>
       </div>
   </div>

@@ -30,7 +30,9 @@
   </div>
   <div  class="container.fluid">
     <div class="row">
-      <mat-card class="card" *ngFor="let sede of sedes |sedesFilter:textoFiltro | paginate: page_size: page_number">
+      <mat-card 
+      [ngClass]="{'card-selected':seleccionarTodos==true, 'card': seleccionarTodos==false }"
+      *ngFor="let sede of sedes |sedesFilter:textoFiltro | paginate: page_size: page_number">
         <mat-card-header>
           <div mat-card-avatar><mat-icon svgIcon="sedes" class="iconos-tabs"></mat-icon></div>
           <mat-card-title><p class="subtitulo-bold-16">{{sede.direccion}}</p></mat-card-title>
@@ -77,7 +79,9 @@
     </div>
   </div>
   <div  class="container.fluid">
-    <mat-card class="card-large" *ngFor="let sede of sedes |sedesFilter:textoFiltro | paginate: page_size: page_number">
+    <mat-card
+    [ngClass]="{'card-large-selected':seleccionarTodos==true, 'card-large': seleccionarTodos==false }"
+    *ngFor="let sede of sedes |sedesFilter:textoFiltro | paginate: page_size: page_number">
       <mat-card-content>
         <div class="continer">
           <div class="row">

@@ -82,6 +82,30 @@ export class RangofacturacionComponent implements OnInit {
     });
   }
 
+  
+  deletePrefijosFacturacion(){
+    this.rangoFacturacion= this.rangosFacturacion[0];
+    this.dialogRef = this.dialog.open(DeleteconfirmmodalComponent, {
+      disableClose: false
+    });
+    this.dialogRef.componentInstance.confirmMessage = "¿Estás seguro de eliminar todos los prefijos de facturacion registrados?"
+
+    this.dialogRef.afterClosed().subscribe(result => {
+      if(result) {
+        this.service.EliminarTodosPrefijosFacturacion(this.rangoFacturacion).subscribe(
+          () => {
+            this.ConsultarPrefijoFacturacion();
+         },
+         (error) => {
+          this._getError(error); }
+       )
+        this.ConsultarPrefijoFacturacion();
+        
+      }
+      this.dialogRef = null;
+    });
+  }
+
   ConsultarPrefijoFacturacion(){
     var datos = JSON.parse( localStorage.getItem( "SSE" ) );
     this.rangoFacturacion= {idRegistro:0,
@@ -161,9 +185,6 @@ export class RangofacturacionComponent implements OnInit {
     }
   }
 
-  deletePrefijosFacturacion(){
-    
-  }
 
   openDialog(pTittle, pSubtittle, pMessage) {
     this.dialog.open(ModalDialogComponent, {

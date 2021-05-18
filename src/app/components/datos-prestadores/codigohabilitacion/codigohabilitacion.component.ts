@@ -77,6 +77,29 @@ export class CodigohabilitacionComponent implements OnInit {
     });
   }
 
+  deleteCodigos(
+  ){
+    this.codigo=this.codigos[0];
+
+    this.dialogRef = this.dialog.open(DeleteconfirmmodalComponent, {
+      disableClose: false
+    });
+    this.dialogRef.componentInstance.confirmMessage = "¿Estás seguro de eliminar todos los códigos de habilitacion de servicios?"
+
+    this.dialogRef.afterClosed().subscribe(result => {
+      if(result) {
+        this.service.EliminarTodosCodigosHabilitacion(this.codigo).subscribe(
+          () => {
+            this.ConsultarCodigosHabilitacion();
+         },
+         (error) => {
+          this._getError(error);
+         })
+      }
+      this.dialogRef = null;
+    });
+  }
+
   ConsultarCodigosHabilitacion(){
     var datos = JSON.parse( localStorage.getItem( "SSE" ) );
     this.codigo= {nitPrestador: datos.numeroDocumentoPrestador, 
@@ -139,10 +162,6 @@ export class CodigohabilitacionComponent implements OnInit {
      this.ShowTable=false;
      this.IconoMostrar="list";
     }
-  }
-
-  deleteCodigos(){
-    
   }
 
   openDialog(pTittle, pSubtittle, pMessage) {

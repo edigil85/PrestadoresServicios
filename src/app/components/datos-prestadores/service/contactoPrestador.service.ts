@@ -36,4 +36,9 @@ export class contactoPrestadorService {
     JSON.stringify(params), {headers:environment.headers})
   }
 
+  EliminarTodosContactosPrestador(params:IcontactoPrestador): Observable<any> {
+    return this.httpClient.post<IcontactoPrestador>(`${this.baseUrl}`+Constants.URI_SERVICE_CONTACTOPRESTADOR_ELIMINARTODOS,
+    JSON.stringify(params), {headers:environment.headers})
+  }
+
 }

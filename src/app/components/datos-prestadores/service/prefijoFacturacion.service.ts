@@ -35,4 +35,9 @@ export class prefijoFacturacionService  {
     return this.httpClient.post<IprefijoFacturacion>(`${this.baseUrl}`+Constants.URI_SERVICE_PREFIJOFACTURACION_ELIMINAR,
     JSON.stringify(params), {headers:environment.headers})
   }
+
+  EliminarTodosPrefijosFacturacion(params:IprefijoFacturacion): Observable<any> {
+    return this.httpClient.post<IprefijoFacturacion>(`${this.baseUrl}`+Constants.URI_SERVICE_PREFIJOFACTURACION_ELIMINARTODOS,
+    JSON.stringify(params), {headers:environment.headers})
+  }
 }

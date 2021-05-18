@@ -34,8 +34,10 @@ export class sedesservice{
     return this.httpClient.post<Isedes>(`${this.baseUrl}`+Constants.URI_SERVICE_SEDES_ELIMINAR,
     JSON.stringify(params), {headers:environment.headers})
   }
+
+  EliminarTodasSedes(params:Isedes): Observable<any> {
+    return this.httpClient.post<Isedes>(`${this.baseUrl}`+Constants.URI_SERVICE_SEDES_ELIMINARTODOS,
+    JSON.stringify(params), {headers:environment.headers})
+  }
   
 }
-
-  
-

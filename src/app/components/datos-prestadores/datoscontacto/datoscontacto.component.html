@@ -30,7 +30,9 @@
     </div>
   <div  class="container.fluid">
     <div class="row">
-    <mat-card class="card" *ngFor="let contacto of contactos |contactoPreFilter : textoFiltro | paginate: page_size: page_number">
+    <mat-card 
+    [ngClass]="{'card-selected':seleccionarTodos==true, 'card': seleccionarTodos==false }"
+    *ngFor="let contacto of contactos |contactoPreFilter : textoFiltro | paginate: page_size: page_number">
       <mat-card-header class="ml-0">
       <mat-card-title>
         <p class="subtitulo-bold-18 ">{{contacto.nombre}}</p>
@@ -111,7 +113,9 @@
       </div>
     </div>
   <div  class="container.fluid">
-    <mat-card class="card-large" *ngFor="let contacto of contactos |contactoPreFilter:textoFiltro | paginate: page_size: page_number">
+    <mat-card 
+    [ngClass]="{'card-large-selected':seleccionarTodos==true, 'card-large': seleccionarTodos==false }"
+    *ngFor="let contacto of contactos |contactoPreFilter:textoFiltro | paginate: page_size: page_number">
       <mat-card-content>
         <div class="continer">
           <div class="row">

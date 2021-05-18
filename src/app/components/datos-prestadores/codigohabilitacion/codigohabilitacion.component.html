@@ -30,7 +30,9 @@
     </div>
   <div  class="container.fluid">
     <div class="row">
-    <mat-card class="card" *ngFor="let codigo of codigos |codigoHabFilter : textoFiltro | paginate: page_size: page_number">
+    <mat-card 
+    [ngClass]="{'card-selected':seleccionarTodos==true, 'card': seleccionarTodos==false }"
+    *ngFor="let codigo of codigos |codigoHabFilter : textoFiltro | paginate: page_size: page_number">
       <mat-card-header>
       <mat-card-title><p class="body-18"><b>Servicio</b></p>
         <p class="body-14"><b>{{codigo.codigoHabilitacion}}</b></p>
@@ -78,7 +80,9 @@
       </div>
     </div>
   <div  class="container.fluid">
-    <mat-card class="card-large" *ngFor="let codigo of codigos |codigoHabFilter:textoFiltro | paginate: page_size: page_number">
+    <mat-card 
+    [ngClass]="{'card-large-selected':seleccionarTodos==true, 'card-large': seleccionarTodos==false }"
+    *ngFor="let codigo of codigos |codigoHabFilter:textoFiltro | paginate: page_size: page_number">
       <mat-card-content>
         <div class="continer">
           <div class="row">

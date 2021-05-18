@@ -30,7 +30,9 @@
   </div>
 <div  class="container.fluid">
   <div class="row">
-  <mat-card class="card" *ngFor="let rango of rangosFacturacion |prefijoFacFilter : textoFiltro | paginate: page_size: page_number">
+  <mat-card 
+  [ngClass]="{'card-selected':seleccionarTodos==true, 'card': seleccionarTodos==false }"
+   *ngFor="let rango of rangosFacturacion |prefijoFacFilter : textoFiltro | paginate: page_size: page_number">
     <mat-card-header>
     <mat-card-title style="font-size: 24px">
       <div class="row">
@@ -42,6 +44,13 @@
     <mat-card-content>
       <table class="mt-2">
         <tr>
+          <th rowspan="2"><p class="body-16"><strong>Rango</strong></p></th>
+          <td class="text-left"><p class="body-16"><strong>Inicio: </strong>{{rango.rangoInicial}}</p></td>
+        </tr>
+        <tr>
+          <td class="text-left"><p class="body-16"><strong>Fin: </strong>{{rango.rangoFinal}}</p></td>
+        </tr>
+        <tr >
           <th rowspan="2"><p class="body-16"><strong>Vigencia</strong></p></th>
           <td><p class="body-16"><strong>Desde: </strong>{{rango.fechaInicial}}</p></td>
         </tr>
@@ -89,7 +98,9 @@
     </div>
   </div>
 <div  class="container.fluid">
-  <mat-card class="card-large pl-4 pb-0 pt-2" *ngFor="let rango of rangosFacturacion | prefijoFacFilter:textoFiltro | paginate: page_size: page_number">
+  <mat-card 
+  [ngClass]="{'card-large-selected pl-4 pb-0 pt-2':seleccionarTodos==true, 'card-large pl-4 pb-0 pt-2': seleccionarTodos==false }"
+  *ngFor="let rango of rangosFacturacion | prefijoFacFilter:textoFiltro | paginate: page_size: page_number">
     <mat-card-content>
       <div class="continer">
         <div class="row">

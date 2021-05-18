@@ -61,6 +61,14 @@ export class Constants {
 
   static URI_SERVICE_SECCION_DATA ='/informacionseccion/consultar';
 
+  static URI_SERVICE_SEDES_ELIMINARTODOS = '/sedeprestador/eliminartodossedeprestador';
+
+  static URI_SERVICE_CODIGOHABILITACION_ELIMINARTODOS ='/codigohabilitacion/eliminartodoscodigohabilitacion';
+
+  static URI_SERVICE_CONTACTOPRESTADOR_ELIMINARTODOS ='/contactonotificacion/eliminartodoscontactoprestador';
+
+  static URI_SERVICE_PREFIJOFACTURACION_ELIMINARTODOS ='/prefijofacturacion/eliminartodosprefijofacturacion';
+
   //Constanetes para maximos registros
 
   static SEDES_PRESTADORES_MAX = 80;

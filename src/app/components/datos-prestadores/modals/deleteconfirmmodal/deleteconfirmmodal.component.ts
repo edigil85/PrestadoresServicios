@@ -5,7 +5,7 @@ import { MatDialogRef} from '@angular/material/dialog'
 @Component({
   selector: 'app-deleteconfirmmodal',
   templateUrl: './deleteconfirmmodal.component.html',
-  styleUrls: ['./deleteconfirmmodal.component.css']
+  styleUrls: ['./deleteconfirmmodal.component.scss']
 })
 export class DeleteconfirmmodalComponent {
 
