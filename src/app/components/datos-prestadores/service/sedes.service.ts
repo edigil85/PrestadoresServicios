@@ -15,27 +15,27 @@ export class sedesservice{
   httpHeaders: HttpHeaders;
   baseUrl: String = environment.apiUrl;
 
-  ConsultarSedes(params:Isedes): Observable<any> {
+  consultarSedes(params:Isedes): Observable<any> {
     return this.httpClient.post<Isedes>(`${this.baseUrl}`+Constants.URI_SERVICE_SEDES_CONSULTA,
     JSON.stringify(params), {headers:environment.headers})
   }
 
-  InsertarSedes(params:Isedes): Observable<any> {
+  insertarSedes(params:Isedes): Observable<any> {
     return this.httpClient.post<Isedes>(`${this.baseUrl}`+Constants.URI_SERVICE_SEDES_CREAR,
     JSON.stringify(params), {headers:environment.headers})
   }
 
-  ActualizarSedes(params:Isedes): Observable<any> {
+  actualizarSedes(params:Isedes): Observable<any> {
     return this.httpClient.post<Isedes>(`${this.baseUrl}`+Constants.URI_SERVICE_SEDES_ACTUALIZAR,
     JSON.stringify(params), {headers:environment.headers})
   }
 
-  EliminarSedes(params:Isedes): Observable<any> {
+  eliminarSedes(params:Isedes): Observable<any> {
     return this.httpClient.post<Isedes>(`${this.baseUrl}`+Constants.URI_SERVICE_SEDES_ELIMINAR,
     JSON.stringify(params), {headers:environment.headers})
   }
 
-  EliminarTodasSedes(params:Isedes): Observable<any> {
+  eliminarTodasSedes(params:Isedes): Observable<any> {
     return this.httpClient.post<Isedes>(`${this.baseUrl}`+Constants.URI_SERVICE_SEDES_ELIMINARTODOS,
     JSON.stringify(params), {headers:environment.headers})
   }

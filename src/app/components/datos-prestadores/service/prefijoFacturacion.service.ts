@@ -16,27 +16,27 @@ export class prefijoFacturacionService  {
   httpHeaders: HttpHeaders;
   baseUrl: String = environment.apiUrl;
 
-  ConsultarPrefijoFacturacion(params:IprefijoFacturacion): Observable<any> {
+  consultarPrefijoFacturacion(params:IprefijoFacturacion): Observable<any> {
     return this.httpClient.post<IprefijoFacturacion>(`${this.baseUrl}`+Constants.URI_SERVICE_PREFIJOFACTURACION_CONSULTA,
     JSON.stringify(params), {headers:environment.headers})
   }
 
-  InsertarPrefijoFacturacion(params:IprefijoFacturacion): Observable<any> {
+  insertarPrefijoFacturacion(params:IprefijoFacturacion): Observable<any> {
     return this.httpClient.post<IprefijoFacturacion>(`${this.baseUrl}`+Constants.URI_SERVICE_PREFIJOFACTURACION_CREAR,
     JSON.stringify(params), {headers:environment.headers})
   }
 
-  ActualizarPrefijoFacturacion(params:IprefijoFacturacion): Observable<any> {
+  actualizarPrefijoFacturacion(params:IprefijoFacturacion): Observable<any> {
     return this.httpClient.post<IprefijoFacturacion>(`${this.baseUrl}`+Constants.URI_SERVICE_PREFIJOFACTURACION_ACTUALIZAR,
     JSON.stringify(params), {headers:environment.headers})
   }
 
-  EliminarPrefijoFacturacion(params:IprefijoFacturacion): Observable<any> {
+  eliminarPrefijoFacturacion(params:IprefijoFacturacion): Observable<any> {
     return this.httpClient.post<IprefijoFacturacion>(`${this.baseUrl}`+Constants.URI_SERVICE_PREFIJOFACTURACION_ELIMINAR,
     JSON.stringify(params), {headers:environment.headers})
   }
 
-  EliminarTodosPrefijosFacturacion(params:IprefijoFacturacion): Observable<any> {
+  eliminarTodosPrefijosFacturacion(params:IprefijoFacturacion): Observable<any> {
     return this.httpClient.post<IprefijoFacturacion>(`${this.baseUrl}`+Constants.URI_SERVICE_PREFIJOFACTURACION_ELIMINARTODOS,
     JSON.stringify(params), {headers:environment.headers})
   }

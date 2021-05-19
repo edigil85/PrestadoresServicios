@@ -2,7 +2,18 @@
 
 .descripcion {
   min-width: 150px;
-  max-width: 300px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.background-legal{
+  background: #f7f7f7 0% 0% no-repeat padding-box;
+  border-radius: 10px;
+}
+
+.input {
+  min-width: 150px;
+  max-width: 500px;
   width: 100%;
 }
 

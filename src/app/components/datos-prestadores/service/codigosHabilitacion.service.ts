@@ -16,27 +16,27 @@ export class codigoHabilitacionService{
   httpHeaders: HttpHeaders;
   baseUrl: String = environment.apiUrl;
 
-  ConsultarCodigoHabilitacion(params:IcodigoHabilitacion): Observable<any> {
+  consultarCodigoHabilitacion(params:IcodigoHabilitacion): Observable<any> {
     return this.httpClient.post<IcodigoHabilitacion>(`${this.baseUrl}`+Constants.URI_SERVICE_CODIGOHABILITACION_CONSULTA,
     JSON.stringify(params), {headers:environment.headers})
   }
 
-  InsertarCodigoHabilitacion(params:IcodigoHabilitacion): Observable<any> {
+  insertarCodigoHabilitacion(params:IcodigoHabilitacion): Observable<any> {
     return this.httpClient.post<IcodigoHabilitacion>(`${this.baseUrl}`+Constants.URI_SERVICE_CODIGOHABILITACION_CREAR,
     JSON.stringify(params), {headers:environment.headers})
   }
 
-  ActualizarCodigoHabilitacion(params:IcodigoHabilitacion): Observable<any> {
+  actualizarCodigoHabilitacion(params:IcodigoHabilitacion): Observable<any> {
     return this.httpClient.post<IcodigoHabilitacion>(`${this.baseUrl}`+Constants.URI_SERVICE_CODIGOHABILITACION_ACTUALIZAR,
     JSON.stringify(params), {headers:environment.headers})
   }
 
-  EliminarCodigoHabilitacion(params:IcodigoHabilitacion): Observable<any> {
+  eliminarCodigoHabilitacion(params:IcodigoHabilitacion): Observable<any> {
     return this.httpClient.post<IcodigoHabilitacion>(`${this.baseUrl}`+Constants.URI_SERVICE_CODIGOHABILITACION_ELIMINAR,
     JSON.stringify(params), {headers:environment.headers})
   }
 
-  EliminarTodosCodigosHabilitacion(params:IcodigoHabilitacion): Observable<any> {
+  eliminarTodosCodigosHabilitacion(params:IcodigoHabilitacion): Observable<any> {
     return this.httpClient.post<IcodigoHabilitacion>(`${this.baseUrl}`+Constants.URI_SERVICE_CODIGOHABILITACION_ELIMINARTODOS,
     JSON.stringify(params), {headers:environment.headers})
   }

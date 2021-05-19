@@ -16,27 +16,27 @@ export class contactoPrestadorService {
   httpHeaders: HttpHeaders;
   baseUrl: String = environment.apiUrl;
   
-  ConsultarContactoPrestador(params:IcontactoPrestador): Observable<any> {
+  consultarContactoPrestador(params:IcontactoPrestador): Observable<any> {
     return this.httpClient.post<IcontactoPrestador>(`${this.baseUrl}`+Constants.URI_SERVICE_CONTACTOPRESTADOR_CONSULTA,
     JSON.stringify(params), {headers:environment.headers})
   }
 
-  InsertarContactoPrestador(params:IcontactoPrestador): Observable<any> {
+  insertarContactoPrestador(params:IcontactoPrestador): Observable<any> {
     return this.httpClient.post<IcontactoPrestador>(`${this.baseUrl}`+Constants.URI_SERVICE_CONTACTOPRESTADOR_CREAR,
     JSON.stringify(params), {headers:environment.headers})
   }
 
-  ActualizarContactoPrestador(params:IcontactoPrestador): Observable<any> {
+  actualizarContactoPrestador(params:IcontactoPrestador): Observable<any> {
     return this.httpClient.post<IcontactoPrestador>(`${this.baseUrl}`+Constants.URI_SERVICE_CONTACTOPRESTADOR_ACTUALIZAR,
     JSON.stringify(params), {headers:environment.headers})
   }
 
-  EliminarContactoPrestador(params:IcontactoPrestador): Observable<any> {
+  eliminarContactoPrestador(params:IcontactoPrestador): Observable<any> {
     return this.httpClient.post<IcontactoPrestador>(`${this.baseUrl}`+Constants.URI_SERVICE_CONTACTOPRESTADOR_ELIMINAR,
     JSON.stringify(params), {headers:environment.headers})
   }
 
-  EliminarTodosContactosPrestador(params:IcontactoPrestador): Observable<any> {
+  eliminarTodosContactosPrestador(params:IcontactoPrestador): Observable<any> {
     return this.httpClient.post<IcontactoPrestador>(`${this.baseUrl}`+Constants.URI_SERVICE_CONTACTOPRESTADOR_ELIMINARTODOS,
     JSON.stringify(params), {headers:environment.headers})
   }

@@ -90,7 +90,7 @@ ngOnInit(): void {
     representanteLegal:'',
     emailReperesentantelegal:''};
 
-  this.ConsultarInfoPrestador();
+  this.consultarInfoPrestador();
 }
 ngAfterViewInit(): void {
   
@@ -108,14 +108,14 @@ consultarDatosSeccion(){
   );
 }
 
-ConsultarInfoPrestador(){
+consultarInfoPrestador(){
   var datos = JSON.parse( localStorage.getItem( "SSE" ) );
   this.infoPrestador= { nitPrestador: datos.numeroDocumentoPrestador, 
     tipoIdentificacion: datos.tipoDocumentoPrestador,
     razonSocial: datos.razonSocial,
     representanteLegal:'',
     emailReperesentantelegal:''};
-  this.infoPrestadoresService.ConsultarInfoPrestador(this.infoPrestador)
+  this.infoPrestadoresService.consultarInfoPrestador(this.infoPrestador)
   .subscribe(
      (result) => {
       this.infoPrestador= result[0];
@@ -124,7 +124,7 @@ ConsultarInfoPrestador(){
   )
 }
 
-onCreate() {
+crear() {
   localStorage.setItem("infoPrestador", JSON.stringify(this.infoPrestador));
   const dialogConfig = new MatDialogConfig();
   dialogConfig.disableClose = true;
@@ -135,7 +135,7 @@ onCreate() {
 
   dialogRef.afterClosed().subscribe(
       () => 
-      this.ConsultarInfoPrestador()
+      this.consultarInfoPrestador()
   );    
 }
 

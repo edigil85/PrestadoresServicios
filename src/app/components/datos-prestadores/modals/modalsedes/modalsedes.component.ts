@@ -51,11 +51,11 @@ export class ModalsedesComponent implements OnInit {
     else{
       this.obtenerDepartamento();
       this.saberdepartamento(this.sede.departamento);
-      this.DatosFormGroup(this.sede.idRegistro,this.selectedDepartamento,this.sede.ciudad,this.sede.direccion);
+      this.datosFormGroup(this.sede.idRegistro,this.selectedDepartamento,this.sede.ciudad,this.sede.direccion);
       //this.obtenerCiudad();
     }
   }
-  DatosFormGroup(idregistro: Number, departamento: Idepartamento, ciudad: String, direccion: String){
+  datosFormGroup(idregistro: Number, departamento: Idepartamento, ciudad: String, direccion: String){
     this.form.patchValue({
       idregistro: idregistro,
       departamentoseleccionado: departamento,
@@ -104,7 +104,7 @@ export class ModalsedesComponent implements OnInit {
         this.sede.departamento = this.selectedDepartamento.nombreDepartamento;
         this.sede.direccion = this.form.get('direccion'). value;
         this.sede.ciudad = this.form.get('ciudad'). value;
-        this.sedesservice.InsertarSedes(this.sede).subscribe(
+        this.sedesservice.insertarSedes(this.sede).subscribe(
           () => {
            this.dialogRef.close();
          }
@@ -116,7 +116,7 @@ export class ModalsedesComponent implements OnInit {
         this.sede.departamento = this.selectedDepartamento.nombreDepartamento;
         this.sede.direccion = this.form.get('correoEleciudadctronico'). value;
         this.sede.ciudad = this.form.get('ciudad'). value;
-        this.sedesservice.ActualizarSedes(this.sede).subscribe(
+        this.sedesservice.actualizarSedes(this.sede).subscribe(
           () => {
            this.dialogRef.close();
          }

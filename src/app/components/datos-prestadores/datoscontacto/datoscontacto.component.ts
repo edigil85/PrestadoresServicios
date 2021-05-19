@@ -15,18 +15,18 @@ import { contactoPrestadorService } from '../service/contactoPrestador.service';
 })
 export class DatoscontactoComponent implements OnInit {
   dialogRef: MatDialogRef<DeleteconfirmmodalComponent>;
-  ShowCards = true;
-  ShowTable = false;
-  ShowFilter= false;
+  showCards = true;
+  showTable = false;
+  showFilter= false;
   page_size: number = 10;
   page_number: number = 1;
   pageSizeOption = [10, 15, 20, 25];
   contactos: IcontactoPrestador[]=[];
   contacto: IcontactoPrestador;
-  IconoMostrar="list";
-  IconoFilter ="filter_alt";
+  iconoMostrar="list";
+  iconoFilter ="filter_alt";
   seleccionarTodos = false;
-  UseFilter = false;
+  useFilter = false;
   textoFiltro= '';
   utilService: UtilService;
 
@@ -36,10 +36,10 @@ export class DatoscontactoComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.ConsultarContactosPrestador();
+    this.consultarCodigosHabilitacion();
   }
 
-  editContacto(contacto: IcontactoPrestador){
+  editarContacto(contacto: IcontactoPrestador){
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
@@ -49,11 +49,11 @@ export class DatoscontactoComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(
       () => 
-      this.ConsultarContactosPrestador()
+      this.consultarCodigosHabilitacion()
   ); 
   } 
 
-  deleteContacto(contacto: IcontactoPrestador){
+  eliminarContacto(contacto: IcontactoPrestador){
     this.dialogRef = this.dialog.open(DeleteconfirmmodalComponent, {
       disableClose: false
     });
@@ -61,14 +61,14 @@ export class DatoscontactoComponent implements OnInit {
 
     this.dialogRef.afterClosed().subscribe(result => {
       if(result) {
-        this.service.EliminarContactoPrestador(contacto).subscribe(
+        this.service.eliminarContactoPrestador(contacto).subscribe(
           () => {
-            this.ConsultarContactosPrestador();
+            this.consultarCodigosHabilitacion();
          },
          (error) => {
           this._getError(error);
          })
-        this.ConsultarContactosPrestador();
+        this.consultarCodigosHabilitacion();
         
       }
       this.dialogRef = null;
@@ -76,7 +76,7 @@ export class DatoscontactoComponent implements OnInit {
   }
 
   
-  deleteContactos(){
+  eliminarContactos(){
     this.contacto = this. contactos[0];
 
     this.dialogRef = this.dialog.open(DeleteconfirmmodalComponent, {
@@ -86,21 +86,21 @@ export class DatoscontactoComponent implements OnInit {
 
     this.dialogRef.afterClosed().subscribe(result => {
       if(result) {
-        this.service.EliminarTodosContactosPrestador(this.contacto).subscribe(
+        this.service.eliminarTodosContactosPrestador(this.contacto).subscribe(
           () => {
-            this.ConsultarContactosPrestador();
+            this.consultarCodigosHabilitacion();
          },
          (error) => {
           this._getError(error);
          })
-        this.ConsultarContactosPrestador();
+        this.consultarCodigosHabilitacion();
         
       }
       this.dialogRef = null;
     });
   }
 
-  ConsultarContactosPrestador(){
+  consultarCodigosHabilitacion(){
     var datos = JSON.parse( localStorage.getItem( "SSE" ) );
     this.contacto= {idRegistro:'1',
                 nitPrestador: datos.numeroDocumentoPrestador, 
@@ -111,7 +111,7 @@ export class DatoscontactoComponent implements OnInit {
 	              emailNotificacion:'',
 	              nombre:'',
 	              telefono:''};
-    this.service.ConsultarContactoPrestador(this.contacto)
+    this.service.consultarContactoPrestador(this.contacto)
     .subscribe(
        (result) => {
         this.contactos= result;
@@ -121,7 +121,7 @@ export class DatoscontactoComponent implements OnInit {
       })
   }
 
-  onCreate() {
+  crear() {
     var datos = JSON.parse( localStorage.getItem( "SSE" ) );
     this.contacto= {idRegistro:'0',
     nitPrestador: datos.numeroDocumentoPrestador, 
@@ -141,7 +141,7 @@ export class DatoscontactoComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(
       () => 
-      this.ConsultarContactosPrestador()
+      this.consultarCodigosHabilitacion()
   ); 
   }
 
@@ -150,29 +150,29 @@ export class DatoscontactoComponent implements OnInit {
     this.page_number= e.pageIndex + 1;
   }
 
-  UsarFiltro(){
-    if(this.ShowFilter == false){
-      this.ShowFilter = true;
-      this.UseFilter = true;
-      this.IconoFilter="close";
+  usarFiltro(){
+    if(this.showFilter == false){
+      this.showFilter = true;
+      this.useFilter = true;
+      this.iconoFilter="close";
      }
      else{
-      this.ShowFilter = false;
-      this.UseFilter = false;
-      this.IconoFilter = "filter_alt";
+      this.showFilter = false;
+      this.useFilter = false;
+      this.iconoFilter = "filter_alt";
      }
   }
 
   mostrar(){
-    if(this.ShowTable == false){
-     this.ShowCards=false;
-     this.ShowTable=true;
-     this.IconoMostrar="module";
+    if(this.showTable == false){
+     this.showCards=false;
+     this.showTable=true;
+     this.iconoMostrar="module";
     }
     else{
-     this.ShowCards=true;
-     this.ShowTable=false;
-     this.IconoMostrar="list";
+     this.showCards=true;
+     this.showTable=false;
+     this.iconoMostrar="list";
     }
   }
 

@@ -17,20 +17,20 @@ import { UtilService } from 'src/app/shared/service/util.service';
 })
 export class SedesComponent implements OnInit {
   utilService: UtilService;
-  Max_Registros: Number
+  max_Registros: Number
   dialogRef: MatDialogRef<DeleteconfirmmodalComponent>;
-  ShowCards = true;
-  ShowTable = false;
-  ShowFilter= false;
-  IconoMostrar="list";
-  IconoFilter ="filter_alt";
+  showCards = true;
+  showTable = false;
+  showFilter= false;
+  iconoMostrar="list";
+  iconoFilter ="filter_alt";
   sede: Isedes;l
   page_size: number = 10;
   page_number: number = 1;
   pageSizeOption = [10, 15, 20, 25];
   sedes: Isedes[]=[];
   seleccionarTodos = false;
-  UseFilter = false;
+  useFilter = false;
   textoFiltro= '';
   
 
@@ -42,16 +42,16 @@ export class SedesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.Max_Registros= Constants.SEDES_PRESTADORES_MAX;
-    this.ConsultarSedesPrestador();
+    this.max_Registros= Constants.SEDES_PRESTADORES_MAX;
+    this.consultarSedesPrestador();
   }
 
-  ConsultarSedesPrestador(){
+  consultarSedesPrestador(){
     var datos = JSON.parse( localStorage.getItem( "SSE" ) );
     this.sede= {idRegistro: 0, nitPrestador: datos.numeroDocumentoPrestador, 
                 tipoIdentificacion:datos.tipoDocumentoPrestador, 
                 departamento: '', ciudad: '', direccion: '', sedeprincipal: 'S'};
-    this.sedesservice.ConsultarSedes(this.sede)
+    this.sedesservice.consultarSedes(this.sede)
     .subscribe(
        (result) => {
         this.sedes= result;
@@ -63,7 +63,7 @@ export class SedesComponent implements OnInit {
     )
   }
 
-  onCreate() {
+  crear() {
     localStorage.setItem("sedeprestador", JSON.stringify(this.sede));
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
@@ -73,24 +73,24 @@ export class SedesComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(
       () => 
-      this.ConsultarSedesPrestador()
+      this.consultarSedesPrestador()
   ); 
   }
 
   mostrar(){
-    if(this.ShowTable == false){
-     this.ShowCards=false;
-     this.ShowTable=true;
-     this.IconoMostrar="module";
+    if(this.showTable == false){
+     this.showCards=false;
+     this.showTable=true;
+     this.iconoMostrar="module";
     }
     else{
-     this.ShowCards=true;
-     this.ShowTable=false;
-     this.IconoMostrar="list";
+     this.showCards=true;
+     this.showTable=false;
+     this.iconoMostrar="list";
     }
   }
 
-  editSede(sede: Isedes){
+  editarSede(sede: Isedes){
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
@@ -99,7 +99,7 @@ export class SedesComponent implements OnInit {
     this.dialog.open(ModalsedesComponent, dialogConfig);
   } 
 
-  deleteSede(sede: Isedes){
+  eliminarSede(sede: Isedes){
     this.dialogRef = this.dialog.open(DeleteconfirmmodalComponent, {
       disableClose: false
     });
@@ -107,22 +107,22 @@ export class SedesComponent implements OnInit {
 
     this.dialogRef.afterClosed().subscribe(result => {
       if(result) {
-        this.sedesservice.EliminarSedes(sede).subscribe(
+        this.sedesservice.eliminarSedes(sede).subscribe(
           () => {
-            this.ConsultarSedesPrestador();
+            this.consultarSedesPrestador();
          },
          (error) => {
           this._getError(error);
         }
        )
-        this.ConsultarSedesPrestador();
+        this.consultarSedesPrestador();
         
       }
       this.dialogRef = null;
     });
   }
 
-  deleteSedes(){
+  eliminarSedes(){
     this.sede = this.sedes[0];
     this.dialogRef = this.dialog.open(DeleteconfirmmodalComponent, {
       disableClose: false
@@ -131,15 +131,15 @@ export class SedesComponent implements OnInit {
 
     this.dialogRef.afterClosed().subscribe(result => {
       if(result) {
-        this.sedesservice.EliminarTodasSedes(this.sede).subscribe(
+        this.sedesservice.eliminarTodasSedes(this.sede).subscribe(
           () => {
-            this.ConsultarSedesPrestador();
+            this.consultarSedesPrestador();
          },
          (error) => {
           this._getError(error);
         }
        )
-        this.ConsultarSedesPrestador();
+        this.consultarSedesPrestador();
         
       }
       this.dialogRef = null;
@@ -151,16 +151,16 @@ export class SedesComponent implements OnInit {
     this.page_number= e.pageIndex + 1;
   }
 
-  UsarFiltro(){
-    if(this.ShowFilter == false){
-      this.ShowFilter = true;
-      this.UseFilter = true;
-      this.IconoFilter="close";
+  usarFiltro(){
+    if(this.showFilter == false){
+      this.showFilter = true;
+      this.useFilter = true;
+      this.iconoFilter="close";
      }
      else{
-      this.ShowFilter = false;
-      this.UseFilter = false;
-      this.IconoFilter = "filter_alt";
+      this.showFilter = false;
+      this.useFilter = false;
+      this.iconoFilter = "filter_alt";
      }
   }
 

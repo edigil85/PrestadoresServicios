@@ -17,18 +17,18 @@ import { UtilService } from 'src/app/shared/service/util.service';
 export class CodigohabilitacionComponent implements OnInit {
   Max_Registros: Number;
   dialogRef: MatDialogRef<DeleteconfirmmodalComponent>;
-  ShowCards = true;
-  ShowTable = false;
-  ShowFilter= false;
+  showCards = true;
+  showTable = false;
+  showFilter= false;
   page_size: number = 10;
   page_number: number = 1;
   pageSizeOption = [10, 15, 20, 25];
   codigos: IcodigoHabilitacion[]=[];
   codigo: IcodigoHabilitacion;
-  IconoMostrar="list";
-  IconoFilter ="filter_alt";
+  iconoMostrar="list";
+  iconoFilter ="filter_alt";
   seleccionarTodos = false;
-  UseFilter = false;
+  useFilter = false;
   textoFiltro= '';
   utilService: UtilService;
 
@@ -40,10 +40,10 @@ export class CodigohabilitacionComponent implements OnInit {
 
   ngOnInit(): void {
     this.Max_Registros= Constants.CODIGOSHABILITACION_PRESTADORES_MAX;
-    this.ConsultarCodigosHabilitacion();
+    this.consultarCodigosHabilitacion();
   }
 
-  editCodigo(codigo: IcodigoHabilitacion){
+  editarCodigo(codigo: IcodigoHabilitacion){
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
@@ -53,11 +53,11 @@ export class CodigohabilitacionComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(
       () => 
-      this.ConsultarCodigosHabilitacion()
+      this.consultarCodigosHabilitacion()
   ); 
   } 
 
-  deleteCodigo(codigo: IcodigoHabilitacion){
+  eliminarCodigo(codigo: IcodigoHabilitacion){
     this.dialogRef = this.dialog.open(DeleteconfirmmodalComponent, {
       disableClose: false
     });
@@ -65,9 +65,9 @@ export class CodigohabilitacionComponent implements OnInit {
 
     this.dialogRef.afterClosed().subscribe(result => {
       if(result) {
-        this.service.EliminarCodigoHabilitacion(codigo).subscribe(
+        this.service.eliminarCodigoHabilitacion(codigo).subscribe(
           () => {
-            this.ConsultarCodigosHabilitacion();
+            this.consultarCodigosHabilitacion();
          },
          (error) => {
           this._getError(error);
@@ -77,7 +77,7 @@ export class CodigohabilitacionComponent implements OnInit {
     });
   }
 
-  deleteCodigos(
+  eliminarCodigos(
   ){
     this.codigo=this.codigos[0];
 
@@ -88,9 +88,9 @@ export class CodigohabilitacionComponent implements OnInit {
 
     this.dialogRef.afterClosed().subscribe(result => {
       if(result) {
-        this.service.EliminarTodosCodigosHabilitacion(this.codigo).subscribe(
+        this.service.eliminarTodosCodigosHabilitacion(this.codigo).subscribe(
           () => {
-            this.ConsultarCodigosHabilitacion();
+            this.consultarCodigosHabilitacion();
          },
          (error) => {
           this._getError(error);
@@ -100,12 +100,12 @@ export class CodigohabilitacionComponent implements OnInit {
     });
   }
 
-  ConsultarCodigosHabilitacion(){
+  consultarCodigosHabilitacion(){
     var datos = JSON.parse( localStorage.getItem( "SSE" ) );
     this.codigo= {nitPrestador: datos.numeroDocumentoPrestador, 
                 tipoIdentificacion:datos.tipoDocumentoPrestador, 
                 codigoHabilitacion:'', descripcionServicio:''};
-    this.service.ConsultarCodigoHabilitacion(this.codigo)
+    this.service.consultarCodigoHabilitacion(this.codigo)
     .subscribe(
        (result) => {
         this.codigos= result;
@@ -115,7 +115,7 @@ export class CodigohabilitacionComponent implements OnInit {
       )
   }
 
-  onCreate() {
+  crear() {
     var datos = JSON.parse( localStorage.getItem( "SSE" ) );
     this.codigo= {nitPrestador: datos.numeroDocumentoPrestador, 
       tipoIdentificacion:datos.tipoDocumentoPrestador, 
@@ -129,7 +129,7 @@ export class CodigohabilitacionComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(
       () => 
-      this.ConsultarCodigosHabilitacion()
+      this.consultarCodigosHabilitacion()
   ); 
   }
 
@@ -139,28 +139,28 @@ export class CodigohabilitacionComponent implements OnInit {
   }
 
   UsarFiltro(){
-    if(this.ShowFilter == false){
-      this.ShowFilter = true;
-      this.UseFilter = true;
-      this.IconoFilter="close";
+    if(this.showFilter == false){
+      this.showFilter = true;
+      this.useFilter = true;
+      this.iconoFilter="close";
      }
      else{
-      this.ShowFilter = false;
-      this.UseFilter = false;
-      this.IconoFilter = "filter_alt";
+      this.showFilter = false;
+      this.useFilter = false;
+      this.iconoFilter = "filter_alt";
      }
   }
 
   mostrar(){
-    if(this.ShowTable == false){
-     this.ShowCards=false;
-     this.ShowTable=true;
-     this.IconoMostrar="module";
+    if(this.showTable == false){
+     this.showCards=false;
+     this.showTable=true;
+     this.iconoMostrar="module";
     }
     else{
-     this.ShowCards=true;
-     this.ShowTable=false;
-     this.IconoMostrar="list";
+     this.showCards=true;
+     this.showTable=false;
+     this.iconoMostrar="list";
     }
   }
 

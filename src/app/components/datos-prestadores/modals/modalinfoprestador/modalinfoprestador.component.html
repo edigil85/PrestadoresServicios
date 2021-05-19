@@ -1,10 +1,9 @@
 <mat-toolbar>
-    <span><h3>Información de la sede</h3></span>
+    <h3>Representante legal</h3>
   </mat-toolbar>
   <form [formGroup]="form" class="normal-form" (ngSubmit)="onSubmit()">
-    <mat-grid-list cols="1" rowHeight="75px">
-    <mat-grid-tile>
-        <mat-form-field>
+    <div class="row">
+        <mat-form-field class="descripcion pt-3" appearance="fill">
             <mat-label>Nombre *</mat-label>
             <input matInput placeholder="Juan Felipe Rodas Restrepo" formControlName="representanteLegal"
             [errorStateMatcher]="matcher" onkeyup="javascript:this.value=this.value.toUpperCase();" >
@@ -12,9 +11,9 @@
                 Este campo es <strong>requerido</strong>
               </mat-error>
         </mat-form-field>
-    </mat-grid-tile>
-    <mat-grid-tile>
-        <mat-form-field>
+    </div>
+    <div class="row">
+        <mat-form-field class="descripcion" appearance="fill">
             <mat-label>Correo electronico *</mat-label>
             <input matInput placeholder="juanrestrepo@ips.com.co" formControlName="correoElectronico" appBlockCopyPaste onkeyup="javascript:this.value=this.value.toUpperCase();">
             <mat-error *ngIf="correoElectronico.hasError('maxlength') && !correoElectronico.hasError('required')">
@@ -27,9 +26,9 @@
                 Este campo es <strong>requerido</strong>
               </mat-error>
         </mat-form-field>
-    </mat-grid-tile>
-    <mat-grid-tile>
-        <mat-form-field>
+    </div>
+    <div class="row"> 
+        <mat-form-field class="descripcion" appearance="fill">
             <mat-label>Confirmar Correo electronico *</mat-label>
             <input matInput placeholder="juanrestrepo@ips.com.co" formControlName="correConfirmacion" onkeyup="javascript:this.value=this.value.toUpperCase();"
             [errorStateMatcher]="matcher" appBlockCopyPaste> 
@@ -37,10 +36,9 @@
                 Correos no son iguales
             </mat-error>  
         </mat-form-field>
-    </mat-grid-tile>
-</mat-grid-list>
-<mat-dialog-actions align="end"> 
-      <button mat-raised-button color="warn" mat-dialog-close>Cerrar</button>
-      <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Guardar</button>
-</mat-dialog-actions>
+    </div>
+<div class="button-row text-center pt-3">
+  <button  class="buttonSecundary mr-3" (click)="onClose()">Cerrar</button>
+  <button  [ngClass]="{'buttonDisabledPrimary': form.invalid==true, 'buttonPrimary': form.invalid==false }" type="submit" [disabled]="form.invalid">Guardar</button>
+</div>
   </form>

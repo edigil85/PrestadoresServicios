@@ -16,20 +16,20 @@ import { prefijoFacturacionService } from '../service/prefijoFacturacion.service
   styleUrls: ['./rangofacturacion.component.scss']
 })
 export class RangofacturacionComponent implements OnInit {
-  Max_Registros: Number;
+  max_Registros: Number;
   dialogRef: MatDialogRef<DeleteconfirmmodalComponent>;
-  ShowCards = true;
-  ShowTable = false;
-  ShowFilter= false;
+  showCards = true;
+  showTable = false;
+  showFilter= false;
   page_size: number = 10;
   page_number: number = 1;
   pageSizeOption = [10, 15, 20, 25];
   rangosFacturacion: IprefijoFacturacion[]=[];
   rangoFacturacion: IprefijoFacturacion;
-  IconoMostrar="list";
-  IconoFilter ="filter_alt";
+  iconoMostrar="list";
+  iconoFilter ="filter_alt";
   seleccionarTodos = false;
-  UseFilter = false;
+  useFilter = false;
   textoFiltro= '';
   utilService: UtilService;
 
@@ -42,11 +42,11 @@ export class RangofacturacionComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.Max_Registros= Constants.RANGOSFACTURACION_PRESTADORES_MAX;
-    this.ConsultarPrefijoFacturacion();
+    this.max_Registros= Constants.RANGOSFACTURACION_PRESTADORES_MAX;
+    this.consultarPrefijoFacturacion();
   }
 
-  editPrefijo(prefijo: IprefijoFacturacion){
+  editarPrefijo(prefijo: IprefijoFacturacion){
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
@@ -56,11 +56,11 @@ export class RangofacturacionComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(
       () => 
-      this.ConsultarPrefijoFacturacion()
+      this.consultarPrefijoFacturacion()
   ); 
   } 
 
-  deletePrefijo(prefijo: IprefijoFacturacion){
+  eliminarPrefijo(prefijo: IprefijoFacturacion){
     this.dialogRef = this.dialog.open(DeleteconfirmmodalComponent, {
       disableClose: false
     });
@@ -68,14 +68,14 @@ export class RangofacturacionComponent implements OnInit {
 
     this.dialogRef.afterClosed().subscribe(result => {
       if(result) {
-        this.service.EliminarPrefijoFacturacion(prefijo).subscribe(
+        this.service.eliminarPrefijoFacturacion(prefijo).subscribe(
           () => {
-            this.ConsultarPrefijoFacturacion();
+            this.consultarPrefijoFacturacion();
          },
          (error) => {
           this._getError(error); }
        )
-        this.ConsultarPrefijoFacturacion();
+        this.consultarPrefijoFacturacion();
         
       }
       this.dialogRef = null;
@@ -83,7 +83,7 @@ export class RangofacturacionComponent implements OnInit {
   }
 
   
-  deletePrefijosFacturacion(){
+  eliminarPrefijosFacturacion(){
     this.rangoFacturacion= this.rangosFacturacion[0];
     this.dialogRef = this.dialog.open(DeleteconfirmmodalComponent, {
       disableClose: false
@@ -92,21 +92,21 @@ export class RangofacturacionComponent implements OnInit {
 
     this.dialogRef.afterClosed().subscribe(result => {
       if(result) {
-        this.service.EliminarTodosPrefijosFacturacion(this.rangoFacturacion).subscribe(
+        this.service.eliminarTodosPrefijosFacturacion(this.rangoFacturacion).subscribe(
           () => {
-            this.ConsultarPrefijoFacturacion();
+            this.consultarPrefijoFacturacion();
          },
          (error) => {
           this._getError(error); }
        )
-        this.ConsultarPrefijoFacturacion();
+        this.consultarPrefijoFacturacion();
         
       }
       this.dialogRef = null;
     });
   }
 
-  ConsultarPrefijoFacturacion(){
+  consultarPrefijoFacturacion(){
     var datos = JSON.parse( localStorage.getItem( "SSE" ) );
     this.rangoFacturacion= {idRegistro:0,
       nitPrestador: datos.numeroDocumentoPrestador, 
@@ -119,7 +119,7 @@ export class RangofacturacionComponent implements OnInit {
       rangoFinal:''
     };
 
-    this.service.ConsultarPrefijoFacturacion(this.rangoFacturacion)
+    this.service.consultarPrefijoFacturacion(this.rangoFacturacion)
     .subscribe(
        (result) => {
         this.rangosFacturacion= result;
@@ -129,7 +129,7 @@ export class RangofacturacionComponent implements OnInit {
     )
   }
 
-  onCreate() {
+  crear() {
     var datos = JSON.parse( localStorage.getItem( "SSE" ) );
     this.rangoFacturacion= {idRegistro:0,
       nitPrestador: datos.numeroDocumentoPrestador, 
@@ -150,7 +150,7 @@ export class RangofacturacionComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(
       () => 
-      this.ConsultarPrefijoFacturacion()
+      this.consultarPrefijoFacturacion()
   ); 
   }
 
@@ -159,29 +159,29 @@ export class RangofacturacionComponent implements OnInit {
     this.page_number= e.pageIndex + 1;
   }
 
-  UsarFiltro(){
-    if(this.ShowFilter == false){
-      this.ShowFilter = true;
-      this.UseFilter = true;
-      this.IconoFilter="close";
+  usarFiltro(){
+    if(this.showFilter == false){
+      this.showFilter = true;
+      this.useFilter = true;
+      this.iconoFilter="close";
      }
      else{
-      this.ShowFilter = false;
-      this.UseFilter = false;
-      this.IconoFilter = "filter_alt";
+      this.showFilter = false;
+      this.useFilter = false;
+      this.iconoFilter = "filter_alt";
      }
   }
 
   mostrar(){
-    if(this.ShowTable == false){
-     this.ShowCards=false;
-     this.ShowTable=true;
-     this.IconoMostrar="module";
+    if(this.showTable == false){
+     this.showCards=false;
+     this.showTable=true;
+     this.iconoMostrar="module";
     }
     else{
-     this.ShowCards=true;
-     this.ShowTable=false;
-     this.IconoMostrar="list";
+     this.showCards=true;
+     this.showTable=false;
+     this.iconoMostrar="list";
     }
   }
 

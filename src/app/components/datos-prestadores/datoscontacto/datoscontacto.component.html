@@ -5,16 +5,16 @@
     <img src='assets\Imagenes\img-prestadores.svg'>
   </section>
 
-  <div *ngIf="ShowCards && contactos.length>0">
+  <div *ngIf="showCards && contactos.length>0">
     <div  class="row" >
       <div class="col-lg-6 pt-3" >
         <mat-checkbox class="example-margin" [(ngModel)]="seleccionarTodos">Seleccionar todos</mat-checkbox>
-        <button *ngIf="seleccionarTodos" style="position: relative;top: -6px;" mat-icon-button class="m-0" (click)="deleteContactos()">
+        <button *ngIf="seleccionarTodos" style="position: relative;top: -6px;" mat-icon-button class="m-0" (click)="eliminarContactos()">
           <i class="far fa-trash-alt iconos-busqueda "></i>
         </button>
       </div>
       <div class="col-lg-6 text-right ">
-        <span *ngIf="UseFilter">
+        <span *ngIf="useFilter">
           <mat-form-field class="example-form-field" class="input-busqueda" >
             <mat-label>Ingresar nombre, correo o teléfono</mat-label>
             <input matInput type="text" [(ngModel)]="textoFiltro">
@@ -23,7 +23,7 @@
             </button>
           </mat-form-field>
         </span>
-        <button mat-icon-button (click)="UsarFiltro()">
+        <button mat-icon-button (click)="usarFiltro()">
           <i class="fas fa-filter  iconos-busqueda"></i></button>
         <button mat-icon-button (click)="mostrar()"><i class="fas fa-list iconos-busqueda"></i></button>
       </div>
@@ -75,8 +75,8 @@
     
       </mat-card-content>
       <mat-card-actions align="end">
-        <button mat-icon-button (click)="editContacto(contacto)"><i class="fas fa-edit iconos"></i></button>
-        <button mat-icon-button (click)="deleteContacto(contacto)"><i class="far fa-trash-alt iconos"></i></button>
+        <button mat-icon-button (click)="editarContacto(contacto)"><i class="fas fa-edit iconos"></i></button>
+        <button mat-icon-button (click)="eliminarContacto(contacto)"><i class="far fa-trash-alt iconos"></i></button>
       </mat-card-actions>
     </mat-card>
     </div>
@@ -89,16 +89,16 @@
   </mat-paginator>
   </div>
 
-  <div *ngIf="ShowTable && contactos.length>0">
+  <div *ngIf="showTable && contactos.length>0">
     <div  class="row" >
       <div class="col-lg-6 pt-3" >
         <mat-checkbox class="example-margin" [(ngModel)]="seleccionarTodos">Seleccionar todos</mat-checkbox>
-        <button *ngIf="seleccionarTodos" style="position: relative;top: -6px;" mat-icon-button class="m-0" (click)="deleteContactos()">
+        <button *ngIf="seleccionarTodos" style="position: relative;top: -6px;" mat-icon-button class="m-0" (click)="eliminarContactos()">
           <i class="far fa-trash-alt iconos-busqueda "></i>
         </button>
       </div>
       <div class="col-lg-6 text-right ">
-        <span *ngIf="UseFilter">
+        <span *ngIf="useFilter">
           <mat-form-field class="example-form-field" class="input-busqueda" >
             <mat-label>Ingresar nombre, correo o teléfono</mat-label>
             <input matInput type="text" [(ngModel)]="textoFiltro">
@@ -107,7 +107,7 @@
             </button>
           </mat-form-field>
         </span>
-        <button mat-icon-button (click)="UsarFiltro()">
+        <button mat-icon-button (click)="usarFiltro()">
           <i class="fas fa-filter  iconos-busqueda"></i></button>
         <button mat-icon-button (click)="mostrar()"> <i class="fas fa-th-list iconos-busqueda"></i></button>
       </div>
@@ -144,8 +144,8 @@
               </table>
             </div>
             <div class="col-3 text-right">
-              <button mat-icon-button (click)="editContacto(contacto)"><i class="fas fa-edit iconos"></i></button>
-              <button mat-icon-button (click)="deleteContacto(contacto)"><i class="far fa-trash-alt iconos"></i></button>
+              <button mat-icon-button (click)="editarContacto(contacto)"><i class="fas fa-edit iconos"></i></button>
+              <button mat-icon-button (click)="eliminarContacto(contacto)"><i class="far fa-trash-alt iconos"></i></button>
             </div>
           </div>
         </div>
@@ -163,6 +163,6 @@
 
   <div class="flotante">
     <div class="redes">
-      <button mat-fab color="primary" (click)="onCreate()"><span class="material-icons">add</span></button>
+      <button mat-fab color="primary" (click)="crear()"><span class="material-icons">add</span></button>
     </div>
   </div>

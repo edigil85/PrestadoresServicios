@@ -44,7 +44,7 @@ export class ModalcodigohabilitacionComponent implements OnInit {
     else{
       this.modificarCodigo= false;
     }
-    this.DatosFormGroup(this.codigoHabilitacion.codigoHabilitacion, this.codigoHabilitacion.descripcionServicio);
+    this.datosFormGroup(this.codigoHabilitacion.codigoHabilitacion, this.codigoHabilitacion.descripcionServicio);
   }
 
   onSubmit() {
@@ -58,7 +58,7 @@ export class ModalcodigohabilitacionComponent implements OnInit {
       if(this.codigoHabilitacion.codigoHabilitacion == '' && this.codigoHabilitacion.descripcionServicio == '' ){
         this.codigoHabilitacion.codigoHabilitacion = this.form.get('codigo'). value;
         this.codigoHabilitacion.descripcionServicio = this.form.get('descripcion'). value;
-        this.service.InsertarCodigoHabilitacion(this.codigoHabilitacion).subscribe(
+        this.service.insertarCodigoHabilitacion(this.codigoHabilitacion).subscribe(
           () => {
            this.dialogRef.close();
          }
@@ -67,7 +67,7 @@ export class ModalcodigohabilitacionComponent implements OnInit {
       }
       else{
         this.codigoHabilitacion.descripcionServicio = this.form.get('descripcion'). value;
-        this.service.ActualizarCodigoHabilitacion(this.codigoHabilitacion).subscribe(
+        this.service.actualizarCodigoHabilitacion(this.codigoHabilitacion).subscribe(
           () => {
            this.dialogRef.close();
          }
@@ -78,7 +78,7 @@ export class ModalcodigohabilitacionComponent implements OnInit {
 
   }
 
-  DatosFormGroup(codigo: String, descripcion: String ){
+  datosFormGroup(codigo: String, descripcion: String ){
     this.form.patchValue({
       codigo: codigo,
       descripcion: descripcion

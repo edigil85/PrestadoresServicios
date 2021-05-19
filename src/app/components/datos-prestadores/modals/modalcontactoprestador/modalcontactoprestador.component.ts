@@ -48,7 +48,7 @@ export class ModalcontactoprestadorComponent implements OnInit {
     this.IniContactoPrestador= JSON.parse(localStorage.getItem('contactoPrestador'));
     this.FinalContactoPrestador= JSON.parse(localStorage.getItem('contactoPrestador'));
     localStorage.removeItem('contactoPrestador');
-    this.DatosFormGroup(this.IniContactoPrestador.emailNotificacion,
+    this.datosFormGroup(this.IniContactoPrestador.emailNotificacion,
       this.IniContactoPrestador.nombre,
       this.IniContactoPrestador.telefono);
     if (this.IniContactoPrestador.notificacionGlosa=='S'){
@@ -74,17 +74,17 @@ export class ModalcontactoprestadorComponent implements OnInit {
 
   onSubmit() {
     //Capturar los valores en FinalContactoPrestador
-    this.CapturarFormulario();
+    this.capturarFormulario();
 
 
-    if (this.CompararContactos()
+    if (this.compararContactos()
       )
      {
       this.dialogRef.close();
     }
      else{
       if(this.IniContactoPrestador.nombre=='' && this.IniContactoPrestador.emailNotificacion =='' && this.IniContactoPrestador.telefono == ''){
-        this.service.InsertarContactoPrestador(this.FinalContactoPrestador).subscribe(
+        this.service.insertarContactoPrestador(this.FinalContactoPrestador).subscribe(
           () => {
            this.dialogRef.close();
          }
@@ -92,7 +92,7 @@ export class ModalcontactoprestadorComponent implements OnInit {
        
       }
       else{
-        this.service.ActualizarContactoPrestador(this.FinalContactoPrestador).subscribe(
+        this.service.actualizarContactoPrestador(this.FinalContactoPrestador).subscribe(
           () => {
            this.dialogRef.close();
          }
@@ -103,7 +103,7 @@ export class ModalcontactoprestadorComponent implements OnInit {
 
   }
 
-  DatosFormGroup(emailNotificacion: String, nombre: String, telefono: String ){
+  datosFormGroup(emailNotificacion: String, nombre: String, telefono: String ){
     this.form.patchValue({
       emailNotificacion: emailNotificacion,
       correConfirmacion: emailNotificacion,
@@ -125,13 +125,13 @@ export class ModalcontactoprestadorComponent implements OnInit {
     });
   }
 
-  CapturarFormulario(){
+  capturarFormulario(){
     this.FinalContactoPrestador.nombre= this.form.get('nombre').value;
     this.FinalContactoPrestador.emailNotificacion= this.form.get('emailNotificacion').value;
     this.FinalContactoPrestador.telefono= this.form.get('telefono').value;
   }
 
-  CompararContactos(): boolean{
+  compararContactos(): boolean{
     if (
       this.IniContactoPrestador.nombre == this.FinalContactoPrestador.nombre 
       && this.IniContactoPrestador.telefono == this.FinalContactoPrestador.telefono 

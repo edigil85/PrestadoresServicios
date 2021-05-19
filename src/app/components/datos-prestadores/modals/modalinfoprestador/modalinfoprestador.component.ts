@@ -18,7 +18,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 @Component({
   selector: 'app-modalinfoprestador',
   templateUrl: './modalinfoprestador.component.html',
-  styleUrls: ['./modalinfoprestador.component.css']
+  styleUrls: ['./modalinfoprestador.component.scss']
 })
 
 export class ModalinfoprestadorComponent implements OnInit {
@@ -42,7 +42,7 @@ export class ModalinfoprestadorComponent implements OnInit {
 
   ngOnInit(): void {
     this.infoPrestador = JSON.parse( localStorage.getItem( "infoPrestador" ) );
-    this.DatosFormGroup(this.infoPrestador.representanteLegal, this.infoPrestador.emailReperesentantelegal);
+    this.datosFormGroup(this.infoPrestador.representanteLegal, this.infoPrestador.emailReperesentantelegal);
     localStorage.removeItem("infoPrestador");
 
 
@@ -64,7 +64,7 @@ export class ModalinfoprestadorComponent implements OnInit {
     });
   }
 
-  DatosFormGroup(nombreRepresentantelegal: String, correoElectronico: String){
+  datosFormGroup(nombreRepresentantelegal: String, correoElectronico: String){
     this.form.setValue({
       representanteLegal: nombreRepresentantelegal,
       correoElectronico: correoElectronico,
@@ -87,7 +87,7 @@ export class ModalinfoprestadorComponent implements OnInit {
       if(this.infoPrestador.representanteLegal == '' && this.infoPrestador.emailReperesentantelegal == ''){
         this.infoPrestador.representanteLegal = this.form.get('representanteLegal').value;
         this.infoPrestador.emailReperesentantelegal = this.form.get('correoElectronico'). value;
-        this.infoPrestadoresService.InsertarInfoPrestador(this.infoPrestador).subscribe(
+        this.infoPrestadoresService.insertarInfoPrestador(this.infoPrestador).subscribe(
           () => {
            this.dialogRef.close();
          }
@@ -97,7 +97,7 @@ export class ModalinfoprestadorComponent implements OnInit {
       else{
         this.infoPrestador.representanteLegal = this.form.get('representanteLegal').value;
         this.infoPrestador.emailReperesentantelegal = this.form.get('correoElectronico'). value;
-        this.infoPrestadoresService.ActualizarInfoPrestador(this.infoPrestador).subscribe(
+        this.infoPrestadoresService.actualizarInfoPrestador(this.infoPrestador).subscribe(
           () => {
            this.dialogRef.close();
          }
