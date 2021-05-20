@@ -4,6 +4,7 @@ import { FormGroup, FormControl, FormGroupDirective, Validators, ValidatorFn, Ng
 import { ErrorStateMatcher } from '@angular/material/core';
 import { IinfoPrestadores } from '../../model/infoPrestador';
 import { infoPrestadoresService} from '../../service/infoPrestador.service'
+import { IdatosPrestador } from '../../model/datosprestador';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -25,6 +26,7 @@ export class ModalinfoprestadorComponent implements OnInit {
    emailpattern ='(^[\\-_a-zA-Z0-9]+(\\.[\\-_a-zA-Z0-9]+)*@[a-zA-z0-9-]+(\\.[a-zA-Z0-9-]+)*(\\.[a-zA-Z]{2,4})$)|(^$)';
   form : FormGroup;
   infoPrestador: IinfoPrestadores;
+  datosPrestador: IdatosPrestador;
   matcher = new MyErrorStateMatcher();
 
 
@@ -44,13 +46,9 @@ export class ModalinfoprestadorComponent implements OnInit {
     this.infoPrestador = JSON.parse( localStorage.getItem( "infoPrestador" ) );
     this.datosFormGroup(this.infoPrestador.representanteLegal, this.infoPrestador.emailReperesentantelegal);
     localStorage.removeItem("infoPrestador");
-
-
-    //this.form.valueChanges.subscribe();
-      
   }
 
-  checkEmail(group: FormGroup) { // here we have the 'passwords' group
+  checkEmail(group: FormGroup) {
     let pass = group.controls.correoElectronico.value;
     let confirmPass = group.controls.correConfirmacion.value;
     return pass === confirmPass ? null : { NoMacth: true }
@@ -85,6 +83,9 @@ export class ModalinfoprestadorComponent implements OnInit {
     }
      else{
       if(this.infoPrestador.representanteLegal == '' && this.infoPrestador.emailReperesentantelegal == ''){
+        this.infoPrestador.nitPrestador= this.datosPrestador.numeroDocumentoPrestador;
+        this.infoPrestador.tipoIdentificacion= this.datosPrestador.tipoDocumentoPrestador;
+        this.infoPrestador.razonSocial= this.datosPrestador.razonSocial;
         this.infoPrestador.representanteLegal = this.form.get('representanteLegal').value;
         this.infoPrestador.emailReperesentantelegal = this.form.get('correoElectronico'). value;
         this.infoPrestadoresService.insertarInfoPrestador(this.infoPrestador).subscribe(

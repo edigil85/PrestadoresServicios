@@ -126,9 +126,9 @@ export class DatoscontactoComponent implements OnInit {
     this.contacto= {idRegistro:'0',
     nitPrestador: datos.numeroDocumentoPrestador, 
     tipoIdentificacion:datos.tipoDocumentoPrestador, 
-    notificacionGlosa:'',
-    notificacionDevoluciones:'',
-    notificacionCartera:'',
+    notificacionGlosa:'N',
+    notificacionDevoluciones:'N',
+    notificacionCartera:'N',
     emailNotificacion:'',
     nombre:'',
     telefono:''};
