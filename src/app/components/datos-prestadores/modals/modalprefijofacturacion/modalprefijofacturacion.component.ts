@@ -34,11 +34,11 @@ export class ModalprefijofacturacionComponent implements OnInit {
   ) { 
     this.form = this.formBuilder.group({
       prefijoFacturacion: new FormControl('', [Validators.required, Validators.maxLength(10)]),
-      rangoInicial: new FormControl('', Validators.required),
-      rangoFinal: new FormControl('', Validators.required),
+      rangoInicial: new FormControl('', [Validators.required, Validators.min(0)]),
+      rangoFinal: new FormControl('', [Validators.required, Validators.min(0)]),
       fechaInicial: new FormControl('', Validators.required),
       fechaFinal: new FormControl('', Validators.required),
-    }, { validator: this.checkRangos });
+    }, { validator: this.checkRangos});
   }
 
   ngOnInit(): void {
@@ -57,6 +57,7 @@ export class ModalprefijofacturacionComponent implements OnInit {
       this.remplazarMes_Es_En(this.prefijoFacturacion.fechaFinal.toString())
       );
     this.fechaminima = this.form.get("fechaInicial").value;
+    this.fechaminima.setDate(this.fechaminima.getDate()+100);
   }
 
   onSubmit() {
@@ -116,6 +117,8 @@ export class ModalprefijofacturacionComponent implements OnInit {
     return min < max ? null : { NoMacth: true }
   }
 
+
+
   onClose() {
     this.form.reset();
     this.initializeFormGroup();
@@ -134,7 +137,7 @@ export class ModalprefijofacturacionComponent implements OnInit {
 
   cambioDia(){
     this.fechaminima = this.form.get("fechaInicial").value;
-    this.fechaminima.setDate(this.fechaminima.getDate()+1);
+    this.fechaminima.setDate(this.fechaminima.getDate()+100);
   }
 
    remplazarMes_En_Es(fecha:String):String {

@@ -28,7 +28,7 @@
                 <mat-error *ngIf="emailNotificacion.hasError('maxlength') && !emailNotificacion.hasError('required')">
                     Supera el maximo de caracteres (80)
                 </mat-error>
-                <mat-error *ngIf="emailNotificacion.hasError('pattern') && !emailNotificacion.hasError('required')">
+                <mat-error *ngIf="emailNotificacion.hasError('pattern') && !emailNotificacion.hasError('required') && !emailNotificacion.hasError('maxlength')">
                      Por favir ingrese un correo valido
                 </mat-error>
                 <mat-error *ngIf="emailNotificacion.hasError('required')">

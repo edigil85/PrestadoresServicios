@@ -21,16 +21,22 @@
           <div class="row">
             <mat-form-field class="ml-2" appearance="fill">
               <mat-label>Rango Inicial *</mat-label>
-              <input  matInput type="number" formControlName="rangoInicial" >
+              <input  matInput type="number" min="0" formControlName="rangoInicial" >
+              <mat-error *ngIf="rangoInicial.hasError('min') && !rangoInicial.hasError('required')">
+                No puede ser menor que cero
+            </mat-error>  
               <mat-error *ngIf="rangoInicial.hasError('required')">
                   Este campo es <strong>requerido</strong>
               </mat-error>
           </mat-form-field>
               <mat-form-field class="ml-2" appearance="fill">
                 <mat-label>Rango Final *</mat-label>
-              <input matInput type="number" formControlName="rangoFinal" 
+              <input matInput type="number" min="0" formControlName="rangoFinal" 
               [errorStateMatcher]="matcher">
-                <mat-error *ngIf="form.hasError('NoMacth')">
+                  <mat-error *ngIf="rangoFinal.hasError('min') && !rangoFinal.hasError('required')">
+                    No puede ser menor que cero
+                  </mat-error>  
+                <mat-error *ngIf="form.hasError('NoMacth') && !rangoFinal.hasError('required')">
                     Rango final debe ser mayor a rango inicial
                 </mat-error>  
               <mat-error *ngIf="rangoFinal.hasError('required')">
@@ -89,6 +95,9 @@
         <mat-form-field class="ml-2" appearance="fill">
           <mat-label>Rango Inicial *</mat-label>
           <input readonly matInput type="number" formControlName="rangoInicial" >
+          <mat-error *ngIf="rangoInicial.hasError('min') && !rangoInicial.hasError('required')">
+            No puede ser menor que cero
+        </mat-error>  
           <mat-error *ngIf="rangoInicial.hasError('required')">
               Este campo es <strong>requerido</strong>
           </mat-error>
@@ -97,12 +106,15 @@
             <mat-label>Rango Final *</mat-label>
           <input matInput type="number" formControlName="rangoFinal" 
           [errorStateMatcher]="matcher">
-            <mat-error *ngIf="form.hasError('NoMacth')">
-                Rango final debe ser mayor a rango inicial
-            </mat-error>  
-          <mat-error *ngIf="rangoFinal.hasError('required')">
-              Este campo es <strong>requerido</strong>
-          </mat-error>
+          <mat-error *ngIf="rangoFinal.hasError('min') && !rangoFinal.hasError('required')">
+            No puede ser menor que cero
+          </mat-error>  
+        <mat-error *ngIf="form.hasError('NoMacth') && !rangoFinal.hasError('required')">
+            Rango final debe ser mayor a rango inicial
+        </mat-error>  
+      <mat-error *ngIf="rangoFinal.hasError('required')">
+          Este campo es <strong>requerido</strong>
+      </mat-error>
           </mat-form-field>
       </div>
     </div>
