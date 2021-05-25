@@ -96,7 +96,12 @@ export class SedesComponent implements OnInit {
     dialogConfig.autoFocus = true;
     dialogConfig.width = "40%";
     localStorage.setItem('sedeprestador', JSON.stringify(sede));
-    this.dialog.open(ModalsedesComponent, dialogConfig);
+    const dialogRef = this.dialog.open(ModalsedesComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(
+      () => 
+      this.consultarSedesPrestador()
+  ); 
   } 
 
   eliminarSede(sede: Isedes){

@@ -52,7 +52,6 @@ export class ModalsedesComponent implements OnInit {
       this.obtenerDepartamento();
       this.saberdepartamento(this.sede.departamento);
       this.datosFormGroup(this.sede.idRegistro,this.selectedDepartamento,this.sede.ciudad,this.sede.direccion);
-      //this.obtenerCiudad();
     }
   }
   datosFormGroup(idregistro: Number, departamento: Idepartamento, ciudad: String, direccion: String){
@@ -64,30 +63,25 @@ export class ModalsedesComponent implements OnInit {
     });
   }
  
-
-  initializeFormGroup() {
-    this.form.setValue({
-      idregistro: '',
-      departamentoseleccionado: '',
-      ciudad: '',
-      direccion: '',
-    });
-  }
-
   saberdepartamento(departamento: String){
    this.utilService.getDepeartamento()
    .subscribe(data=>{
     this.selectedDepartamento = data.find(item=> item.nombreDepartamento==departamento)
+    this.obtenerCiudad(this.selectedDepartamento);
+    this.form.patchValue({
+      departamentoseleccionado: this.selectedDepartamento,
+    });
+    this.showCiudad=true;
    });
       (error) => console.error(error)
     ;
-    console.log(this.selectedDepartamento);
-      this.obtenerCiudad();
   }
 
+  compareFn (departamento1: Idepartamento, departamento2: Idepartamento) { 
+    return departamento1 && departamento2? departamento1.codigoDepartamento === departamento2.codigoDepartamento: departamento1 === departamento2; 
+}
+
   onClose() {
-    this.form.reset();
-    this.initializeFormGroup();
     this.dialogRef.close();
   }
 
@@ -114,7 +108,7 @@ export class ModalsedesComponent implements OnInit {
       else{
         this.selectedDepartamento = this.form.get('departamentoseleccionado').value;
         this.sede.departamento = this.selectedDepartamento.nombreDepartamento;
-        this.sede.direccion = this.form.get('correoEleciudadctronico'). value;
+        this.sede.direccion = this.form.get('direccion'). value;
         this.sede.ciudad = this.form.get('ciudad'). value;
         this.sedesservice.actualizarSedes(this.sede).subscribe(
           () => {
@@ -136,8 +130,8 @@ export class ModalsedesComponent implements OnInit {
     );
   }
 
-  obtenerCiudad(){
-    this.utilService.getCiudad(this.selectedDepartamento).subscribe((response:any) => {
+  obtenerCiudad(departamento: Idepartamento){
+    this.utilService.getCiudad(departamento).subscribe((response:any) => {
       this.listciudades = response.body;
       },
       (error) => console.error(error)
@@ -146,7 +140,7 @@ export class ModalsedesComponent implements OnInit {
 
   onSelectDepartamento():void{
     this.selectedDepartamento = this.form.get('departamentoseleccionado').value;
-    this.obtenerCiudad();
+    this.obtenerCiudad(this.selectedDepartamento);
     this.showCiudad = true;
   }
 
