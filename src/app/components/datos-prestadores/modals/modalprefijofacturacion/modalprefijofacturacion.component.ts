@@ -38,7 +38,7 @@ export class ModalprefijofacturacionComponent implements OnInit {
       rangoFinal: new FormControl('', [Validators.required, Validators.min(0)]),
       fechaInicial: new FormControl('', Validators.required),
       fechaFinal: new FormControl('', Validators.required),
-    }, { validator: this.checkRangos});
+    }, { validators: [this.checkRangos, this.checkFecha]});
   }
 
   ngOnInit(): void {
@@ -56,13 +56,13 @@ export class ModalprefijofacturacionComponent implements OnInit {
       this.remplazarMes_Es_En(this.prefijoFacturacion.fechaInicial.toString()),
       this.remplazarMes_Es_En(this.prefijoFacturacion.fechaFinal.toString())
       );
-    this.fechaminima = this.form.get("fechaInicial").value;
-    this.fechaminima.setDate(this.fechaminima.getDate()+100);
+      this.fechaminima= new Date((this.form.get("fechaInicial").value));
+      this.fechaminima.setDate(this.fechaminima.getDate()+100);
   }
 
   onSubmit() {
     if (this.form.get('fechaFinal').value == this.remplazarMes_Es_En(this.prefijoFacturacion.fechaFinal)
-      
+      && this.form.get('rangoFinal').value == this.remplazarMes_Es_En(this.prefijoFacturacion.rangoFinal)
       )
      {
       this.dialogRef.close();
@@ -117,44 +117,40 @@ export class ModalprefijofacturacionComponent implements OnInit {
     return min < max ? null : { NoMacth: true }
   }
 
+  checkFecha(group: FormGroup) { 
+    let min = group.controls.fechaInicial.value;
+    let max = group.controls.fechaFinal.value;
+    return min < max ? null : { NoFecha: true }
+  }
+
 
 
   onClose() {
-    this.form.reset();
-    this.initializeFormGroup();
     this.dialogRef.close();
   }
 
-  initializeFormGroup() {
-    this.form.setValue({
-      prefijoFacturacion: '',
-      rangoInicial:'',
-      rangoFinal:'',
-      fechaInicial: '',
-      fechaFinal: ''
-    });
-  }
-
   cambioDia(){
-    this.fechaminima = this.form.get("fechaInicial").value;
+    this.fechaminima= new Date((this.form.get("fechaInicial").value));
     this.fechaminima.setDate(this.fechaminima.getDate()+100);
   }
+
+
 
    remplazarMes_En_Es(fecha:String):String {
     var result: String
     var mes: String = fecha.substr(0,3);
     switch (mes){
       case 'Jan':
-      result = fecha.replace('Jan','Ene');
+      result = fecha.replace('Jan','ene');
       break;
       case 'Apr':
-      result = fecha.replace('Apr','Abr');
+      result = fecha.replace('Apr','abr');
       break;
       case 'Aug':
-      result = fecha.replace('Aug','Ago');
+      result = fecha.replace('Aug','ago');
       break;
       case 'Dec':
-      result = fecha.replace('Dec','Dic');
+      result = fecha.replace('Dec','dic');
       break;
       default:
         result= fecha;
