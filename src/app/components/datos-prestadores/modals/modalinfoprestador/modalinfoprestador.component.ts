@@ -14,6 +14,44 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   }
 }
 
+export function matchOtherValidator (otherControlName: string) {
+
+  let thisControl: FormControl;
+  let otherControl: FormControl;
+
+  return function matchOtherValidate (control: FormControl) {
+
+    if (!control.parent) {
+      return null;
+    }
+
+    if (!thisControl) {
+      thisControl = control;
+      otherControl = control.parent.get(otherControlName) as FormControl;
+      if (!otherControl) {
+        throw new Error('matchOtherValidator(): other control is not found in parent group');
+      }
+      otherControl.valueChanges.subscribe(() => {
+        thisControl.updateValueAndValidity();
+      });
+    }
+
+    if (!otherControl) {
+      return null;
+    }
+
+    if (otherControl.value !== thisControl.value) {
+      return {
+        matchOther: true
+      };
+    }
+
+    return null;
+
+  }
+
+}
+
 
 
 @Component({
@@ -28,6 +66,7 @@ export class ModalinfoprestadorComponent implements OnInit {
   infoPrestador: IinfoPrestadores;
   datosPrestador: IdatosPrestador;
   matcher = new MyErrorStateMatcher();
+  accionValida: boolean=true;
 
 
   constructor(
@@ -35,23 +74,17 @@ export class ModalinfoprestadorComponent implements OnInit {
     private infoPrestadoresService: infoPrestadoresService,
     private formBuilder: FormBuilder){
       this.form = this.formBuilder.group({
-        representanteLegal: ['', [Validators.required]],
-        correoElectronico: ['', [Validators.required, Validators.maxLength(80), Validators.pattern(this.emailpattern)]],
-        correConfirmacion: [''] 
-      }, { validator: this.checkEmail }); 
-
+        representanteLegal: new FormControl('', [Validators.required]),
+        correoElectronico: new FormControl('', [Validators.required, Validators.maxLength(80), Validators.pattern(this.emailpattern)]),
+        correConfirmacion: new FormControl('', [Validators.required,  matchOtherValidator('correoElectronico')])
+      }); 
   }
+
 
   ngOnInit(): void {
     this.infoPrestador = JSON.parse( localStorage.getItem( "infoPrestador" ) );
     this.datosFormGroup(this.infoPrestador.representanteLegal, this.infoPrestador.emailReperesentantelegal);
     localStorage.removeItem("infoPrestador");
-  }
-
-  checkEmail(group: FormGroup) {
-    let pass = group.controls.correoElectronico.value;
-    let confirmPass = group.controls.correConfirmacion.value;
-    return pass === confirmPass ? null : { NoMacth: true }
   }
 
   initializeFormGroup() {
@@ -71,10 +104,13 @@ export class ModalinfoprestadorComponent implements OnInit {
   }
 
   onClose() {
+    this.accionValida=false;
     this.dialogRef.close();
   }
 
   onSubmit() {
+    if(this.accionValida){
+
     if (this.form.get('representanteLegal').value == this.infoPrestador.representanteLegal
       && this.form.get('correoElectronico'). value == this.infoPrestador.emailReperesentantelegal
       )
@@ -106,7 +142,7 @@ export class ModalinfoprestadorComponent implements OnInit {
        
       }
      }
-
+    }
   }
 
   get representanteLegal() { return this.form.get('representanteLegal');}

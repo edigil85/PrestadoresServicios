@@ -12,7 +12,7 @@
               Este campo es <strong>requerido</strong>
           </mat-error>
           </mat-form-field>
-          <i class="fas fa-info-circle iconos" title="Dato alfanumerico asignado por la DIAN"></i>
+          <i class="fas fa-info-circle iconos" title="Dato alfanumérico asignado por la DIAN para el rango de numeración de las facturas"></i>
         </div>
 
       <div class="row">
@@ -21,7 +21,11 @@
           <div class="row">
             <mat-form-field class="ml-2" appearance="fill">
               <mat-label>Rango Inicial *</mat-label>
-              <input  matInput type="number" min="0" formControlName="rangoInicial" >
+              <input  matInput type="number" min="0" maxlength="30" #rangoini formControlName="rangoInicial" >
+              <mat-hint align="end">{{rangoini.value.length}} / 30</mat-hint>
+              <mat-error *ngIf="rangoInicial.hasError('maxmin') && !rangoInicial.hasError('required')">
+                Rango inicial debe ser menor a rango final
+            </mat-error>  
               <mat-error *ngIf="rangoInicial.hasError('min') && !rangoInicial.hasError('required')">
                 No puede ser menor que cero
             </mat-error>  
@@ -31,12 +35,12 @@
           </mat-form-field>
               <mat-form-field class="ml-2" appearance="fill">
                 <mat-label>Rango Final *</mat-label>
-              <input matInput type="number" min="0" formControlName="rangoFinal" 
-              [errorStateMatcher]="matcher">
+              <input matInput type="number" min="0" maxlength="30" #rangofin formControlName="rangoFinal">
+              <mat-hint align="end">{{rangofin.value.length}} / 30</mat-hint>
                   <mat-error *ngIf="rangoFinal.hasError('min') && !rangoFinal.hasError('required')">
                     No puede ser menor que cero
                   </mat-error>  
-                <mat-error *ngIf="form.hasError('NoMacth') && !rangoFinal.hasError('required')">
+                <mat-error *ngIf="rangoFinal.hasError('maxmin') && !rangoFinal.hasError('required')">
                     Rango final debe ser mayor a rango inicial
                 </mat-error>  
               <mat-error *ngIf="rangoFinal.hasError('required')">
@@ -54,6 +58,9 @@
               <input matInput formControlName="fechaInicial" [matDatepicker]="pickerInicial" (dateChange)="cambioDia()">
               <mat-datepicker-toggle matSuffix [for]="pickerInicial"></mat-datepicker-toggle>
               <mat-datepicker touchUi #pickerInicial></mat-datepicker>
+              <mat-error *ngIf="fechaInicial.hasError('inva') && !fechaInicial.hasError('required')">
+                Fecha Inicial es mayor a fecha final
+              </mat-error>
               <mat-error *ngIf="fechaInicial.hasError('required')">
                 Este campo es <strong>requerido</strong>
             </mat-error>
@@ -64,6 +71,9 @@
               <input matInput formControlName="fechaFinal" [min]="fechaminima" [matDatepicker]="pickerFinal">
               <mat-datepicker-toggle matSuffix [for]="pickerFinal"></mat-datepicker-toggle>
               <mat-datepicker touchUi #pickerFinal></mat-datepicker>
+              <mat-error *ngIf="fechaFinal.hasError('inva') && !fechaFinal.hasError('required')">
+                Fecha Inicial es mayor a fecha final
+              </mat-error>
               <mat-error *ngIf="fechaFinal.hasError('required')">
                 Este campo es <strong>requerido</strong>
             </mat-error>
@@ -85,7 +95,7 @@
           Este campo es <strong>requerido</strong>
       </mat-error>
       </mat-form-field>
-      <i class="fas fa-info-circle iconos" title="Dato alfanumerico asignado por la DIAN"></i>
+      <i class="fas fa-info-circle iconos" title="Dato alfanumérico asignado por la DIAN para el rango de numeración de las facturas"></i>
     </div>
 
   <div class="row">
@@ -94,22 +104,26 @@
       <div class="row">
         <mat-form-field class="ml-2" appearance="fill">
           <mat-label>Rango Inicial *</mat-label>
-          <input readonly matInput type="number" formControlName="rangoInicial" >
+          <input readonly matInput type="number" maxlength="30" #rangoini formControlName="rangoInicial" >
+          <mat-hint align="end">{{rangoini.value.length}} / 30</mat-hint>
           <mat-error *ngIf="rangoInicial.hasError('min') && !rangoInicial.hasError('required')">
             No puede ser menor que cero
         </mat-error>  
+        <mat-error *ngIf="rangoInicial.hasError('maxmin') && !rangoInicial.hasError('required')">
+          Rango inicial debe ser menor a rango final
+      </mat-error> 
           <mat-error *ngIf="rangoInicial.hasError('required')">
               Este campo es <strong>requerido</strong>
           </mat-error>
       </mat-form-field>
           <mat-form-field class="ml-2" appearance="fill">
             <mat-label>Rango Final *</mat-label>
-          <input matInput type="number" formControlName="rangoFinal" 
-          [errorStateMatcher]="matcher">
+          <input matInput type="number" maxlength="30" #rangofin formControlName="rangoFinal">
+          <mat-hint align="end">{{rangofin.value.length}} / 30</mat-hint>
           <mat-error *ngIf="rangoFinal.hasError('min') && !rangoFinal.hasError('required')">
             No puede ser menor que cero
           </mat-error>  
-        <mat-error *ngIf="form.hasError('NoMacth') && !rangoFinal.hasError('required')">
+        <mat-error *ngIf="rangoFinal.hasError('maxmin') && !rangoFinal.hasError('required')">
             Rango final debe ser mayor a rango inicial
         </mat-error>  
       <mat-error *ngIf="rangoFinal.hasError('required')">
@@ -134,23 +148,21 @@
     
       <mat-form-field class="ml-2" appearance="fill">
           <mat-label>Fecha final</mat-label>
-          <input matInput formControlName="fechaFinal" [min]="fechaminima" [matDatepicker]="pickerFinal" [errorStateMatcher]="matcher">
+          <input matInput formControlName="fechaFinal" [min]="fechaminima" [matDatepicker]="pickerFinal">
           <mat-datepicker-toggle matSuffix [for]="pickerFinal"></mat-datepicker-toggle>
           <mat-datepicker touchUi #pickerFinal></mat-datepicker>
-          <mat-error *ngIf="form.hasError('NoFecha') && !fechaFinal.hasError('required')">
+          <mat-error *ngIf="fechaFinal.hasError('inva') && !fechaFinal.hasError('required')">
             Fecha Inicial es mayor a fecha final
-        </mat-error>
+          </mat-error>
           <mat-error *ngIf="fechaFinal.hasError('required')">
             Este campo es <strong>requerido</strong>
-        </mat-error>
+          </mat-error>
       </mat-form-field>
     
   </div>
 </div>
 </div>
   </div>
-
-
 
 
     <div class="button-row text-center pt-3">

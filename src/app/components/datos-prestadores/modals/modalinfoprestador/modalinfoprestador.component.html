@@ -5,8 +5,9 @@
     <div class="row">
         <mat-form-field class="descripcion pt-3" appearance="fill">
             <mat-label>Nombre *</mat-label>
-            <input matInput placeholder="Juan Felipe Rodas Restrepo" formControlName="representanteLegal"
-            [errorStateMatcher]="matcher" onkeyup="javascript:this.value=this.value.toUpperCase();" >
+            <input matInput placeholder="Juan Felipe Rodas Restrepo" maxlength="80" #representante formControlName="representanteLegal"
+            appUpperCase >
+            <mat-hint align="end">{{representante.value.length}} / 80</mat-hint>
             <mat-error *ngIf="representanteLegal.hasError('required')">
                 Este campo es <strong>requerido</strong>
               </mat-error>
@@ -15,7 +16,8 @@
     <div class="row">
         <mat-form-field class="descripcion" appearance="fill">
             <mat-label>Correo electronico *</mat-label>
-            <input matInput placeholder="juanrestrepo@ips.com.co" formControlName="correoElectronico" appBlockCopyPaste onkeyup="javascript:this.value=this.value.toUpperCase();">
+            <input matInput placeholder="juanrestrepo@ips.com.co"  maxlength="80" #correo formControlName="correoElectronico" appBlockCopyPaste appUpperCase>
+            <mat-hint align="end">{{correo.value.length}} / 80</mat-hint>
             <mat-error *ngIf="correoElectronico.hasError('maxlength') && !correoElectronico.hasError('required')">
                 Supera el maximo de caracteres (80)
             </mat-error>
@@ -30,11 +32,15 @@
     <div class="row"> 
         <mat-form-field class="descripcion" appearance="fill">
             <mat-label>Confirmar Correo electronico *</mat-label>
-            <input matInput placeholder="juanrestrepo@ips.com.co" formControlName="correConfirmacion" onkeyup="javascript:this.value=this.value.toUpperCase();"
-            [errorStateMatcher]="matcher" appBlockCopyPaste> 
-              <mat-error *ngIf="form.hasError('NoMacth')">
-                Correos no son iguales
-            </mat-error>  
+            <input matInput placeholder="juanrestrepo@ips.com.co"  maxlength="80" #concorreo formControlName="correConfirmacion" 
+            appBlockCopyPaste appUpperCase> 
+            <mat-hint align="end">{{concorreo.value.length}} / 80</mat-hint>
+            <mat-error *ngIf="correConfirmacion.hasError('matchOther')">
+              Correos no son iguales
+            </mat-error>
+            <mat-error *ngIf="correConfirmacion.hasError('required')">
+              Este campo es <strong>requerido</strong>
+            </mat-error>
         </mat-form-field>
     </div>
 <div class="button-row text-center pt-3">

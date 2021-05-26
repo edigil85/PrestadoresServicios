@@ -29,6 +29,7 @@ export class ModalcodigohabilitacionComponent implements OnInit {
   });
   codigoHabilitacion: IcodigoHabilitacion;
   modificarCodigo: boolean= false;
+  accionValida:boolean =true;
 
   constructor(
     public service: codigoHabilitacionService,
@@ -48,6 +49,7 @@ export class ModalcodigohabilitacionComponent implements OnInit {
   }
 
   onSubmit() {
+    if(this.accionValida){
     if (this.form.get('codigo'). value == this.codigoHabilitacion.codigoHabilitacion
       && this.form.get('descripcion'). value == this.codigoHabilitacion.descripcionServicio
       )
@@ -75,7 +77,7 @@ export class ModalcodigohabilitacionComponent implements OnInit {
        
       }
      }
-
+    }
   }
 
   datosFormGroup(codigo: String, descripcion: String ){
@@ -86,8 +88,7 @@ export class ModalcodigohabilitacionComponent implements OnInit {
   }
 
   onClose() {
-    this.form.reset();
-    this.initializeFormGroup();
+    this.accionValida=false;
     this.dialogRef.close();
   }
 

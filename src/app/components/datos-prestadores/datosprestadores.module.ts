@@ -43,6 +43,7 @@ import { prefijoFacFilter } from './pipes/PrefijoFacFilter.pipe';
 import { contactoPreFilter } from './pipes/ContactoPreFilter.pipe';
 import { BlockCopyPasteDirective } from 'src/app/shared/Directive/block-copy-paste.directive';
 import { sino } from './pipes/sino.pipe';
+import { UppercaseDirective } from 'src/app/shared/Directive/upperCase.directive';
 
 
 @NgModule({
@@ -64,7 +65,8 @@ import { sino } from './pipes/sino.pipe';
    prefijoFacFilter,
    contactoPreFilter,
    sino,
-   BlockCopyPasteDirective
+   BlockCopyPasteDirective,
+   UppercaseDirective
   ],
   imports: [ 
     HttpClientModule,

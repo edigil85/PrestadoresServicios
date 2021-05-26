@@ -31,7 +31,10 @@
         <div class="col">
           <mat-form-field class="direccion" appearance="fill">
             <mat-label>Dirección*</mat-label>
-            <input matInput formControlName="direccion" onkeyup="javascript:this.value=this.value.toUpperCase();">
+            <input matInput formControlName="direccion" appUpperCase>
+            <mat-error *ngIf="direccion.hasError('required')">
+              Este campo es <strong>requerido</strong>
+            </mat-error>
           </mat-form-field>
         </div>
       </div>

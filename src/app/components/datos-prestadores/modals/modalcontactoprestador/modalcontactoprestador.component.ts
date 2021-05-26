@@ -14,6 +14,35 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   }
 }
 
+export function matchOtherValidator (otherControlName: string) {
+  let thisControl: FormControl;
+  let otherControl: FormControl;
+  return function matchOtherValidate (control: FormControl) {
+    if (!control.parent) {
+      return null;
+    }
+    if (!thisControl) {
+      thisControl = control;
+      otherControl = control.parent.get(otherControlName) as FormControl;
+      if (!otherControl) {
+        throw new Error('matchOtherValidator(): other control is not found in parent group');
+      }
+      otherControl.valueChanges.subscribe(() => {
+        thisControl.updateValueAndValidity();
+      });
+    }
+    if (!otherControl) {
+      return null;
+    }
+    if (otherControl.value !== thisControl.value) {
+      return {
+        matchOther: true
+      };
+    }
+    return null;
+  }
+}
+
 @Component({
   selector: 'app-modalcontactoprestador',
   templateUrl: './modalcontactoprestador.component.html',
@@ -29,6 +58,7 @@ export class ModalcontactoprestadorComponent implements OnInit {
   IniContactoPrestador: IcontactoPrestador;
   FinalContactoPrestador: IcontactoPrestador;
   matcher = new MyErrorStateMatcher();
+  accionValida:boolean =true;
 
   constructor(
     public service: contactoPrestadorService,
@@ -37,11 +67,11 @@ export class ModalcontactoprestadorComponent implements OnInit {
   ) 
   { 
     this.form = this.formBuilder.group({
-      nombre: ['', [Validators.required, Validators.maxLength(80)]],
-      telefono: ['', [Validators.required, Validators.pattern('^[0-9]*$'), Validators.minLength(7), Validators.maxLength(10)]],
-      emailNotificacion: ['', [Validators.required, Validators.maxLength(80), Validators.pattern(this.emailpattern)]],
-      correConfirmacion: [''] 
-    }, { validator: this.checkEmail });
+      nombre: new FormControl('', [Validators.required, Validators.maxLength(80)]),
+      telefono: new FormControl('', [Validators.required, Validators.pattern('^[0-9]*$'), Validators.minLength(7), Validators.maxLength(10)]),
+      emailNotificacion: new FormControl('', [Validators.required, Validators.maxLength(80), Validators.pattern(this.emailpattern)]),
+      correConfirmacion: new FormControl('', [Validators.required,  matchOtherValidator('emailNotificacion')])
+    });
   }
 
   ngOnInit(): void {
@@ -66,13 +96,8 @@ export class ModalcontactoprestadorComponent implements OnInit {
     this.validarChecks();
   }
 
-  checkEmail(group: FormGroup) { 
-    let pass = group.controls.emailNotificacion.value;
-    let confirmPass = group.controls.correConfirmacion.value;
-    return pass === confirmPass ? null : { NoMacth: true }
-  }
-
   onSubmit() {
+    if(this.accionValida){
     //Capturar los valores en FinalContactoPrestador
     this.capturarFormulario();
 
@@ -100,7 +125,7 @@ export class ModalcontactoprestadorComponent implements OnInit {
        
       }
      }
-
+    }
   }
 
   datosFormGroup(emailNotificacion: String, nombre: String, telefono: String ){
@@ -112,7 +137,8 @@ export class ModalcontactoprestadorComponent implements OnInit {
     });
   }
 
-  onClose() {
+  cerrar() {
+    this.accionValida=false;
     this.dialogRef.close();
   }
 

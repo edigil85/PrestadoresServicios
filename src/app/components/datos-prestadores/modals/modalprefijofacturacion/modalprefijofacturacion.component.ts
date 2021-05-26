@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { IprefijoFacturacion } from '../../model/prefijoFacturacion';
@@ -25,7 +25,8 @@ export class ModalprefijofacturacionComponent implements OnInit {
   modificarCodigo: boolean= false;
   fechaminima: Date;
   fechaPaso: Date;
-  matcher = new MyErrorStateMatcher();
+  accionValida:boolean =true;
+
 
   constructor(
     public service: prefijoFacturacionService,
@@ -34,11 +35,39 @@ export class ModalprefijofacturacionComponent implements OnInit {
   ) { 
     this.form = this.formBuilder.group({
       prefijoFacturacion: new FormControl('', [Validators.required, Validators.maxLength(10)]),
-      rangoInicial: new FormControl('', [Validators.required, Validators.min(0)]),
-      rangoFinal: new FormControl('', [Validators.required, Validators.min(0)]),
-      fechaInicial: new FormControl('', Validators.required),
-      fechaFinal: new FormControl('', Validators.required),
-    }, { validators: [this.checkRangos, this.checkFecha]});
+      rangoInicial: new FormControl('', [Validators.required, Validators.min(0), this.rangoValidator()]),
+      rangoFinal: new FormControl('', [Validators.required, Validators.min(0), this.rangoValidator()]),
+      fechaInicial: new FormControl('', [Validators.required,this.fechaValidator()]),
+      fechaFinal: new FormControl('', [Validators.required, this.fechaValidator()]),
+    });
+  }
+
+  fechaValidator()
+  {
+    return (control:FormControl)=>
+    {
+      const form=control.parent
+      if (form)
+      {
+        const min=form.get('fechaInicial');
+        const max=form.get('fechaFinal');
+        return min.value && max.value && +max.value<+min.value?{inva:true}:null
+      }
+    }
+  }
+
+  rangoValidator()
+  {
+    return (control:FormControl)=>
+    {
+      const form=control.parent
+      if (form)
+      {
+        const min=form.get('rangoInicial');
+        const max=form.get('rangoFinal');
+        return min.value && max.value && +max.value<=min.value?{maxmin :true}:null
+      }
+    }
   }
 
   ngOnInit(): void {
@@ -57,10 +86,11 @@ export class ModalprefijofacturacionComponent implements OnInit {
       this.remplazarMes_Es_En(this.prefijoFacturacion.fechaFinal.toString())
       );
       this.fechaminima= new Date((this.form.get("fechaInicial").value));
-      this.fechaminima.setDate(this.fechaminima.getDate()+100);
+      this.fechaminima.setDate(this.fechaminima.getDate()+1);
   }
 
   onSubmit() {
+    if(this.accionValida){
     if (this.form.get('fechaFinal').value == this.remplazarMes_Es_En(this.prefijoFacturacion.fechaFinal)
       && this.form.get('rangoFinal').value == this.remplazarMes_Es_En(this.prefijoFacturacion.rangoFinal)
       )
@@ -98,7 +128,7 @@ export class ModalprefijofacturacionComponent implements OnInit {
        
       }
      }
-
+    }
   }
 
   datosFormGroup(prefijoFacturacion: String, rangoInicial: String, rangoFinal:String, fechaInicial: String, fechaFinal: String){
@@ -111,27 +141,15 @@ export class ModalprefijofacturacionComponent implements OnInit {
     });
   }
 
-  checkRangos(group: FormGroup) { 
-    let min = group.controls.rangoInicial.value;
-    let max = group.controls.rangoFinal.value;
-    return min < max ? null : { NoMacth: true }
-  }
-
-  checkFecha(group: FormGroup) { 
-    let min = group.controls.fechaInicial.value;
-    let max = group.controls.fechaFinal.value;
-    return min < max ? null : { NoFecha: true }
-  }
-
-
 
   onClose() {
+    this.accionValida=false;
     this.dialogRef.close();
   }
 
   cambioDia(){
     this.fechaminima= new Date((this.form.get("fechaInicial").value));
-    this.fechaminima.setDate(this.fechaminima.getDate()+100);
+    this.fechaminima.setDate(this.fechaminima.getDate()+1);
   }
 
 
@@ -180,8 +198,6 @@ export class ModalprefijofacturacionComponent implements OnInit {
     return result;
   }
 
-
-  
   get prefijo() { return this.form.get('prefijoFacturacion');}
   get rangoInicial() { return this.form.get('rangoInicial');}
   get rangoFinal() { return this.form.get('rangoFinal');}

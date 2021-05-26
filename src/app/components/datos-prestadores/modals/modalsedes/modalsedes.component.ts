@@ -6,7 +6,7 @@ import { utilPrestadoresService } from '../../service/utilPrestadoresService';
 import { Iciudad } from '../../model/ciudad'
 import { Idepartamento } from '../../model/departamento'
 
-import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { FormGroup, FormControl, Validators, FormBuilder } from "@angular/forms";
 
 
 
@@ -18,10 +18,7 @@ import { FormGroup, FormControl, Validators } from "@angular/forms";
 export class ModalsedesComponent implements OnInit {
 
   form: FormGroup = new FormGroup({
-    idregistro: new FormControl(null),
-    departamentoseleccionado: new FormControl(''),
-    ciudad: new FormControl(''),
-    direccion: new FormControl('', Validators.required),
+    
   });
 
   listdepartamento: Idepartamento []= [];
@@ -33,14 +30,21 @@ export class ModalsedesComponent implements OnInit {
   ciudades : Iciudad;
   sede: Isedes;
   showCiudad: boolean= false;
+  accionValida:boolean =true;
 
   constructor(
     public sedesservice: sedesservice,
     public dialogRef: MatDialogRef<ModalsedesComponent>,
     private utilService: utilPrestadoresService,
-  ) { 
-
+    private formBuilder: FormBuilder){
+      this.form = this.formBuilder.group({
+        idregistro: new FormControl(null),
+        departamentoseleccionado: new FormControl(''),
+        ciudad: new FormControl(''),
+        direccion: new FormControl('', Validators.required),
+      }); 
   }
+
 
   ngOnInit(): void {
     this.sede= JSON.parse(localStorage.getItem('sedeprestador'));
@@ -82,10 +86,12 @@ export class ModalsedesComponent implements OnInit {
 }
 
   onClose() {
+    this.accionValida=false;
     this.dialogRef.close();
   }
 
   onSubmit() {
+    if(this.accionValida){
     if (this.form.get('ciudad'). value == this.sede.ciudad
       && this.form.get('direccion'). value == this.sede.direccion
       )
@@ -118,7 +124,7 @@ export class ModalsedesComponent implements OnInit {
        
       }
      }
-
+    }
   }
 
   obtenerDepartamento(){
@@ -143,5 +149,8 @@ export class ModalsedesComponent implements OnInit {
     this.obtenerCiudad(this.selectedDepartamento);
     this.showCiudad = true;
   }
+
+
+  get direccion() { return this.form.get('direccion');}
 
 }
