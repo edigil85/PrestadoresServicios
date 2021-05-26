@@ -98,6 +98,7 @@ export class CodigohabilitacionComponent implements OnInit {
       }
       this.dialogRef = null;
     });
+    this.seleccionarTodos= false;
   }
 
   consultarCodigosHabilitacion(){

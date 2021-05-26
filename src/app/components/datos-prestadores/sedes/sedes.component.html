@@ -2,7 +2,7 @@
   <section class="center" *ngIf="sedes.length==0">
     <h3>Aún no tienes configuradas las sedes</h3>
     <p class="body-16 pt-1">Debes de hacer uso de la acción adicionar registro para configurarlas</p>
-    <img src='assets\Imagenes\img-prestadores.svg'>
+    <img src='..\assets\Imagenes\img-prestadores.svg'>
   </section>
 
 <div *ngIf="showCards && sedes.length>0">
@@ -19,7 +19,7 @@
           <mat-label>Direccion, departamento o municipio</mat-label>
           <input matInput type="text" [(ngModel)]="textoFiltro">
           <button mat-button *ngIf="textoFiltro" matSuffix mat-icon-button aria-label="Clear" (click)="textoFiltro=''">
-            <mat-icon>close</mat-icon>
+            <mat-icon class="iconos-close">close</mat-icon>
           </button>
         </mat-form-field>
       </span>
@@ -69,7 +69,7 @@
           <mat-label>Direccion, departamento o municipio</mat-label>
           <input matInput type="text" [(ngModel)]="textoFiltro">
           <button mat-button *ngIf="textoFiltro" matSuffix mat-icon-button aria-label="Clear" (click)="textoFiltro=''">
-            <mat-icon>close</mat-icon>
+            <mat-icon class="iconos-close">close</mat-icon>
           </button>
         </mat-form-field>
       </span>

@@ -149,6 +149,7 @@ export class SedesComponent implements OnInit {
       }
       this.dialogRef = null;
     });
+    this.seleccionarTodos= false;
   }
 
   handlePage(e: PageEvent){

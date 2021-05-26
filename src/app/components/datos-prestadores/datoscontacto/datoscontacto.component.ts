@@ -98,6 +98,7 @@ export class DatoscontactoComponent implements OnInit {
       }
       this.dialogRef = null;
     });
+    this.seleccionarTodos= false;
   }
 
   consultarCodigosHabilitacion(){
