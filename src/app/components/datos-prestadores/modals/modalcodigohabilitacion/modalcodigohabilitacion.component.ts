@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { ModalDialogComponent } from 'src/app/components/modal-dialog/modal-dialog.component';
 import { IcodigoHabilitacion } from '../../model/codigoHabilitacion';
 import { codigoHabilitacionService } from '../../service/codigosHabilitacion.service';
 
@@ -28,10 +29,13 @@ export class ModalcodigohabilitacionComponent implements OnInit {
     descripcion: new FormControl('', [Validators.required, Validators.maxLength(50)]),
   });
   codigoHabilitacion: IcodigoHabilitacion;
+  codigoconsulta: IcodigoHabilitacion;
+  codigosFacturacion: IcodigoHabilitacion [];
   modificarCodigo: boolean= false;
   accionValida:boolean =true;
 
   constructor(
+    private dialog: MatDialog,
     public service: codigoHabilitacionService,
     public dialogRef: MatDialogRef<ModalcodigohabilitacionComponent>,
   ) { }
@@ -102,4 +106,39 @@ export class ModalcodigohabilitacionComponent implements OnInit {
 
   get codigo() { return this.form.get('codigo');}
   get descripcion() { return this.form.get('descripcion');}
+
+
+  public consultarCodigo(busquedaCodigo: IcodigoHabilitacion): Promise<any>{
+    return this.service.consultarCodigoHabilitacion(busquedaCodigo).toPromise()
+}
+
+  async buscarCodigo(codigo: string){
+    var datos = JSON.parse( localStorage.getItem( "SSE" ) );
+    this.codigoconsulta= {nitPrestador: datos.numeroDocumentoPrestador, 
+                tipoIdentificacion:datos.tipoDocumentoPrestador, 
+                codigoHabilitacion:'', descripcionServicio:''};
+      this.codigosFacturacion = await this.consultarCodigo(this.codigoconsulta)
+      const a = this.codigosFacturacion.filter(codigosFacturacion=>
+        codigosFacturacion.codigoHabilitacion==codigo)
+      if(a.length==1){
+        this.openDialog(
+          'Alerta',
+          '',
+          'El codigo ya existe'
+        );
+      this.codigoHabilitacion=a[0];
+      this.datosFormGroup(this.codigoHabilitacion.codigoHabilitacion, this.codigoHabilitacion.descripcionServicio);
+      }
+    }
+
+    openDialog(pTittle, pSubtittle, pMessage) {
+      this.dialog.open(ModalDialogComponent, {
+        data: {
+          tittle: pTittle,
+          subtittle: pSubtittle,
+          message: pMessage,
+        },
+      });
+    }
+
 }

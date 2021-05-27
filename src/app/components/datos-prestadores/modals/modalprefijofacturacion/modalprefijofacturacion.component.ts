@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { ModalDialogComponent } from 'src/app/components/modal-dialog/modal-dialog.component';
 import { IprefijoFacturacion } from '../../model/prefijoFacturacion';
 import { prefijoFacturacionService } from '../../service/prefijoFacturacion.service';
 
@@ -22,6 +23,8 @@ export class ModalprefijofacturacionComponent implements OnInit {
 
   form: FormGroup;
   prefijoFacturacion: IprefijoFacturacion;
+  busquedaprefijo: IprefijoFacturacion
+  rangoFacturacion: IprefijoFacturacion [];
   modificarCodigo: boolean= false;
   fechaminima: Date;
   fechaPaso: Date;
@@ -29,15 +32,16 @@ export class ModalprefijofacturacionComponent implements OnInit {
 
 
   constructor(
+    private dialog: MatDialog,
     public service: prefijoFacturacionService,
     public dialogRef: MatDialogRef<ModalprefijofacturacionComponent>,
     private formBuilder: FormBuilder
   ) { 
     this.form = this.formBuilder.group({
       prefijoFacturacion: new FormControl('', [Validators.required, Validators.maxLength(10)]),
-      rangoInicial: new FormControl('', [Validators.required, Validators.min(0), this.rangoValidator()]),
-      rangoFinal: new FormControl('', [Validators.required, Validators.min(0), this.rangoValidator()]),
-      fechaInicial: new FormControl('', [Validators.required,this.fechaValidator()]),
+      rangoInicial: new FormControl('', [Validators.required, Validators.min(0), Validators.pattern('^[0-9]*$'), this.rangoValidator()]),
+      rangoFinal: new FormControl('', [Validators.required, Validators.min(0), Validators.pattern('^[0-9]*$'), this.rangoValidator()]),
+      fechaInicial: new FormControl('', [Validators.required, this.fechaValidator()]),
       fechaFinal: new FormControl('', [Validators.required, this.fechaValidator()]),
     });
   }
@@ -204,5 +208,56 @@ export class ModalprefijofacturacionComponent implements OnInit {
   get fechaInicial() { return this.form.get('fechaInicial');}
   get fechaFinal() { return this.form.get('fechaFinal');}
 
-
+  public consultarPrefijos(busquedaprefijo: IprefijoFacturacion): Promise<any>{
+    return this.service.consultarPrefijoFacturacion(this.busquedaprefijo).toPromise()
 }
+
+  async buscarPrefijo(prefijo: string){
+      var datos = JSON.parse( localStorage.getItem( "SSE" ) );
+      this.busquedaprefijo= {idRegistro:0,
+        nitPrestador: datos.numeroDocumentoPrestador, 
+        tipoIdentificacion:datos.tipoDocumentoPrestador, 
+        prefijoFacturacion:'',
+        activo:'S',
+        fechaInicial:'',
+        fechaFinal:'',
+        rangoInicial:'',
+        rangoFinal:''
+      };
+  
+      this.rangoFacturacion = await this.consultarPrefijos(this.busquedaprefijo)
+      const a = this.rangoFacturacion.filter(rangoFacturacion=>
+        rangoFacturacion.prefijoFacturacion==prefijo)
+      if(a.length==1){
+        this.openDialog(
+          'Alerta',
+          '',
+          'El prefijo ya existe'
+        );
+      this.prefijoFacturacion=a[0];
+      this.datosFormGroup(this.prefijoFacturacion.prefijoFacturacion, 
+        this.prefijoFacturacion.rangoInicial,
+        this.prefijoFacturacion.rangoFinal,
+        this.remplazarMes_Es_En(this.prefijoFacturacion.fechaInicial.toString()),
+        this.remplazarMes_Es_En(this.prefijoFacturacion.fechaFinal.toString())
+        );
+        this.fechaminima= new Date((this.form.get("fechaInicial").value));
+        this.fechaminima.setDate(this.fechaminima.getDate()+1);
+        this.modificarCodigo= false;
+      }
+    }
+
+    openDialog(pTittle, pSubtittle, pMessage) {
+      this.dialog.open(ModalDialogComponent, {
+        data: {
+          tittle: pTittle,
+          subtittle: pSubtittle,
+          message: pMessage,
+        },
+      });
+    }
+    
+}
+  
+
+

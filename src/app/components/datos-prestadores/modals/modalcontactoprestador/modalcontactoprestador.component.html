@@ -29,7 +29,7 @@
                     Supera el maximo de caracteres (80)
                 </mat-error>
                 <mat-error *ngIf="emailNotificacion.hasError('pattern') && !emailNotificacion.hasError('required') && !emailNotificacion.hasError('maxlength')">
-                     Por favir ingrese un correo valido
+                     Ingrese un correo valido
                 </mat-error>
                 <mat-error *ngIf="emailNotificacion.hasError('required')">
                     Este campo es <strong>requerido</strong>
@@ -41,7 +41,7 @@
             <mat-form-field class="input" appearance="fill">
                 <mat-label>Confirmar Correo electronico *</mat-label>
                 <input matInput placeholder="juanrestrepo@ips.com.co" formControlName="correConfirmacion"
-                [errorStateMatcher]="matcher" appBlockCopyPaste appUpperCase>
+                 appBlockCopyPaste appUpperCase>
                 <mat-error *ngIf="correConfirmacion.hasError('matchOther') && !correConfirmacion.hasError('required')">
                     Correos no son iguales
                   </mat-error>
