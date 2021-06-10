@@ -94,6 +94,7 @@ export class RangofacturacionComponent implements OnInit {
       if(result) {
         this.service.eliminarTodosPrefijosFacturacion(this.rangoFacturacion).subscribe(
           () => {
+            this.seleccionarTodos= false;
             this.consultarPrefijoFacturacion();
          },
          (error) => {
@@ -104,7 +105,6 @@ export class RangofacturacionComponent implements OnInit {
       }
       this.dialogRef = null;
     });
-    this.seleccionarTodos= false;
   }
 
   consultarPrefijoFacturacion(){

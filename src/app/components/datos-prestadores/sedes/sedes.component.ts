@@ -138,6 +138,7 @@ export class SedesComponent implements OnInit {
       if(result) {
         this.sedesservice.eliminarTodasSedes(this.sede).subscribe(
           () => {
+            this.seleccionarTodos= false;
             this.consultarSedesPrestador();
          },
          (error) => {
@@ -149,7 +150,6 @@ export class SedesComponent implements OnInit {
       }
       this.dialogRef = null;
     });
-    this.seleccionarTodos= false;
   }
 
   handlePage(e: PageEvent){

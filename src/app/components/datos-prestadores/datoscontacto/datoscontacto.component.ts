@@ -88,6 +88,7 @@ export class DatoscontactoComponent implements OnInit {
       if(result) {
         this.service.eliminarTodosContactosPrestador(this.contacto).subscribe(
           () => {
+            this.seleccionarTodos= false;
             this.consultarCodigosHabilitacion();
          },
          (error) => {
@@ -98,7 +99,6 @@ export class DatoscontactoComponent implements OnInit {
       }
       this.dialogRef = null;
     });
-    this.seleccionarTodos= false;
   }
 
   consultarCodigosHabilitacion(){

@@ -90,6 +90,7 @@ export class CodigohabilitacionComponent implements OnInit {
       if(result) {
         this.service.eliminarTodosCodigosHabilitacion(this.codigo).subscribe(
           () => {
+            this.seleccionarTodos= false;
             this.consultarCodigosHabilitacion();
          },
          (error) => {
@@ -98,7 +99,6 @@ export class CodigohabilitacionComponent implements OnInit {
       }
       this.dialogRef = null;
     });
-    this.seleccionarTodos= false;
   }
 
   consultarCodigosHabilitacion(){
