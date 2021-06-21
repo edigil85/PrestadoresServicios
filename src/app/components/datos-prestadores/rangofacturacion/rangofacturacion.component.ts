@@ -43,7 +43,7 @@ export class RangofacturacionComponent implements OnInit {
 
   ngOnInit(): void {
     this.max_Registros= Constants.RANGOSFACTURACION_PRESTADORES_MAX;
-    this.consultarPrefijoFacturacion();
+    this.consultarPrefijoFacturacion(1);
   }
 
   editarPrefijo(prefijo: IprefijoFacturacion){
@@ -56,7 +56,7 @@ export class RangofacturacionComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(
       () => 
-      this.consultarPrefijoFacturacion()
+      this.consultarPrefijoFacturacion(2)
   ); 
   } 
 
@@ -70,12 +70,12 @@ export class RangofacturacionComponent implements OnInit {
       if(result) {
         this.service.eliminarPrefijoFacturacion(prefijo).subscribe(
           () => {
-            this.consultarPrefijoFacturacion();
+            this.consultarPrefijoFacturacion(1);
          },
          (error) => {
           this._getError(error); }
        )
-        this.consultarPrefijoFacturacion();
+        this.consultarPrefijoFacturacion(1);
         
       }
       this.dialogRef = null;
@@ -95,19 +95,19 @@ export class RangofacturacionComponent implements OnInit {
         this.service.eliminarTodosPrefijosFacturacion(this.rangoFacturacion).subscribe(
           () => {
             this.seleccionarTodos= false;
-            this.consultarPrefijoFacturacion();
+            this.consultarPrefijoFacturacion(1);
          },
          (error) => {
           this._getError(error); }
        )
-        this.consultarPrefijoFacturacion();
+        this.consultarPrefijoFacturacion(1);
         
       }
       this.dialogRef = null;
     });
   }
 
-  consultarPrefijoFacturacion(){
+  consultarPrefijoFacturacion(orden){
     var datos = JSON.parse( localStorage.getItem( "SSE" ) );
     this.rangoFacturacion= {idRegistro:0,
       nitPrestador: datos.numeroDocumentoPrestador, 
@@ -117,18 +117,48 @@ export class RangofacturacionComponent implements OnInit {
       fechaInicial:'',
       fechaFinal:'',
       rangoInicial:'',
-      rangoFinal:''
+      rangoFinal:'',
+      fechaCreacion:null,
+      fechaModificacion:null
     };
 
     this.service.consultarPrefijoFacturacion(this.rangoFacturacion)
     .subscribe(
        (result) => {
         this.rangosFacturacion= result;
+        if(orden==1){
+          this.sortFechacreacion();
+        }
+        else{
+          this.sortFechaModificacion();
+        }
       },  
       (error) => {
         this._getError(error); }
     )
   }
+
+  sortFechacreacion(){
+    this.rangosFacturacion.sort(function (a, b) {
+    if (a.fechaCreacion > b.fechaCreacion) {
+      return -1;
+    }
+    if (a.fechaCreacion < b.fechaCreacion) {
+      return 1;
+    }
+    return 0});
+}
+
+sortFechaModificacion(){
+    this.rangosFacturacion.sort(function (a, b) {
+    if (a.fechaModificacion > b.fechaModificacion) {
+      return -1;
+    }
+    if (a.fechaModificacion < b.fechaModificacion) {
+      return 1;
+    }
+    return 0});
+}
 
   crear() {
     var datos = JSON.parse( localStorage.getItem( "SSE" ) );
@@ -140,7 +170,9 @@ export class RangofacturacionComponent implements OnInit {
       fechaInicial:'',
       fechaFinal:'',
       rangoInicial:'',
-      rangoFinal:''
+      rangoFinal:'',
+      fechaCreacion:null,
+      fechaModificacion:null
     };
     localStorage.setItem("prefijoFacturacion", JSON.stringify(this.rangoFacturacion));
     const dialogConfig = new MatDialogConfig();
@@ -151,7 +183,7 @@ export class RangofacturacionComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(
       () => 
-      this.consultarPrefijoFacturacion()
+      this.consultarPrefijoFacturacion(1)
   ); 
   }
 

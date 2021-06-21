@@ -8,6 +8,8 @@ export interface  IprefijoFacturacion {
     fechaFinal: String;
     rangoInicial: String;
     rangoFinal: String;
+    fechaCreacion: String ;
+	fechaModificacion: String;
 }
 export class prefijoFacturacion {
     idRegistro: Number;
@@ -19,6 +21,8 @@ export class prefijoFacturacion {
     fechaFinal: String;
     rangoInicial: String;
     rangoFinal: String;
+    fechaCreacion: String ;
+	fechaModificacion: String;
 
     constructor(
         idRegistro: Number,
@@ -27,7 +31,11 @@ export class prefijoFacturacion {
         prefijoFacturacion: String,
         activo: String,
         fechaInicial: String,
-        fechaFinal: String) {
+        fechaFinal: String,
+        rangoInicial: String,
+        rangoFinal: String,
+        fechaCreacion: String,
+        fechaModificacion: String) {
             this.idRegistro=idRegistro
             this.nitPrestador=nitPrestador;
             this.tipoIdentificacion=tipoIdentificacion;
@@ -35,7 +43,9 @@ export class prefijoFacturacion {
             this.activo=activo;
             this.fechaInicial=fechaInicial;
             this.fechaFinal=fechaFinal;
-            this.fechaInicial=fechaInicial;
-            this.fechaFinal=fechaFinal;
+            this.rangoInicial=rangoInicial;
+            this.rangoFinal=rangoFinal;
+            this.fechaCreacion=fechaCreacion;
+            this.fechaModificacion=fechaModificacion;
     }
 }

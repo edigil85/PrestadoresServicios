@@ -40,7 +40,7 @@ export class CodigohabilitacionComponent implements OnInit {
 
   ngOnInit(): void {
     this.Max_Registros= Constants.CODIGOSHABILITACION_PRESTADORES_MAX;
-    this.consultarCodigosHabilitacion();
+    this.consultarCodigosHabilitacion(1);
   }
 
   editarCodigo(codigo: IcodigoHabilitacion){
@@ -53,7 +53,7 @@ export class CodigohabilitacionComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(
       () => 
-      this.consultarCodigosHabilitacion()
+      this.consultarCodigosHabilitacion(2)
   ); 
   } 
 
@@ -67,7 +67,7 @@ export class CodigohabilitacionComponent implements OnInit {
       if(result) {
         this.service.eliminarCodigoHabilitacion(codigo).subscribe(
           () => {
-            this.consultarCodigosHabilitacion();
+            this.consultarCodigosHabilitacion(1);
          },
          (error) => {
           this._getError(error);
@@ -90,8 +90,8 @@ export class CodigohabilitacionComponent implements OnInit {
       if(result) {
         this.service.eliminarTodosCodigosHabilitacion(this.codigo).subscribe(
           () => {
+            this.consultarCodigosHabilitacion(1);
             this.seleccionarTodos= false;
-            this.consultarCodigosHabilitacion();
          },
          (error) => {
           this._getError(error);
@@ -101,26 +101,55 @@ export class CodigohabilitacionComponent implements OnInit {
     });
   }
 
-  consultarCodigosHabilitacion(){
+  consultarCodigosHabilitacion(orden){
     var datos = JSON.parse( localStorage.getItem( "SSE" ) );
     this.codigo= {nitPrestador: datos.numeroDocumentoPrestador, 
                 tipoIdentificacion:datos.tipoDocumentoPrestador, 
-                codigoHabilitacion:'', descripcionServicio:''};
+                codigoHabilitacion:'', descripcionServicio:'', fechaCreacion:null, fechaModificacion:null};
     this.service.consultarCodigoHabilitacion(this.codigo)
     .subscribe(
        (result) => {
         this.codigos= result;
+        if(orden==1){
+          this.sortFechacreacion();
+        }
+        else{
+          this.sortFechaModificacion();
+        }
       },(error) => {
         this._getError(error);
       }
       )
   }
 
+  
+  sortFechacreacion(){
+    this.codigos.sort(function (a, b) {
+    if (a.fechaCreacion > b.fechaCreacion) {
+      return -1;
+    }
+    if (a.fechaCreacion < b.fechaCreacion) {
+      return 1;
+    }
+    return 0});
+}
+
+sortFechaModificacion(){
+    this.codigos.sort(function (a, b) {
+    if (a.fechaModificacion > b.fechaModificacion) {
+      return -1;
+    }
+    if (a.fechaModificacion < b.fechaModificacion) {
+      return 1;
+    }
+    return 0});
+}
+
   crear() {
     var datos = JSON.parse( localStorage.getItem( "SSE" ) );
     this.codigo= {nitPrestador: datos.numeroDocumentoPrestador, 
       tipoIdentificacion:datos.tipoDocumentoPrestador, 
-      codigoHabilitacion:'', descripcionServicio:''};
+      codigoHabilitacion:'', descripcionServicio:'', fechaCreacion:null, fechaModificacion:null};
     localStorage.setItem("codigoHabilitacion", JSON.stringify(this.codigo));
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
@@ -130,7 +159,7 @@ export class CodigohabilitacionComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(
       () => 
-      this.consultarCodigosHabilitacion()
+      this.consultarCodigosHabilitacion(1)
   ); 
   }
 

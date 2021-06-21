@@ -104,6 +104,8 @@ export class ModalsedesComponent implements OnInit {
         this.sede.departamento = this.selectedDepartamento.nombreDepartamento;
         this.sede.direccion = this.form.get('direccion'). value;
         this.sede.ciudad = this.form.get('ciudad'). value;
+        this.sede.fechaCreacion = null;
+        this.sede.fechaModificacion = null;
         this.sedesservice.insertarSedes(this.sede).subscribe(
           () => {
            this.dialogRef.close();
@@ -116,6 +118,8 @@ export class ModalsedesComponent implements OnInit {
         this.sede.departamento = this.selectedDepartamento.nombreDepartamento;
         this.sede.direccion = this.form.get('direccion'). value;
         this.sede.ciudad = this.form.get('ciudad'). value;
+        this.sede.fechaCreacion = null;
+        this.sede.fechaModificacion = null;
         this.sedesservice.actualizarSedes(this.sede).subscribe(
           () => {
            this.dialogRef.close();

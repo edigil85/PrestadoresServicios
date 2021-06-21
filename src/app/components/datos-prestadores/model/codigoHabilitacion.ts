@@ -3,6 +3,8 @@ export interface  IcodigoHabilitacion {
     tipoIdentificacion: String;
 	codigoHabilitacion: String;
     descripcionServicio: String;
+    fechaCreacion: String ;
+	fechaModificacion: String;
 }
 
 export class codigoHabilitacion {
@@ -10,14 +12,20 @@ export class codigoHabilitacion {
     tipoIdentificacion: String;
 	codigoHabilitacion: String;
     descripcionServicio: String;
+    fechaCreacion: String ;
+	fechaModificacion: String;
     constructor(
         nitPrestador: String,
     tipoIdentificacion: String,
 	codigoHabilitacion: String,
-    descripcionServicio: String) {
+    descripcionServicio: String,
+    fechaCreacion: String ,
+	fechaModificacion: String) {
             this.nitPrestador=nitPrestador;
             this.tipoIdentificacion=tipoIdentificacion;
             this.codigoHabilitacion=codigoHabilitacion;
             this.descripcionServicio=descripcionServicio;
+            this.fechaCreacion=fechaCreacion;
+            this.fechaModificacion=fechaModificacion;
     }
 }

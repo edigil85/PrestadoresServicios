@@ -155,6 +155,8 @@ export class ModalcontactoprestadorComponent implements OnInit {
     this.FinalContactoPrestador.nombre= this.form.get('nombre').value;
     this.FinalContactoPrestador.emailNotificacion= this.form.get('emailNotificacion').value;
     this.FinalContactoPrestador.telefono= this.form.get('telefono').value;
+    this.FinalContactoPrestador.fechaCreacion=null;
+    this.FinalContactoPrestador.fechaModificacion=null;
   }
 
   compararContactos(): boolean{

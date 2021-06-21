@@ -64,6 +64,8 @@ export class ModalcodigohabilitacionComponent implements OnInit {
       if(this.codigoHabilitacion.codigoHabilitacion == '' && this.codigoHabilitacion.descripcionServicio == '' ){
         this.codigoHabilitacion.codigoHabilitacion = this.form.get('codigo'). value;
         this.codigoHabilitacion.descripcionServicio = this.form.get('descripcion'). value;
+        this.codigoHabilitacion.fechaCreacion=null;
+        this.codigoHabilitacion.fechaModificacion=null;
         this.service.insertarCodigoHabilitacion(this.codigoHabilitacion).subscribe(
           () => {
            this.dialogRef.close();
@@ -73,6 +75,8 @@ export class ModalcodigohabilitacionComponent implements OnInit {
       }
       else{
         this.codigoHabilitacion.descripcionServicio = this.form.get('descripcion'). value;
+        this.codigoHabilitacion.fechaCreacion=null;
+        this.codigoHabilitacion.fechaModificacion=null;
         this.service.actualizarCodigoHabilitacion(this.codigoHabilitacion).subscribe(
           () => {
            this.dialogRef.close();
@@ -116,7 +120,7 @@ export class ModalcodigohabilitacionComponent implements OnInit {
     var datos = JSON.parse( localStorage.getItem( "SSE" ) );
     this.codigoconsulta= {nitPrestador: datos.numeroDocumentoPrestador, 
                 tipoIdentificacion:datos.tipoDocumentoPrestador, 
-                codigoHabilitacion:'', descripcionServicio:''};
+                codigoHabilitacion:'', descripcionServicio:'', fechaCreacion:null, fechaModificacion:null};
       this.codigosFacturacion = await this.consultarCodigo(this.codigoconsulta)
       const a = this.codigosFacturacion.filter(codigosFacturacion=>
         codigosFacturacion.codigoHabilitacion==codigo)

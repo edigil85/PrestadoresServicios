@@ -36,7 +36,7 @@ export class DatoscontactoComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.consultarCodigosHabilitacion();
+    this.consultarCodigosHabilitacion(1);
   }
 
   editarContacto(contacto: IcontactoPrestador){
@@ -49,7 +49,7 @@ export class DatoscontactoComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(
       () => 
-      this.consultarCodigosHabilitacion()
+      this.consultarCodigosHabilitacion(2)
   ); 
   } 
 
@@ -63,12 +63,12 @@ export class DatoscontactoComponent implements OnInit {
       if(result) {
         this.service.eliminarContactoPrestador(contacto).subscribe(
           () => {
-            this.consultarCodigosHabilitacion();
+            this.consultarCodigosHabilitacion(1);
          },
          (error) => {
           this._getError(error);
          })
-        this.consultarCodigosHabilitacion();
+        this.consultarCodigosHabilitacion(1);
         
       }
       this.dialogRef = null;
@@ -89,19 +89,19 @@ export class DatoscontactoComponent implements OnInit {
         this.service.eliminarTodosContactosPrestador(this.contacto).subscribe(
           () => {
             this.seleccionarTodos= false;
-            this.consultarCodigosHabilitacion();
+            this.consultarCodigosHabilitacion(1);
          },
          (error) => {
           this._getError(error);
          })
-        this.consultarCodigosHabilitacion();
+        this.consultarCodigosHabilitacion(1);
         
       }
       this.dialogRef = null;
     });
   }
 
-  consultarCodigosHabilitacion(){
+  consultarCodigosHabilitacion(orden){
     var datos = JSON.parse( localStorage.getItem( "SSE" ) );
     this.contacto= {idRegistro:'1',
                 nitPrestador: datos.numeroDocumentoPrestador, 
@@ -111,16 +111,46 @@ export class DatoscontactoComponent implements OnInit {
 	              notificacionCartera:'N',
 	              emailNotificacion:'',
 	              nombre:'',
-	              telefono:''};
+	              telefono:'',
+                fechaCreacion:null,
+                fechaModificacion:null};
     this.service.consultarContactoPrestador(this.contacto)
     .subscribe(
        (result) => {
         this.contactos= result;
+        if(orden==1){
+          this.sortFechacreacion();
+        }
+        else{
+          this.sortFechaModificacion();
+        }
       },
       (error) => {
         this._getError(error);
       })
   }
+
+  sortFechacreacion(){
+    this.contactos.sort(function (a, b) {
+    if (a.fechaCreacion > b.fechaCreacion) {
+      return -1;
+    }
+    if (a.fechaCreacion < b.fechaCreacion) {
+      return 1;
+    }
+    return 0});
+}
+
+sortFechaModificacion(){
+    this.contactos.sort(function (a, b) {
+    if (a.fechaModificacion > b.fechaModificacion) {
+      return -1;
+    }
+    if (a.fechaModificacion < b.fechaModificacion) {
+      return 1;
+    }
+    return 0});
+}
 
   crear() {
     var datos = JSON.parse( localStorage.getItem( "SSE" ) );
@@ -132,7 +162,9 @@ export class DatoscontactoComponent implements OnInit {
     notificacionCartera:'N',
     emailNotificacion:'',
     nombre:'',
-    telefono:''};
+    telefono:'',
+    fechaCreacion:null,
+    fechaModificacion:null};
     localStorage.setItem("contactoPrestador", JSON.stringify(this.contacto));
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
@@ -142,7 +174,7 @@ export class DatoscontactoComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(
       () => 
-      this.consultarCodigosHabilitacion()
+      this.consultarCodigosHabilitacion(1)
   ); 
   }
 

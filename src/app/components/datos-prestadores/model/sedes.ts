@@ -6,6 +6,8 @@ export interface  Isedes {
     ciudad: String;
     direccion: String;
     sedeprincipal: String;
+    fechaCreacion: String ;
+	fechaModificacion: String;
 }
 
 export class sedes {
@@ -16,6 +18,8 @@ export class sedes {
     ciudad: String;
     direccion: String;
     sedeprincipal: String;
+    fechaCreacion: String ;
+	fechaModificacion: String;
 
    /* constructor(
         idRegistro: Number,

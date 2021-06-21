@@ -112,6 +112,8 @@ export class ModalprefijofacturacionComponent implements OnInit {
         {  month: 'short', year: 'numeric', day: 'numeric' }));
         this.prefijoFacturacion.rangoInicial= this.form.get('rangoInicial').value
         this.prefijoFacturacion.rangoFinal= this.form.get('rangoFinal').value
+        this.prefijoFacturacion.fechaCreacion=null;
+        this.prefijoFacturacion.fechaModificacion=null;
         this.service.insertarPrefijoFacturacion(this.prefijoFacturacion).subscribe(
           () => {
            this.dialogRef.close();
@@ -124,6 +126,8 @@ export class ModalprefijofacturacionComponent implements OnInit {
         this.prefijoFacturacion.fechaFinal= this.remplazarMes_En_Es(this.fechaPaso.toLocaleDateString('en-US', 
         {  month: 'short', year: 'numeric', day: 'numeric' }));
         this.prefijoFacturacion.rangoFinal= this.form.get('rangoFinal').value
+        this.prefijoFacturacion.fechaCreacion=null;
+        this.prefijoFacturacion.fechaModificacion=null;
         this.service.actualizarPrefijoFacturacion(this.prefijoFacturacion).subscribe(
           () => {
            this.dialogRef.close();
@@ -222,7 +226,9 @@ export class ModalprefijofacturacionComponent implements OnInit {
         fechaInicial:'',
         fechaFinal:'',
         rangoInicial:'',
-        rangoFinal:''
+        rangoFinal:'',
+        fechaCreacion:null,
+        fechaModificacion:null
       };
   
       this.rangoFacturacion = await this.consultarPrefijos(this.busquedaprefijo)

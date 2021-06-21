@@ -27,7 +27,7 @@ export class SedesComponent implements OnInit {
   sede: Isedes;l
   page_size: number = 10;
   page_number: number = 1;
-  pageSizeOption = [10, 15, 20, 25];
+  pageSizeOption = [10, 15, 20, 25, 30];
   sedes: Isedes[]=[];
   seleccionarTodos = false;
   useFilter = false;
@@ -43,24 +43,53 @@ export class SedesComponent implements OnInit {
 
   ngOnInit(): void {
     this.max_Registros= Constants.SEDES_PRESTADORES_MAX;
-    this.consultarSedesPrestador();
+    this.consultarSedesPrestador(1);
   }
 
-  consultarSedesPrestador(){
+  consultarSedesPrestador(orden){
     var datos = JSON.parse( localStorage.getItem( "SSE" ) );
     this.sede= {idRegistro: 0, nitPrestador: datos.numeroDocumentoPrestador, 
                 tipoIdentificacion:datos.tipoDocumentoPrestador, 
-                departamento: '', ciudad: '', direccion: '', sedeprincipal: 'S'};
+                departamento: '', ciudad: '', direccion: '', sedeprincipal: 'S', fechaCreacion:null, fechaModificacion:null };
     this.sedesservice.consultarSedes(this.sede)
     .subscribe(
        (result) => {
         this.sedes= result;
+        if(orden==1){
+          this.sortFechacreacion();
+        }
+        else{
+          this.sortFechaModificacion();
+        }
+       
       },
       (error) => {
         this._getError(error);
       }
 
     )
+  }
+
+  sortFechacreacion(){
+      this.sedes.sort(function (a, b) {
+      if (a.fechaCreacion > b.fechaCreacion) {
+        return -1;
+      }
+      if (a.fechaCreacion < b.fechaCreacion) {
+        return 1;
+      }
+      return 0});
+  }
+
+  sortFechaModificacion(){
+      this.sedes.sort(function (a, b) {
+      if (a.fechaModificacion > b.fechaModificacion) {
+        return -1;
+      }
+      if (a.fechaModificacion < b.fechaModificacion) {
+        return 1;
+      }
+      return 0});
   }
 
   crear() {
@@ -73,7 +102,7 @@ export class SedesComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(
       () => 
-      this.consultarSedesPrestador()
+      this.consultarSedesPrestador(1)
   ); 
   }
 
@@ -100,7 +129,7 @@ export class SedesComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(
       () => 
-      this.consultarSedesPrestador()
+      this.consultarSedesPrestador(2)
   ); 
   } 
 
@@ -114,13 +143,13 @@ export class SedesComponent implements OnInit {
       if(result) {
         this.sedesservice.eliminarSedes(sede).subscribe(
           () => {
-            this.consultarSedesPrestador();
+            this.consultarSedesPrestador(1);
          },
          (error) => {
           this._getError(error);
         }
        )
-        this.consultarSedesPrestador();
+        this.consultarSedesPrestador(1);
         
       }
       this.dialogRef = null;
@@ -139,13 +168,13 @@ export class SedesComponent implements OnInit {
         this.sedesservice.eliminarTodasSedes(this.sede).subscribe(
           () => {
             this.seleccionarTodos= false;
-            this.consultarSedesPrestador();
+            this.consultarSedesPrestador(1);
          },
          (error) => {
           this._getError(error);
         }
        )
-        this.consultarSedesPrestador();
+        this.consultarSedesPrestador(1);
         
       }
       this.dialogRef = null;

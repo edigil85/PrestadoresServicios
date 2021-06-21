@@ -8,6 +8,8 @@ export interface  IcontactoPrestador {
 	emailNotificacion: String;
 	nombre: String;
 	telefono: String;
+	fechaCreacion: String ;
+	fechaModificacion: String;
 }
 export class contactoPrestador {
     idRegistro: String;
@@ -19,6 +21,8 @@ export class contactoPrestador {
 	emailNotificacion: String;
 	nombre: String;
 	telefono: String;
+	fechaCreacion: String ;
+	fechaModificacion: String;
 
     constructor(
         idRegistro: String,
@@ -29,7 +33,9 @@ export class contactoPrestador {
 	notificacionCartera: String,
 	emailNotificacion: String,
 	nombre: String,
-	telefono: String,) {
+	telefono: String,
+	fechaCreacion: String,
+	fechaModificacion: String) {
         this.idRegistro=idRegistro;
         this.nitPrestador=nitPrestador;
         this.tipoIdentificacion=tipoIdentificacion;
@@ -39,5 +45,7 @@ export class contactoPrestador {
         this.emailNotificacion=emailNotificacion;
         this.nombre=nombre;
         this.telefono=telefono;
+		this.fechaCreacion=fechaCreacion;
+		this.fechaModificacion=fechaModificacion;
     }
 }
