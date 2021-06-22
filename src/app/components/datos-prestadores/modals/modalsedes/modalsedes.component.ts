@@ -92,6 +92,7 @@ export class ModalsedesComponent implements OnInit {
 
   onSubmit() {
     if(this.accionValida){
+      this.ciudades=this.listciudades.find(item=> item.nombreCiudad==this.form.get('ciudad').value)
     if (this.form.get('ciudad'). value == this.sede.ciudad
       && this.form.get('direccion'). value == this.sede.direccion
       )
@@ -102,10 +103,12 @@ export class ModalsedesComponent implements OnInit {
       if(this.sede.departamento == '' && this.sede.ciudad == '' && this.sede.direccion == ''){
         this.selectedDepartamento = this.form.get('departamentoseleccionado').value;
         this.sede.departamento = this.selectedDepartamento.nombreDepartamento;
-        this.sede.direccion = this.form.get('direccion'). value;
-        this.sede.ciudad = this.form.get('ciudad'). value;
+        this.sede.direccion = this.form.get('direccion').value;
+        this.sede.ciudad = this.ciudades.nombreCiudad;
         this.sede.fechaCreacion = null;
         this.sede.fechaModificacion = null;
+        this.sede.codigoCiudad = this.ciudades.codigoCiudad;
+        console.log(this.sede);
         this.sedesservice.insertarSedes(this.sede).subscribe(
           () => {
            this.dialogRef.close();
@@ -117,9 +120,11 @@ export class ModalsedesComponent implements OnInit {
         this.selectedDepartamento = this.form.get('departamentoseleccionado').value;
         this.sede.departamento = this.selectedDepartamento.nombreDepartamento;
         this.sede.direccion = this.form.get('direccion'). value;
-        this.sede.ciudad = this.form.get('ciudad'). value;
+        this.sede.ciudad = this.ciudades.nombreCiudad;
         this.sede.fechaCreacion = null;
         this.sede.fechaModificacion = null;
+        this.sede.codigoCiudad = this.ciudades.codigoCiudad;
+        console.log(this.sede);
         this.sedesservice.actualizarSedes(this.sede).subscribe(
           () => {
            this.dialogRef.close();

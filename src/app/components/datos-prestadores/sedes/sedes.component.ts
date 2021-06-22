@@ -50,7 +50,8 @@ export class SedesComponent implements OnInit {
     var datos = JSON.parse( localStorage.getItem( "SSE" ) );
     this.sede= {idRegistro: 0, nitPrestador: datos.numeroDocumentoPrestador, 
                 tipoIdentificacion:datos.tipoDocumentoPrestador, 
-                departamento: '', ciudad: '', direccion: '', sedeprincipal: 'S', fechaCreacion:null, fechaModificacion:null };
+                departamento: '', ciudad: '', direccion: '', sedeprincipal: 'S', fechaCreacion:null, fechaModificacion:null,
+                codigoCiudad: '' };
     this.sedesservice.consultarSedes(this.sede)
     .subscribe(
        (result) => {
