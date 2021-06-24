@@ -61,6 +61,7 @@ export class SedesComponent implements OnInit {
         }
         else{
           this.sortFechaModificacion();
+          console.log(this.sedes)
         }
        
       },
@@ -84,6 +85,12 @@ export class SedesComponent implements OnInit {
 
   sortFechaModificacion(){
       this.sedes.sort(function (a, b) {
+      if ( b.fechaModificacion==null){
+          b.fechaModificacion='01-ENE-1990 12:00:00'
+      }
+      if ( a.fechaModificacion==null){
+        a.fechaModificacion='01-ENE-1990 12:00:00'
+      }
       if (a.fechaModificacion > b.fechaModificacion) {
         return -1;
       }
