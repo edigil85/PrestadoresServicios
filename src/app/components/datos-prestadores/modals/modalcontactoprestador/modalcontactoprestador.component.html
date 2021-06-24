@@ -105,6 +105,6 @@
        </mat-error>
     <div class="button-row text-center pt-3">
         <button  class="buttonSecundary mr-3" (click)="cerrar()">Cerrar</button>
-        <button  [ngClass]="{'buttonDisabledPrimary': form.invalid==true || Checked==false, 'buttonPrimary': form.invalid==false && Checked==true }" type="submit" [disabled]="form.invalid">Guardar</button>
+        <button  [ngClass]="{'buttonDisabledPrimary': form.invalid==true || Checked==false, 'buttonPrimary': form.invalid==false && Checked==true }" type="submit" [disabled]="form.invalid==true || Checked==false">Guardar</button>
     </div>
   </form>

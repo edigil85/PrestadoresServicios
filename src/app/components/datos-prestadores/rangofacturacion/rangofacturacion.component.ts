@@ -150,14 +150,20 @@ export class RangofacturacionComponent implements OnInit {
 }
 
 sortFechaModificacion(){
-    this.rangosFacturacion.sort(function (a, b) {
-    if (a.fechaModificacion > b.fechaModificacion) {
-      return -1;
-    }
-    if (a.fechaModificacion < b.fechaModificacion) {
-      return 1;
-    }
-    return 0});
+  this.rangosFacturacion.sort(function (a, b) {
+  if ( b.fechaModificacion==null){
+      b.fechaModificacion='01-ENE-1990 12:00:00'
+  }
+  if ( a.fechaModificacion==null){
+    a.fechaModificacion='01-ENE-1990 12:00:00'
+  }
+  if (a.fechaModificacion > b.fechaModificacion) {
+    return -1;
+  }
+  if (a.fechaModificacion < b.fechaModificacion) {
+    return 1;
+  }
+  return 0});
 }
 
   crear() {
