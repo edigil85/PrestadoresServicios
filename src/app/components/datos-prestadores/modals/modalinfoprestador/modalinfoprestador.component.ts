@@ -85,6 +85,7 @@ export class ModalinfoprestadorComponent implements OnInit {
     this.infoPrestador = JSON.parse( localStorage.getItem( "infoPrestador" ) );
     this.datosFormGroup(this.infoPrestador.representanteLegal, this.infoPrestador.emailReperesentantelegal);
     localStorage.removeItem("infoPrestador");
+    
   }
 
   initializeFormGroup() {
@@ -119,9 +120,6 @@ export class ModalinfoprestadorComponent implements OnInit {
     }
      else{
       if(this.infoPrestador.representanteLegal == '' && this.infoPrestador.emailReperesentantelegal == ''){
-        this.infoPrestador.nitPrestador= this.datosPrestador.numeroDocumentoPrestador;
-        this.infoPrestador.tipoIdentificacion= this.datosPrestador.tipoDocumentoPrestador;
-        this.infoPrestador.razonSocial= this.datosPrestador.razonSocial;
         this.infoPrestador.representanteLegal = this.form.get('representanteLegal').value;
         this.infoPrestador.emailReperesentantelegal = this.form.get('correoElectronico'). value;
         this.infoPrestadoresService.insertarInfoPrestador(this.infoPrestador).subscribe(
