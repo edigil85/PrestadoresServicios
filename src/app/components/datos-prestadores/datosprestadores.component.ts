@@ -126,11 +126,13 @@ consultarInfoPrestador(){
 
 crear() {
   var datos = JSON.parse( localStorage.getItem( "SSE" ) );
+  if(!this.infoPrestador.nitPrestador== datos.numeroDocumentoPrestador){
   this.infoPrestador= { nitPrestador: datos.numeroDocumentoPrestador, 
     tipoIdentificacion: datos.tipoDocumentoPrestador,
     razonSocial: datos.razonSocial,
     representanteLegal:'',
     emailReperesentantelegal:''};
+  }
   localStorage.setItem("infoPrestador", JSON.stringify(this.infoPrestador));
   const dialogConfig = new MatDialogConfig();
   dialogConfig.disableClose = true;
