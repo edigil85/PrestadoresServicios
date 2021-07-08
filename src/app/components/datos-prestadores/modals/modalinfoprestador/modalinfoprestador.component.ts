@@ -85,7 +85,6 @@ export class ModalinfoprestadorComponent implements OnInit {
     this.infoPrestador = JSON.parse( localStorage.getItem( "infoPrestador" ) );
     this.datosFormGroup(this.infoPrestador.representanteLegal, this.infoPrestador.emailReperesentantelegal);
     localStorage.removeItem("infoPrestador");
-    
   }
 
   initializeFormGroup() {

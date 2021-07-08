@@ -11,7 +11,7 @@ import { DatoscontactoComponent } from './datoscontacto/datoscontacto.component'
 const routes: Routes = [
 { path: '', component: DatosPrestadoresComponent,
   children: [
-    { path: '', redirectTo: 'sedes', pathMatch: 'full'},
+    //{ path: '', redirectTo: 'sedes', pathMatch: 'full'},
     {path: 'sedes',component: SedesComponent,},
     {path: 'rangofacturacion',component: RangofacturacionComponent,},
     {path: 'codigohabilitacion',component: CodigohabilitacionComponent,},

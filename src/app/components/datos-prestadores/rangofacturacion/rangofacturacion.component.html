@@ -1,7 +1,13 @@
-<div class="container">
+<div class="container" style="position: relative">
+  <ngx-spinner [fullScreen]="false" bdColor="rgba(165,162,165,0.8)" size="large" color="#fff" 
+   type="ball-pulse">
+    <p style="font-size: 20px; position: relative; color: white">Procesando...</p>
+  </ngx-spinner>
   <section class="center" *ngIf="rangosFacturacion.length==0">
-    <h3>Aún no tienes configurados los prefijos de facturación</h3>
-    <p class="body-16 pt-1">Debes de hacer uso de la acción adicionar registro para configurarlas</p>
+    <h3>Aún no tienes configurados los rangos de facturación</h3>
+    <div class="info">
+      <p class="body-16 pt-1">Debes de hacer uso de la acción adicionar registro (<button><p style="font-size: 23px;">+</p></button>) para configurarlas</p>
+      </div>
     <img src='..\assets\Imagenes\img-prestadores.svg'>
   </section>
 
@@ -47,10 +53,10 @@
           <th rowspan="2"><p class="body-16"><strong>Rango</strong></p></th>
           <td class="text-left"><p class="body-16"><strong>Inicio: </strong>{{rango.rangoInicial}}</p></td>
         </tr>
-        <tr>
+        <tr style="border-bottom:1pt solid black;">
           <td class="text-left"><p class="body-16"><strong>Fin: </strong>{{rango.rangoFinal}}</p></td>
         </tr>
-        <tr >
+        <tr style="border-top:1pt solid black;">
           <th rowspan="2"><p class="body-16"><strong>Vigencia</strong></p></th>
           <td><p class="body-16"><strong>Desde: </strong>{{rango.fechaInicial}}</p></td>
         </tr>
@@ -108,7 +114,7 @@
             <div class="col Prefijo-title-show">Prefijo</div>
             <div class="col Prefijo-show">{{rango.prefijoFacturacion}}</div>
           </div>
-          <div class="col-3">
+          <div class="col-3" style="border-right:1pt solid black;">
             <table>
               <tr>
                 <th><p class="body-16"><strong>Rangos</strong></p></th>
@@ -119,7 +125,7 @@
               </tr>
             </table>
           </div>
-          <div class="col-4">
+          <div class="col-4" style="border-left:1pt solid black;">
             <table>
               <tr>
                 <th><p class="body-16"><strong>Vigencias</strong></p></th>

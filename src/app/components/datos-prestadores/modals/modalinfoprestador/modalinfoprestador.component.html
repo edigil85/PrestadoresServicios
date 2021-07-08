@@ -4,7 +4,7 @@
   <form [formGroup]="form" class="normal-form" (ngSubmit)="onSubmit()">
     <div class="row">
         <mat-form-field class="descripcion pt-3" appearance="fill">
-            <mat-label>Nombre *</mat-label>
+            <mat-label>Nombres y apellidos *</mat-label>
             <input matInput placeholder="Juan Felipe Rodas Restrepo" maxlength="80" #representante formControlName="representanteLegal"
             appUpperCase >
             <mat-hint align="end">{{representante.value.length}} / 80</mat-hint>
@@ -15,7 +15,7 @@
     </div>
     <div class="row">
         <mat-form-field class="descripcion" appearance="fill">
-            <mat-label>Correo electronico *</mat-label>
+            <mat-label>Ingresa correo electrónico *</mat-label>
             <input matInput placeholder="juanrestrepo@ips.com.co"  maxlength="80" #correo formControlName="correoElectronico" appBlockCopyPaste appUpperCase>
             <mat-hint align="end">{{correo.value.length}} / 80</mat-hint>
             <mat-error *ngIf="correoElectronico.hasError('maxlength') && !correoElectronico.hasError('required')">
@@ -31,7 +31,7 @@
     </div>
     <div class="row"> 
         <mat-form-field class="descripcion" appearance="fill">
-            <mat-label>Confirmar Correo electronico *</mat-label>
+            <mat-label>Ingresa confirmación de correo electrónico *</mat-label>
             <input matInput placeholder="juanrestrepo@ips.com.co"  maxlength="80" #concorreo formControlName="correConfirmacion" 
             appBlockCopyPaste appUpperCase> 
             <mat-hint align="end">{{concorreo.value.length}} / 80</mat-hint>

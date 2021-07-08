@@ -8,6 +8,7 @@ import { IcodigoHabilitacion } from '../model/codigoHabilitacion';
 import { Constants } from 'src/app/shared/utils/Constants';
 import { ModalDialogComponent } from '../../modal-dialog/modal-dialog.component';
 import { UtilService } from 'src/app/shared/service/util.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-codigohabilitacion',
@@ -36,6 +37,7 @@ export class CodigohabilitacionComponent implements OnInit {
   constructor(
     private dialog: MatDialog,
     private service: codigoHabilitacionService,
+    private spinner: NgxSpinnerService
   ) { }
 
   ngOnInit(): void {
@@ -102,21 +104,25 @@ export class CodigohabilitacionComponent implements OnInit {
   }
 
   consultarCodigosHabilitacion(orden){
+    this.spinner.show();
     var datos = JSON.parse( localStorage.getItem( "SSE" ) );
     this.codigo= {nitPrestador: datos.numeroDocumentoPrestador, 
                 tipoIdentificacion:datos.tipoDocumentoPrestador, 
                 codigoHabilitacion:'', descripcionServicio:'', fechaCreacion:null, fechaModificacion:null};
     this.service.consultarCodigoHabilitacion(this.codigo)
     .subscribe(
-       (result) => {
-        this.codigos= result;
-        if(orden==1){
+      async (result) => {
+        this.codigos= await result;
+        if(orden===1){
           this.sortFechacreacion();
         }
         else{
           this.sortFechaModificacion();
+          console.log(this.codigos)
         }
+        this.spinner.hide();
       },(error) => {
+        this.spinner.hide();
         this._getError(error);
       }
       )
@@ -125,27 +131,35 @@ export class CodigohabilitacionComponent implements OnInit {
   
   sortFechacreacion(){
     this.codigos.sort(function (a, b) {
-    if (a.fechaCreacion > b.fechaCreacion) {
-      return -1;
-    }
-    if (a.fechaCreacion < b.fechaCreacion) {
-      return 1;
-    }
-    return 0});
+      let dia1 = a.fechaCreacion;
+      let date1= new Date(dia1.toString());
+      let dia2 = b.fechaCreacion;
+      let date2= new Date(dia2.toString());
+      if (date1 > date2) {
+        return -1;
+      }
+      if (date1 < date2) {
+        return 1;
+      }
+      return 0});
 }
 
 sortFechaModificacion(){
   this.codigos.sort(function (a, b) {
-  if ( b.fechaModificacion==null){
-      b.fechaModificacion='01-ENE-1990 12:00:00'
+    let dia1 = a.fechaModificacion;
+    let dia2 = b.fechaModificacion;
+  if ( dia1===null){
+    dia1='01-JUL-2000 14:00:00'
   }
-  if ( a.fechaModificacion==null){
-    a.fechaModificacion='01-ENE-1990 12:00:00'
+  if ( dia2===null){
+    dia2='01-JUL-2000 14:00:00'
   }
-  if (a.fechaModificacion > b.fechaModificacion) {
+  let date1= new Date(dia1.toString());
+  let date2= new Date(dia2.toString());
+  if (date1 > date2) {
     return -1;
   }
-  if (a.fechaModificacion < b.fechaModificacion) {
+  if (date1 < date2) {
     return 1;
   }
   return 0});

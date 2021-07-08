@@ -38,7 +38,7 @@
           </div>
           <div class="col-8">
             <mat-form-field class="descripcion" appearance="fill">
-              <mat-label>Descrición del servicio *</mat-label>
+              <mat-label>Descripción de servicio *</mat-label>
               <input  matInput formControlName="descripcion" appUpperCase>
               <mat-hint align="end">{{descripcion.value.length}} / 50</mat-hint>
               <mat-error *ngIf="descripcion.hasError('maxlength')">

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDialog, MatDialogConfig} from '@angular/material/dialog'
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute  } from '@angular/router';
 import { MatIconRegistry } from "@angular/material/icon";
 import { DomSanitizer } from "@angular/platform-browser";
 import { IdatosPrestador } from '../datos-prestadores/model/datosprestador'
@@ -13,7 +13,6 @@ import { UtilService } from 'src/app/shared/service/util.service';
 import { ModalDialogComponent } from '../modal-dialog/modal-dialog.component';
 
 
-
 @Component({
   selector: 'app-datos-prestadores',
   templateUrl: './datosprestadores.component.html',
@@ -21,6 +20,7 @@ import { ModalDialogComponent } from '../modal-dialog/modal-dialog.component';
   ]
 })
 export class DatosPrestadoresComponent {
+  typeIndetification: any[] = [];
   navLinks: any[];
   activeLinkIndex = -1;
   datosPrestador: IdatosPrestador;
@@ -29,7 +29,8 @@ export class DatosPrestadoresComponent {
   
  
   constructor(
-    private router: Router, 
+    private route: ActivatedRoute,
+    private router: Router,
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer,
     private utilService: utilPrestadoresService,
@@ -83,29 +84,28 @@ ngOnInit(): void {
       this.activeLinkIndex = this.navLinks.indexOf(this.navLinks.find(tab => tab.link === '.' + this.router.url));
   });
   this.datosPrestador= { tipoDocumentoPrestador:'', razonSocial:'', numeroDocumentoPrestador:'', tokenInformaticaCloud:''};
-  this.consultarDatosSeccion()
+  this.consultarDatosSeccion();
+  this.router.navigate(['sedes'], { relativeTo: this.route });
   this.infoPrestador= {nitPrestador: this.datosPrestador.numeroDocumentoPrestador, 
     tipoIdentificacion: this.datosPrestador.tipoDocumentoPrestador,
     razonSocial: this.datosPrestador.razonSocial,
     representanteLegal:'',
     emailReperesentantelegal:''};
-
-  this.consultarInfoPrestador();
 }
 ngAfterViewInit(): void {
-  
 }
 
 consultarDatosSeccion(){
-  
   this.utilService.getDatosPrestador()
   .subscribe(
-       result => {
-      this.datosPrestador= result;
+     async  result => {
+      this.datosPrestador= await result;
       localStorage.setItem("SSE", JSON.stringify(this.datosPrestador));
+      this.obtenerTiposDocumentos(this.datosPrestador.tipoDocumentoPrestador);
+      this.consultarInfoPrestador();
     },(error) => {
       this._getError(error); }
-  );
+  ); 
 }
 
 consultarInfoPrestador(){
@@ -126,7 +126,7 @@ consultarInfoPrestador(){
 
 crear() {
   var datos = JSON.parse( localStorage.getItem( "SSE" ) );
-  if(!this.infoPrestador.nitPrestador== datos.numeroDocumentoPrestador){
+  if(this.infoPrestador.nitPrestador===null){
   this.infoPrestador= { nitPrestador: datos.numeroDocumentoPrestador, 
     tipoIdentificacion: datos.tipoDocumentoPrestador,
     razonSocial: datos.razonSocial,
@@ -157,6 +157,16 @@ openDialog(pTittle, pSubtittle, pMessage) {
   });
 }
 
+obtenerTiposDocumentos(tipoDocumentoPrestador: String) {
+  this.utilService.getDocumentTypes().subscribe(
+   async (result) => {
+      this.typeIndetification = await result;
+      let documento=this.typeIndetification.find(item=> item.value==tipoDocumentoPrestador)
+      this.datosPrestador.tipoDocumentoPrestador=documento.text;
+    },
+    (error) => console.error(error)
+  );
+}
 
 _getError(error) {
   if (error.status === 500) {
@@ -180,5 +190,4 @@ _getError(error) {
     );
   }
 }
-
 }

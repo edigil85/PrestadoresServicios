@@ -18,6 +18,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatPaginatorIntl, MatPaginatorModule} from '@angular/material/paginator';
 import {MatDatepickerModule, } from '@angular/material/datepicker';
 import { MatNativeDateModule } from "@angular/material/core";
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 
@@ -87,7 +88,8 @@ import { UppercaseDirective } from 'src/app/shared/Directive/upperCase.directive
     MatInputModule,
     MatPaginatorModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    NgxSpinnerModule
     ],
     providers: [
      {provide: MatPaginatorIntl, useClass: CustomMatPaginatorIntl}

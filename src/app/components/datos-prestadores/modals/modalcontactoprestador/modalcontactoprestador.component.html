@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-lg-4">
             <mat-form-field class="input" appearance="fill">
-                <mat-label>Nombres y apellidos *</mat-label>
+                <mat-label>Ingresa nombre completo *</mat-label>
                 <input matInput formControlName="nombre" maxlength="80" appUpperCase>
                 <mat-hint align="end">{{nombre.value.length}} / 80</mat-hint>
                 <mat-error *ngIf="nombre.hasError('maxlength') && !nombre.hasError('required')">
@@ -22,8 +22,8 @@
             </div>
             <div class="col-lg-4">
             <mat-form-field class="input" appearance="fill">
-                <mat-label>Correo electronico *</mat-label>
-                <input matInput placeholder="juanrestrepo@ips.com.co" formControlName="emailNotificacion"
+                <mat-label>Ingresa correo electrónico *</mat-label>
+                <input matInput  formControlName="emailNotificacion"
                 appUpperCase appBlockCopyPaste>
                 <mat-error *ngIf="emailNotificacion.hasError('maxlength') && !emailNotificacion.hasError('required')">
                     Supera el maximo de caracteres (80)
@@ -39,8 +39,8 @@
 
             <div class="col-lg-4">
             <mat-form-field class="input" appearance="fill">
-                <mat-label>Confirmar Correo electronico *</mat-label>
-                <input matInput placeholder="juanrestrepo@ips.com.co" formControlName="correConfirmacion"
+                <mat-label>Ingresa confirmación de correo electrónico *</mat-label>
+                <input matInput  formControlName="correConfirmacion"
                  appBlockCopyPaste appUpperCase>
                 <mat-error *ngIf="correConfirmacion.hasError('matchOther') && !correConfirmacion.hasError('required')">
                     Correos no son iguales
@@ -58,7 +58,7 @@
             <div class="row">
                 <div class="col-lg-4">
                 <mat-form-field class="input" appearance="fill">
-                    <mat-label>Telefono / Celular *</mat-label>
+                    <mat-label>Teléfono / Celular *</mat-label>
                     <input matInput formControlName="telefono" maxlength="10">
                     <mat-hint align="end">{{telefono.value.length}} / 10</mat-hint>
                     <mat-error *ngIf="telefono.hasError('pattern') && !telefono.hasError('required')">
@@ -101,7 +101,7 @@
         </div>
     </div>
     <mat-error class="text-center" *ngIf="!Checked">
-        Debes de seleccionar minimo una notificacion
+        Debes de seleccionar mínimo una notificación.
        </mat-error>
     <div class="button-row text-center pt-3">
         <button  class="buttonSecundary mr-3" (click)="cerrar()">Cerrar</button>

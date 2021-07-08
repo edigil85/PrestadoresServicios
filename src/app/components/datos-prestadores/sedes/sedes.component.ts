@@ -8,6 +8,9 @@ import { PageEvent } from '@angular/material/paginator';
 import { Constants } from 'src/app/shared/utils/Constants';
 import { ModalDialogComponent } from '../../modal-dialog/modal-dialog.component';
 import { UtilService } from 'src/app/shared/service/util.service';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { IdatosPrestador } from '../../datos-prestadores/model/datosprestador'
+import { utilPrestadoresService } from '../service/utilPrestadoresService';
 
 
 @Component({
@@ -32,40 +35,60 @@ export class SedesComponent implements OnInit {
   seleccionarTodos = false;
   useFilter = false;
   textoFiltro= '';
+  datosPrestador: IdatosPrestador;
+  util: UtilService;
   
 
   constructor(
     private dialog: MatDialog,
     private sedesservice: sedesservice,
+    private utilServices: utilPrestadoresService,
+    private spinner: NgxSpinnerService
   ) { 
 
   }
 
   ngOnInit(): void {
     this.max_Registros= Constants.SEDES_PRESTADORES_MAX;
-    this.consultarSedesPrestador(1);
+    this.consultarDatosSeccion();
+  }
+
+  ngAfterViewInit(): void {
+  }
+
+  consultarDatosSeccion(){
+    this.utilServices.getDatosPrestador()
+    .subscribe(
+       async  result => {
+        this.datosPrestador= await result;
+        localStorage.setItem("SSE", JSON.stringify(this.datosPrestador));
+        this.consultarSedesPrestador(1);
+      },(error) => {
+        this._getError(error); }
+    ); 
   }
 
   consultarSedesPrestador(orden){
+    this.spinner.show();
     var datos = JSON.parse( localStorage.getItem( "SSE" ) );
     this.sede= {idRegistro: 0, nitPrestador: datos.numeroDocumentoPrestador, 
-                tipoIdentificacion:datos.tipoDocumentoPrestador, 
-                departamento: '', ciudad: '', direccion: '', sedeprincipal: 'S', fechaCreacion:null, fechaModificacion:null,
-                codigoCiudad: '' };
+      tipoIdentificacion:datos.tipoDocumentoPrestador, 
+      departamento: '', ciudad: '', direccion: '', sedeprincipal: 'S', fechaCreacion:null, fechaModificacion:null,
+      codigoCiudad: '' };
     this.sedesservice.consultarSedes(this.sede)
     .subscribe(
-       (result) => {
-        this.sedes= result;
+      async (result) => {
+        this.sedes= await result;
         if(orden==1){
           this.sortFechacreacion();
         }
         else{
           this.sortFechaModificacion();
-          console.log(this.sedes)
         }
-       
+       this.spinner.hide();
       },
       (error) => {
+        this.spinner.hide();
         this._getError(error);
       }
 
@@ -74,30 +97,38 @@ export class SedesComponent implements OnInit {
 
   sortFechacreacion(){
       this.sedes.sort(function (a, b) {
-      if (a.fechaCreacion > b.fechaCreacion) {
+      let dia1 = a.fechaCreacion;
+      let date1= new Date(dia1.toString());
+      let dia2 = b.fechaCreacion;
+      let date2= new Date(dia2.toString());
+      if (date1 > date2) {
         return -1;
       }
-      if (a.fechaCreacion < b.fechaCreacion) {
+      if (date1 < date2) {
         return 1;
       }
       return 0});
   }
 
   sortFechaModificacion(){
-      this.sedes.sort(function (a, b) {
-      if ( b.fechaModificacion==null){
-          b.fechaModificacion='01-ENE-1990 12:00:00'
-      }
-      if ( a.fechaModificacion==null){
-        a.fechaModificacion='01-ENE-1990 12:00:00'
-      }
-      if (a.fechaModificacion > b.fechaModificacion) {
-        return -1;
-      }
-      if (a.fechaModificacion < b.fechaModificacion) {
-        return 1;
-      }
-      return 0});
+  this.sedes.sort(function (a, b) {
+    let dia1 = a.fechaModificacion;
+    let dia2 = b.fechaModificacion;
+  if ( dia1===null){
+    dia1='01-JUL-2000 14:00:00'
+  }
+  if ( dia2===null){
+    dia2='01-JUL-2000 14:00:00'
+  }
+  let date1= new Date(dia1.toString());
+  let date2= new Date(dia2.toString());
+  if (date1 > date2) {
+    return -1;
+  }
+  if (date1 < date2) {
+    return 1;
+  }
+  return 0});
   }
 
   crear() {

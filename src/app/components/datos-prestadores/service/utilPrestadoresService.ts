@@ -38,5 +38,9 @@ export class utilPrestadoresService{
     return this.httpClient.post<IdatosPrestador>(`${this.baseUrl}`+Constants.URI_SERVICE_SECCION_DATA,
     body, {headers:environment.headers});
   }
+
+  getDocumentTypes(): Observable<any> {
+    return this.httpClient.get('./assets/json/tipos_documento.json');
+  }
  
 }

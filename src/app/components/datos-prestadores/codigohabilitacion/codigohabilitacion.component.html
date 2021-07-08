@@ -1,7 +1,13 @@
-<div class="container">
+<div class="container" style="position: relative">
+  <ngx-spinner [fullScreen]="false" bdColor="rgba(165,162,165,0.8)" size="large" color="#fff" 
+   type="ball-pulse">
+    <p style="font-size: 20px; position: relative; color: white">Procesando...</p>
+  </ngx-spinner>
 <section class="center" *ngIf="codigos.length==0">
     <h3>Aún no tienes configurados los códigos de habilitación</h3>
-    <p class="body-16 pt-1">Debes de hacer uso de la acción adicionar registro para configurarlas</p>
+    <div class="info">
+    <p class="body-16 pt-1">Debes de hacer uso de la acción adicionar registro (<button><p style="font-size: 23px;">+</p></button>) para configurarlas</p>
+    </div>
     <img src='..\assets\Imagenes\img-prestadores.svg'>
   </section>
 
@@ -39,7 +45,7 @@
       </mat-card-title>
       </mat-card-header>
       <mat-card-content class="ml-3">
-        <p class="body-16 pt-3">{{codigo.descripcionServicio}}</p>
+        <p class="body-16">{{codigo.descripcionServicio}}</p>
       </mat-card-content>
       <mat-card-actions align="end">
         <button mat-icon-button (click)="editarCodigo(codigo)"><i class="fas fa-edit iconos"></i></button>
