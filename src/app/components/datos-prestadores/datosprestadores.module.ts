@@ -18,6 +18,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatPaginatorIntl, MatPaginatorModule} from '@angular/material/paginator';
 import {MatDatepickerModule, } from '@angular/material/datepicker';
 import { MatNativeDateModule } from "@angular/material/core";
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import { NgxSpinnerModule } from 'ngx-spinner';
 
 
@@ -45,6 +46,7 @@ import { contactoPreFilter } from './pipes/ContactoPreFilter.pipe';
 import { BlockCopyPasteDirective } from 'src/app/shared/Directive/block-copy-paste.directive';
 import { sino } from './pipes/sino.pipe';
 import { UppercaseDirective } from 'src/app/shared/Directive/upperCase.directive';
+import {CustomDateAdapter} from '../datos-prestadores/custom.date.adapter';
 
 
 @NgModule({
@@ -92,7 +94,10 @@ import { UppercaseDirective } from 'src/app/shared/Directive/upperCase.directive
     NgxSpinnerModule
     ],
     providers: [
-     {provide: MatPaginatorIntl, useClass: CustomMatPaginatorIntl}
+     { provide: MatPaginatorIntl, useClass: CustomMatPaginatorIntl},
+     { provide: MAT_DATE_LOCALE, useValue: 'en-GB' },
+     { provide: DateAdapter, useClass: CustomDateAdapter }
+     
    ]
 })
 export class DatosPrestadoresModule { }
