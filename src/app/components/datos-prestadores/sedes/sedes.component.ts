@@ -96,9 +96,9 @@ export class SedesComponent implements OnInit {
   }
 
   sortFechacreacion(){
-      this.sedes.sort(function (a, b) {
-        let dia1 = a.fechaModificacion;
-        let dia2 = b.fechaModificacion;
+    this.sedes.sort(function (a, b) {
+      let dia1 = a.fechaCreacion;
+      let dia2 = b.fechaCreacion;
       if ( dia1===null){
         dia1='01-JUL-2000 14:00:00'
       }
@@ -114,9 +114,9 @@ export class SedesComponent implements OnInit {
         return 1;
       }
       return 0});
-  }
+}
 
-  sortFechaModificacion(){
+sortFechaModificacion(){
   this.sedes.sort(function (a, b) {
     let dia1 = a.fechaModificacion;
     let dia2 = b.fechaModificacion;
@@ -135,7 +135,7 @@ export class SedesComponent implements OnInit {
     return 1;
   }
   return 0});
-  }
+}
 
   crear() {
     localStorage.setItem("sedeprestador", JSON.stringify(this.sede));
