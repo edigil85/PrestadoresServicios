@@ -145,10 +145,16 @@ export class RangofacturacionComponent implements OnInit {
 
   sortFechacreacion(){
     this.rangosFacturacion.sort(function (a, b) {
-      let dia1 = a.fechaCreacion;
-      let date1= new Date(dia1.toString());
-      let dia2 = b.fechaCreacion;
-      let date2= new Date(dia2.toString());
+      let dia1 = a.fechaModificacion;
+      let dia2 = b.fechaModificacion;
+    if ( dia1===null){
+      dia1='01-JUL-2000 14:00:00'
+    }
+    if ( dia2===null){
+      dia2='01-JUL-2000 14:00:00'
+    }
+    let date1= new Date(dia1.toString());
+    let date2= new Date(dia2.toString());
       if (date1 > date2) {
         return -1;
       }
