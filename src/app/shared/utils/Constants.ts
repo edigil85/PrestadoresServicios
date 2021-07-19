@@ -71,7 +71,7 @@ export class Constants {
 
   //Constanetes para maximos registros
 
-  static SEDES_PRESTADORES_MAX = 80;
+  static SEDES_PRESTADORES_MAX = 90;
 
   static RANGOSFACTURACION_PRESTADORES_MAX = 300;
 

@@ -137,8 +137,8 @@ export class DatoscontactoComponent implements OnInit {
 
   sortFechacreacion(){
     this.contactos.sort(function (a, b) {
-      let dia1 = a.fechaModificacion;
-      let dia2 = b.fechaModificacion;
+      let dia1 = a.fechaCreacion;
+      let dia2 = b.fechaCreacion;
     if ( dia1===null){
       dia1='01-JUL-2000 14:00:00'
     }
