@@ -38,6 +38,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatDatepickerModule, } from '@angular/material/datepicker';
 import { MatNativeDateModule } from "@angular/material/core";
+import { ConsultaPrestadoresComponent } from './components/consulta-prestadores/consulta-prestadores.component';
 
 
 @NgModule({
@@ -50,7 +51,7 @@ import { MatNativeDateModule } from "@angular/material/core";
     UploadFileCsvComponent, AgendaExternoVacunacionComponent,
 
     //autorizaciones
-    SolicitudAutorizacionesComponent, UploadFileComponent,
+    SolicitudAutorizacionesComponent, UploadFileComponent, ConsultaPrestadoresComponent,
   ],
   
   imports: [

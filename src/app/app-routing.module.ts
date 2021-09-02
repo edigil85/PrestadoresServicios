@@ -11,6 +11,9 @@ const routes: Routes = [
   { path: 'agendamiento-vacunacion', component: AgendaExternoVacunacionComponent },
   { path: 'datos-prestadores', 
   loadChildren:() => import('./components/datos-prestadores/datosprestadores.module').then(m=> m.DatosPrestadoresModule)
+  },
+  { path: 'consulta-prestadores', 
+  loadChildren:() => import('./components/consulta-prestadores/consulta-prestadores.module').then(m=> m.ConsultasPrestadoresModule)
   }
 ];
 
