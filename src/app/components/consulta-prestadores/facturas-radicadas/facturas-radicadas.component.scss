@@ -1,5 +1,17 @@
 @import "../../../../assets/scss/variables";
 
+.textoboton{
+  font-family: $unnamed-font-family-barlow;
+  font-style: $unnamed-font-style-normal;
+  font-weight: $unnamed-font-weight-normal;
+  font-size: $unnamed-font-size-16;
+  line-height: $unnamed-line-spacing-18;
+  letter-spacing: $unnamed-character-spacing-0;
+  color: $variante-gris-oscuro;
+  text-decoration: underline;
+}
+
+
 .banner{
     border-radius: 5%;
     background: #f7f7f7;

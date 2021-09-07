@@ -1,4 +1,4 @@
-export interface  IconsultaFacturaRadicada {
+export interface  IfacturaRadicada {
     idPrestador: String;
 	tipoIdPrestador: String;
 	fechaRadicacion: String;
@@ -7,7 +7,7 @@ export interface  IconsultaFacturaRadicada {
 	valorTotalFacturasRadicadas: Number;
 }
 
-export class consultaFacturaRadicada {
+export class facturaRadicada {
     idPrestador: String;
 	tipoIdPrestador: String;
 	fechaRadicacion: String;

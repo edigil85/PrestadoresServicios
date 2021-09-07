@@ -77,4 +77,8 @@ export class Constants {
 
   static CODIGOSHABILITACION_PRESTADORES_MAX = 300;
 
+  //constantes para modulo de consultas de prestadores
+
+  static URI_SERVICE_CONSULTA_FACTURASRADICADAS='/consultaFacturasRadicadas/consulta';
+
 }

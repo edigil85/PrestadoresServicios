@@ -1,35 +1,52 @@
 <header id="header"></header>
     <div class="container">
-        <h4 class="h4-bold">Facturas radicadas</h4>
+    <h4 class="h4-bold">Facturas radicadas</h4>
+    <form [formGroup]="form" class="normal-form pt-3" (ngSubmit)="onSubmit()">
         <div class="container background-legal">
             <div class="row ">
                 <div class="col pt-1"  >
                     <mat-form-field appearance="fill">
                         <mat-label># de radicación</mat-label>
-                        <input matInput  maxlength="20">
+                        <input matInput  maxlength="20" #numeroRadicacion formControlName="numeroRadicacion">
+                        <mat-hint align="end">{{numeroRadicacion.value.length}} / 20</mat-hint>
+                        <mat-error *ngIf="radicacion.hasError('pattern')">
+                            Solo debe tener números
+                        </mat-error>
                     </mat-form-field>
                 </div>
                 <div class="col pt-1">
                     <mat-form-field appearance="fill">
                         <mat-label>Fecha de radicacion desde</mat-label>
-                        <input matInput  [matDatepicker]="pickerInicial">
+                        <input matInput formControlName="fechaInicial" [matDatepicker]="pickerInicial">
                         <mat-datepicker-toggle matSuffix [for]="pickerInicial"></mat-datepicker-toggle>
                         <mat-datepicker touchUi #pickerInicial></mat-datepicker>
+                        <mat-error *ngIf="fechaInicial.hasError('inva')">
+                            Fecha Inicial es mayor a fecha final
+                        </mat-error>
+                        <mat-error *ngIf="fechaInicial.hasError('dif')">
+                            Se exede el rango de consulta (max 3 meses)
+                        </mat-error>
                     </mat-form-field>
                 </div>
                 <div class="col pt-1"  >
                     <mat-form-field appearance="fill">
                         <mat-label>Fecha de radicacion hasta</mat-label>
-                        <input matInput  [matDatepicker]="pickerInicial">
-                        <mat-datepicker-toggle matSuffix [for]="pickerInicial"></mat-datepicker-toggle>
-                        <mat-datepicker touchUi #pickerInicial></mat-datepicker>
+                        <input matInput formControlName="fechaFinal" [matDatepicker]="pickerFinal">
+                        <mat-datepicker-toggle matSuffix [for]="pickerFinal"></mat-datepicker-toggle>
+                        <mat-datepicker touchUi #pickerFinal></mat-datepicker>
+                        <mat-error *ngIf="fechaFinal.hasError('inva')">
+                            Fecha Inicial es mayor a fecha final
+                        </mat-error>
+                        <mat-error *ngIf="fechaFinal.hasError('dif')">
+                            Se exede el rango de consulta (max 3 meses)
+                        </mat-error>
                     </mat-form-field>
                 </div>
                 <div class="col button-row text-center pt-2"  >
-                    <button  class="buttonPrimary mr-3" >Consultar</button>
+                    <button  [ngClass]="{'buttonDisabledPrimary': form.invalid==true, 'buttonPrimary': form.invalid==false }" type="submit" [disabled]="form.invalid">Consultar</button>
                 </div>
                 <div class="col" >
-                    <p class="text-center pt-3">Limpiar</p>
+                    <p class="textoboton text-center  pt-3" (click)="limpiar()">Limpiar</p>
                 </div>
             </div>   
             <div class="row ">
@@ -40,15 +57,18 @@
                   </p>
             </div>  
         </div>
-        <section class="center pt-2">
-            <div class="info">
-              <p class="body-16 pt-1 text-center">
-                  Hemos habilitado para ti esta consulta, donde puedes encontrar la informacion
-                 de las facturas radicadas en EPS SURA.
-                </p>
-              </div>
-            <img src='..\assets\Imagenes\img-prestadores.svg'>
-        </section>
+    </form>
+        
     </div>
+
+    <section class="center pt-2">
+        <div class="info">
+          <p class="body-16 pt-1 text-center">
+              Hemos habilitado para ti esta consulta, donde puedes encontrar la informacion
+             de las facturas radicadas en EPS SURA.
+            </p>
+          </div>
+        <img src='..\assets\Imagenes\img-prestadores.svg'>
+    </section>
     
 
