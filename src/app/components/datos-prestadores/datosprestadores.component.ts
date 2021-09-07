@@ -25,7 +25,7 @@ export class DatosPrestadoresComponent {
   activeLinkIndex = -1;
   datosPrestador: IdatosPrestador;
   infoPrestador: IinfoPrestadores;
-  util: UtilService;
+  util: UtilService; 
   
  
   constructor(
