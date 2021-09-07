@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-facturas-radicadas',
   templateUrl: './facturas-radicadas.component.html',
-  styleUrls: ['./facturas-radicadas.component.css']
+  styleUrls: ['./facturas-radicadas.component.scss']
 })
 export class FacturasRadicadasComponent implements OnInit {
 

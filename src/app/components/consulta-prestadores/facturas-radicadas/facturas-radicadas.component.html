@@ -1,1 +1,54 @@
-<p>facturas-radicadas works!</p>
+<header id="header"></header>
+    <div class="container">
+        <h4 class="h4-bold">Facturas radicadas</h4>
+        <div class="container background-legal">
+            <div class="row ">
+                <div class="col pt-1"  >
+                    <mat-form-field appearance="fill">
+                        <mat-label># de radicación</mat-label>
+                        <input matInput  maxlength="20">
+                    </mat-form-field>
+                </div>
+                <div class="col pt-1">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Fecha de radicacion desde</mat-label>
+                        <input matInput  [matDatepicker]="pickerInicial">
+                        <mat-datepicker-toggle matSuffix [for]="pickerInicial"></mat-datepicker-toggle>
+                        <mat-datepicker touchUi #pickerInicial></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div class="col pt-1"  >
+                    <mat-form-field appearance="fill">
+                        <mat-label>Fecha de radicacion hasta</mat-label>
+                        <input matInput  [matDatepicker]="pickerInicial">
+                        <mat-datepicker-toggle matSuffix [for]="pickerInicial"></mat-datepicker-toggle>
+                        <mat-datepicker touchUi #pickerInicial></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div class="col button-row text-center pt-2"  >
+                    <button  class="buttonPrimary mr-3" >Consultar</button>
+                </div>
+                <div class="col" >
+                    <p class="text-center pt-3">Limpiar</p>
+                </div>
+            </div>   
+            <div class="row ">
+                
+                <p class="body-16 pt-1 pl-2 text-center">
+                    <i class="pl-2 fas fa-exclamation-triangle"></i>
+                    Ten presente que puedes consultar un rango máximo de 3 meses
+                  </p>
+            </div>  
+        </div>
+        <section class="center pt-2">
+            <div class="info">
+              <p class="body-16 pt-1 text-center">
+                  Hemos habilitado para ti esta consulta, donde puedes encontrar la informacion
+                 de las facturas radicadas en EPS SURA.
+                </p>
+              </div>
+            <img src='..\assets\Imagenes\img-prestadores.svg'>
+        </section>
+    </div>
+    
+
