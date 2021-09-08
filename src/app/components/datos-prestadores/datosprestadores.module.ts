@@ -96,7 +96,7 @@ import {CustomDateAdapter} from '../datos-prestadores/custom.date.adapter';
     providers: [
      { provide: MatPaginatorIntl, useClass: CustomMatPaginatorIntl},
      { provide: MAT_DATE_LOCALE, useValue: 'en-GB' },
-     { provide: DateAdapter, useClass: CustomDateAdapter }
+     { provide: DateAdapter, useClass: CustomDateAdapter } 
      
    ]
 })
