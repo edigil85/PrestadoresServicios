@@ -24,10 +24,10 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 //componentes del modulo
 import { PaginatePipe } from './pipes/paginate.pipe'
 import { CustomMatPaginatorIntl } from './pipes/paginate.es';
-import {CustomDateAdapter} from '../consulta-prestadores/custom.date.adapter';
+import {CustomDateAdapter} from '../datos-prestadores/custom.date.adapter';
 import {ConsultaPrestadoresRoutingModule} from './consulta-prestadores-routing.module';
-import { FacturasRadicadasComponent } from './facturas-radicadas/facturas-radicadas.component'
-
+import {FacturasRadicadasComponent } from './facturas-radicadas/facturas-radicadas.component'
+import {ConsultaPrestadoresComponent} from './consulta-prestadores.component'
 
 
 
@@ -35,6 +35,7 @@ import { FacturasRadicadasComponent } from './facturas-radicadas/facturas-radica
 @NgModule({
     declarations: 
     [
+        ConsultaPrestadoresComponent,
         PaginatePipe,
         FacturasRadicadasComponent,
     ],
