@@ -8,6 +8,8 @@ import { IconsultaFacturaRadicada} from '../model/consultaFacturasRadicada';
 import { IfacturaRadicada } from '../model/facturasRadicadas';
 import { facturasRadicadasService} from '../service/facturaRadicada.service';
 import { ErrorStateMatcher } from '@angular/material/core';
+import { formatDate } from '@angular/common';
+
 
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -30,7 +32,7 @@ export class FacturasRadicadasComponent implements OnInit {
   pageSizeOption = [10, 15, 20, 25, 30];
   utilService: UtilService;
   consultaFacturaRadicada: IconsultaFacturaRadicada;
-  facturaRadicada: IfacturaRadicada[]=[];
+  facturasRadicada: IfacturaRadicada[]=[];
   form: FormGroup;
 
   constructor(
@@ -70,7 +72,6 @@ export class FacturasRadicadasComponent implements OnInit {
         const min=form.get('fechaInicial');
         const max=form.get('fechaFinal');
         var resta=(Number(max.value)-Number(min.value))/(1000*60*60*24);
-        console.log(resta);
         return min.value && max.value && +resta>92?{dif:true}:null
       }
     }
@@ -78,12 +79,44 @@ export class FacturasRadicadasComponent implements OnInit {
   
 
   ngOnInit(): void {
+    this.limpiar();
   }
 
   onSubmit() {
-    console.log("se presiono el boton consultar");
+    var numeroRadicacion: string, fechaRadicacionDesde: string, fechaRadicacionHasta: string
+    
+    numeroRadicacion=this.form.get('numeroRadicacion').value;
+    fechaRadicacionDesde=this.form.get('fechaInicial').value;
+    fechaRadicacionHasta=this.form.get('fechaFinal').value;
+  
+    var respuesta = this.tipoconsulta(numeroRadicacion, fechaRadicacionDesde, fechaRadicacionHasta )
+
+    if(respuesta>3){
+      this.openDialog(
+        'Error Consulta',
+        '',
+        'No se cumplen con los criterios de busqueda');
+    }
+    else{
+      this.consultarFacturaRadicada(numeroRadicacion, formatDate(fechaRadicacionDesde,"dd/MM/yyyy",'en-US') , formatDate(fechaRadicacionHasta,"dd/MM/yyyy",'en-US'), respuesta)
+    }
   }
 
+  tipoconsulta(numeroRadicacion: String, fechaRadicacionDesde: String, fechaRadicacionHasta: String ){
+    if(numeroRadicacion && fechaRadicacionDesde && fechaRadicacionHasta){
+      return 2
+    }
+
+    if (!numeroRadicacion && fechaRadicacionDesde && fechaRadicacionHasta){
+      return 3
+    }
+
+    if (numeroRadicacion && !fechaRadicacionDesde && !fechaRadicacionHasta){
+      return 1
+    }
+    return 4
+  }
+  
 
   limpiar(){
     this.form.reset();
@@ -91,7 +124,7 @@ export class FacturasRadicadasComponent implements OnInit {
 
 
 
-  consultarFacturaRadicada(any){
+  consultarFacturaRadicada(numeroRadicacion: String, fechaRadicacionDesde: String, fechaRadicacionHasta: String, tipoConsulta: Number ){
     this.spinner.show();
     var datos = JSON.parse( localStorage.getItem( "SSE" ) );
     this.consultaFacturaRadicada= {idPrestador: datos.numeroDocumentoPrestador, 
@@ -100,7 +133,7 @@ export class FacturasRadicadasComponent implements OnInit {
     this.service.consultarfacturaRadicada(this.consultaFacturaRadicada)
     .subscribe(
       async (result) => {
-        this.facturaRadicada= await result;
+        this.facturasRadicada= await result;
         this.spinner.hide();
       },(error) => {
         this.spinner.hide();
