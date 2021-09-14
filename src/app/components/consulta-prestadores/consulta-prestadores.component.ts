@@ -4,6 +4,8 @@ import {utilPrestadoresService} from '../datos-prestadores/service/utilPrestador
 import { MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {UtilService} from '../../shared/service/util.service';
 import { ModalDialogComponent } from '../modal-dialog/modal-dialog.component';
+import { MatIconRegistry } from "@angular/material/icon";
+import { DomSanitizer } from "@angular/platform-browser";
 
 @Component({
   selector: 'app-consulta-prestadores',
@@ -18,8 +20,15 @@ export class ConsultaPrestadoresComponent implements OnInit {
 
   constructor(
     private utilService: utilPrestadoresService,
-    private dialog: MatDialog
-  ) { }
+    private dialog: MatDialog,
+    private matIconRegistry: MatIconRegistry,
+    private domSanitizer: DomSanitizer,
+  ) {
+    this.matIconRegistry.addSvgIcon("user",this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/Iconos/iconos-prestadores/ic-user.svg"));
+    this.matIconRegistry.addSvgIcon("exportPDF",this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/Iconos/iconos-prestadores/pdf-file-ic.svg"));
+    this.matIconRegistry.addSvgIcon("exportCSV",this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/Iconos/iconos-prestadores/file-csv-light.svg"));
+    
+   }
 
   ngOnInit(): void {
     this.datosPrestador= { tipoDocumentoPrestador:'', razonSocial:'', numeroDocumentoPrestador:'', tokenInformaticaCloud:''};

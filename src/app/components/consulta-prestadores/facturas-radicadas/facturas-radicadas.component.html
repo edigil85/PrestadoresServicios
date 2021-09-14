@@ -58,10 +58,7 @@
             </div>  
         </div>
     </form>
-        
-    </div>
-
-    <section class="center pt-2">
+    <section class="center pt-2" *ngIf="facturasRadicada.length==0">
         <div class="info">
           <p class="body-16 pt-1 text-center">
               Hemos habilitado para ti esta consulta, donde puedes encontrar la informacion
@@ -70,5 +67,51 @@
           </div>
         <img src='..\assets\Imagenes\img-prestadores.svg'>
     </section>
+
+    <div class="container" *ngIf="facturasRadicada.length>0">
+        <h5 class="h4-bold">Detalle de facturas radicadas</h5>
+        <p>{{facturasRadicada.length}} registro(s) recuperado(s)</p>
+        
+
+        <table>
+            <tr>
+              <th>Fecha de radicación</th>
+              <th># de radicación</th>
+              <th>Total de facturas radicadas</th>
+              <th>Valor total facturas radicadas</th>
+              <th>Exportar facturas</th>
+            </tr>
+            <tr *ngFor="let factura of facturasRadicada | paginate: page_size: page_number">
+                <td>{{factura.fechaRadicacion}}</td>
+                <td>{{factura.numeroRadicacion}}</td>
+                <td>{{factura.totalFacturasRadicadas}}</td>
+                <td>$ {{factura.valorTotalFacturasRadicadas}}</td>
+                <td>
+                    <button mat-icon-button (click)="ExportarCSV()" class="ml-2" >
+                        <mat-icon svgIcon="exportCSV" ></mat-icon>
+                    </button>
+                    <button mat-icon-button (click)="exportarPDF()" class="ml-2" >
+                        <mat-icon svgIcon="exportPDF" ></mat-icon>
+                    </button>
+                     
+                    
+                </td>
+            </tr>
+          </table>
+
+
+          <mat-paginator [length]="facturasRadicada.length"
+          [pageSize]="page_size"
+          [pageSizeOptions]="pageSizeOption"
+          (page)="handlePage($event)"
+          showFirstLastButtons>
+        </mat-paginator>
+    </div>
+
+    </div>
+
+
+
+    
     
 

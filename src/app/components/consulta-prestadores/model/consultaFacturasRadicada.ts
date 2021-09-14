@@ -4,7 +4,7 @@ export interface  IconsultaFacturaRadicada {
 	numeroRadicacion: String;
 	fechaRadicacionDesde: String;
 	fechaRadicacionHasta: String;
-    tipoConsulta: Number;
+    tipoconsulta: Number;
 }
 
 export class consultaFacturaRadicada {
@@ -13,7 +13,7 @@ export class consultaFacturaRadicada {
 	numeroRadicacion: String;
 	fechaRadicacionDesde: String;
 	fechaRadicacionHasta: String;
-    tipoConsulta: Number;
+    tipoconsulta: Number;
 
     constructor(
         idPrestador: String,
@@ -27,6 +27,6 @@ export class consultaFacturaRadicada {
          this.numeroRadicacion=numeroRadicacion;
          this.fechaRadicacionDesde=fechaRadicacionDesde;
          this.fechaRadicacionHasta=fechaRadicacionHasta;
-         this.tipoConsulta=tipoConsulta;
+         this.tipoconsulta=tipoConsulta;
     }
 }

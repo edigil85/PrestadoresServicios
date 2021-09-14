@@ -9,6 +9,7 @@ import { IfacturaRadicada } from '../model/facturasRadicadas';
 import { facturasRadicadasService} from '../service/facturaRadicada.service';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { formatDate } from '@angular/common';
+import { PageEvent } from '@angular/material/paginator';
 
 
 
@@ -120,6 +121,15 @@ export class FacturasRadicadasComponent implements OnInit {
 
   limpiar(){
     this.form.reset();
+    this.facturasRadicada=[];
+  }
+
+  exportarPDF(){
+
+  }
+
+  ExportarCSV(){
+    
   }
 
 
@@ -127,9 +137,28 @@ export class FacturasRadicadasComponent implements OnInit {
   consultarFacturaRadicada(numeroRadicacion: String, fechaRadicacionDesde: String, fechaRadicacionHasta: String, tipoConsulta: Number ){
     this.spinner.show();
     var datos = JSON.parse( localStorage.getItem( "SSE" ) );
-    this.consultaFacturaRadicada= {idPrestador: datos.numeroDocumentoPrestador, 
-                tipoIdentificacion:datos.tipoDocumentoPrestador, 
-                numeroRadicacion: null, fechaRadicacionDesde:null, fechaRadicacionHasta: null, tipoConsulta:null };
+
+    switch(tipoConsulta){
+      case 1: {
+        this.consultaFacturaRadicada= {idPrestador: datos.numeroDocumentoPrestador, 
+          tipoIdentificacion:datos.tipoDocumentoPrestador, 
+          numeroRadicacion: numeroRadicacion, fechaRadicacionDesde:null, fechaRadicacionHasta: null, tipoconsulta:tipoConsulta };
+        break;
+      }
+      case 2: {
+        this.consultaFacturaRadicada= {idPrestador: datos.numeroDocumentoPrestador, 
+          tipoIdentificacion:datos.tipoDocumentoPrestador, 
+          numeroRadicacion: numeroRadicacion, fechaRadicacionDesde:fechaRadicacionDesde, fechaRadicacionHasta: fechaRadicacionHasta, tipoconsulta:tipoConsulta };
+        break;
+      }
+      case 3: {
+        this.consultaFacturaRadicada= {idPrestador: datos.numeroDocumentoPrestador, 
+          tipoIdentificacion:datos.tipoDocumentoPrestador, 
+          numeroRadicacion: null, fechaRadicacionDesde:fechaRadicacionDesde, fechaRadicacionHasta: fechaRadicacionHasta, tipoconsulta:tipoConsulta };
+        break;
+      }
+    }
+
     this.service.consultarfacturaRadicada(this.consultaFacturaRadicada)
     .subscribe(
       async (result) => {
@@ -150,6 +179,11 @@ export class FacturasRadicadasComponent implements OnInit {
         message: pMessage,
       },
     });
+  }
+
+  handlePage(e: PageEvent){
+    this.page_size= e.pageSize;
+    this.page_number= e.pageIndex + 1;
   }
 
   _getError(error) {
@@ -175,8 +209,6 @@ export class FacturasRadicadasComponent implements OnInit {
     }
   }
 
-
- 
   get radicacion() { return this.form.get('numeroRadicacion');}
   get fechaInicial() { return this.form.get('fechaInicial');}
   get fechaFinal() { return this.form.get('fechaFinal');}
