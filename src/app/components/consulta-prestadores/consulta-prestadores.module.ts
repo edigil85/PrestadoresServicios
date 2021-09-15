@@ -22,12 +22,14 @@ import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/
 import { NgxSpinnerModule } from 'ngx-spinner';
 
 //componentes del modulo
-import { PaginatePipe } from './pipes/paginate.pipe'
-import { CustomMatPaginatorIntl } from './pipes/paginate.es';
+import {PaginatePipe } from './pipes/paginate.pipe'
+import {CustomMatPaginatorIntl } from './pipes/paginate.es';
 import {CustomDateAdapter} from '../datos-prestadores/custom.date.adapter';
 import {ConsultaPrestadoresRoutingModule} from './consulta-prestadores-routing.module';
 import {FacturasRadicadasComponent } from './facturas-radicadas/facturas-radicadas.component'
-import {ConsultaPrestadoresComponent} from './consulta-prestadores.component'
+import {ConsultaPrestadoresComponent} from './consulta-prestadores.component';
+import {GlosasComponent } from './glosas/glosas.component';
+import {DevolucionesComponent } from './devoluciones/devoluciones.component'
 
 
 
@@ -38,6 +40,8 @@ import {ConsultaPrestadoresComponent} from './consulta-prestadores.component'
         ConsultaPrestadoresComponent,
         PaginatePipe,
         FacturasRadicadasComponent,
+        GlosasComponent,
+        DevolucionesComponent,
     ],
     imports: [ 
         HttpClientModule,

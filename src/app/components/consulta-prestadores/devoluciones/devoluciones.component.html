@@ -1,20 +1,10 @@
 <header id="header"></header>
     <div class="container">
-    <h4 class="h4-bold">Facturas radicadas</h4>
+    <h4 class="h4-bold">Devoluciones</h4>
     <form [formGroup]="form" class="normal-form pt-3" (ngSubmit)="onSubmit()">
         <div class="container background-legal">
             <div class="row ">
-                <div class="col pt-1"  >
-                    <mat-form-field appearance="fill">
-                        <mat-label># de radicación</mat-label>
-                        <input matInput  maxlength="20" #numeroRadicacion formControlName="numeroRadicacion">
-                        <mat-hint align="end">{{numeroRadicacion.value.length}} / 20</mat-hint>
-                        <mat-error *ngIf="radicacion.hasError('pattern')">
-                            Solo debe tener números
-                        </mat-error>
-                    </mat-form-field>
-                </div>
-                <div class="col pt-1">
+                <div class="col-sm">
                     <mat-form-field appearance="fill">
                         <mat-label>Fecha de radicacion desde</mat-label>
                         <input matInput formControlName="fechaInicial" [matDatepicker]="pickerInicial">
@@ -24,11 +14,11 @@
                             Fecha Inicial es mayor a fecha final
                         </mat-error>
                         <mat-error *ngIf="fechaInicial.hasError('dif')">
-                            Se exede el rango de consulta (max 3 meses)
+                            Se exede el rango de consulta (max 3 meses) 
                         </mat-error>
                     </mat-form-field>
                 </div>
-                <div class="col pt-1"  >
+                <div class="col-sm"  >
                     <mat-form-field appearance="fill">
                         <mat-label>Fecha de radicacion hasta</mat-label>
                         <input matInput formControlName="fechaFinal" [matDatepicker]="pickerFinal">
@@ -42,11 +32,31 @@
                         </mat-error>
                     </mat-form-field>
                 </div>
-                <div class="col button-row text-center pt-2"  >
+                <div class="col-sm"  >
+                    <mat-form-field appearance="fill">
+                        <mat-label>Prefijo de factura</mat-label>
+                        <input matInput  maxlength="20" #prefijoFactura formControlName="prefijoFactura">
+                        <mat-hint align="end">{{prefijoFactura.value.length}} / 20</mat-hint>
+                        <mat-error *ngIf="prefijoFactura.hasError('pattern')">
+                            Solo debe tener números
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-sm"  >
+                    <mat-form-field appearance="fill">
+                        <mat-label># de factura</mat-label>
+                        <input matInput  maxlength="20" #numerofactura formControlName="numeroFactura">
+                        <mat-hint align="end">{{numerofactura.value.length}} / 20</mat-hint>
+                        <mat-error *ngIf="numerofactura.hasError('pattern')">
+                            Solo debe tener números
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col button-row text-center"  >
                     <button  [ngClass]="{'buttonDisabledPrimary': form.invalid==true, 'buttonPrimary': form.invalid==false }" type="submit" [disabled]="form.invalid">Consultar</button>
                 </div>
                 <div class="col" >
-                    <p class="textoboton text-center  pt-3" (click)="limpiar()">Limpiar</p>
+                    <p class="textoboton text-center" (click)="limpiar()">Limpiar</p>
                 </div>
             </div>   
             <div class="row ">
@@ -58,7 +68,7 @@
             </div>  
         </div>
     </form>
-    <section class="center pt-2" *ngIf="facturasRadicada.length==0">
+    <section class="center pt-2">
         <div class="info">
           <p class="body-16 pt-1 text-center">
               Hemos habilitado para ti esta consulta, donde puedes encontrar la informacion
@@ -68,50 +78,7 @@
         <img src='..\assets\Imagenes\png-search.png'>
     </section>
 
-    <div class="container" *ngIf="facturasRadicada.length>0">
-        <h5 class="h4-bold">Detalle de facturas radicadas</h5>
-        <p>{{facturasRadicada.length}} registro(s) recuperado(s)</p>
-        
-
-        <table>
-            <tr>
-              <th>Fecha de radicación</th>
-              <th># de radicación</th>
-              <th>Total de facturas radicadas</th>
-              <th>Valor total facturas radicadas</th>
-              <th>Exportar facturas</th>
-            </tr>
-            <tr *ngFor="let factura of facturasRadicada | paginate: page_size: page_number">
-                <td>{{factura.fechaRadicacion}}</td>
-                <td>{{factura.numeroRadicacion}}</td>
-                <td>{{factura.totalFacturasRadicadas}}</td>
-                <td>$ {{factura.valorTotalFacturasRadicadas}}</td>
-                <td>
-                    <button mat-icon-button (click)="ExportarCSV()" class="ml-2" >
-                        <mat-icon svgIcon="exportCSV" ></mat-icon>
-                    </button>
-                    <button mat-icon-button (click)="exportarPDF()" class="ml-2" >
-                        <mat-icon svgIcon="exportPDF" ></mat-icon>
-                    </button>
-                     
-                    
-                </td>
-            </tr>
-          </table>
-
-
-          <mat-paginator [length]="facturasRadicada.length"
-          [pageSize]="page_size"
-          [pageSizeOptions]="pageSizeOption"
-          (page)="handlePage($event)"
-          showFirstLastButtons>
-        </mat-paginator>
-    </div>
-
-    </div>
-
-
-
     
-    
+
+
 
