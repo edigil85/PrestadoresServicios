@@ -35,7 +35,7 @@ export class DevolucionesComponent implements OnInit {
     private formBuilder: FormBuilder
   ) {
     this.form = this.formBuilder.group({
-      prefijoFactura: new FormControl('',[Validators.pattern('^[0-9]*$')]),
+      prefijoFactura: new FormControl('',[Validators.pattern('^[A-Za-z0-9]*$')]),
       numeroFactura: new FormControl('',[Validators.pattern('^[0-9]*$')]),
       fechaInicial: new FormControl('', [ this.fechaValidator(), this.fechadiferencia()]),
       fechaFinal: new FormControl('', [ this.fechaValidator(), this.fechadiferencia()]),
@@ -76,7 +76,37 @@ export class DevolucionesComponent implements OnInit {
   }
 
   onSubmit() {
+    var numerofactura: string, prefijoFactura: String, fechaRadicacionDesde: string, fechaRadicacionHasta: string
     
+    numerofactura=this.form.get('numeroFactura').value;
+    prefijoFactura=this.form.get('prefijoFactura').value;
+    fechaRadicacionDesde=this.form.get('fechaInicial').value;
+    fechaRadicacionHasta=this.form.get('fechaFinal').value;
+  
+    var respuesta = this.tipoconsulta(numerofactura, prefijoFactura, fechaRadicacionDesde, fechaRadicacionHasta )
+
+    if(respuesta>4){
+      this.openDialog(
+        'Error Consulta',
+        '',
+        'No se cumplen con los criterios de busqueda');
+    }
+  }
+
+  tipoconsulta(numerofactura: string, prefijoFactura: String, fechaRadicacionDesde: string, fechaRadicacionHasta: string ){
+    if(!numerofactura && !prefijoFactura && fechaRadicacionDesde && fechaRadicacionHasta){
+      return 1
+    }
+    if(!numerofactura && prefijoFactura && fechaRadicacionDesde && fechaRadicacionHasta){
+      return 2
+    }
+    if(numerofactura && !prefijoFactura && fechaRadicacionDesde && fechaRadicacionHasta){
+      return 3
+    }
+    if(numerofactura && prefijoFactura && fechaRadicacionDesde && fechaRadicacionHasta){
+      return 4
+    }
+    return 5
   }
 
   limpiar(){
@@ -84,8 +114,46 @@ export class DevolucionesComponent implements OnInit {
     
   }
 
-  get prefijoFactura() { return this.form.get('prefijoFactura');}
-  get numeroFactura() { return this.form.get('numeroFactura');}
+  openDialog(pTittle, pSubtittle, pMessage) {
+    this.dialog.open(ModalDialogComponent, {
+      data: {
+        tittle: pTittle,
+        subtittle: pSubtittle,
+        message: pMessage,
+      },
+    });
+  }
+
+  handlePage(e: PageEvent){
+    this.page_size= e.pageSize;
+    this.page_number= e.pageIndex + 1;
+  }
+
+  _getError(error) {
+    if (error.status === 500) {
+      this.openDialog(
+        'Mensaje Error',
+        '',
+        'Ocurrió un error en el servicio, por favor intente más tarde.'
+      );
+    } else if (error.status === 401) {
+      this.openDialog(
+        'Mensaje Error',
+        '401',
+        'Su sesión ha terminado, por favor inicia nuevamente.'
+      );
+
+    } else if (error.error.frontEndErrorCode != undefined) {
+      this.openDialog(
+        'Mensaje Error',
+        '',
+        this.utilService.showMessageError(error.error.frontEndErrorCode)
+      );
+    }
+  }
+
+  get preFactura() { return this.form.get('prefijoFactura');}
+  get numFactura() { return this.form.get('numeroFactura');}
   get fechaInicial() { return this.form.get('fechaInicial');}
   get fechaFinal() { return this.form.get('fechaFinal');}
 

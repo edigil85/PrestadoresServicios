@@ -1,11 +1,11 @@
 <header id="header"></header>
     <div class="container">
     <h4 class="h4-bold">Devoluciones</h4>
-    <form [formGroup]="form" class="normal-form pt-3" (ngSubmit)="onSubmit()">
-        <div class="container background-legal">
+    <form [formGroup]="form" class="normal-form pt-1" (ngSubmit)="onSubmit()">
+        <div class="container boxShadow">
             <div class="row ">
-                <div class="col-sm">
-                    <mat-form-field appearance="fill">
+                <div class="col pt-2">
+                    <mat-form-field  class="input-md" appearance="fill">
                         <mat-label>Fecha de radicacion desde</mat-label>
                         <input matInput formControlName="fechaInicial" [matDatepicker]="pickerInicial">
                         <mat-datepicker-toggle matSuffix [for]="pickerInicial"></mat-datepicker-toggle>
@@ -14,12 +14,10 @@
                             Fecha Inicial es mayor a fecha final
                         </mat-error>
                         <mat-error *ngIf="fechaInicial.hasError('dif')">
-                            Se exede el rango de consulta (max 3 meses) 
-                        </mat-error>
+                            Se exede el rango de consulta (max 3 meses)  
+                        </mat-error> 
                     </mat-form-field>
-                </div>
-                <div class="col-sm"  >
-                    <mat-form-field appearance="fill">
+                    <mat-form-field  class="input-md" appearance="fill">
                         <mat-label>Fecha de radicacion hasta</mat-label>
                         <input matInput formControlName="fechaFinal" [matDatepicker]="pickerFinal">
                         <mat-datepicker-toggle matSuffix [for]="pickerFinal"></mat-datepicker-toggle>
@@ -28,35 +26,33 @@
                             Fecha Inicial es mayor a fecha final
                         </mat-error>
                         <mat-error *ngIf="fechaFinal.hasError('dif')">
-                            Se exede el rango de consulta (max 3 meses)
+                            Se exede el rango de consulta (max 3 meses)ftgr
                         </mat-error>
                     </mat-form-field>
                 </div>
-                <div class="col-sm"  >
-                    <mat-form-field appearance="fill">
+                <div class="col pt-2">
+                    <mat-form-field class="input-md" appearance="fill">
                         <mat-label>Prefijo de factura</mat-label>
                         <input matInput  maxlength="20" #prefijoFactura formControlName="prefijoFactura">
                         <mat-hint align="end">{{prefijoFactura.value.length}} / 20</mat-hint>
-                        <mat-error *ngIf="prefijoFactura.hasError('pattern')">
-                            Solo debe tener números
+                        <mat-error *ngIf="preFactura.hasError('pattern')">
+                            Contiene caracteres no validos
                         </mat-error>
                     </mat-form-field>
-                </div>
-                <div class="col-sm"  >
-                    <mat-form-field appearance="fill">
+                    <mat-form-field class="input-md" appearance="fill">
                         <mat-label># de factura</mat-label>
-                        <input matInput  maxlength="20" #numerofactura formControlName="numeroFactura">
-                        <mat-hint align="end">{{numerofactura.value.length}} / 20</mat-hint>
-                        <mat-error *ngIf="numerofactura.hasError('pattern')">
+                        <input matInput  maxlength="20" #numeroFactura formControlName="numeroFactura">
+                        <mat-hint align="end">{{numeroFactura.value.length}} / 20</mat-hint>
+                        <mat-error *ngIf="numFactura.hasError('pattern')">
                             Solo debe tener números
                         </mat-error>
                     </mat-form-field>
                 </div>
-                <div class="col button-row text-center"  >
+                <div class="col m-auto text-center pt-2"  >
                     <button  [ngClass]="{'buttonDisabledPrimary': form.invalid==true, 'buttonPrimary': form.invalid==false }" type="submit" [disabled]="form.invalid">Consultar</button>
                 </div>
-                <div class="col" >
-                    <p class="textoboton text-center" (click)="limpiar()">Limpiar</p>
+                <div class="col m-auto" >
+                    <button type="button" class="textoboton text-center" (click)="limpiar()">Limpiar</button>
                 </div>
             </div>   
             <div class="row ">
@@ -68,14 +64,16 @@
             </div>  
         </div>
     </form>
-    <section class="center pt-2">
+    <section class="center boxShadow pt-2 mt-3">
         <div class="info">
-          <p class="body-16 pt-1 text-center">
-              Hemos habilitado para ti esta consulta, donde puedes encontrar la informacion
-             de las facturas radicadas en EPS SURA.
-            </p>
+            <p class="body-16 mb-0 text-center">
+                Hemos habilitado para ti esta consulta, donde puedes encontrar la
+              </p>
+              <p class="body-16  mb-0 text-center">
+                informacion de las facturas radicadas en EPS SURA.
+              </p>
           </div>
-        <img src='..\assets\Imagenes\png-search.png'>
+        <img class="image" src='..\assets\Imagenes\png-search.png'>
     </section>
 
     
