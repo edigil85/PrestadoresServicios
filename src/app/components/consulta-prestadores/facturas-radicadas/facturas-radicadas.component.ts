@@ -10,6 +10,7 @@ import { facturasRadicadasService} from '../service/facturaRadicada.service';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { formatDate } from '@angular/common';
 import { PageEvent } from '@angular/material/paginator';
+import { saveAs } from 'file-saver';
 
 
 
@@ -30,11 +31,13 @@ export class FacturasRadicadasComponent implements OnInit {
 
   page_size: number = 10;
   page_number: number = 1;
+  blob;
   pageSizeOption = [10, 15, 20, 25, 30];
   utilService: UtilService;
   consultaFacturaRadicada: IconsultaFacturaRadicada;
-  facturasRadicada: IfacturaRadicada[]=[];
+  facturasRadicadas: IfacturaRadicada[]=[];
   form: FormGroup;
+  filename: string = null;
 
   constructor(
     private dialog: MatDialog,
@@ -121,16 +124,46 @@ export class FacturasRadicadasComponent implements OnInit {
 
   limpiar(){
     this.form.reset();
-    this.facturasRadicada=[];
+    this.facturasRadicadas=[];
   }
 
-  exportarPDF(){
-
+  exportarPDF(factura: IfacturaRadicada){
+    this.filename= factura.idPrestador+"-"+factura.numeroRadicacion;
+    this.service.detallefacturaradicadaPDF(factura)
+    .subscribe(
+      (response: any) =>{
+        let dataType = response.type;
+        let binaryData = [];
+        binaryData.push(response);
+        let downloadLink = document.createElement('a');
+        downloadLink.href = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));
+        if (this.filename)
+            downloadLink.setAttribute('download', this.filename);
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+    }
+    )
   }
 
-  ExportarCSV(){
-    
+  ExportarCSV(factura: IfacturaRadicada){
+    this.filename= factura.idPrestador+"-"+factura.numeroRadicacion;
+    this.service.detallefacturaradicadaXLS(factura)
+    .subscribe(
+      (response: any) =>{
+        let dataType = response.type;
+        let binaryData = [];
+        binaryData.push(response);
+        let downloadLink = document.createElement('a');
+        downloadLink.href = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));
+        if (this.filename)
+            downloadLink.setAttribute('download', this.filename);
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+    }
+    )
   }
+
+
 
 
 
@@ -162,7 +195,7 @@ export class FacturasRadicadasComponent implements OnInit {
     this.service.consultarfacturaRadicada(this.consultaFacturaRadicada)
     .subscribe(
       async (result) => {
-        this.facturasRadicada= await result;
+        this.facturasRadicadas= await result;
         this.spinner.hide();
       },(error) => {
         this.spinner.hide();

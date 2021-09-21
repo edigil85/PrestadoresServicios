@@ -80,5 +80,7 @@ export class Constants {
   //constantes para modulo de consultas de prestadores
 
   static URI_SERVICE_CONSULTA_FACTURASRADICADAS='/consultaFacturasRadicadas/consulta';
+  static URI_SERVICE_DETALLEFACTURARADICADAPDF='/consultaFacturasRadicadas/consultaDetallePDF';
+  static URI_SERVICE_DETALLEFACTURARADICADAXLS='/consultaFacturasRadicadas/consultaDetalleXLS';
 
 }

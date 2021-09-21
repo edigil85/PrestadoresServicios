@@ -58,7 +58,7 @@
             </div>  
         </div>
     </form>
-    <section class="center boxShadow pt-2 mt-3 " *ngIf="facturasRadicada.length==0">
+    <section class="center boxShadow pt-2 mt-3 " *ngIf="facturasRadicadas.length==0">
         <div class="info">
           <p class="body-16 mb-0 text-center">
             Hemos habilitado para ti esta consulta, donde puedes encontrar la
@@ -70,9 +70,9 @@
         <img class="image" src='..\assets\Imagenes\png-search.png'>
     </section>
 
-    <div class="container boxShadow pt-2 mt-3" *ngIf="facturasRadicada.length>0">
+    <div class="container boxShadow pt-2 mt-3" *ngIf="facturasRadicadas.length>0">
         <h5 class="h4-bold">Detalle de facturas radicadas</h5>
-        <p>{{facturasRadicada.length}} registro(s) recuperado(s)</p>
+        <p>{{facturasRadicadas.length}} registro(s) recuperado(s)</p>
         
 
         <table>
@@ -83,16 +83,16 @@
               <th>Valor total facturas radicadas</th>
               <th>Exportar facturas</th>
             </tr>
-            <tr *ngFor="let factura of facturasRadicada | paginate: page_size: page_number">
+            <tr *ngFor="let factura of facturasRadicadas | paginate: page_size: page_number">
                 <td>{{factura.fechaRadicacion}}</td>
                 <td>{{factura.numeroRadicacion}}</td>
                 <td>{{factura.totalFacturasRadicadas}}</td>
                 <td>$ {{factura.valorTotalFacturasRadicadas}}</td>
                 <td>
-                    <button mat-icon-button (click)="ExportarCSV()" class="ml-2" >
+                    <button mat-icon-button (click)="ExportarCSV(factura)" class="ml-2" >
                         <mat-icon class="iconos" svgIcon="exportCSV" ></mat-icon>
                     </button>
-                    <button mat-icon-button (click)="exportarPDF()" class="ml-2" >
+                    <button mat-icon-button (click)="exportarPDF(factura)" class="ml-2" >
                         <mat-icon svgIcon="exportPDF" ></mat-icon>
                     </button>
                      
@@ -102,7 +102,7 @@
           </table>
 
 
-          <mat-paginator [length]="facturasRadicada.length"
+          <mat-paginator [length]="facturasRadicadas.length"
           [pageSize]="page_size"
           [pageSizeOptions]="pageSizeOption"
           (page)="handlePage($event)"

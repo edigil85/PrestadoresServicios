@@ -21,5 +21,15 @@ export class facturasRadicadasService{
     return this.httpClient.post<IconsultaFacturaRadicada>(`${this.baseUrl}`+Constants.URI_SERVICE_CONSULTA_FACTURASRADICADAS,
     JSON.stringify(params), {headers:environment.headers})
   }
+
+  detallefacturaradicadaPDF(params:IfacturaRadicada): Observable<Blob> {
+    return this.httpClient.post<any>(`${this.baseUrl}`+Constants.URI_SERVICE_DETALLEFACTURARADICADAPDF, 
+    JSON.stringify(params),   {headers:environment.headers, responseType: 'blob' as 'json'} )
+  }
+
+  detallefacturaradicadaXLS(params:IfacturaRadicada): Observable<Blob> {
+    return this.httpClient.post<any>(`${this.baseUrl}`+Constants.URI_SERVICE_DETALLEFACTURARADICADAXLS, 
+    JSON.stringify(params),   {headers:environment.headers, responseType: 'blob' as 'json'} )
+  }
   
 }
