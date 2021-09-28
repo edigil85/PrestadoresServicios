@@ -1,12 +1,15 @@
 <header id="header"></header>
     <div class="container">
+    <ngx-spinner [fullScreen]="false" bdColor="rgba(165,162,165,0.8)" size="large" color="#fff" type="ball-pulse">
+        <p style="font-size: 20px; position: relative; color: white">Procesando...</p>
+    </ngx-spinner>
     <h4 class="h4-bold">Devoluciones</h4>
     <form [formGroup]="form" class="normal-form pt-1" (ngSubmit)="onSubmit()">
         <div class="container boxShadow">
             <div class="row ">
                 <div class="col pt-2">
                     <mat-form-field  class="input-md" appearance="fill">
-                        <mat-label>Fecha de radicacion desde</mat-label>
+                        <mat-label>Fecha de radicacion desde *</mat-label>
                         <input matInput formControlName="fechaInicial" [matDatepicker]="pickerInicial">
                         <mat-datepicker-toggle matSuffix [for]="pickerInicial"></mat-datepicker-toggle>
                         <mat-datepicker touchUi #pickerInicial></mat-datepicker>
@@ -16,9 +19,12 @@
                         <mat-error *ngIf="fechaInicial.hasError('dif')">
                             Se exede el rango de consulta (max 3 meses)  
                         </mat-error> 
+                        <mat-error *ngIf="fechaInicial.hasError('required')">
+                            Campo requerido
+                        </mat-error>
                     </mat-form-field>
                     <mat-form-field  class="input-md" appearance="fill">
-                        <mat-label>Fecha de radicacion hasta</mat-label>
+                        <mat-label>Fecha de radicacion hasta *</mat-label>
                         <input matInput formControlName="fechaFinal" [matDatepicker]="pickerFinal">
                         <mat-datepicker-toggle matSuffix [for]="pickerFinal"></mat-datepicker-toggle>
                         <mat-datepicker touchUi #pickerFinal></mat-datepicker>
@@ -27,6 +33,9 @@
                         </mat-error>
                         <mat-error *ngIf="fechaFinal.hasError('dif')">
                             Se exede el rango de consulta (max 3 meses)ftgr
+                        </mat-error>
+                        <mat-error *ngIf="fechaFinal.hasError('required')">
+                            Campo requerido
                         </mat-error>
                     </mat-form-field>
                 </div>

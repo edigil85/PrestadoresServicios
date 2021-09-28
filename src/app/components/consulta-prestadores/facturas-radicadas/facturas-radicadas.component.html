@@ -1,5 +1,9 @@
 <header id="header"></header>
     <div class="container">
+    <ngx-spinner [fullScreen]="false" bdColor="rgba(165,162,165,0.8)" size="large" color="#fff" 
+        type="ball-pulse">
+        <p style="font-size: 20px; position: relative; color: white">Procesando...</p>
+    </ngx-spinner>
     <h4 class="h4-bold">Facturas radicadas</h4>
     <form [formGroup]="form" class="normal-form pt-1" (ngSubmit)="onSubmit()">
         <div class="container boxShadow">
