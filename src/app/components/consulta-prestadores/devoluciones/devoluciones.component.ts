@@ -35,6 +35,7 @@ export class DevolucionesComponent implements OnInit {
   pageSizeOption = [10, 15, 20, 25, 30];
   consultaDevoluciones: IconsultaDevoluciones;
   listaDevoluciones: Idevoluviones[]=[];
+  mostrarDevoluciones: Idevoluviones[]=[]
   utilService: UtilService;
   form: FormGroup;
   filename: string = null;
@@ -44,7 +45,6 @@ export class DevolucionesComponent implements OnInit {
   cantidadaldia: number=0;
   cantidadProxima: number=0;
   cantidadvencida: number=0;
-  expandir = false;
 
 
   constructor(
@@ -167,7 +167,6 @@ export class DevolucionesComponent implements OnInit {
     .subscribe(
       async (result) => {
         this.listaDevoluciones= await result;
-        
         for(var i=0;i<this.listaDevoluciones.length; i++){
           if(this.listaDevoluciones[i].estado==this.aldia){
             this.cantidadaldia= this.cantidadaldia + 1;
@@ -178,10 +177,8 @@ export class DevolucionesComponent implements OnInit {
           if(this.listaDevoluciones[i].estado==this.vencida){
             this.cantidadvencida= this.cantidadvencida + 1;
           }
+           this.mostrarDevoluciones=this.listaDevoluciones;
         }
-
-
-
         this.spinner.hide();
       },(error) => {
         this.spinner.hide();
@@ -209,9 +206,26 @@ export class DevolucionesComponent implements OnInit {
   limpiar(){
     this.form.reset();
     this.listaDevoluciones=[];
+    this.mostrarDevoluciones=[];
     this.cantidadaldia=0;
     this.cantidadProxima=0;
     this.cantidadvencida=0;
+  }
+
+  filtroTodos(){
+    this.mostrarDevoluciones=this.listaDevoluciones;
+  }
+
+  filtroAldia(){
+    this.mostrarDevoluciones=this.listaDevoluciones.filter(devolucion => devolucion.estado==this.aldia);
+  }
+
+  filtroProximo(){
+    this.mostrarDevoluciones=this.listaDevoluciones.filter(devolucion => devolucion.estado==this.proxima);
+  }
+
+  filtroVencido(){
+    this.mostrarDevoluciones=this.listaDevoluciones.filter(devolucion => devolucion.estado==this.vencida);
   }
 
   openDialog(pTittle, pSubtittle, pMessage) {
