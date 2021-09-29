@@ -27,6 +27,11 @@ export class ConsultaPrestadoresComponent implements OnInit {
     this.matIconRegistry.addSvgIcon("user",this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/Iconos/iconos-prestadores/ic-user.svg"));
     this.matIconRegistry.addSvgIcon("exportPDF",this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/Iconos/iconos-prestadores/pdf-file-ic.svg"));
     this.matIconRegistry.addSvgIcon("exportCSV",this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/Iconos/iconos-prestadores/file-csv-light.svg"));
+
+    this.matIconRegistry.addSvgIcon("mas",this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/Iconos/iconos-prestadores/plus-ic.svg"));
+    this.matIconRegistry.addSvgIcon("check",this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/Iconos/iconos-prestadores/check-circle-ic.svg"));
+    this.matIconRegistry.addSvgIcon("vencido",this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/Iconos/iconos-prestadores/close-circle-ic.svg"));
+    this.matIconRegistry.addSvgIcon("alerta",this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/Iconos/iconos-prestadores/warning-ic.svg"));
     
    }
 

@@ -4,6 +4,7 @@ export interface Idevoluviones{
     prefijoFactura: String;
     numeroFactura: String;
     valorFactura: number;
+    fechaRadicacion: String;
     fechaDevolucion: String;
     radicado: String;
     plan: String;
@@ -21,6 +22,7 @@ export class devoluciones{
     prefijoFactura: String;
     numeroFactura: String;
     valorFactura: number;
+    fechaRadicacion: String;
     fechaDevolucion: String;
     radicado: String;
     plan: String;
@@ -37,6 +39,7 @@ export class devoluciones{
         prefijoFactura: String,
         numeroFactura: String,
         valorFactura: number,
+        fechaRadicacion: String,
         fechaDevolucion: String,
         radicado: String,
         plan: String,
@@ -52,6 +55,7 @@ export class devoluciones{
         this.prefijoFactura=prefijoFactura;
         this.numeroFactura=numeroFactura;
         this.valorFactura=valorFactura;
+        this.fechaRadicacion=fechaRadicacion
         this.fechaDevolucion=fechaDevolucion;
         this.radicado=radicado;
         this.plan=plan;

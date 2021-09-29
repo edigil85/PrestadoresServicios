@@ -18,6 +18,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatPaginatorIntl, MatPaginatorModule} from '@angular/material/paginator';
 import {MatDatepickerModule, } from '@angular/material/datepicker';
 import { MatNativeDateModule } from "@angular/material/core";
+import {MatExpansionModule} from '@angular/material/expansion'
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import { NgxSpinnerModule } from 'ngx-spinner';
 
@@ -63,6 +64,7 @@ import {DevolucionesComponent } from './devoluciones/devoluciones.component'
         MatPaginatorModule,
         MatDatepickerModule,
         MatNativeDateModule,
+        MatExpansionModule,
         NgxSpinnerModule
         ],
         providers: [

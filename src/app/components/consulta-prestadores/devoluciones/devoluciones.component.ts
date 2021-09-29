@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material/dialog';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -7,10 +7,12 @@ import { UtilService } from 'src/app/shared/service/util.service';
 import { IconsultaDevoluciones} from '../model/consultaDevoluciones';
 import { Idevoluviones } from '../model/devoluciones';
 import { devolucionesService} from '../service/devoluciones.service';
+import { MatCheckboxChange } from '@angular/material/checkbox';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { formatDate } from '@angular/common';
 import { PageEvent } from '@angular/material/paginator';
 import { saveAs } from 'file-saver';
+import {MatAccordion} from '@angular/material/expansion';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -26,7 +28,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./devoluciones.component.scss']
 })
 export class DevolucionesComponent implements OnInit {
-
+  @ViewChild(MatAccordion) accordion: MatAccordion;
   page_size: number = 10;
   page_number: number = 1;
   blob;
@@ -36,6 +38,14 @@ export class DevolucionesComponent implements OnInit {
   utilService: UtilService;
   form: FormGroup;
   filename: string = null;
+  aldia="Al dia";
+  proxima ="Proxima a vencerse";
+  vencida ="Vencida";
+  cantidadaldia: number=0;
+  cantidadProxima: number=0;
+  cantidadvencida: number=0;
+  expandir = false;
+
 
   constructor(
     private dialog: MatDialog,
@@ -83,6 +93,15 @@ export class DevolucionesComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  onChange(ob: MatCheckboxChange) {
+    if(ob.checked){
+      this.accordion.openAll();
+    }
+    else{
+      this.accordion.closeAll();
+    }
+ } 
 
   onSubmit() {
     var numerofactura: string, prefijoFactura: String, fechaDevolucionDesde: string, fechaDevolucionHasta: string
@@ -148,7 +167,21 @@ export class DevolucionesComponent implements OnInit {
     .subscribe(
       async (result) => {
         this.listaDevoluciones= await result;
-        console.log(this.listaDevoluciones);
+        
+        for(var i=0;i<this.listaDevoluciones.length; i++){
+          if(this.listaDevoluciones[i].estado==this.aldia){
+            this.cantidadaldia= this.cantidadaldia + 1;
+          }
+          if(this.listaDevoluciones[i].estado==this.proxima){
+            this.cantidadProxima= this.cantidadProxima + 1;
+          }
+          if(this.listaDevoluciones[i].estado==this.vencida){
+            this.cantidadvencida= this.cantidadvencida + 1;
+          }
+        }
+
+
+
         this.spinner.hide();
       },(error) => {
         this.spinner.hide();
@@ -175,7 +208,10 @@ export class DevolucionesComponent implements OnInit {
 
   limpiar(){
     this.form.reset();
-    
+    this.listaDevoluciones=[];
+    this.cantidadaldia=0;
+    this.cantidadProxima=0;
+    this.cantidadvencida=0;
   }
 
   openDialog(pTittle, pSubtittle, pMessage) {

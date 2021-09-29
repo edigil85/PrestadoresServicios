@@ -6,6 +6,27 @@ table {
   width: 100%;
 }
 
+mat-expansion-panel{
+  margin: 10px !important;
+}
+
+.mat-expansion-panel-header{
+  margin: 10px !important;
+  
+}
+
+.observacion {
+  background-color: #F2F2F2 !important; 
+  margin: auto !important;
+  padding: inherit !important;
+  border-bottom-right-radius: 20px !important;
+}
+
+.cosa{
+  margin: auto !important;
+  padding: inherit !important;
+}
+
 th {
   text-align: center;
   padding: 14px;
@@ -73,10 +94,56 @@ border-radius: 10px;
   border: 10px;
 }
 
+
+
 .iconos{
   font-size: 20px;
   color: $primario;
 }
+
+.iconos-Check-lg{
+  display: inline-block;
+    font-size: 35px;
+    color:$correcto;
+    margin-right: 4px;
+}
+
+.iconos-alerta-lg{
+  display: inline-block;
+  font-size: 35px;
+  color:$alerta;
+  margin-right: 4px;
+}
+
+.iconos-vencido-lg{
+  display: inline-block;
+  font-size: 35px;
+  color:$error;
+  margin-right: 4px;
+}
+
+.iconos-Check{
+  display: inline-block;
+    font-size: 25px;
+    color:$correcto;
+    margin-right: 4px;
+}
+
+.iconos-alerta{
+  display: inline-block;
+  font-size: 25px;
+  color:$alerta;
+  margin-right: 4px;
+}
+
+.iconos-vencido{
+  display: inline-block;
+  font-size: 25px;
+  color:$error;
+  margin-right: 4px;
+}
+
+
 .iconos-tabs{
   width: 35px !important;
   height: 35px !important;
@@ -272,3 +339,9 @@ border-radius: 10px;
     color: $primario !important;
   
   }
+
+  //inpout checkbox 
+::ng-deep .mat-checkbox-checked .mat-checkbox-background,
+::ng-deep .mat-checkbox-indeterminate .mat-checkbox-background {
+background-color:  $primario !important;
+}

@@ -73,17 +73,89 @@
             </div>  
         </div>
     </form>
-    <section class="center boxShadow pt-2 mt-3">
+    <section class="center boxShadow pt-2 mt-3" *ngIf="listaDevoluciones.length==0">
         <div class="info">
             <p class="body-16 mb-0 text-center">
-                Hemos habilitado para ti esta consulta, donde puedes encontrar la
+                Hemos habilitado para tí esta consulta, donde puedes encontrar la información
               </p>
               <p class="body-16  mb-0 text-center">
-                informacion de las facturas radicadas en EPS SURA.
+                de las devoluciones que actualmente tienes con nosotros.
               </p>
           </div>
         <img class="image" src='..\assets\Imagenes\png-search.png'>
     </section>
+
+    <div class="container boxShadow pt-2 mt-3" *ngIf="listaDevoluciones.length>0">
+        <h5 class="h4-bold">Detalle de devoluciones</h5>
+         <p>{{listaDevoluciones.length}} registro(s) recuperado(s)</p>
+        <div class="row">
+            <div class="col"> <mat-checkbox (change)="onChange($event)">Expandir devoluciones</mat-checkbox></div>
+            <div class="col"> <button class="textoboton text-center">Todas ({{listaDevoluciones.length}})</button></div>
+            <div class="col"> <button class="ml-2 textoboton text-center"><i class="far fa-check iconos-Check"></i>Al día ({{cantidadaldia}})</button></div>
+            <div class="col"> <button class="ml-2 textoboton text-center"><i class="far fa-exclamation-circle iconos-alerta"></i>Próximas a vencerse ({{cantidadProxima}})</button></div>
+            <div class="col"> <button class="ml-2 textoboton text-center"><i class="far fa-times iconos-vencido"></i>Vencidas ({{cantidadvencida}})</button></div>
+            <div class="col"> <button class="ml-2 textoboton text-center"><mat-icon class="iconos" svgIcon="exportCSV" ></mat-icon>Exportar registros</button></div>
+        </div>
+
+        <mat-accordion class="example-headers-align" multi>
+            <mat-expansion-panel *ngFor="let devolucion of listaDevoluciones | paginate: page_size: page_number">
+                <mat-expansion-panel-header>
+                <div class="row">
+                    <div class="col"><p class="body-16 pt-3"><strong>Fecha de radicacion</strong></p>
+                      <p class="body-16">{{devolucion.fechaRadicacion}}</p></div>
+                    <div class="col"><p class="body-16 pt-3"><strong># de factura</strong></p>
+                      <p class="body-16">{{devolucion.prefijoFactura}} {{devolucion.numeroFactura}}</p></div>
+                    <div class="col"><p class="body-16 pt-3"><strong>Valor factura</strong></p>
+                      <p class="body-16">{{devolucion.valorFactura}}</p></div>
+                    <div class="col"><p class="body-16 pt-3"><strong>Fecha de notificación</strong></p>
+                      <p class="body-16">{{devolucion.fechaDevolucion}}</p></div>
+                    <div class="col"><p class="body-16 pt-3"><strong>Estado</strong></p>
+                        <i *ngIf="devolucion.estado==aldia" class="far fa-check iconos-Check-lg"></i>
+                        <i *ngIf="devolucion.estado==proxima" class="far fa-exclamation-circle iconos-alerta-lg"></i>
+                        <i *ngIf="devolucion.estado==vencida" class="far fa-times iconos-vencido-lg"></i>
+                    </div>
+                </div>
+                </mat-expansion-panel-header>
+                <div class="row pt-3">
+                    <div class="col-10">
+                        <p class="body-16  mb-0" ><strong>Detalle de la devolucion</strong></p>
+                        <p>Plazo de respuesta: <strong>20 días, </strong>hasta el: {{devolucion.fechaTentativaRespuesta}}</p>
+                    </div>
+                    <div class="col">
+                        <button mat-icon-button  class="ml-2" >
+                            <mat-icon class="iconos" svgIcon="exportCSV" ></mat-icon>
+                        </button>
+                        <button mat-icon-button class="ml-2" >
+                            <mat-icon svgIcon="exportPDF" ></mat-icon>
+                        </button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <p class="body-16  mb-0" ><strong>Causa de rechazo</strong></p>
+                        <p>{{devolucion.causaRechazo}}</p>
+                    </div>
+                </div>
+
+                <div class="container observacion">
+                    <p class="body-16  mb-0" >
+                        <strong>Observaciones</strong>
+                    </p>
+                    <p>{{devolucion.observacion}}</p>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>
+
+
+    
+
+          <mat-paginator [length]="listaDevoluciones.length"
+          [pageSize]="page_size"
+          [pageSizeOptions]="pageSizeOption"
+          (page)="handlePage($event)"
+          showFirstLastButtons>
+        </mat-paginator>
+    </div>
 
     
 
