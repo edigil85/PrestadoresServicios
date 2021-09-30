@@ -83,5 +83,7 @@ export class Constants {
   static URI_SERVICE_DETALLEFACTURARADICADAPDF='/consultaFacturasRadicadas/consultaDetallePDF';
   static URI_SERVICE_DETALLEFACTURARADICADAXLS='/consultaFacturasRadicadas/consultaDetalleXLS';
   static URI_SERVICE_CONSULTA_DEVOLUCIONES='/Devoluciones/consulta';
-
+  static URI_SERVICE_CONSULTA_DEVOLUCIONESPDF='/Devoluciones/consultaPDF';
+  static URI_SERVICE_CONSULTA_DEVOLUCIONESCSV='/Devoluciones/consultaCSV';
+  static URI_SERVICE_CONSULTA_DEVOLUCIONESTODOSCSV='/Devoluciones/consultaTodosCSV';
 }

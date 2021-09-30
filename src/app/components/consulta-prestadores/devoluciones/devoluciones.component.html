@@ -89,12 +89,19 @@
         <h5 class="h4-bold">Detalle de devoluciones</h5>
          <p>{{listaDevoluciones.length}} registro(s) recuperado(s)</p>
         <div class="row">
-            <div class="col"> <mat-checkbox (change)="onChange($event)">Expandir devoluciones</mat-checkbox></div>
-            <div class="col"> <button (click)="filtroTodos()" class="textoboton text-center">Todas ({{listaDevoluciones.length}})</button></div>
+            <div class="col"> 
+                <button (click)="expandir()" class="ml-2 textobotonsinlinea text-center" *ngIf="!checked">
+                    <i class="far fa-window-maximize iconos"></i>Expandir todas
+                </button>
+                <button (click)="contraer()" class="ml-2 textobotonsinlinea text-center" *ngIf="checked">
+                    <i class="far fa-window-minimize iconos"></i>Contraer todas
+                </button>
+            </div>
+            <div class="col"> <button (click)="filtroTodos()" class="ml-2 textoboton text-center">Todas ({{listaDevoluciones.length}})</button></div>
             <div class="col"> <button (click)="filtroAldia()" class="ml-2 textoboton text-center"><i class="far fa-check iconos-Check"></i>Al día ({{cantidadaldia}})</button></div>
             <div class="col"> <button (click)="filtroProximo()" class="ml-2 textoboton text-center"><i class="far fa-exclamation-circle iconos-alerta"></i>Próximas a vencerse ({{cantidadProxima}})</button></div>
             <div class="col"> <button (click)="filtroVencido()" class="ml-2 textoboton text-center"><i class="far fa-times iconos-vencido"></i>Vencidas ({{cantidadvencida}})</button></div>
-            <div class="col"> <button  class="ml-2 textoboton text-center"><mat-icon class="iconos" svgIcon="exportCSV" ></mat-icon>Exportar registros</button></div>
+            <div class="col"> <button (click)="exportarTodosCSV()"class="ml-2 textoboton text-center"><mat-icon class="iconos" svgIcon="exportCSV" ></mat-icon>Exportar registros</button></div>
         </div>
 
         <mat-accordion class="example-headers-align" multi>
@@ -106,7 +113,7 @@
                     <div class="col"><p class="body-16 pt-3"><strong># de factura</strong></p>
                       <p class="body-16">{{devolucion.prefijoFactura}} {{devolucion.numeroFactura}}</p></div>
                     <div class="col"><p class="body-16 pt-3"><strong>Valor factura</strong></p>
-                      <p class="body-16">{{devolucion.valorFactura}}</p></div>
+                      <p class="body-16">{{devolucion.valorFactura |currency: 'USD' : 'symbol' : '1.0-0'}} </p></div>
                     <div class="col"><p class="body-16 pt-3"><strong>Fecha de notificación</strong></p>
                       <p class="body-16">{{devolucion.fechaDevolucion}}</p></div>
                     <div class="col"><p class="body-16 pt-3"><strong>Estado</strong></p>
@@ -122,10 +129,10 @@
                         <p>Plazo de respuesta: <strong>20 días, </strong>hasta el: {{devolucion.fechaTentativaRespuesta}}</p>
                     </div>
                     <div class="col">
-                        <button mat-icon-button  class="ml-2" >
+                        <button mat-icon-button  class="ml-2" (click)="exportarCSV(devolucion)" >
                             <mat-icon class="iconos" svgIcon="exportCSV" ></mat-icon>
                         </button>
-                        <button mat-icon-button class="ml-2" >
+                        <button mat-icon-button class="ml-2" (click)="exportarPDF(devolucion)" >
                             <mat-icon svgIcon="exportPDF" ></mat-icon>
                         </button>
                     </div>

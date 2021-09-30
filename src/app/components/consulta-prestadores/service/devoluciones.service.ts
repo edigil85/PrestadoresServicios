@@ -22,4 +22,19 @@ export class devolucionesService{
     JSON.stringify(params), {headers:environment.headers})
   }
 
+  devolucionPDF(params:Idevoluviones): Observable<Blob> {
+    return this.httpClient.post<any>(`${this.baseUrl}`+Constants.URI_SERVICE_CONSULTA_DEVOLUCIONESPDF, 
+    JSON.stringify(params),   {headers:environment.headers, responseType: 'blob' as 'json'} )
+  }
+
+  devolucionCSV(params:Idevoluviones): Observable<Blob> {
+    return this.httpClient.post<any>(`${this.baseUrl}`+Constants.URI_SERVICE_CONSULTA_DEVOLUCIONESCSV, 
+    JSON.stringify(params),   {headers:environment.headers, responseType: 'blob' as 'json'} )
+  }
+
+  devolucionTodosCSV(params:IconsultaDevoluciones): Observable<Blob> {
+    return this.httpClient.post<any>(`${this.baseUrl}`+Constants.URI_SERVICE_CONSULTA_DEVOLUCIONESTODOSCSV, 
+    JSON.stringify(params),   {headers:environment.headers, responseType: 'blob' as 'json'} )
+  }
+
 }

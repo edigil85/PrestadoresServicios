@@ -45,6 +45,7 @@ export class DevolucionesComponent implements OnInit {
   cantidadaldia: number=0;
   cantidadProxima: number=0;
   cantidadvencida: number=0;
+  checked = false;
 
 
   constructor(
@@ -94,14 +95,72 @@ export class DevolucionesComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onChange(ob: MatCheckboxChange) {
-    if(ob.checked){
-      this.accordion.openAll();
+  exportarTodosCSV(){
+    this.spinner.show();
+    this.filename=this.consultaDevoluciones.idPrestador+".csv";
+    this.service.devolucionTodosCSV(this.consultaDevoluciones)
+    .subscribe(
+        (response: any) =>{
+        let dataType = response.type;
+        let binaryData = [];
+        binaryData.push(response);
+        let downloadLink = document.createElement('a');
+        downloadLink.href = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));
+        if (this.filename)
+            downloadLink.setAttribute('download', this.filename);
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
     }
-    else{
-      this.accordion.closeAll();
+    )
+    this.spinner.hide();
+  }
+
+  exportarCSV(devolucion: Idevoluviones){
+    this.filename= devolucion.idPrestador+"-"+devolucion.radicado+".csv";
+    this.service.devolucionCSV(devolucion)
+    .subscribe(
+      (response: any) =>{
+        let dataType = response.type;
+        let binaryData = [];
+        binaryData.push(response);
+        let downloadLink = document.createElement('a');
+        downloadLink.href = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));
+        if (this.filename)
+            downloadLink.setAttribute('download', this.filename);
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
     }
- } 
+    )
+  }
+
+  exportarPDF(devolucion: Idevoluviones){
+    this.filename= devolucion.idPrestador+"-"+devolucion.radicado;
+    this.service.devolucionPDF(devolucion)
+    .subscribe(
+      (response: any) =>{
+        let dataType = response.type;
+        let binaryData = [];
+        binaryData.push(response);
+        let downloadLink = document.createElement('a');
+        downloadLink.href = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));
+        if (this.filename)
+            downloadLink.setAttribute('download', this.filename);
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+    }
+    )
+  }
+
+
+  expandir(){
+  this.accordion.openAll();
+  this.checked=true;
+  }
+
+  contraer(){
+    this.accordion.closeAll();
+    this.checked=false;
+  }
 
   onSubmit() {
     var numerofactura: string, prefijoFactura: String, fechaDevolucionDesde: string, fechaDevolucionHasta: string
@@ -167,6 +226,9 @@ export class DevolucionesComponent implements OnInit {
     .subscribe(
       async (result) => {
         this.listaDevoluciones= await result;
+        this.cantidadaldia=0;
+        this.cantidadProxima=0;
+        this.cantidadvencida=0;
         for(var i=0;i<this.listaDevoluciones.length; i++){
           if(this.listaDevoluciones[i].estado==this.aldia){
             this.cantidadaldia= this.cantidadaldia + 1;
@@ -214,18 +276,27 @@ export class DevolucionesComponent implements OnInit {
 
   filtroTodos(){
     this.mostrarDevoluciones=this.listaDevoluciones;
+    if(this.checked){
+      this.accordion.openAll();
+    }
+    else{
+      this.accordion.closeAll();
+    }
   }
 
   filtroAldia(){
     this.mostrarDevoluciones=this.listaDevoluciones.filter(devolucion => devolucion.estado==this.aldia);
+    this.contraer();
   }
 
   filtroProximo(){
     this.mostrarDevoluciones=this.listaDevoluciones.filter(devolucion => devolucion.estado==this.proxima);
+    this.contraer();
   }
 
   filtroVencido(){
     this.mostrarDevoluciones=this.listaDevoluciones.filter(devolucion => devolucion.estado==this.vencida);
+    this.contraer();
   }
 
   openDialog(pTittle, pSubtittle, pMessage) {

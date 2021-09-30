@@ -62,6 +62,19 @@ border-radius: 10px;
 }
 
 
+.textobotonsinlinea{
+  font-family: $unnamed-font-family-barlow;
+  font-style: $unnamed-font-style-normal;
+  font-weight: $unnamed-font-weight-normal;
+  font-size: $unnamed-font-size-16;
+  line-height: $unnamed-line-spacing-18;
+  letter-spacing: $unnamed-character-spacing-0;
+  color: $variante-gris-oscuro;
+  border:none;
+  background-color: transparent;
+  outline: none !important; 
+}
+
 .textoboton{
   font-family: $unnamed-font-family-barlow;
   font-style: $unnamed-font-style-normal;
