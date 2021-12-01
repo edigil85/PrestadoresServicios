@@ -12,7 +12,7 @@ import { ErrorStateMatcher } from '@angular/material/core';
 import { formatDate } from '@angular/common';
 import { PageEvent } from '@angular/material/paginator';
 import { saveAs } from 'file-saver';
-import {MatAccordion} from '@angular/material/expansion';
+import { MatAccordion } from '@angular/material/expansion';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
