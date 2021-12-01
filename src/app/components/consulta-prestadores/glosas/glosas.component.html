@@ -1,5 +1,8 @@
 <header id="header"></header>
     <div class="container">
+    <ngx-spinner [fullScreen]="false" bdColor="rgba(165,162,165,0.8)" size="large" color="#fff" type="ball-pulse">
+        <p style="font-size: 20px; position: relative; color: white">Procesando...</p>
+    </ngx-spinner>
     <h4 class="h4-bold">Glosas</h4>
     <form [formGroup]="form" class="normal-form pt-1" (ngSubmit)="onSubmit()">
         <div class="container boxShadow">
@@ -26,7 +29,7 @@
                             Fecha Inicial es mayor a fecha final
                         </mat-error>
                         <mat-error *ngIf="fechaFinal.hasError('dif')">
-                            Se exede el rango de consulta (max 3 meses)ftgr
+                            Se exede el rango de consulta (max 3 meses)
                         </mat-error>
                     </mat-form-field>
                 </div>
@@ -74,14 +77,65 @@
             </div>  
         </div>
     </form>
-    <section class="center boxShadow pt-2 mt-3">
+    <section class="center boxShadow pt-2 mt-3" *ngIf="listaGlosas.length==0">
         <div class="info">
             <p class="body-16 mb-0 text-center">
                 Hemos habilitado para ti esta consulta, donde puedes encontrar la
               </p>
               <p class="body-16  mb-0 text-center">
-                informacion de las facturas radicadas en EPS SURA.
+                informacion de las glosas que actualmente tienes con nosotros.
               </p>
           </div>
         <img class="image" src='..\assets\Imagenes\png-search.png'>
     </section>
+
+    <div class="container boxShadow pt-2 mt-3" *ngIf="listaGlosas.length>0">
+        <h5 class="h4-bold">Detalle de devoluciones</h5>
+         <p>{{listaGlosas.length}} registro(s) recuperado(s)</p>
+        <div class="row">
+            <div class="col"> 
+                <button (click)="expandir()" class="ml-2 textobotonsinlinea text-center" *ngIf="!checked">
+                    <i class="far fa-window-maximize iconos"></i>Expandir todas
+                </button>
+                <button (click)="contraer()" class="ml-2 textobotonsinlinea text-center" *ngIf="checked">
+                    <i class="far fa-window-minimize iconos"></i>Contraer todas
+                </button>
+            </div>
+            <div class="col"> <button (click)="filtroTodos()" class="ml-2 textoboton text-center">Todas ({{listaGlosas.length}})</button></div>
+            <div class="col"> <button (click)="filtroAldia()" class="ml-2 textoboton text-center"><i class="far fa-check iconos-Check"></i>Al día ({{cantidadaldia}})</button></div>
+            <div class="col"> <button (click)="filtroProximo()" class="ml-2 textoboton text-center"><i class="far fa-exclamation-circle iconos-alerta"></i>Próximas a vencerse ({{cantidadProxima}})</button></div>
+            <div class="col"> <button (click)="filtroVencido()" class="ml-2 textoboton text-center"><i class="far fa-times iconos-vencido"></i>Vencidas ({{cantidadvencida}})</button></div>
+            
+        </div>
+
+        <mat-accordion class="example-headers-align" multi>
+            <mat-expansion-panel *ngFor="let glosa of mostrarglosas | paginate: page_size: page_number">
+                <mat-expansion-panel-header>
+                <div class="row">
+                    <div class="col"><p class="body-16 pt-3"><strong>Fecha de radicacion</strong></p>
+                      <p class="body-16">{{glosa.fechaRadicacion}}</p></div>
+                    <div class="col"><p class="body-16 pt-3"><strong># de factura</strong></p>
+                      <p class="body-16">{{glosa.prefijoFactura}} {{glosa.numeroFactura}}</p></div>
+                    <div class="col"><p class="body-16 pt-3"><strong>Valor factura</strong></p>
+                      <p class="body-16">{{glosa.valorFactura |currency: 'USD' : 'symbol' : '1.0-0'}} </p></div>
+                    <div class="col"><p class="body-16 pt-3"><strong># de glosa</strong></p>
+                      <p class="body-16">{{glosa.numeroGlosa}}</p></div>
+                    <div class="col"><p class="body-16 pt-3"><strong>Valor glosa</strong></p>
+                      <p class="body-16">{{glosa.valorGlosa |currency: 'USD' : 'symbol' : '1.0-0'}} </p></div>
+                    
+                </div>
+                </mat-expansion-panel-header>
+                
+            </mat-expansion-panel>
+        </mat-accordion>
+
+
+    
+
+          <mat-paginator [length]="mostrarglosas.length"
+          [pageSize]="page_size"
+          [pageSizeOptions]="pageSizeOption"
+          (page)="handlePage($event)"
+          showFirstLastButtons>
+        </mat-paginator>
+    </div>
