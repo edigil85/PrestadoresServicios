@@ -122,10 +122,51 @@
                       <p class="body-16">{{glosa.numeroGlosa}}</p></div>
                     <div class="col"><p class="body-16 pt-3"><strong>Valor glosa</strong></p>
                       <p class="body-16">{{glosa.valorGlosa |currency: 'USD' : 'symbol' : '1.0-0'}} </p></div>
-                    
+                      <div class="col"><p class="body-16 pt-3"><strong>Estado</strong></p>
+                        {{glosa.momentosGlosa.length}}
+                        <i *ngIf="glosa.estado==aldia" class="far fa-check iconos-Check-lg"></i>
+                        <i *ngIf="glosa.estado==proxima" class="far fa-exclamation-circle iconos-alerta-lg"></i>
+                        <i *ngIf="glosa.estado==vencida" class="far fa-times iconos-vencido-lg"></i>
+                    </div>
                 </div>
                 </mat-expansion-panel-header>
+                <div class="row">
+                    <div class="col-10"> <p class="body-16 pt-3"><strong>Detalle de estados</strong></p></div>
+                    <div class="col">
+                        <button mat-icon-button  class="ml-2" (click)="exportarCSV(glosa)" >
+                            <mat-icon class="iconos" svgIcon="exportCSV" ></mat-icon>
+                        </button>
+                        <button mat-icon-button class="ml-2" (click)="exportarPDF(glosa)" >
+                            <mat-icon svgIcon="exportPDF" ></mat-icon>
+                        </button>
+                    </div>
+                </div>
                 
+                <div  class="container.fluid">
+                    <div class="row">
+                        <mat-card  class="card" *ngFor="let momento of glosa.momentosGlosa">
+                            <div class="row pl-2 pt-2">
+                                <i *ngIf="momento.estado==aldia" class="far fa-check iconos-Check-lg"></i>
+                                <i *ngIf="momento.estado==proxima" class="far fa-exclamation-circle iconos-alerta-lg"></i>
+                                <i *ngIf="momento.estado==vencida" class="far fa-times iconos-vencido-lg"></i>
+                                <strong>Estado {{momento.idMomentoGlosa}}:</strong>  {{momento.nombreMomento}}
+                            </div>
+                            <div class="row pl-2 pt-2">
+                                Plazo de respuesta en dias:&nbsp;<strong>{{momento.diasPlazoRespuesta}} días </strong>&nbsp;hasta el:  <strong>{{momento.fechaTentativaRespuesta}}</strong>
+                            </div>
+                            <div class="row pl-2 pt-2">
+                            <div class="col">
+                                <p class="left"><strong>Glosa</strong></p>
+                            </div>
+                            <div class="col">
+                                <p class="rigth" *ngIf="momento.nombreMomento=='NOTIFICACION'">fecha de notificacíon: {{momento.fechaInicioMomento}}</p>
+                                <p class="rigth" *ngIf="momento.nombreMomento!='NOTIFICACION'">fecha de respuesta: {{momento.fechaInicioMomento}}</p>
+                            </div>
+                            </div>
+                            <p class="pt-3 pl-2">{{momento.observacion}}</p>
+                        </mat-card>
+                    </div>
+                </div>  
             </mat-expansion-panel>
         </mat-accordion>
 

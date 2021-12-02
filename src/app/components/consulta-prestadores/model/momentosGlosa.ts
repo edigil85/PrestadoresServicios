@@ -6,6 +6,7 @@ export interface  ImomentosGlosa {
     fechaTentativaRespuesta: String;
     fechaRespuestaMomento: String;
     observacion: String;
+    estado: String;
 }
 
 export class momentosGlosa {
@@ -16,7 +17,7 @@ export class momentosGlosa {
     fechaTentativaRespuesta: String;
     fechaRespuestaMomento: String;
     observacion: String;
-
+    estado: String;
     constructor(
         idMomentoGlosa: Number,
         nombreMomento: String,
@@ -24,7 +25,8 @@ export class momentosGlosa {
         fechaInicioMomento: String,
         fechaTentativaRespuesta: String,
         fechaRespuestaMomento: String,
-        observacion: String) {
+        observacion: String,
+        estado: String) {
          this.idMomentoGlosa=idMomentoGlosa;
          this.nombreMomento=nombreMomento;
          this.diasPlazoRespuesta=diasPlazoRespuesta;
@@ -32,5 +34,6 @@ export class momentosGlosa {
          this.fechaTentativaRespuesta=fechaTentativaRespuesta;
          this.fechaRespuestaMomento=fechaRespuestaMomento;
          this.observacion=observacion;
+         this.estado=estado;
     }
 }

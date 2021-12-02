@@ -225,15 +225,15 @@ export class GlosasComponent implements OnInit {
       async (result) => {
         this.listaGlosas= await result;
         for(var i=0;i<this.listaGlosas.length; i++){
-          // if(this.listaGlosas[i].estado==this.aldia){
-          //   this.cantidadaldia= this.cantidadaldia + 1;
-          // }
-          // if(this.listaGlosas[i].estado==this.proxima){
-          //   this.cantidadProxima= this.cantidadProxima + 1;
-          // }
-          // if(this.listaGlosas[i].estado==this.vencida){
-          //   this.cantidadvencida= this.cantidadvencida + 1;
-          // }
+          if(this.listaGlosas[i].estado==this.aldia){
+            this.cantidadaldia= this.cantidadaldia + 1;
+          }
+          if(this.listaGlosas[i].estado==this.proxima){
+            this.cantidadProxima= this.cantidadProxima + 1;
+          }
+          if(this.listaGlosas[i].estado==this.vencida){
+            this.cantidadvencida= this.cantidadvencida + 1;
+          }
             this.mostrarglosas=this.listaGlosas;
         }
         this.spinner.hide();
@@ -255,18 +255,18 @@ export class GlosasComponent implements OnInit {
   }
 
   filtroAldia(){
-    // this.mostrarDevoluciones=this.listaDevoluciones.filter(devolucion => devolucion.estado==this.aldia);
-    // this.contraer();
+    this.mostrarglosas=this.listaGlosas.filter(glosas => glosas.estado==this.aldia);
+    this.contraer();
   }
 
   filtroProximo(){
-    // this.mostrarDevoluciones=this.listaDevoluciones.filter(devolucion => devolucion.estado==this.proxima);
-    // this.contraer();
+    this.mostrarglosas=this.listaGlosas.filter(glosas => glosas.estado==this.proxima);
+    this.contraer();
   }
 
   filtroVencido(){
-    // this.mostrarDevoluciones=this.listaDevoluciones.filter(devolucion => devolucion.estado==this.vencida);
-    // this.contraer();
+     this.mostrarglosas=this.listaGlosas.filter(glosas => glosas.estado==this.vencida);
+     this.contraer();
   }
 
 

@@ -8,6 +8,7 @@ export interface  Iglosas {
 	valorFactura: String;
     valorGlosa: String;
     momentosGlosa: ImomentosGlosa [];
+    estado: string;
 }
 
 export class glosas {
@@ -19,6 +20,7 @@ export class glosas {
 	valorFactura: String;
     valorGlosa: String;
     momentosGlosa: ImomentosGlosa [];
+    estado: String;
 
     constructor(
     idPrestador: String,
@@ -28,7 +30,8 @@ export class glosas {
     fechaRadicacion: String,
 	valorFactura: String,
     valorGlosa: String,
-    momentosGlosa: ImomentosGlosa []) {
+    momentosGlosa: ImomentosGlosa [],
+    estado: String) {
          this.idPrestador=idPrestador;
          this.tipoIdentificacion=tipoIdentificacion;
          this.numeroGlosa=numeroGlosa;
@@ -37,6 +40,7 @@ export class glosas {
          this.valorFactura=valorFactura;
          this.valorGlosa=valorGlosa;
          this.momentosGlosa=momentosGlosa;
+         this.estado=estado;
     }
 }
 
