@@ -156,6 +156,26 @@ export class GlosasComponent implements OnInit {
     // )
   }
 
+  exportarTodosCSV(){
+    // this.spinner.show();
+    // this.filename=this.consultaDevoluciones.idPrestador+".csv";
+    // this.service.devolucionTodosCSV(this.consultaDevoluciones)
+    // .subscribe(
+    //     (response: any) =>{
+    //     let dataType = response.type;
+    //     let binaryData = [];
+    //     binaryData.push(response);
+    //     let downloadLink = document.createElement('a');
+    //     downloadLink.href = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));
+    //     if (this.filename)
+    //         downloadLink.setAttribute('download', this.filename);
+    //     document.body.appendChild(downloadLink);
+    //     downloadLink.click();
+    // }
+    // )
+    // this.spinner.hide();
+  }
+
   consultarGlosas(numeroglosa: String, numerofactura: String, prefijoFactura: String, fechaRadicacionDesde: String, fechaRadicacionHasta: String,
     tipoConsulta: number ){
     this.spinner.show();

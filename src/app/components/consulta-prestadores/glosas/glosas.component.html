@@ -105,7 +105,7 @@
             <div class="col"> <button (click)="filtroAldia()" class="ml-2 textoboton text-center"><i class="far fa-check iconos-Check"></i>Al día ({{cantidadaldia}})</button></div>
             <div class="col"> <button (click)="filtroProximo()" class="ml-2 textoboton text-center"><i class="far fa-exclamation-circle iconos-alerta"></i>Próximas a vencerse ({{cantidadProxima}})</button></div>
             <div class="col"> <button (click)="filtroVencido()" class="ml-2 textoboton text-center"><i class="far fa-times iconos-vencido"></i>Vencidas ({{cantidadvencida}})</button></div>
-            
+            <div class="col"> <button (click)="exportarTodosCSV()"class="ml-2 textoboton text-center"><mat-icon class="iconos" svgIcon="exportCSV" ></mat-icon>Exportar registros</button></div>
         </div>
 
         <mat-accordion class="example-headers-align" multi>
@@ -123,10 +123,12 @@
                     <div class="col"><p class="body-16 pt-3"><strong>Valor glosa</strong></p>
                       <p class="body-16">{{glosa.valorGlosa |currency: 'USD' : 'symbol' : '1.0-0'}} </p></div>
                       <div class="col"><p class="body-16 pt-3"><strong>Estado</strong></p>
-                        {{glosa.momentosGlosa.length}}
+                        <p class="padre">
+                        <strong>{{glosa.momentosGlosa.length}}</strong>&nbsp;
                         <i *ngIf="glosa.estado==aldia" class="far fa-check iconos-Check-lg"></i>
                         <i *ngIf="glosa.estado==proxima" class="far fa-exclamation-circle iconos-alerta-lg"></i>
                         <i *ngIf="glosa.estado==vencida" class="far fa-times iconos-vencido-lg"></i>
+                        </p>
                     </div>
                 </div>
                 </mat-expansion-panel-header>
@@ -145,25 +147,43 @@
                 <div  class="container.fluid">
                     <div class="row">
                         <mat-card  class="card" *ngFor="let momento of glosa.momentosGlosa">
+                            <div *ngIf="momento.fechaRespuestaMomento!=null">
                             <div class="row pl-2 pt-2">
-                                <i *ngIf="momento.estado==aldia" class="far fa-check iconos-Check-lg"></i>
-                                <i *ngIf="momento.estado==proxima" class="far fa-exclamation-circle iconos-alerta-lg"></i>
-                                <i *ngIf="momento.estado==vencida" class="far fa-times iconos-vencido-lg"></i>
-                                <strong>Estado {{momento.idMomentoGlosa}}:</strong>  {{momento.nombreMomento}}
+                                <i *ngIf="momento.estado==aldia" class="far fa-check iconos-Check"></i>
+                                <i *ngIf="momento.estado==proxima" class="far fa-exclamation-circle iconos-alerta"></i>
+                                <i *ngIf="momento.estado==vencida" class="far fa-times iconos-vencido"></i>
+                                <strong>&nbsp;Estado {{momento.idMomentoGlosa}}:&nbsp;</strong>  {{momento.nombreMomento}}
                             </div>
                             <div class="row pl-2 pt-2">
                                 Plazo de respuesta en dias:&nbsp;<strong>{{momento.diasPlazoRespuesta}} días </strong>&nbsp;hasta el:  <strong>{{momento.fechaTentativaRespuesta}}</strong>
                             </div>
                             <div class="row pl-2 pt-2">
                             <div class="col">
-                                <p class="left"><strong>Glosa</strong></p>
+                                <p ><strong>Glosa</strong></p>
                             </div>
                             <div class="col">
-                                <p class="rigth" *ngIf="momento.nombreMomento=='NOTIFICACION'">fecha de notificacíon: {{momento.fechaInicioMomento}}</p>
-                                <p class="rigth" *ngIf="momento.nombreMomento!='NOTIFICACION'">fecha de respuesta: {{momento.fechaInicioMomento}}</p>
+                                <p class="body-14" *ngIf="momento.nombreMomento=='NOTIFICACION'">fecha de notificacíon: {{momento.fechaInicioMomento}}</p>
+                                <p class="body-14" *ngIf="momento.nombreMomento!='NOTIFICACION'">fecha de respuesta: {{momento.fechaRespuestaMomento}}</p>
                             </div>
                             </div>
                             <p class="pt-3 pl-2">{{momento.observacion}}</p>
+                            </div>
+                            <div *ngIf="momento.fechaRespuestaMomento==null">
+                                <div class="row pl-2 pt-2">
+                                    <strong>Estado {{momento.idMomentoGlosa}}:&nbsp;</strong>  {{momento.nombreMomento}}
+                                </div>
+                                <div class="row pl-2 pt-2">
+                                    <div class="col-1">
+                                        <i *ngIf="momento.estado==aldia" class="far fa-check iconos-Check-xlg"></i>
+                                        <i *ngIf="momento.estado==proxima" class="far fa-exclamation-circle iconos-alerta-xlg"></i>
+                                        <i *ngIf="momento.estado==vencida" class="far fa-times iconos-vencido-xlg"></i>
+                                    </div>
+                                    <div class="col margen">
+                                        <p class="body-16">Plazo de respuesta en dias:&nbsp;<strong>{{momento.diasPlazoRespuesta}} días </strong>&nbsp;hasta el:  <strong>{{momento.fechaTentativaRespuesta}}</strong>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
                         </mat-card>
                     </div>
                 </div>  

@@ -89,7 +89,7 @@ tr:nth-child(even) {
   width: 320px;
   margin: 10px;
   background: #F2F2F2;
-  border-bottom-right-radius: 10px;
+  border-bottom-right-radius: 25px;
 }
 
 
@@ -142,8 +142,40 @@ border-radius: 10px;
 }
 
 .iconos-vencido-lg{
-  display: inline-block;
+  //display: inline-block;
   font-size: 35px;
+  color:$error;
+  //margin-right: 4px;
+}
+
+.margen{
+  padding: 10px;
+  margin-left: 20px;
+}
+
+.padre{
+  display: flex;
+  align-items: center;
+  font-size: large;
+}
+
+.iconos-Check-xlg{
+  display: inline-block;
+    font-size: 55px;
+    color:$correcto;
+    margin-right: 4px;
+}
+
+.iconos-alerta-xlg{
+  display: inline-block;
+  font-size: 55px;
+  color:$alerta;
+  margin-right: 4px;
+}
+
+.iconos-vencido-xlg{
+  display: inline-block;
+  font-size: 55px;
   color:$error;
   margin-right: 4px;
 }
