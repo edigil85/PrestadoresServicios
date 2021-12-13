@@ -36,6 +36,7 @@ export class GlosasComponent implements OnInit {
   listaGlosas: Iglosas[]=[];
   mostrarglosas: Iglosas[]=[]
   utilService: UtilService;
+  filename: string = null;
   aldia="Al dia";
   proxima ="Proxima a vencerse";
   vencida ="Vencida";
@@ -121,59 +122,59 @@ export class GlosasComponent implements OnInit {
   }
 
   exportarCSV(glosa: Iglosas){
-    // this.filename= devolucion.idPrestador+"-"+devolucion.radicado+".csv";
-    // this.service.devolucionCSV(devolucion)
-    // .subscribe(
-    //   (response: any) =>{
-    //     let dataType = response.type;
-    //     let binaryData = [];
-    //     binaryData.push(response);
-    //     let downloadLink = document.createElement('a');
-    //     downloadLink.href = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));
-    //     if (this.filename)
-    //         downloadLink.seIglosastAttribute('download', this.filename);
-    //     document.body.appendChild(downloadLink);
-    //     downloadLink.click();
-    // }
-    // )
+    this.filename= glosa.idPrestador+"-"+glosa.numeroGlosa+".csv";
+    this.service.glosaCSV(glosa)
+    .subscribe(
+      (response: any) =>{
+        let dataType = response.type;
+        let binaryData = [];
+        binaryData.push(response);
+        let downloadLink = document.createElement('a');
+        downloadLink.href = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));
+        if (this.filename)
+            downloadLink.setAttribute('download', this.filename);
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+    }
+    )
   }
 
   exportarPDF(glosa: Iglosas){
-    // this.filename= devolucion.idPrestador+"-"+devolucion.radicado;
-    // this.service.devolucionPDF(devolucion)
-    // .subscribe(
-    //   (response: any) =>{
-    //     let dataType = response.type;
-    //     let binaryData = [];
-    //     binaryData.push(response);
-    //     let downloadLink = document.createElement('a');
-    //     downloadLink.href = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));
-    //     if (this.filename)
-    //         downloadLink.setAttribute('download', this.filename);
-    //     document.body.appendChild(downloadLink);
-    //     downloadLink.click();
-    // }
-    // )
+    this.filename= glosa.idPrestador+"-"+glosa.numeroGlosa;
+    this.service.glosaPDF(glosa)
+    .subscribe(
+      (response: any) =>{
+        let dataType = response.type;
+        let binaryData = [];
+        binaryData.push(response);
+        let downloadLink = document.createElement('a');
+        downloadLink.href = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));
+        if (this.filename)
+            downloadLink.setAttribute('download', this.filename);
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+    }
+    )
   }
 
   exportarTodosCSV(){
-    // this.spinner.show();
-    // this.filename=this.consultaDevoluciones.idPrestador+".csv";
-    // this.service.devolucionTodosCSV(this.consultaDevoluciones)
-    // .subscribe(
-    //     (response: any) =>{
-    //     let dataType = response.type;
-    //     let binaryData = [];
-    //     binaryData.push(response);
-    //     let downloadLink = document.createElement('a');
-    //     downloadLink.href = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));
-    //     if (this.filename)
-    //         downloadLink.setAttribute('download', this.filename);
-    //     document.body.appendChild(downloadLink);
-    //     downloadLink.click();
-    // }
-    // )
-    // this.spinner.hide();
+    this.spinner.show();
+    this.filename=this.consultaGlosas.idPrestador+".csv";
+    this.service.glosasTodosCSV(this.consultaGlosas)
+    .subscribe(
+        (response: any) =>{
+        let dataType = response.type;
+        let binaryData = [];
+        binaryData.push(response);
+        let downloadLink = document.createElement('a');
+        downloadLink.href = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));
+        if (this.filename)
+            downloadLink.setAttribute('download', this.filename);
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+    }
+    )
+    this.spinner.hide();
   }
 
   consultarGlosas(numeroglosa: String, numerofactura: String, prefijoFactura: String, fechaRadicacionDesde: String, fechaRadicacionHasta: String,

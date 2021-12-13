@@ -87,4 +87,7 @@ export class Constants {
   static URI_SERVICE_CONSULTA_DEVOLUCIONESCSV='/Devoluciones/consultaCSV';
   static URI_SERVICE_CONSULTA_DEVOLUCIONESTODOSCSV='/Devoluciones/consultaTodosCSV';
   static URI_SERVICE_CONSULTA_GLOSAS='/Glosas/consulta';
+  static URI_SERVICE_CONSULTA_GLOSASPDF='/Glosas/consultaPDF';
+  static URI_SERVICE_CONSULTA_GLOSASCSV='/Glosas/consultaCSV';
+  static URI_SERVICE_CONSULTA_GLOSASTODOSCSV='/Glosas/consultaTodosCSV';
 }

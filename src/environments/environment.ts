@@ -5,12 +5,13 @@
 export const environment = {
    production: false,
    //apiUrl: 'http://epsarpdllo01.suranet.com/Prestadores/api/v1',
-   apiUrl:'http://localhost.suranet.com:7001/Prestadores/api/v1',
-   headers: {
+
+  environment: 'local',
+  apiUrl: './assets/json',
+  headers: {
     'Content-Type': 'application/json',
     'Access-Control-Allow-Credentials': 'true'
-  },
-  environment: 'dev',
+  }
 };
 
 /*

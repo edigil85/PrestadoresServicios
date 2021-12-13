@@ -53,8 +53,8 @@
                     </div>
                     <div class="form-group col-md-3 ">
                         <label for="telefonoFijo "><strong>Número de teléfono fijo</strong></label>
-                        <input type="text " class="form-control only-number" placeholder="Ejemplo: 1234567 " id="telefonoFijo " formControlName="telefonoFijo" [(ngModel)]="affiliate.telefonoFijo" [class.is-invalid]="telephoneValidate">
-                        <p class="text-danger" *ngIf="telephoneValidate">Verifique los valores ingresados</p>
+                        <input type="number" class="form-control only-number" placeholder="Ejemplo: 1234567 " id="telefonoFijo " formControlName="telefonoFijo" [(ngModel)]="affiliate.telefonoFijo" [class.is-invalid]="telephoneValidate">
+                        <p class="text-danger12" *ngIf="telephoneValidate">El teléfono campo debe tener 7 o 10 dígitos númericos</p>
                         <div class="ic-modal " data-toggle="modal" (click)="openDialog('Mensaje Informativo','Datos básicos','Recuerde que el teléfono fijo debe corresponder con el del usuario, si no tiene, se deberá ingresar el de un familiar')">
                             <i class="fas fa-info-square shadow-sm "></i>
                         </div>

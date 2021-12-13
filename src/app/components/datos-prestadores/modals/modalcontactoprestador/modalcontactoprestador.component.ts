@@ -43,6 +43,8 @@ export function matchOtherValidator (otherControlName: string) {
   }
 }
 
+
+
 @Component({
   selector: 'app-modalcontactoprestador',
   templateUrl: './modalcontactoprestador.component.html',
@@ -68,7 +70,7 @@ export class ModalcontactoprestadorComponent implements OnInit {
   { 
     this.form = this.formBuilder.group({
       nombre: new FormControl('', [Validators.required, Validators.maxLength(80)]),
-      telefono: new FormControl('', [Validators.required, Validators.pattern('^[0-9]*$'), Validators.minLength(7), Validators.maxLength(10)]),
+      telefono: new FormControl('', [Validators.required, Validators.pattern('^[0-9]{10}$|^[0-9]{7}$'), Validators.minLength(7), Validators.maxLength(10)]),
       emailNotificacion: new FormControl('', [Validators.required, Validators.maxLength(80), Validators.pattern(this.emailpattern)]),
       correConfirmacion: new FormControl('', [Validators.required,  matchOtherValidator('emailNotificacion')])
     });

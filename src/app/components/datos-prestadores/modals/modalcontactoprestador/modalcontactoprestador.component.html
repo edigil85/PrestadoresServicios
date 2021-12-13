@@ -62,7 +62,7 @@
                     <input matInput formControlName="telefono" maxlength="10">
                     <mat-hint align="end">{{telefono.value.length}} / 10</mat-hint>
                     <mat-error *ngIf="telefono.hasError('pattern') && !telefono.hasError('required')">
-                        Debes ingresar solo números
+                        El teléfono debe tener 7 o 10 dígitos númericos
                      </mat-error>
                     <mat-error *ngIf="telefono.hasError('maxlength') && !telefono.hasError('required') && !telefono.hasError('pattern')">
                        Supera el maximo de caracteres (10)

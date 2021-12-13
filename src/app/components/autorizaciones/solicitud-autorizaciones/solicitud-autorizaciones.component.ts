@@ -137,7 +137,7 @@ export class SolicitudAutorizacionesComponent implements OnInit {
     );
     this.myFormData = this.fb.group({
       nombreCompleto: ['', [Validators.required]],
-      telefonoFijo: ['', [Validators.maxLength(7), Validators.pattern("^[0-9]*$")]],
+      telefonoFijo: ['', [Validators.pattern("^[0-9]{10}$|^[0-9]{7}$")]],
       celular: ['', [Validators.required, Validators.maxLength(10), Validators.pattern("^[0-9]*$")]],
       correoElectronico: ['', [Validators.required, Validators.maxLength(80), Validators.pattern("^[_a-zA-Z0-9-]+(.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(.[a-zA-Z]{2,4})$")]],
       tipoPlanPAC: [''],

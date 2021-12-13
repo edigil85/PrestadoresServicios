@@ -14,12 +14,27 @@ export class glosasService{
 
   constructor(private httpClient: HttpClient) {
   }
-  httpHeaders: HttpHeaders;
+  httpHeaders: HttpHeaders; 
   baseUrl: String = environment.apiUrl;
 
   consultarGlosas(params:IconsultaGlosa): Observable<any> {
     return this.httpClient.post<IconsultaGlosa>(`${this.baseUrl}`+Constants.URI_SERVICE_CONSULTA_GLOSAS,
     JSON.stringify(params), {headers:environment.headers})
+  }
+
+  glosaPDF(params:Iglosas): Observable<Blob> {
+    return this.httpClient.post<any>(`${this.baseUrl}`+Constants.URI_SERVICE_CONSULTA_GLOSASPDF, 
+    JSON.stringify(params),   {headers:environment.headers, responseType: 'blob' as 'json'} )
+  }
+
+  glosaCSV(params:Iglosas): Observable<Blob> {
+    return this.httpClient.post<any>(`${this.baseUrl}`+Constants.URI_SERVICE_CONSULTA_GLOSASCSV, 
+    JSON.stringify(params),   {headers:environment.headers, responseType: 'blob' as 'json'} )
+  }
+
+  glosasTodosCSV(params:IconsultaGlosa): Observable<Blob> {
+    return this.httpClient.post<any>(`${this.baseUrl}`+Constants.URI_SERVICE_CONSULTA_GLOSASTODOSCSV, 
+    JSON.stringify(params),   {headers:environment.headers, responseType: 'blob' as 'json'} )
   }
 
 }
