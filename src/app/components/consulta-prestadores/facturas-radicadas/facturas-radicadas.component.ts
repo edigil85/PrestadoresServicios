@@ -196,6 +196,13 @@ export class FacturasRadicadasComponent implements OnInit {
     .subscribe(
       async (result) => {
         this.facturasRadicadas= await result;
+        if(this.facturasRadicadas.length==0){
+          this.openDialog(
+            'Alerta',
+            '',
+            'No hay ningun registro con la busqueda realizada'
+          );
+        }
         this.spinner.hide();
       },(error) => {
         this.spinner.hide();
