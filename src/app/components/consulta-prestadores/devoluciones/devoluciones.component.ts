@@ -57,8 +57,8 @@ export class DevolucionesComponent implements OnInit {
     this.form = this.formBuilder.group({
       prefijoFactura: new FormControl('',[Validators.pattern('^[A-Za-z0-9]*$')]),
       numeroFactura: new FormControl('',[Validators.pattern('^[0-9]*$')]),
-      fechaInicial: new FormControl('', [Validators.required, this.fechaValidator(), this.fechadiferencia()]),
-      fechaFinal: new FormControl('', [Validators.required, this.fechaValidator(), this.fechadiferencia()]),
+      fechaInicial: new FormControl('', [this.fechaValidator(), this.fechadiferencia()]),
+      fechaFinal: new FormControl('', [this.fechaValidator(), this.fechadiferencia()]),
     });
   }
 
@@ -240,6 +240,13 @@ export class DevolucionesComponent implements OnInit {
             this.cantidadvencida= this.cantidadvencida + 1;
           }
            this.mostrarDevoluciones=this.listaDevoluciones;
+        }
+        if(this.listaDevoluciones.length==0){
+          this.openDialog(
+            'Alerta',
+            '',
+            'No hay ningun registro con la busqueda realizada'
+          );
         }
         this.spinner.hide();
       },(error) => {
