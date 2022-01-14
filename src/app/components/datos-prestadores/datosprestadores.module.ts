@@ -45,7 +45,7 @@ import { prefijoFacFilter } from './pipes/PrefijoFacFilter.pipe';
 import { contactoPreFilter } from './pipes/ContactoPreFilter.pipe';
 import { BlockCopyPasteDirective } from 'src/app/shared/Directive/block-copy-paste.directive';
 import { sino } from './pipes/sino.pipe';
-import { UppercaseDirective } from 'src/app/shared/Directive/upperCase.directive';
+import { SharedModule } from 'src/app/shared/components/SharedModule';
 import {CustomDateAdapter} from '../datos-prestadores/custom.date.adapter';
 
 
@@ -68,8 +68,7 @@ import {CustomDateAdapter} from '../datos-prestadores/custom.date.adapter';
    prefijoFacFilter,
    contactoPreFilter,
    sino,
-   BlockCopyPasteDirective,
-   UppercaseDirective
+   BlockCopyPasteDirective
   ],
   imports: [ 
     HttpClientModule,
@@ -91,7 +90,8 @@ import {CustomDateAdapter} from '../datos-prestadores/custom.date.adapter';
     MatPaginatorModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    SharedModule
     ],
     providers: [
      { provide: MatPaginatorIntl, useClass: CustomMatPaginatorIntl},

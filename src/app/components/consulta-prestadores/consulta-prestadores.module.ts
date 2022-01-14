@@ -31,7 +31,7 @@ import {FacturasRadicadasComponent } from './facturas-radicadas/facturas-radicad
 import {ConsultaPrestadoresComponent} from './consulta-prestadores.component';
 import {GlosasComponent } from './glosas/glosas.component';
 import {DevolucionesComponent } from './devoluciones/devoluciones.component'
-
+import { SharedModule } from 'src/app/shared/components/SharedModule';
 
 
 
@@ -65,7 +65,8 @@ import {DevolucionesComponent } from './devoluciones/devoluciones.component'
         MatDatepickerModule,
         MatNativeDateModule,
         MatExpansionModule,
-        NgxSpinnerModule
+        NgxSpinnerModule,
+        SharedModule
         ],
         providers: [
          { provide: MatPaginatorIntl, useClass: CustomMatPaginatorIntl},

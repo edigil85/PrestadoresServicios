@@ -9,7 +9,7 @@ const routes: Routes = [
   { path: 'solicitud-autorizaciones', component: SolicitudAutorizacionesComponent},*/
   { path: 'solicitud-autorizaciones', component: SolicitudAutorizacionesComponent },
   { path: 'agendamiento-vacunacion', component: AgendaExternoVacunacionComponent },
-  { path: '', 
+  { path: 'datos-prestadores', 
   loadChildren:() => import('./components/datos-prestadores/datosprestadores.module').then(m=> m.DatosPrestadoresModule)
   },
   { path: 'consulta-prestadores', 

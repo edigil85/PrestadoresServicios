@@ -257,6 +257,16 @@ export class GlosasComponent implements OnInit {
           }
             this.mostrarglosas=this.listaGlosas;
         }
+        if(this.listaGlosas.length==0){
+          this.openDialog(
+            'Alerta',
+            '',
+            'No hay ningun registro con la busqueda realizada'
+          );
+          this.cantidadaldia=0;
+          this.cantidadProxima=0;
+          this.cantidadvencida=0;
+        }
         this.spinner.hide();
       },(error) => {
         this.spinner.hide();
