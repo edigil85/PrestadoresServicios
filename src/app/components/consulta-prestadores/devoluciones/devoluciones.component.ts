@@ -171,7 +171,7 @@ export class DevolucionesComponent implements OnInit {
     fechaDevolucionHasta=this.form.get('fechaFinal').value;
   
     var respuesta = this.tipoconsulta(numerofactura, prefijoFactura, fechaDevolucionDesde, fechaDevolucionHasta )
-    if(respuesta>4){
+    if(respuesta>7){
       this.openDialog(
         'Error Consulta',
         '',
@@ -218,6 +218,27 @@ export class DevolucionesComponent implements OnInit {
           tipoIdentificacion:datos.tipoDocumentoPrestador, 
           numeroFactura: null, prefijoFactura:prefijoFactura ,fechaDevolucionDesde:fechaDevolucionDesde, 
           fechaDevolucionHasta: fechaDevolucionHasta, tipoconsulta:tipoConsulta };
+        break;
+      }
+      case 5: {
+        this.consultaDevoluciones= {idPrestador: datos.numeroDocumentoPrestador, 
+          tipoIdentificacion:datos.tipoDocumentoPrestador, 
+          numeroFactura: null, prefijoFactura:prefijoFactura ,fechaDevolucionDesde:null, 
+          fechaDevolucionHasta: null, tipoconsulta:tipoConsulta };
+        break;
+      }
+      case 6: {
+        this.consultaDevoluciones= {idPrestador: datos.numeroDocumentoPrestador, 
+          tipoIdentificacion:datos.tipoDocumentoPrestador, 
+          numeroFactura: numerofactura, prefijoFactura:null ,fechaDevolucionDesde:null, 
+          fechaDevolucionHasta: null, tipoconsulta:tipoConsulta };
+        break;
+      }
+      case 7: {
+        this.consultaDevoluciones= {idPrestador: datos.numeroDocumentoPrestador, 
+          tipoIdentificacion:datos.tipoDocumentoPrestador, 
+          numeroFactura: numerofactura, prefijoFactura:prefijoFactura ,fechaDevolucionDesde:null, 
+          fechaDevolucionHasta: null, tipoconsulta:tipoConsulta };
         break;
       }
     }
@@ -269,7 +290,16 @@ export class DevolucionesComponent implements OnInit {
     if(!numerofactura && prefijoFactura && fechaRadicacionDesde && fechaRadicacionHasta){
       return 4
     }
-    return 5
+    if(!numerofactura && prefijoFactura && !fechaRadicacionDesde && !fechaRadicacionHasta){
+      return 5
+    }
+    if(numerofactura && !prefijoFactura && !fechaRadicacionDesde && !fechaRadicacionHasta){
+      return 6
+    }
+    if(numerofactura && prefijoFactura && !fechaRadicacionDesde && !fechaRadicacionHasta){
+      return 7
+    }
+    return 8
   }
 
   limpiar(){
